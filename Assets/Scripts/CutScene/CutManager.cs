@@ -34,7 +34,7 @@ public class CutManager : MonoBehaviour
         {
             if(curSceneNum >= cutScenes.Count -1 )
             {
-                SceneManager.LoadScene("World");
+                SceneManager.LoadScene("Past");
                 return;
             }
             // 모든 씬을 처리했다면 다음 씬 로드
