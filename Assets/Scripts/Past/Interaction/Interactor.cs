@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class Interactor : MonoBehaviour
 {
     private IInteractable interactableObject;
@@ -14,6 +15,7 @@ public class Interactor : MonoBehaviour
     
     private readonly Collider2D[] colliders = new Collider2D[3];
     public int numFound;
+    
 
     private void Update()
     {
