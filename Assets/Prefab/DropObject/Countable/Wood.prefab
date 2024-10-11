@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4497442470260683934}
   - component: {fileID: 4279304269850214813}
-  - component: {fileID: 105537976479912773}
   - component: {fileID: -2753124511335282457}
+  - component: {fileID: 3593215343931072645}
   m_Layer: 0
   m_Name: Wood
   m_TagString: Untagged
@@ -86,19 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &105537976479912773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3365893065532988594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ebb062fac88cb641a7d9e7b9c13414f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prompt: Wood
 --- !u!60 &-2753124511335282457
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -150,3 +137,18 @@ PolygonCollider2D:
       - {x: 0.375, y: 0.6666667}
       - {x: 0.2916667, y: 0.7083334}
   m_UseDelaunayMesh: 0
+--- !u!114 &3593215343931072645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3365893065532988594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57da2f8c6c2dee447ba7189ec99be23e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prompt: E:broke
+  disableCollisionTime: 0.5
+  Data: {fileID: 0}

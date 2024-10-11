@@ -4,11 +4,11 @@ using UnityEngine.Pool;
 
 public class DropObject : Interactable
 {
-    private IObjectPool<DropObject> _ManagedPool;
-    private Collider2D _collider; // 충돌 감지를 위한 Collider2D
-    [SerializeField] private float disableCollisionTime = 0.5f; // 충돌 비활성화 시간
+    protected IObjectPool<DropObject> _ManagedPool;
+    protected Collider2D _collider; // 충돌 감지를 위한 Collider2D
+    [SerializeField] protected float disableCollisionTime = 0.5f; // 충돌 비활성화 시간
 
-    private void Awake()
+    protected void Awake()
     {
         _collider = GetComponent<Collider2D>(); // Collider2D 컴포넌트 가져오기
     }
@@ -26,13 +26,13 @@ public class DropObject : Interactable
     }
 
     // 드랍되었을 때 콜라이더를 일정 시간 비활성화
-    private void OnEnable()
+    protected void OnEnable()
     {
         StartCoroutine(DisableCollisionTemporarily());
     }
 
     // 일정 시간 동안 충돌을 비활성화하는 코루틴
-    private IEnumerator DisableCollisionTemporarily()
+    protected IEnumerator DisableCollisionTemporarily()
     {
         _collider.enabled = false; // 콜라이더 비활성화
 
@@ -48,7 +48,9 @@ public class DropObject : Interactable
     {
         if (other.CompareTag("Player"))
         {
+            //인벤토리 저장구현 필요
             DestroyDropObject(); // 풀로 반환
+            
         }
     }
 }
