@@ -28,17 +28,11 @@ public class FieldObject : Interactable
         durability = fieldObjectData.durability;
         dropTable = new List<DropTable>(fieldObjectData.dropTable);
 
-        // 각 드랍 아이템마다 풀을 초기화
+        // 각 드랍 아이템마다 DropObjectManager에서 풀을 가져옴
         foreach (var drop in dropTable)
         {
             GameObject dropPrefab = drop.dropItem;
-            dropObjectPools[dropPrefab] = new ObjectPool<DropObject>(
-                ()=>CreateDropObject(dropPrefab), // 해당 드랍 아이템의 프리팹을 기준으로 풀 생성 익명 람다식
-                OnGetDropObject,
-                OnReleaseDropObject,
-                OnDestroyDropObject,
-                false, 10, 30
-            );
+            dropObjectPools[dropPrefab] = DropObjectManager.Instance.GetOrCreatePool(dropPrefab);
         }
     }
 

@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class ItemData : ScriptableObject
 {
     [SerializeField] private int _id;

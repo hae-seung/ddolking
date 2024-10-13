@@ -2,13 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class DropObject : Interactable
+public class DropObject : MonoBehaviour
 {
-    protected IObjectPool<DropObject> _ManagedPool;
+    protected IObjectPool<DropObject> _ManagedPool; // 풀 매니저에서 제공되는 풀
     protected Collider2D _collider; // 충돌 감지를 위한 Collider2D
     [SerializeField] protected float disableCollisionTime = 0.5f; // 충돌 비활성화 시간
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         _collider = GetComponent<Collider2D>(); // Collider2D 컴포넌트 가져오기
     }
@@ -22,11 +22,18 @@ public class DropObject : Interactable
     // 풀로 반환하는 메서드
     public void DestroyDropObject()
     {
-        _ManagedPool.Release(this);
+        if (_ManagedPool != null) // _ManagedPool이 null이 아닌지 확인
+        {
+            _ManagedPool.Release(this);
+        }
+        else
+        {
+            Debug.LogError("Managed pool is null. Make sure SetManagedPool() is called.");
+        }
     }
 
     // 드랍되었을 때 콜라이더를 일정 시간 비활성화
-    protected void OnEnable()
+    protected virtual void OnEnable()
     {
         StartCoroutine(DisableCollisionTemporarily());
     }
@@ -48,9 +55,12 @@ public class DropObject : Interactable
     {
         if (other.CompareTag("Player"))
         {
-            //인벤토리 저장구현 필요
-            DestroyDropObject(); // 풀로 반환
-            
+            AddItemToInventory();
         }
+    }
+
+    protected virtual void AddItemToInventory()
+    {
+        // 아이템을 인벤토리에 추가하는 로직 구현
     }
 }

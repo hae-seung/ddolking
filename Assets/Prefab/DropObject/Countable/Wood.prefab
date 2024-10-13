@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4497442470260683934}
   - component: {fileID: 4279304269850214813}
   - component: {fileID: -2753124511335282457}
-  - component: {fileID: 3593215343931072645}
+  - component: {fileID: 4614174397841594984}
   m_Layer: 0
   m_Name: Wood
   m_TagString: Untagged
@@ -137,7 +137,7 @@ PolygonCollider2D:
       - {x: 0.375, y: 0.6666667}
       - {x: 0.2916667, y: 0.7083334}
   m_UseDelaunayMesh: 0
---- !u!114 &3593215343931072645
+--- !u!114 &4614174397841594984
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,9 +146,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3365893065532988594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57da2f8c6c2dee447ba7189ec99be23e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4cd02e7bed0dd0a42ada50ce58963020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prompt: E:broke
   disableCollisionTime: 0.5
-  Data: {fileID: 0}
+  data: {fileID: 11400000, guid: 38e4e079308bea14187842bdd885cd4c, type: 2}
