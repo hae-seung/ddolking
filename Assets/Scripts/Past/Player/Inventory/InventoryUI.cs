@@ -30,6 +30,7 @@ public class InventoryUI : MonoBehaviour
             if (i < val)
             {
                 slots[i].GetComponent<Image>().sprite = slotOpenImage;
+                slots[i].GetComponent<Image>().raycastTarget = true;
             }
             else
             {

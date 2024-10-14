@@ -84,9 +84,9 @@ public class Inventory : Singleton<Inventory>
                         Debug.LogWarning("빈 슬롯이 없습니다.");
                         return amount; // 남은 양 반환 (빈 슬롯이 없으므로 인벤토리에 모두 추가하지 못한 양)
                     }
-                    else
+                    else//빈슬롯을 찾은경우
                     {
-                        //amount는 맥스치를 찍게 하고 남은 수량이거나 1개이거나
+                        //amount는 맥스치를 찍게 하고 남은 수량이거나 1개이거나였던 경우여서 빈슬롯을 찾음
                         CountableItem newItem = new CountableItem(countableItem.CountableData, amount);
                         _items[index] = newItem;//null대신 새로운 아이템추가
 
