@@ -14,29 +14,29 @@ public class InventoryUI : MonoBehaviour
     private void Awake()
     {
         inven = Inventory.Instance;
-        inven.onSlotCountChanged += SlotChange;
-        slots = slotHolder.GetComponentsInChildren<Slot>();
+        if (slots.Length == 0)//인스펙터에서 할당 안한 경우 대비
+            slots = slotHolder.GetComponentsInChildren<Slot>();
+            
         activeInventory = false;
         gameObject.SetActive(false);
-
-        // 인벤토리 UI가 초기화된 후 현재 SlotCnt 값에 따라 슬롯 상태 업데이트
-        SlotChange(inven.SlotCnt);  // 현재 SlotCnt 값으로 슬롯을 갱신
+        AddSlot(inven.SlotCnt);//인벤토리를 인스펙터에서 false로 시작할경우 대비
     }
 
-    private void SlotChange(int val)
+    public void AddSlot(int val)
     {
-        for (int i = 0; i < slots.Length; i++)
+        Debug.Log(slots.Length);
+        for (int i = 0; i < slots.Length; i++)//총 슬롯은 고정시켜둘거임
         {
-            if (i < inven.SlotCnt)
+            if (i < val)
             {
-                slots[i].GetComponent<Button>().interactable = true;
                 slots[i].GetComponent<Image>().sprite = slotOpenImage;
             }
             else
             {
-                slots[i].GetComponent<Button>().interactable = false;
+                slots[i].GetComponent<Image>().raycastTarget = false;
             }
         }
+        
     }
 
     public void OpenCloseInventory()
@@ -44,9 +44,5 @@ public class InventoryUI : MonoBehaviour
         activeInventory = !activeInventory;
         gameObject.SetActive(activeInventory);
     }
-
-    public void AddSlot(int num)
-    {
-        inven.SlotCnt += num;
-    }
+    
 }

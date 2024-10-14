@@ -10,31 +10,32 @@ public class Inventory : Singleton<Inventory>
     private int slotCnt;
     public List<Item> _items = new List<Item>(); // 인벤토리 슬롯 리스트
     public InventoryUI inventoryUI;
-
-    public delegate void OnSlotCountChanged(int val);
-    public OnSlotCountChanged onSlotCountChanged;
-
+    
     public int SlotCnt
     {
         get => slotCnt;
-        set
-        {
-            slotCnt = value;
-            onSlotCountChanged?.Invoke(slotCnt);
-        }
+        set {  slotCnt = value; }
     }
 
     private void Start()
     {
         SlotCnt = 18; // 초기 슬롯 개수 설정
-        InitializeInventory(); // List는 0, 슬롯은 열려있어서 각각 맞춰줘야함
+        inventoryUI.AddSlot(SlotCnt);
+        UpdateInventory(SlotCnt); // List는 0, 슬롯은 열려있어서 각각 맞춰줘야함
     }
-
-    private void InitializeInventory()
+    
+    public void AddInventoryList(int count)//배낭아이템이 사용
     {
-        for (int i = 0; i < SlotCnt; i++)
+        SlotCnt += count; //슬롯개수 증가
+        inventoryUI.AddSlot(SlotCnt);//슬롯 해금
+        UpdateInventory(count);//인벤토리 List<> 해금
+    }
+    
+    private void UpdateInventory(int count)
+    {
+        for (int i = 0; i < count; i++)//반복횟수
         {
-            _items.Add(null); // 모든 슬롯을 빈 슬롯으로 초기화
+            _items.Add(null); // 새로 추가된 리스트는 null로 초기화
         }
         Debug.Log($"인벤토리 초기화됨: {_items.Count}개의 슬롯 생성.");
     }
@@ -74,7 +75,7 @@ public class Inventory : Singleton<Inventory>
                         Debug.Log($"슬롯 {index}에 수량 업데이트: {existingItem.itemData.Name}, 수량: {existingItem.Amount}");
                     }
                 }
-                else
+                else//빈슬롯을 찾아서 아이템 추가
                 {
                     index = FindEmptySlotIndex(index + 1);
 
@@ -130,7 +131,7 @@ public class Inventory : Singleton<Inventory>
         return -1; // 빈 슬롯이 없으면 -1 반환
     }
 
-    // 슬롯 변경 후 처리
+    // 해금되어있던 빈슬롯에 아이템이 추가
     private void UpdateSlot(int index)
     {
         Debug.Log($"슬롯 {index} 업데이트됨: {_items[index]?.ToString() ?? "빈 슬롯"}");
