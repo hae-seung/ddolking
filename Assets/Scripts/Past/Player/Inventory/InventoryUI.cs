@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -55,9 +56,28 @@ public class InventoryUI : MonoBehaviour
 
     public void AddNewItem(int idx, Item item)//인벤토리에서 일어난 변화를 슬롯에 적용
     {
-       
+        GameObject newItem = Instantiate(ItemPrefab, slots[slots[idx].SlotIndex].transform);
+        newItem.GetComponent<DragableItem>().Init(item);
     }
-    
+
+    public void UpdateItemAmount(int idx, Item item)
+    {
+        // SlotIndex를 통해 실제 슬롯을 참조
+        DragableItem dragableItem = slots[slots[idx].SlotIndex].GetComponentInChildren<DragableItem>();
+
+        if (dragableItem != null && item is CountableItem ci)
+        {
+            dragableItem.itemAmount.text = ci.Amount.ToString(); // 수량 텍스트 업데이트
+        }
+    }
+
+
+    public void SwapIndex(int index1, int index2)
+    {
+        int temp = index1;
+        slots[index1].SetIndex(index2);
+        slots[index2].SetIndex(temp);
+    }
     
     [ContextMenu("show")]
     public void SHow()

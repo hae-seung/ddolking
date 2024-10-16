@@ -7,6 +7,7 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 {
     private Transform canvas;
     private Transform previousParent;
+    private int previousParentSlotIndex;
     private RectTransform rect;
     private CanvasGroup canvasGroup;
 
@@ -14,6 +15,9 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public Text itemAmount;
 
     public Transform PreviousParent => previousParent;
+
+    public int PreviousParentSlotIndex => previousParentSlotIndex;
+  
     
     private void Awake()
     {
@@ -22,11 +26,21 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.blocksRaycasts = true;
     }
-    
+
+    public void Init(Item item)
+    {
+        iconImage.sprite = item.itemData.IconImage;
+        if (item is CountableItem ci)
+            itemAmount.text = ci.Amount.ToString();
+        else
+            itemAmount.text = "1";
+    }
     
     public void OnBeginDrag(PointerEventData eventData)
     {
         previousParent = transform.parent; // 현재 부모 저장
+        previousParentSlotIndex = previousParent.GetComponent<Slot>().SlotIndex;
+        
         transform.SetParent(canvas); // 아이템을 최상단 canvas로 이동
         transform.SetAsLastSibling(); // 드래그 중 다른 UI 요소 위에 표시
 

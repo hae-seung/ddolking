@@ -6,7 +6,8 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IDropHandler, IPointerE
 {
     private Image image;
     private RectTransform rect;
-    private int slotIndex;
+    private int slotIndex;//슬롯 내부의 number
+    public InventoryUI inventoryUI;
 
     public int SlotIndex
     {
@@ -30,11 +31,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IDropHandler, IPointerE
             image.raycastTarget = true;
         }
     }
-
-    public void UpdateSlot(int idx, Item item)
-    {
-        
-    }
     
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -53,11 +49,13 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IDropHandler, IPointerE
             Transform draggedItem = eventData.pointerDrag.transform; // 드래그 중인 아이템
             DragableItem draggedItemScript = draggedItem.GetComponent<DragableItem>();
 
+            int previousSlotIndex = draggedItemScript.PreviousParentSlotIndex;
+
             if (transform.childCount > 0) // 현재 슬롯에 이미 아이템이 있다면
             {
                 // 현재 슬롯에 있는 아이템
-                Transform itemInSlot = transform.GetChild(0); 
-            
+                Transform itemInSlot = transform.GetChild(0);
+                
                 // 드래그된 아이템의 원래 부모 슬롯
                 Transform originalParent = draggedItemScript.PreviousParent;
 
@@ -75,6 +73,8 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IDropHandler, IPointerE
                 draggedItem.SetParent(transform);
                 draggedItem.localPosition = Vector3.zero;
             }
+
+            inventoryUI.SwapIndex(previousSlotIndex, SlotIndex);
         }
     }
 

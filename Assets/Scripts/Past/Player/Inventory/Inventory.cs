@@ -46,76 +46,78 @@ public class Inventory : Singleton<Inventory>
             inventoryUI.OpenCloseInventory();
     }
 
-    public int Add(Item item, int amount = 1)
-    {
+   public int Add(Item item, int amount = 1)
+    {   
         int index;
 
-        // 1. 수량이 있는 아이템 (CountableItem)
+        // 수량이 있는 아이템일 경우
         if (item is CountableItem countableItem)
         {
             bool findNextCountable = true;
             index = -1;
 
-            while (amount > 0)//수량이 0 이상이면 다른 슬롯에 넣어서라도 계속 돌아야함
+            while (amount > 0) // 남은 수량이 0이 될 때까지 계속 반복
             {
-                if (findNextCountable)//같은물건 찾기 시작
+                if (findNextCountable) // 같은 아이템이 있는지 찾기
                 {
                     index = FindCountableItemSlotIndex(countableItem, index + 1);
 
-                    if (index == -1)//같은 아이템이 맥스 수량을 찍은 경우 or 같은 아이템이 없는 경우
+                    if (index == -1) // 같은 아이템이 없거나, 수량이 가득 찬 경우
                     {
                         findNextCountable = false;
                     }
-                    else//같은 아이템에 갯수만 추가하기
+                    else // 같은 아이템의 수량을 추가
                     {
-                        CountableItem existingItem = _items[index] as CountableItem;//인벤에서 아이템을 가져와서
-                        amount = existingItem.AddAmountAndGetExcess(amount);//수량 추가
+                        CountableItem existingItem = _items[index] as CountableItem;
+                        amount = existingItem.AddAmountAndGetExcess(amount); // 수량 추가 후 남은 수량 계산
 
-                        UpdateSlot(index,amount);//todo: 수량만 추가하는 함수 필요
+                        // 해당 슬롯의 수량 텍스트만 업데이트
+                        inventoryUI.UpdateItemAmount(index, existingItem);
                     }
                 }
-                else//빈슬롯을 찾아서 아이템 추가
+                else // 빈 슬롯을 찾아서 나머지 수량을 추가
                 {
-                    index = FindEmptySlotIndex(index + 1);
-
+                    index = FindEmptySlotIndex();
+                
                     if (index == -1)
                     {
                         Debug.LogWarning("빈 슬롯이 없습니다.");
-                        return amount; // 남은 양 반환 (빈 슬롯이 없으므로 인벤토리에 모두 추가하지 못한 양)
+                        return amount; // 남은 양 반환 (빈 슬롯이 없으면 남은 양을 반환)
                     }
-                    else//빈슬롯을 찾은경우
+                    else
                     {
-                        //amount는 맥스치를 찍게 하고 남은 수량이거나 1개이거나였던 경우여서 빈슬롯을 찾음
-                        CountableItem newItem = new CountableItem(countableItem.CountableData, amount);
-                        _items[index] = newItem;//null대신 새로운 아이템추가
+                        // 새로운 아이템 추가
+                        int addableAmount = Mathf.Min(amount, countableItem.MaxAmount); // 남은 공간만큼 추가
+                        CountableItem newItem = new CountableItem(countableItem.CountableData, addableAmount);
+                        _items[index] = newItem;
 
-                        amount = (amount > countableItem.MaxAmount) ? (amount - countableItem.MaxAmount) : 0;
+                        // 남은 수량 계산
+                        amount -= addableAmount;
 
-                        UpdateSlot(index,amount);
+                        // 새로운 슬롯에 아이템 추가
+                        inventoryUI.AddNewItem(index, newItem);
                         Debug.Log($"슬롯 {index}에 아이템 추가됨: {newItem.itemData.Name}, 수량: {newItem.Amount}");
                     }
                 }
             }
         }
-        else
+        else // 수량이 없는 아이템일 경우
         {
-            // 수량이 없는 아이템 처리
             index = FindEmptySlotIndex();
-
-            if (index == -1)
+    
+            if (index != -1)
             {
-                Debug.LogWarning("빈 슬롯이 없습니다.");
-                return amount; // 빈 슬롯이 없으면 남은 양 반환
+                _items[index] = item;
+                inventoryUI.AddNewItem(index, item);
             }
-
-            // 빈 슬롯에 아이템 추가
-            _items[index] = item;
-            UpdateSlot(index,amount);
-            Debug.Log($"슬롯 {index}에 아이템 추가됨: {item.itemData.Name}");
         }
 
-        return 0; // 성공적으로 모두 추가되었을 때 0 반환
+        return amount; // 남은 아이템 수량 반환 (추가할 수 없었던 양)
     }
+
+   
+
+    
 
     // 빈 슬롯을 찾는 메서드
     private int FindEmptySlotIndex(int startIndex = 0)
@@ -129,11 +131,7 @@ public class Inventory : Singleton<Inventory>
         }
         return -1; // 빈 슬롯이 없으면 -1 반환
     }
-
-    // 해금되어있던 빈슬롯에 아이템이 추가
-    private void UpdateSlot(int index, int amount)
-    {
-    }
+    
 
     // 수량이 여유 있는 CountableItem의 슬롯을 찾는 메서드
     private int FindCountableItemSlotIndex(CountableItem countableItem, int startIndex = 0)
