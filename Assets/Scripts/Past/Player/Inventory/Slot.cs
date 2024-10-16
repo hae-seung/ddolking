@@ -34,7 +34,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IDropHandler, IPointerE
         if (eventData.pointerDrag != null) // 현재 드래그하고 있는 대상이 있다면
         {
             Transform draggedItem = eventData.pointerDrag.transform; // 드래그 중인 아이템
-            DragableItem draggedItemScript = eventData.pointerDrag.GetComponent<DragableItem>();
+            DragableItem draggedItemScript = draggedItem.GetComponent<DragableItem>();
 
             if (transform.childCount > 0) // 현재 슬롯에 이미 아이템이 있다면
             {

@@ -3,20 +3,18 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+
 {
-    private ScrollRect scrollRect; // ScrollRect를 참조
     private Transform canvas;
     private Transform previousParent;
     private RectTransform rect;
     private CanvasGroup canvasGroup;
-    public float scrollSpeed = 5.0f; // 스크롤 속도
 
     public Transform PreviousParent => previousParent;
     
     private void Awake()
     {
         canvas = GetComponentInParent<Canvas>().transform;
-        scrollRect = GetComponentInParent<ScrollRect>();
         rect = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.blocksRaycasts = true;
@@ -50,5 +48,7 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             rect.position = previousParent.GetComponent<RectTransform>().position;
         }
     }
+
+   
     
 }

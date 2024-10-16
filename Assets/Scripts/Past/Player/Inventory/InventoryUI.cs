@@ -30,7 +30,7 @@ public class InventoryUI : MonoBehaviour
             if (i < val)
             {
                 slots[i].GetComponent<Image>().sprite = slotOpenImage;
-                slots[i].GetComponent<Image>().raycastTarget = true;
+                slots[i].GetComponent<Image>().raycastTarget = true; //잠긴 이미지는 활동하면 안됨
             }
             else
             {
@@ -44,6 +44,11 @@ public class InventoryUI : MonoBehaviour
     {
         activeInventory = !activeInventory;
         gameObject.SetActive(activeInventory);
+    }
+
+    public void AAAAAA()
+    {
+        Debug.Log("ddd");
     }
     
 }
