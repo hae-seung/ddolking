@@ -71,8 +71,7 @@ public class Inventory : Singleton<Inventory>
                         CountableItem existingItem = _items[index] as CountableItem;//인벤에서 아이템을 가져와서
                         amount = existingItem.AddAmountAndGetExcess(amount);//수량 추가
 
-                        UpdateSlot(index);
-                        Debug.Log($"슬롯 {index}에 수량 업데이트: {existingItem.itemData.Name}, 수량: {existingItem.Amount}");
+                        UpdateSlot(index,amount);//todo: 수량만 추가하는 함수 필요
                     }
                 }
                 else//빈슬롯을 찾아서 아이템 추가
@@ -92,7 +91,7 @@ public class Inventory : Singleton<Inventory>
 
                         amount = (amount > countableItem.MaxAmount) ? (amount - countableItem.MaxAmount) : 0;
 
-                        UpdateSlot(index);
+                        UpdateSlot(index,amount);
                         Debug.Log($"슬롯 {index}에 아이템 추가됨: {newItem.itemData.Name}, 수량: {newItem.Amount}");
                     }
                 }
@@ -111,7 +110,7 @@ public class Inventory : Singleton<Inventory>
 
             // 빈 슬롯에 아이템 추가
             _items[index] = item;
-            UpdateSlot(index);
+            UpdateSlot(index,amount);
             Debug.Log($"슬롯 {index}에 아이템 추가됨: {item.itemData.Name}");
         }
 
@@ -132,9 +131,8 @@ public class Inventory : Singleton<Inventory>
     }
 
     // 해금되어있던 빈슬롯에 아이템이 추가
-    private void UpdateSlot(int index)
+    private void UpdateSlot(int index, int amount)
     {
-        Debug.Log($"슬롯 {index} 업데이트됨: {_items[index]?.ToString() ?? "빈 슬롯"}");
     }
 
     // 수량이 여유 있는 CountableItem의 슬롯을 찾는 메서드

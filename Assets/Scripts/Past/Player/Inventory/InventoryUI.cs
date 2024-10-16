@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class InventoryUI : MonoBehaviour
     public Transform slotHolder;
     private Inventory inven;
     public Sprite slotOpenImage;
+    public GameObject inventoryFrame;
+    public GameObject ItemPrefab;//빈 아이템 프리팹
     public bool activeInventory;
     
     private void Awake()
@@ -16,10 +19,15 @@ public class InventoryUI : MonoBehaviour
         inven = Inventory.Instance;
         if (slots.Length == 0)//인스펙터에서 할당 안한 경우 대비
             slots = slotHolder.GetComponentsInChildren<Slot>();
-            
-        activeInventory = false;
-        gameObject.SetActive(false);
         AddSlot(inven.SlotCnt);//인벤토리를 인스펙터에서 false로 시작할경우 대비
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < slots.Length; i++)
+            slots[i].SetIndex(i);
+        activeInventory = false;
+        inventoryFrame.SetActive(activeInventory);
     }
 
     public void AddSlot(int val)
@@ -37,18 +45,30 @@ public class InventoryUI : MonoBehaviour
                 slots[i].GetComponent<Image>().raycastTarget = false;
             }
         }
-        
     }
 
     public void OpenCloseInventory()
     {
         activeInventory = !activeInventory;
-        gameObject.SetActive(activeInventory);
+        inventoryFrame.SetActive(activeInventory);
     }
 
-    public void AAAAAA()
+    public void AddNewItem(int idx, Item item)//인벤토리에서 일어난 변화를 슬롯에 적용
     {
-        Debug.Log("ddd");
+       
     }
+    
+    
+    [ContextMenu("show")]
+    public void SHow()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            Transform p = slots[i].transform;
+            if(p.childCount >0 )
+                Debug.Log(slots[i].SlotIndex +"번째 인덱스");
+        }
+    }
+    
     
 }

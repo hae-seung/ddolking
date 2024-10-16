@@ -10,6 +10,9 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     private RectTransform rect;
     private CanvasGroup canvasGroup;
 
+    public Image iconImage;
+    public Text itemAmount;
+
     public Transform PreviousParent => previousParent;
     
     private void Awake()
@@ -19,7 +22,8 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.blocksRaycasts = true;
     }
-
+    
+    
     public void OnBeginDrag(PointerEventData eventData)
     {
         previousParent = transform.parent; // 현재 부모 저장
@@ -33,7 +37,6 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public void OnDrag(PointerEventData eventData)
     {
         rect.position = eventData.position; // 마우스 위치에 따라 아이템 이동
-
     }
 
     public void OnEndDrag(PointerEventData eventData)

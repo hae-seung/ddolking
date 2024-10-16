@@ -6,7 +6,19 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IDropHandler, IPointerE
 {
     private Image image;
     private RectTransform rect;
+    private int slotIndex;
 
+    public int SlotIndex
+    {
+        get => slotIndex;
+        private set { slotIndex = value; }
+    }
+
+    public void SetIndex(int idx)
+    {
+        SlotIndex = idx;
+    }
+    
     private void Awake()
     {
         image = GetComponent<Image>();
@@ -19,6 +31,11 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IDropHandler, IPointerE
         }
     }
 
+    public void UpdateSlot(int idx, Item item)
+    {
+        
+    }
+    
     public void OnPointerEnter(PointerEventData eventData)
     {
         image.color = Color.red; // 마우스가 슬롯에 들어오면 색상 변경

@@ -12,4 +12,5 @@ public class ItemData : ScriptableObject
     public string Name => _name;
     public string Description => _description;
     public Sprite IconImage => _iconImage;
+    public GameObject DropObjectPrefab => dropObjectPrefab;
 }
