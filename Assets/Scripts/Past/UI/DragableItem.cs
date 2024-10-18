@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 
 {
-    private Transform canvas;
     private Transform previousParent;
     private int previousParentSlotIndex;
     private RectTransform rect;
@@ -21,7 +20,6 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     
     private void Awake()
     {
-        canvas = GetComponentInParent<Canvas>().transform;
         rect = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         canvasGroup.blocksRaycasts = true;
@@ -41,7 +39,7 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         previousParent = transform.parent; // 현재 부모 저장
         previousParentSlotIndex = previousParent.GetComponent<Slot>().SlotIndex;
         
-        transform.SetParent(canvas); // 아이템을 최상단 canvas로 이동
+        transform.SetParent(transform.root); // 아이템을 최상단 canvas로 이동
         transform.SetAsLastSibling(); // 드래그 중 다른 UI 요소 위에 표시
 
         canvasGroup.alpha = 0.6f; // 드래그 중 아이템을 반투명하게
@@ -59,7 +57,7 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         canvasGroup.blocksRaycasts = true;
 
         // 아이템이 드롭된 슬롯이 없으면 원래 부모로 복귀
-        if (transform.parent == canvas)
+        if (transform.parent == transform.root)
         {
             transform.SetParent(previousParent); // 원래 부모로 복귀
             rect.position = previousParent.GetComponent<RectTransform>().position;
