@@ -104,4 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa1103f0fa6d5e41acdae7df761183f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 0}
+  inventoryUI: {fileID: 6012027075447656052, guid: 3c6be246668c946498da4ce675ebfb65, type: 3}
+  quickSlotUI: {fileID: 8185114034390188207, guid: 4b4b5079f242336429596f90a8f1eb3d, type: 3}
+  isQuickSlot: 0
+  slotIndex: -1

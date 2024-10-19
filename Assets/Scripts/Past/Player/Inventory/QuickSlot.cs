@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuickSlot : MonoBehaviour
+public class QuickSlot : Slot
 {
     
 }

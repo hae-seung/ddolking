@@ -14,6 +14,7 @@ public class InventoryUI : MonoBehaviour
     public GameObject inventoryFrame;
     public GameObject ItemPrefab;//빈 아이템 프리팹
     public bool activeInventory;
+    public QuickSlotUI quickSlotUI;
     
     private void Awake()
     {
@@ -29,11 +30,11 @@ public class InventoryUI : MonoBehaviour
             slots[i].SetIndex(i);
         activeInventory = false;
         inventoryFrame.SetActive(activeInventory);
+        quickSlotUI.InitializeQuickSlots();
     }
 
     public void AddSlot(int val)
     {
-        Debug.Log(slots.Length);
         for (int i = 0; i < slots.Length; i++)//총 슬롯은 고정시켜둘거임
         {
             if (i < val)
@@ -48,6 +49,14 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    
+    public void SwapIndex(int index1, int index2)
+    {
+        int temp = index1;
+        slots[index1].SetIndex(index2);
+        slots[index2].SetIndex(temp);
+    }
+    
     public void OpenCloseInventory()
     {
         activeInventory = !activeInventory;
@@ -70,25 +79,4 @@ public class InventoryUI : MonoBehaviour
             dragableItem.itemAmount.text = ci.Amount.ToString(); // 수량 텍스트 업데이트
         }
     }
-
-
-    public void SwapIndex(int index1, int index2)
-    {
-        int temp = index1;
-        slots[index1].SetIndex(index2);
-        slots[index2].SetIndex(temp);
-    }
-    
-    [ContextMenu("show")]
-    public void SHow()
-    {
-        for (int i = 0; i < slots.Length; i++)
-        {
-            Transform p = slots[i].transform;
-            if(p.childCount >0 )
-                Debug.Log(slots[i].SlotIndex +"번째 인덱스");
-        }
-    }
-    
-    
 }
