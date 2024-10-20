@@ -39,12 +39,7 @@ public class Inventory : Singleton<Inventory>
         }
         Debug.Log($"인벤토리 초기화됨: {_items.Count}개의 슬롯 생성.");
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-            inventoryUI.OpenCloseInventory();
-    }
+    
 
    public int Add(Item item, int amount = 1)
     {   

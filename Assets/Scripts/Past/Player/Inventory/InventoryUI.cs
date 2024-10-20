@@ -66,7 +66,9 @@ public class InventoryUI : MonoBehaviour
     public void AddNewItem(int idx, Item item)//인벤토리에서 일어난 변화를 슬롯에 적용
     {
         GameObject newItem = Instantiate(ItemPrefab, slots[slots[idx].SlotIndex].transform);
-        newItem.GetComponent<DragableItem>().Init(item);
+        DragableItem dItem = newItem.GetComponent<DragableItem>();
+        dItem.Init(item);
+        dItem.ResizeItemImage();
     }
 
     public void UpdateItemAmount(int idx, Item item)
@@ -79,4 +81,5 @@ public class InventoryUI : MonoBehaviour
             dragableItem.itemAmount.text = ci.Amount.ToString(); // 수량 텍스트 업데이트
         }
     }
+    
 }

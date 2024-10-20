@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,9 +10,12 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     private int previousParentSlotIndex;
     private RectTransform rect;
     private CanvasGroup canvasGroup;
+    private Item itemInstance;//인벤토리와의 참조를 하기 위함
 
     public Image iconImage;
     public Text itemAmount;
+
+    public Item ItemInstance => itemInstance;
 
     public Transform PreviousParent => previousParent;
 
@@ -27,11 +31,14 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void Init(Item item)
     {
-        iconImage.sprite = item.itemData.IconImage;
+        itemInstance = item;//인벤토리에서 받아온 아이템 그대로 참조하기 위함(정보가 연게되어 저장됨)
+        iconImage.sprite = itemInstance.itemData.IconImage;
         if (item is CountableItem ci)
             itemAmount.text = ci.Amount.ToString();
         else
             itemAmount.text = "1";
+        
+        //itemInstance의 변화가 Inventory의 _items에도 그대로 적용됨
     }
     
     public void OnBeginDrag(PointerEventData eventData)
@@ -62,8 +69,19 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             transform.SetParent(previousParent); // 원래 부모로 복귀
             rect.position = previousParent.GetComponent<RectTransform>().position;
         }
+        else
+        {
+            ResizeItemImage();
+        }
+
+       
     }
 
-   
-    
+    [ContextMenu("resize")]
+    public void ResizeItemImage()
+    {
+        RectTransform parentRect = transform.parent.GetComponent<RectTransform>();
+        rect.sizeDelta = new Vector2(parentRect.rect.width, parentRect.rect.height);
+        transform.position = transform.parent.position;
+    }
 }
