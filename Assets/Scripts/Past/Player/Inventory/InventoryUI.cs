@@ -14,6 +14,7 @@ public class InventoryUI : MonoBehaviour
     public GameObject inventoryFrame;
     public GameObject ItemPrefab;//빈 아이템 프리팹
     public bool activeInventory;
+    public QuickSlotUI quickSlotUI;
     
     private void Awake()
     {
@@ -29,11 +30,11 @@ public class InventoryUI : MonoBehaviour
             slots[i].SetIndex(i);
         activeInventory = false;
         inventoryFrame.SetActive(activeInventory);
+        quickSlotUI.InitializeQuickSlots();
     }
 
     public void AddSlot(int val)
     {
-        Debug.Log(slots.Length);
         for (int i = 0; i < slots.Length; i++)//총 슬롯은 고정시켜둘거임
         {
             if (i < val)
@@ -48,6 +49,17 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
+    
+    public void SwapIndex(int index1, int index2)
+    {
+        // 1. 슬롯 1번과 슬롯 2번의 SlotIndex 값을 교환
+        int tempSlotIndex = slots[index1].SlotIndex;
+        slots[index1].SetIndex(slots[index2].SlotIndex);
+        slots[index2].SetIndex(tempSlotIndex);
+    }
+
+
+    
     public void OpenCloseInventory()
     {
         activeInventory = !activeInventory;
@@ -57,7 +69,12 @@ public class InventoryUI : MonoBehaviour
     public void AddNewItem(int idx, Item item)//인벤토리에서 일어난 변화를 슬롯에 적용
     {
         GameObject newItem = Instantiate(ItemPrefab, slots[slots[idx].SlotIndex].transform);
-        newItem.GetComponent<DragableItem>().Init(item);
+        DragableItem dItem = newItem.GetComponent<DragableItem>();
+        dItem.Init(item);
+        dItem.ResizeItemImage();
+        
+        if (slots[slots[idx].SlotIndex].isQuickSlot)
+            quickSlotUI.UpdateQuickSlot(slots[slots[idx].SlotIndex].SlotIndex);
     }
 
     public void UpdateItemAmount(int idx, Item item)
@@ -70,25 +87,5 @@ public class InventoryUI : MonoBehaviour
             dragableItem.itemAmount.text = ci.Amount.ToString(); // 수량 텍스트 업데이트
         }
     }
-
-
-    public void SwapIndex(int index1, int index2)
-    {
-        int temp = index1;
-        slots[index1].SetIndex(index2);
-        slots[index2].SetIndex(temp);
-    }
-    
-    [ContextMenu("show")]
-    public void SHow()
-    {
-        for (int i = 0; i < slots.Length; i++)
-        {
-            Transform p = slots[i].transform;
-            if(p.childCount >0 )
-                Debug.Log(slots[i].SlotIndex +"번째 인덱스");
-        }
-    }
-    
     
 }

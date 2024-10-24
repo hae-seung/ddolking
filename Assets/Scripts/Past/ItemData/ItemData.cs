@@ -6,6 +6,7 @@ public class ItemData : ScriptableObject
     [Multiline]
     [SerializeField] private string _description;
     [SerializeField] private Sprite _iconImage;
+    [Tooltip("인벤토리에서 버릴때 생성시킬 오브젝트")]
     [SerializeField] private GameObject dropObjectPrefab;
     
     public int ID => _id;
