@@ -11,7 +11,8 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     private RectTransform rect;
     private CanvasGroup canvasGroup;
     private Item itemInstance;//인벤토리와의 참조를 하기 위함
-
+    private GameObject dropObjectPrefab;
+    
     public Image iconImage;
     public Text itemAmount;
 
@@ -33,6 +34,10 @@ public class DragableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     {
         itemInstance = item;//인벤토리에서 받아온 아이템 그대로 참조하기 위함(정보가 연게되어 저장됨)
         iconImage.sprite = itemInstance.itemData.IconImage;
+        
+        dropObjectPrefab = itemInstance.itemData.DropObjectPrefab;
+        //todo:혹시나 아이템 드랍을 구현한다면, 인스턴스화 후에 Countable아이템이라면 SetAmount로 수량 조절필요
+        
         if (item is CountableItem ci)
             itemAmount.text = ci.Amount.ToString();
         else

@@ -52,10 +52,13 @@ public class InventoryUI : MonoBehaviour
     
     public void SwapIndex(int index1, int index2)
     {
-        int temp = index1;
-        slots[index1].SetIndex(index2);
-        slots[index2].SetIndex(temp);
+        // 1. 슬롯 1번과 슬롯 2번의 SlotIndex 값을 교환
+        int tempSlotIndex = slots[index1].SlotIndex;
+        slots[index1].SetIndex(slots[index2].SlotIndex);
+        slots[index2].SetIndex(tempSlotIndex);
     }
+
+
     
     public void OpenCloseInventory()
     {
@@ -69,6 +72,9 @@ public class InventoryUI : MonoBehaviour
         DragableItem dItem = newItem.GetComponent<DragableItem>();
         dItem.Init(item);
         dItem.ResizeItemImage();
+        
+        if (slots[slots[idx].SlotIndex].isQuickSlot)
+            quickSlotUI.UpdateQuickSlot(slots[slots[idx].SlotIndex].SlotIndex);
     }
 
     public void UpdateItemAmount(int idx, Item item)
