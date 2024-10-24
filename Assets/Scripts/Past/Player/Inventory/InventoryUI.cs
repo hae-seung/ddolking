@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,21 +8,20 @@ public class InventoryUI : MonoBehaviour
     private Inventory inven;
     public Sprite slotOpenImage;
     public GameObject inventoryFrame;
-    public GameObject ItemPrefab;//빈 아이템 프리팹
+    public GameObject ItemPrefab; // 빈 아이템 프리팹
     public bool activeInventory;
     public QuickSlotUI quickSlotUI;
-    
+
     private void Awake()
     {
         inven = Inventory.Instance;
-        if (slots.Length == 0)//인스펙터에서 할당 안한 경우 대비
-            slots = slotHolder.GetComponentsInChildren<Slot>();
-        AddSlot(inven.SlotCnt);//인벤토리를 인스펙터에서 false로 시작할경우 대비
+        slots = slotHolder.GetComponentsInChildren<Slot>();
+        AddSlot(inven.SlotCnt); // 인벤토리 초기화
     }
 
     private void Start()
     {
-        for (int i = 0; i < slots.Length; i++)
+        for(int i = 0; i<slots.Length; i++)
             slots[i].SetIndex(i);
         activeInventory = false;
         inventoryFrame.SetActive(activeInventory);
@@ -35,12 +30,12 @@ public class InventoryUI : MonoBehaviour
 
     public void AddSlot(int val)
     {
-        for (int i = 0; i < slots.Length; i++)//총 슬롯은 고정시켜둘거임
+        for (int i = 0; i < slots.Length; i++)
         {
             if (i < val)
             {
                 slots[i].GetComponent<Image>().sprite = slotOpenImage;
-                slots[i].GetComponent<Image>().raycastTarget = true; //잠긴 이미지는 활동하면 안됨
+                slots[i].GetComponent<Image>().raycastTarget = true;
             }
             else
             {
@@ -49,43 +44,33 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    
-    public void SwapIndex(int index1, int index2)
+    public void AddNewItem(int idx, Item item)
     {
-        // 1. 슬롯 1번과 슬롯 2번의 SlotIndex 값을 교환
-        int tempSlotIndex = slots[index1].SlotIndex;
-        slots[index1].SetIndex(slots[index2].SlotIndex);
-        slots[index2].SetIndex(tempSlotIndex);
+        GameObject newItem = Instantiate(ItemPrefab, slots[idx].transform);
+        DragableItem dItem = newItem.GetComponent<DragableItem>();
+        dItem.Init(item);
+        dItem.ResizeItemImage();
+        if (slots[idx].isQuickSlot)
+            quickSlotUI.UpdateQuickSlot(idx);
     }
 
+    public void UpdateItemAmount(int idx, Item item)
+    {
+        DragableItem dragableItem = slots[idx].GetComponentInChildren<DragableItem>();
+        if (dragableItem != null && item is CountableItem ci)
+        {
+            dragableItem.itemAmount.text = ci.Amount.ToString();
+        }
+    }
 
-    
+    public void SwapItem(int index1, int index2)
+    {
+       inven.SwapItems(index1, index2);
+    }
+
     public void OpenCloseInventory()
     {
         activeInventory = !activeInventory;
         inventoryFrame.SetActive(activeInventory);
     }
-
-    public void AddNewItem(int idx, Item item)//인벤토리에서 일어난 변화를 슬롯에 적용
-    {
-        GameObject newItem = Instantiate(ItemPrefab, slots[slots[idx].SlotIndex].transform);
-        DragableItem dItem = newItem.GetComponent<DragableItem>();
-        dItem.Init(item);
-        dItem.ResizeItemImage();
-        
-        if (slots[slots[idx].SlotIndex].isQuickSlot)
-            quickSlotUI.UpdateQuickSlot(slots[slots[idx].SlotIndex].SlotIndex);
-    }
-
-    public void UpdateItemAmount(int idx, Item item)
-    {
-        // SlotIndex를 통해 실제 슬롯을 참조
-        DragableItem dragableItem = slots[slots[idx].SlotIndex].GetComponentInChildren<DragableItem>();
-
-        if (dragableItem != null && item is CountableItem ci)
-        {
-            dragableItem.itemAmount.text = ci.Amount.ToString(); // 수량 텍스트 업데이트
-        }
-    }
-    
 }
