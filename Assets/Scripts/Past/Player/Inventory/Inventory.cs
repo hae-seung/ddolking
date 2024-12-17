@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Inventory : Singleton<Inventory>
@@ -13,10 +14,11 @@ public class Inventory : Singleton<Inventory>
         set { slotCnt = value; }
     }
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         SlotCnt = 18; // 초기 슬롯 개수 설정
-        inventoryUI.AddSlot(SlotCnt);
+        inventoryUI.Init(this);
         UpdateInventory(SlotCnt); // List는 0, 슬롯은 열려있어서 각각 맞춰줘야함
     }
 
@@ -48,14 +50,17 @@ public class Inventory : Singleton<Inventory>
 
             while (amount > 0)
             {
+                // 1-1. 이미 해당 아이템이 인벤토리 내에 존재하고, 개수 여유 있는지 검사
                 if (findNextCountable)
                 {
                     index = FindCountableItemSlotIndex(countableItem, index + 1);
-
+                    
+                    // 개수 여유있는 기존재 슬롯이 더이상 없다고 판단될 경우, 빈 슬롯부터 탐색 시작
                     if (index == -1)
                     {
                         findNextCountable = false;
                     }
+                    // 기존재 슬롯을 찾은 경우, 양 증가시키고 초과량 존재 시 amount에 초기화
                     else
                     {
                         CountableItem existingItem = _items[index] as CountableItem;
@@ -63,21 +68,24 @@ public class Inventory : Singleton<Inventory>
                         inventoryUI.UpdateItemAmount(index, existingItem);
                     }
                 }
+                // 1-2. 빈 슬롯 탐색
                 else
                 {
                     index = FindEmptySlotIndex();
+                    // 빈 슬롯조차 없는 경우 종료
                     if (index == -1)
                     {
                         Debug.LogWarning("빈 슬롯이 없습니다.");
                         return amount; // 남은 양 반환
                     }
+                    // 빈 슬롯 발견 시, 슬롯에 아이템 추가 및 잉여량 계산
                     else
                     {
-                        int addableAmount = Mathf.Min(amount, countableItem.MaxAmount); // 남은 공간만큼 추가
-                        CountableItem newItem = new CountableItem(countableItem.CountableData, addableAmount);
-                        _items[index] = newItem;
-                        amount -= addableAmount;
-                        inventoryUI.AddNewItem(index, newItem);
+                        CountableItem citem = countableItem.Clone(amount);
+                        _items[index] = citem;
+
+                        amount -= citem.Amount;
+                        inventoryUI.AddNewItem(index, citem);
                     }
                 }
             }
@@ -130,7 +138,5 @@ public class Inventory : Singleton<Inventory>
         Item temp = _items[index1];
         _items[index1] = _items[index2];
         _items[index2] = temp;
-
-        Debug.Log($"Inventory items swapped: {index1} <-> {index2}");
     }
 }

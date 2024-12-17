@@ -3,30 +3,30 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public Slot[] slots;
+    private Slot[] slots;
     public Transform slotHolder;
     private Inventory inven;
     public Sprite slotOpenImage;
     public GameObject inventoryFrame;
     public GameObject ItemPrefab; // 빈 아이템 프리팹
-    public bool activeInventory;
     public QuickSlotUI quickSlotUI;
 
-    private void Awake()
+    private bool activeInventory;
+    
+    public void Init(Inventory inventory)
     {
-        inven = Inventory.Instance;
+        inven = inventory;
         slots = slotHolder.GetComponentsInChildren<Slot>();
         AddSlot(inven.SlotCnt); // 인벤토리 초기화
-    }
-
-    private void Start()
-    {
+        
         for(int i = 0; i<slots.Length; i++)
             slots[i].SetIndex(i);
+        
         activeInventory = false;
         inventoryFrame.SetActive(activeInventory);
         quickSlotUI.InitializeQuickSlots();
     }
+    
 
     public void AddSlot(int val)
     {

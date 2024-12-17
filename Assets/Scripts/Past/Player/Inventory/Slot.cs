@@ -46,6 +46,9 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IDropHandler, IPointerE
             Transform draggedItem = eventData.pointerDrag.transform; // 드래그 중인 아이템
             DragableItem draggedItemScript = draggedItem.GetComponent<DragableItem>();
 
+            if (draggedItemScript == null)
+                return;
+            
             Slot previousSlot = draggedItemScript.PreviousParent.GetComponent<Slot>();
             if (previousSlot != null)
             {
