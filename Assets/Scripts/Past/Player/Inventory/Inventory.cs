@@ -5,7 +5,7 @@ using UnityEngine;
 public class Inventory : Singleton<Inventory>
 {
     public List<Item> _items = new List<Item>(); // 인벤토리 슬롯 리스트
-    public InventoryUI inventoryUI;
+    //public InventoryUI inventoryUI;
     private int slotCnt;
 
     public int SlotCnt
@@ -18,14 +18,14 @@ public class Inventory : Singleton<Inventory>
     {
         base.Awake();
         SlotCnt = 18; // 초기 슬롯 개수 설정
-        inventoryUI.Init(this);
+        //inventoryUI.Init(this);
         UpdateInventory(SlotCnt); // List는 0, 슬롯은 열려있어서 각각 맞춰줘야함
     }
 
     public void AddInventoryList(int count) // 배낭아이템이 사용
     {
         SlotCnt += count; // 슬롯 개수 증가
-        inventoryUI.AddSlot(SlotCnt); // 슬롯 해금
+        //inventoryUI.AddSlot(SlotCnt); // 슬롯 해금
         UpdateInventory(count); // 인벤토리 List<> 해금
     }
 
@@ -65,7 +65,7 @@ public class Inventory : Singleton<Inventory>
                     {
                         CountableItem existingItem = _items[index] as CountableItem;
                         amount = existingItem.AddAmountAndGetExcess(amount); // 수량 추가 후 남은 수량 계산
-                        inventoryUI.UpdateItemAmount(index, existingItem);
+                       // inventoryUI.UpdateItemAmount(index, existingItem);
                     }
                 }
                 // 1-2. 빈 슬롯 탐색
@@ -85,7 +85,7 @@ public class Inventory : Singleton<Inventory>
                         _items[index] = citem;
 
                         amount -= citem.Amount;
-                        inventoryUI.AddNewItem(index, citem);
+                        //inventoryUI.AddNewItem(index, citem);
                     }
                 }
             }
@@ -96,7 +96,7 @@ public class Inventory : Singleton<Inventory>
             if (index != -1)
             {
                 _items[index] = item;
-                inventoryUI.AddNewItem(index, item);
+                //inventoryUI.AddNewItem(index, item);
             }
         }
         return amount; // 남은 아이템 수량 반환
@@ -135,8 +135,6 @@ public class Inventory : Singleton<Inventory>
     public void SwapItems(int index1, int index2)
     {
         // 아이템 리스트에서의 스왑
-        Item temp = _items[index1];
-        _items[index1] = _items[index2];
-        _items[index2] = temp;
+        (_items[index1], _items[index2]) = (_items[index2], _items[index1]);
     }
 }

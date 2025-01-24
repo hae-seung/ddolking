@@ -6,19 +6,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody2D rigid;
-    public Vector2 inputVec;
+    private Rigidbody2D rigid;
+    private Vector2 inputVec;
     public float speed;
     private void Awake()
     {
         Application.targetFrameRate = 75;
         rigid = GetComponent<Rigidbody2D>();
     }
-
-    private void Update()
-    {
-       
-    }
+    
 
     private void FixedUpdate()
     {
