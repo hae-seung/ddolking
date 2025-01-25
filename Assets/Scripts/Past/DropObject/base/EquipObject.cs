@@ -16,8 +16,5 @@ public abstract class EquipObject : DropObject
     }
 
     protected abstract void MakeItemInstance();
-    protected override void AddItemToInventory()
-    {
-        
-    }
+    
 }

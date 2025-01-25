@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public abstract class CountableObject<T> : DropObject where T : CountableItem
@@ -13,7 +12,7 @@ public abstract class CountableObject<T> : DropObject where T : CountableItem
 
     protected abstract void MakeItemInstance();
 
-    protected override void AddItemToInventory()
+    protected override void CollectItem()
     {
         int amountBeforePickup = countableItem.Amount;
         int amountLeftAfterAdd = Inventory.Instance.Add(countableItem, countableItem.Amount);

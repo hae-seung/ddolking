@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class PortionObject : CountableObject<PortionItem>
@@ -7,7 +6,7 @@ public class PortionObject : CountableObject<PortionItem>
     protected override void MakeItemInstance()
     {
         countableItem = new PortionItem(data);
-        itemId= data.ID;
+        itemId = data.ID;
     }
 
     protected override void OnEnable()
@@ -17,8 +16,13 @@ public class PortionObject : CountableObject<PortionItem>
             IsFirstAwake = false;
             return;
         }
-    
+
         countableItem = new PortionItem(data);
         base.OnEnable();
+    }
+
+    public override int GetItemId()
+    {
+        return data.ID;
     }
 }

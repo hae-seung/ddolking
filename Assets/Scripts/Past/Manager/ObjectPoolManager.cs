@@ -2,129 +2,112 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
+[DefaultExecutionOrder(-100)]
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
-    private Dictionary<int, ObjectPool<GameObject>> objectPools = new();
-    private Dictionary<int, GameObject> registeredPrefabs = new();
-    private const int maxPoolSize = 30;  // 최대 풀 크기 설정
+    [Header("풀 기본 설정")]
+    public int defaultCapacity = 10;
+    public int maxPoolSize = 50;
 
-    public void CreatePool(int id, GameObject prefab, int initialSize = 10)
+    private Dictionary<int, IObjectPool<GameObject>> pools = new();
+    private Dictionary<int, GameObject> registeredPrefabs = new();
+
+    // 프리팹 등록 및 풀 생성
+    public void RegisterPrefab(int id, GameObject prefab)
     {
-        if (objectPools.ContainsKey(id))
+        if (pools.ContainsKey(id))
         {
-            Debug.LogWarning($"풀 ID {id}가 이미 등록되어 있습니다.");
+            Debug.Log($"ID {id}는 이미 등록된 프리팹입니다.");
             return;
         }
 
         registeredPrefabs[id] = prefab;
-
-        var pool = new ObjectPool<GameObject>(
-            () => CreateObject(id),
-            OnGetFromPool,
-            OnReleaseToPool,
-            OnDestroyObject,
-            false, initialSize, maxPoolSize
+        pools[id] = new ObjectPool<GameObject>(
+            () => CreatePooledItem(id),
+            OnTakeFromPool,
+            OnReturnedToPool,
+            OnDestroyPoolObject,
+            false, defaultCapacity, maxPoolSize
         );
 
-        objectPools[id] = pool;
-        Debug.Log($"풀 생성 완료: ID {id}");
+        Debug.Log($"ID {id}의 프리팹이 풀에 등록되었습니다.");
     }
 
-    public bool IsPoolRegistered(int id)
+    // 아이템 생성 (Instantiate)
+    private GameObject CreatePooledItem(int id)
     {
-        return objectPools.ContainsKey(id);
-    }
-
-    public GameObject SpawnObject(int id, Vector3 position, Quaternion rotation)
-    {
-        if (!objectPools.ContainsKey(id))
+        if (!registeredPrefabs.ContainsKey(id))
         {
-            Debug.LogWarning($"풀 ID {id}가 존재하지 않아 새로 생성합니다.");
-            return InstantiateAndReturn(id, position, rotation);
+            Debug.LogError($"ID {id}의 프리팹이 등록되지 않았습니다!");
+            return null;
         }
 
-        ObjectPool<GameObject> pool = objectPools[id];
-
-        // 풀의 maxSize 초과 시, 새로운 오브젝트 인스턴스화하여 리턴
-        if (pool.CountActive >= maxPoolSize)
-        {
-            Debug.LogWarning($"풀 ID {id}가 최대 크기 {maxPoolSize}에 도달하여 새 오브젝트를 인스턴스화합니다.");
-            return InstantiateAndReturn(id, position, rotation);
-        }
-
-        GameObject obj = pool.Get();
-        obj.transform.position = position;
-        obj.transform.rotation = rotation;
-        obj.SetActive(true);
+        GameObject obj = Instantiate(registeredPrefabs[id]);
+        obj.SetActive(false);
         return obj;
     }
 
-    public void ReleaseObject(int id, GameObject obj)
+    // 오브젝트 풀에서 꺼내기
+    private void OnTakeFromPool(GameObject poolGo)
     {
-        if (objectPools.ContainsKey(id))
+        poolGo.SetActive(true);
+    }
+
+    // 오브젝트 풀에 반환
+    private void OnReturnedToPool(GameObject poolGo)
+    {
+        poolGo.SetActive(false);
+        poolGo.transform.SetParent(transform);
+    }
+
+    // 오브젝트 제거
+    private void OnDestroyPoolObject(GameObject poolGo)
+    {
+        Destroy(poolGo);
+    }
+
+    // 아이템 스폰 (필드에서 드롭 시)
+    public GameObject SpawnObject(int id, Vector3 position, Quaternion rotation, Transform parent = null)
+    {
+        if (!pools.ContainsKey(id))
         {
-            ObjectPool<GameObject> pool = objectPools[id];
+            Debug.LogWarning($"ID {id}의 풀을 찾을 수 없습니다. 새로운 오브젝트를 생성합니다.");
+            RegisterPrefab(id, registeredPrefabs[id]);
+        }
 
-            // 현재 풀의 최대 크기를 초과할 경우 오브젝트 삭제
-            if (pool.CountInactive >= maxPoolSize)
-            {
-                Debug.LogWarning($"풀 ID {id}가 최대 크기 초과로 오브젝트 삭제됨: {obj.name}");
-                Destroy(obj);
-                return;
-            }
+        GameObject obj = pools[id].Get();
+        obj.transform.position = position;
+        obj.transform.rotation = rotation;
 
-            Debug.Log($"풀 ID {id}에 오브젝트 반환: {obj.name}");
-            pool.Release(obj);
+        if (parent != null)
+        {
+            obj.transform.SetParent(parent);
         }
         else
         {
-            Debug.LogWarning($"풀 ID {id}가 존재하지 않아 오브젝트를 직접 파괴합니다: {obj.name}");
+            obj.transform.SetParent(null);
+        }
+
+        Debug.Log($"ID {id}의 오브젝트 풀에서 가져옴: {obj.name}");
+        return obj;
+    }
+
+    // 아이템 반환 (플레이어가 획득할 때)
+    public void ReleaseObject(int id, GameObject obj)
+    {
+        if (!pools.ContainsKey(id))
+        {
+            Debug.LogWarning($"ID {id}의 풀을 찾을 수 없습니다. 오브젝트를 삭제합니다.");
             Destroy(obj);
-        }
-    }
-
-
-    private GameObject InstantiateAndReturn(int id, Vector3 position, Quaternion rotation)
-    {
-        if (!registeredPrefabs.ContainsKey(id))
-        {
-            Debug.LogError($"ID {id}에 대한 프리팹이 등록되지 않았습니다.");
-            return null;
+            return;
         }
 
-        GameObject newObj = Instantiate(registeredPrefabs[id], position, rotation);
-        newObj.SetActive(true);
-        return newObj;
+        pools[id].Release(obj);
     }
 
-    private GameObject CreateObject(int id)
+    // 특정 ID에 대한 풀이 등록되어 있는지 확인
+    public bool IsPoolRegistered(int id)
     {
-        if (!registeredPrefabs.ContainsKey(id))
-        {
-            Debug.LogError($"ID {id}에 대한 프리팹이 등록되지 않았습니다.");
-            return null;
-        }
-
-        GameObject newObj = Instantiate(registeredPrefabs[id]);
-        newObj.SetActive(false);
-        newObj.transform.SetParent(Instance.transform);
-        return newObj;
-    }
-
-    private void OnGetFromPool(GameObject obj)
-    {
-        obj.SetActive(true);
-        obj.transform.SetParent(null);
-    }
-
-    private void OnReleaseToPool(GameObject obj)
-    {
-        obj.SetActive(false);
-        obj.transform.SetParent(Instance.transform);
-    }
-
-    private void OnDestroyObject(GameObject obj)
-    {
-        Destroy(obj);
+        return pools.ContainsKey(id);
     }
 }
