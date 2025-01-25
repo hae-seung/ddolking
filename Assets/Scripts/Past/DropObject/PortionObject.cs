@@ -1,8 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PortionObject : CountableObject
+public class PortionObject : CountableObject<PortionItem>
 {
-    //todo:포션의 회복량
+    [SerializeField] private PortionItemData data;
+    protected override void MakeItemInstance()
+    {
+        countableItem = new PortionItem(data);
+        itemId= data.ID;
+    }
+
+    protected override void OnEnable()
+    {
+        if (IsFirstAwake)
+        {
+            IsFirstAwake = false;
+            return;
+        }
+    
+        countableItem = new PortionItem(data);
+        base.OnEnable();
+    }
 }

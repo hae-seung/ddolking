@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 8447587856513844223}
   - component: {fileID: 2944461598108420050}
   - component: {fileID: 8634705538607935713}
-  - component: {fileID: 7530044654698085677}
+  - component: {fileID: 2849971052332456066}
   m_Layer: 6
   m_Name: NormalTree
   m_TagString: Untagged
@@ -172,7 +172,7 @@ PolygonCollider2D:
       - {x: -0.36582565, y: -0.029411197}
       - {x: -0.38361344, y: 0.3802517}
   m_UseDelaunayMesh: 0
---- !u!114 &7530044654698085677
+--- !u!114 &2849971052332456066
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,11 +184,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5e93503a159ca4cb8845a1bdebd316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prompt: F:break
-  fieldObjectData: {fileID: 11400000, guid: 08b8fd33348a70748a3c72c458b98f93, type: 2}
-  durabilityPanel: {fileID: 7780298148254050771}
-  durabilityBar: {fileID: 3512175753495831764}
-  interactionDuration: 1
+  prompt: 
+  fieldObjectData: {fileID: 0}
+  durabilityPanel: {fileID: 0}
+  durabilityBar: {fileID: 0}
+  interactionDuration: 0
   tilemap: {fileID: 0}
 --- !u!1 &5242664623722495184
 GameObject:

@@ -1,13 +1,13 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Inventory : Singleton<Inventory>
 {
-    public List<Item> _items = new List<Item>(); // 인벤토리 슬롯 리스트
-    //public InventoryUI inventoryUI;
+    private List<Item> _items = new List<Item>(); // 인벤토리 슬롯 리스트
+    //0~4번 인덱스까지는 퀵슬롯을 위한 자리
+    
+    public InventoryUI inventoryUI;
     private int slotCnt;
-
     public int SlotCnt
     {
         get => slotCnt;
@@ -17,25 +17,22 @@ public class Inventory : Singleton<Inventory>
     protected override void Awake()
     {
         base.Awake();
-        SlotCnt = 18; // 초기 슬롯 개수 설정
-        //inventoryUI.Init(this);
+        SlotCnt = 25; // 초기 슬롯 개수 설정
+        inventoryUI.Init(SlotCnt);
         UpdateInventory(SlotCnt); // List는 0, 슬롯은 열려있어서 각각 맞춰줘야함
     }
 
     public void AddInventoryList(int count) // 배낭아이템이 사용
     {
         SlotCnt += count; // 슬롯 개수 증가
-        //inventoryUI.AddSlot(SlotCnt); // 슬롯 해금
+        inventoryUI.AddSlot(count); // 슬롯 해금
         UpdateInventory(count); // 인벤토리 List<> 해금
     }
 
     private void UpdateInventory(int count)
     {
         for (int i = 0; i < count; i++)
-        {
             _items.Add(null); // 새로 추가된 리스트는 null로 초기화
-        }
-        Debug.Log($"인벤토리 초기화됨: {_items.Count}개의 슬롯 생성.");
     }
 
     public int Add(Item item, int amount = 1)
@@ -65,7 +62,7 @@ public class Inventory : Singleton<Inventory>
                     {
                         CountableItem existingItem = _items[index] as CountableItem;
                         amount = existingItem.AddAmountAndGetExcess(amount); // 수량 추가 후 남은 수량 계산
-                       // inventoryUI.UpdateItemAmount(index, existingItem);
+                        inventoryUI.UpdateItemAmount(index, existingItem.Amount);
                     }
                 }
                 // 1-2. 빈 슬롯 탐색
@@ -81,22 +78,30 @@ public class Inventory : Singleton<Inventory>
                     // 빈 슬롯 발견 시, 슬롯에 아이템 추가 및 잉여량 계산
                     else
                     {
-                        CountableItem citem = countableItem.Clone(amount);
-                        _items[index] = citem;
-
-                        amount -= citem.Amount;
-                        //inventoryUI.AddNewItem(index, citem);
+                        if (amount == 1)
+                        {
+                            _items[index] = item;
+                            amount = 0;
+                        }
+                        else
+                        {
+                            CountableItem citem = countableItem.Clone(amount);
+                        
+                            _items[index] = citem;
+                            amount -= citem.Amount;
+                        }
+                        inventoryUI.AddNewItem(index, _items[index]);
                     }
                 }
             }
         }
-        else
+        else //도구류
         {
             index = FindEmptySlotIndex();
             if (index != -1)
             {
                 _items[index] = item;
-                //inventoryUI.AddNewItem(index, item);
+                inventoryUI.AddNewItem(index, item);
             }
         }
         return amount; // 남은 아이템 수량 반환

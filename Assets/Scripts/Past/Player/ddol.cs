@@ -5,14 +5,21 @@ using UnityEngine;
 
 public class ddol : MonoBehaviour
 {
-    //public InventoryUI inventoryUI;
-    
-    
+    private UIManager uiManager;
+
+    private void Awake()
+    {
+        uiManager = FindObjectOfType<UIManager>();
+    }
+
     private void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.E))
-            //inventoryUI.OpenCloseInventory();
-        
-      
+        if (Input.GetKeyDown(KeyCode.Tab))
+            uiManager.HandleTab();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            uiManager.HandleEscape();
+
     }
+    
 }

@@ -5,12 +5,7 @@ using UnityEngine;
 public class PortionItem : CountableItem
 {
     public PortionItem(PortionItemData data, int amount = 1) : base(data, amount){ }
-
-    public bool Use()
-    {
-        Amount--;
-        return true;
-    }
+    
 
     protected override CountableItem CreateItem(int amount)
     {
