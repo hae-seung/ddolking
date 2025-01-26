@@ -15,7 +15,7 @@ MonoBehaviour:
   _id: 11
   _name: "\uBB3C\uC57D"
   _description: "\u3141\u3141\u3141"
-  _iconImage: {fileID: 21300000, guid: af88e637281e9a548aa31d1cb76a0486, type: 3}
-  dropObjectPrefab: {fileID: 0}
-  maxAmount: 99
+  _iconImage: {fileID: 21300000, guid: acbba4f81e74aeb42a0cff89b55c60d3, type: 3}
+  dropObjectPrefab: {fileID: 3382593057138888241, guid: fc2d22f7795ef7949b58095536f3cf71, type: 3}
+  maxAmount: 2
   value: 0.06

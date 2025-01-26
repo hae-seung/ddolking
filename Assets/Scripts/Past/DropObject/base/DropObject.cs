@@ -4,28 +4,32 @@ using UnityEngine;
 public abstract class DropObject : MonoBehaviour
 {
     protected int itemId;
+    protected GameObject dropObjectPrefab;
     private Collider2D _collider;
     private float disableCollisionTime = 0.5f;
-    private float autoReleaseTime = 5f;  // 1분 후 자동 반환 시간
-    protected bool IsFirstAwake = false;
+    private float autoReleaseTime = 2f;  // 1분 후 자동 반환 시간
+    protected bool isSpawned = false;  // 풀에서 가져왔거나 인스턴스화된 경우
 
     protected virtual void Awake()
     {
         _collider = GetComponent<Collider2D>();
-        IsFirstAwake = true;
+        isSpawned = false;  // 기본적으로 씬에 배치된 상태
     }
 
     protected virtual void OnEnable()
     {
         StartCoroutine(DisableCollisionTemporarily());
 
-        // 1분 후 자동으로 풀에 반환
-        Invoke(nameof(AutoReleaseToPool), autoReleaseTime);
+        // 풀에서 가져온 경우(SpawnObject를 통해), 자동 반환 설정
+        if (isSpawned)
+        {
+            Invoke(nameof(AutoReleaseToPool), autoReleaseTime);
+        }
     }
 
     protected virtual void OnDisable()
     {
-        // 비활성화되면 자동 반환 취소
+        // 비활성화 시 자동 반환 취소
         CancelInvoke(nameof(AutoReleaseToPool));
     }
 
@@ -46,7 +50,6 @@ public abstract class DropObject : MonoBehaviour
 
     private void HandleItemPickup()
     {
-        // 풀 등록 확인 후 자동 등록
         if (!ObjectPoolManager.Instance.IsPoolRegistered(itemId))
         {
             ObjectPoolManager.Instance.RegisterPrefab(itemId, gameObject);
@@ -85,6 +88,12 @@ public abstract class DropObject : MonoBehaviour
             Debug.LogError($"{gameObject.name}: DropObject에 itemId가 설정되지 않음.");
             Destroy(gameObject);
         }
+    }
+
+    // 풀에서 나온 경우 호출 (스폰될 때 실행)
+    public void SetAsSpawned()
+    {
+        isSpawned = true;
     }
 
     public abstract int GetItemId();

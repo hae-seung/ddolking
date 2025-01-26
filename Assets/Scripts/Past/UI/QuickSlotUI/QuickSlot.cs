@@ -34,8 +34,31 @@ public class QuickSlot : MonoBehaviour
         IsUsing = true;
     }
 
-    public void UpdateAmount(int amount)//countableItem만 실행함
+    public void UpdateAmount(int amount  = 0)//countableItem만 실행함
     {
-        amountText.text = amount.ToString();
+        if(amount == 0)
+            HideText();
+        else
+        {
+            amountText.text = amount.ToString();
+            ShowText();
+        }
+    }
+
+    public void SetItemIcon(Sprite sprite)
+    {
+        iconImage.sprite = sprite;
+        ShowIcon();
+    }
+
+    public void RemoveItem()
+    {
+        HideIcon();
+        HideText();
+    }
+
+    public void HideAmountText()
+    {
+        HideText();
     }
 }

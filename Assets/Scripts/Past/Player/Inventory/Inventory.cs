@@ -14,11 +14,16 @@ public class Inventory : Singleton<Inventory>
         set { slotCnt = value; }
     }
 
+    private bool IsValidIndex(int index)
+    {
+        return index >= 0 && index < SlotCnt;
+    }
+    
     protected override void Awake()
     {
         base.Awake();
-        SlotCnt = 25; // 초기 슬롯 개수 설정
-        inventoryUI.Init(SlotCnt);
+        SlotCnt = 30; // 초기 슬롯 개수 설정
+        inventoryUI.Init(SlotCnt, this);
         UpdateInventory(SlotCnt); // List는 0, 슬롯은 열려있어서 각각 맞춰줘야함
     }
 
@@ -133,13 +138,75 @@ public class Inventory : Singleton<Inventory>
         }
         return -1;
     }
-    
-    
-    
-    
-    public void SwapItems(int index1, int index2)
+
+    public void SwapItem(int from , int to)
     {
-        // 아이템 리스트에서의 스왑
-        (_items[index1], _items[index2]) = (_items[index2], _items[index1]);
+        (_items[from], _items[to]) = (_items[to], _items[from]);
+
+        Item itemA = _items[from];
+        Item itemB = _items[to];
+
+        if (itemA != null && itemB != null &&
+            itemA.itemData == itemB.itemData &&
+            itemA is CountableItem ciA && itemB is CountableItem ciB)
+        {
+            int maxAmount = ciB.MaxAmount;
+            int sum = ciA.Amount + ciB.Amount;
+
+            if (sum <= maxAmount)
+            {
+                ciA.SetAmount(0);
+                ciB.SetAmount(sum);
+            }
+            else
+            {
+                ciA.SetAmount(sum - maxAmount);
+                ciB.SetAmount(maxAmount);
+            }
+        }
+
+        UpdateSlot(from);
+        UpdateSlot(to);
     }
+
+    public void UpdateSlot(int index)
+    {
+        Item item = _items[index];
+
+        if (item != null)
+        {
+            inventoryUI.SetItemIcon(index, item.itemData.IconImage);
+        
+            if (item is CountableItem ci)
+            {
+                if (ci.IsEmpty)
+                {
+                    _items[index] = null;
+                    RemoveIcon();
+                    return;
+                }
+                else
+                {
+                    inventoryUI.UpdateItemAmount(index, ci.Amount);
+                }
+            }
+            else
+            {
+                inventoryUI.UpdateItemAmount(index, 0);
+            }
+        }
+        else
+        {
+            RemoveIcon();
+        }
+    
+        void RemoveIcon()
+        {
+            inventoryUI.RemoveItem(index);
+            inventoryUI.HideItemAmountText(index);
+        }
+    }
+
+    
+    
 }

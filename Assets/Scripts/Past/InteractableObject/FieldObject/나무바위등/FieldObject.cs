@@ -54,7 +54,7 @@ public class FieldObject : Interactable
         });
     }
 
-    public void DropItems()
+    private void DropItems()
     {
         foreach (var drop in dropTable)
         {

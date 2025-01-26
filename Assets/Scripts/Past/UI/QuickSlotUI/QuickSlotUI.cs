@@ -12,7 +12,7 @@ public class QuickSlotUI : MonoBehaviour
         UpdatePlayerHand();
     }
 
-    public void UpdateItemAmount(int idx, int amount)
+    public void UpdateItemAmount(int idx, int amount = 0)
     {
         quickSlots[idx].UpdateAmount(amount);
     }
@@ -21,6 +21,20 @@ public class QuickSlotUI : MonoBehaviour
     {
         
     }
-    
+
+    public void SetItemIcon(int idx, Sprite sprite)
+    {
+        quickSlots[idx].SetItemIcon(sprite);
+    }
+
+    public void RemoveItem(int idx)
+    {
+        quickSlots[idx].RemoveItem();
+    }
+
+    public void HideAmountText(int idx)
+    {
+        quickSlots[idx].HideAmountText();
+    }
     
 }

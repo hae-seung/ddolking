@@ -17,5 +17,5 @@ MonoBehaviour:
   durability: 3
   dropTable:
   - dropItemPrefab: {fileID: 3382593057138888241, guid: fc2d22f7795ef7949b58095536f3cf71, type: 3}
-    minAmount: 30
-    maxAmount: 35
+    minAmount: 5
+    maxAmount: 5

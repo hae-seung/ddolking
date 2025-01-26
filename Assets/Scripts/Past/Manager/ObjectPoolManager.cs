@@ -88,9 +88,13 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             obj.transform.SetParent(null);
         }
 
+        // DropObject의 SetAsSpawned() 호출
+        obj.GetComponent<DropObject>()?.SetAsSpawned();
+
         Debug.Log($"ID {id}의 오브젝트 풀에서 가져옴: {obj.name}");
         return obj;
     }
+
 
     // 아이템 반환 (플레이어가 획득할 때)
     public void ReleaseObject(int id, GameObject obj)
