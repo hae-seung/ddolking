@@ -52,7 +52,7 @@ public abstract class DropObject : MonoBehaviour
     {
         if (!ObjectPoolManager.Instance.IsPoolRegistered(itemId))
         {
-            ObjectPoolManager.Instance.RegisterPrefab(itemId, gameObject);
+            ObjectPoolManager.Instance.RegisterPrefab(itemId, dropObjectPrefab);
         }
 
         CollectItem();

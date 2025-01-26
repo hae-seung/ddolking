@@ -169,18 +169,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void AddNewItem(int idx, Item item)
-    {
-        if (0 <= idx && idx < slots.Count)
-        {
-            slots[idx].CreateItem(item);
-            if (idx <= 4)
-            {
-                quickSlotUI.CreateItem(idx, item);
-            }
-        }
-    }
-
+    
     public void UpdateItemAmount(int idx, int amount = 0)
     {
         if (0 <= idx && idx < slots.Count)
@@ -207,7 +196,7 @@ public class InventoryUI : MonoBehaviour
         if (0 <= idx && idx <= 4)
             quickSlotUI.RemoveItem(idx);
 
-        slots[idx].RemoveItem(idx);
+        slots[idx].RemoveItem();
     }
 
     public void HideItemAmountText(int idx)
@@ -215,6 +204,6 @@ public class InventoryUI : MonoBehaviour
         if (0 <= idx && idx <= 4)
             quickSlotUI.HideAmountText(idx);
 
-        slots[idx].HideAmountText(idx);
+        slots[idx].HideAmountText();
     }
 }

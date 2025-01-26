@@ -17,22 +17,6 @@ public class QuickSlot : MonoBehaviour
 
     public bool IsUsing { get; private set; } = false;
     
-    public void CreateItem(Item item)
-    {
-        HideIcon();
-        HideText();
-        
-        if (item is CountableItem citem)
-        {
-            amountText.text = citem.Amount.ToString();
-            ShowText();
-        }
-        
-        iconImage.sprite = item.itemData.IconImage;
-        ShowIcon();
-
-        IsUsing = true;
-    }
 
     public void UpdateAmount(int amount  = 0)//countableItem만 실행함
     {
@@ -55,6 +39,7 @@ public class QuickSlot : MonoBehaviour
     {
         HideIcon();
         HideText();
+        iconImage.sprite = null;
     }
 
     public void HideAmountText()

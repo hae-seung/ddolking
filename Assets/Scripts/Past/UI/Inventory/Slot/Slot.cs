@@ -25,20 +25,7 @@ public class Slot : MonoBehaviour
     {
         SlotIdx = idx;
     }
-
-    public void CreateItem(Item item)
-    {
-        if (item is CountableItem citem)
-        {
-            amountText.text = citem.Amount.ToString();
-            ShowText();
-        }
-        
-        iconImage.sprite = item.itemData.IconImage;
-        ShowIcon();
-
-        IsUsing = true;
-    }
+    
 
     public void UpdateItemAmount(int amount = 0)
     {
@@ -57,45 +44,35 @@ public class Slot : MonoBehaviour
 
         Sprite tempSprite = iconImage.sprite;
 
-        SetItem(other.iconImage.sprite);
-        other.SetItem(tempSprite);
+        SetItemIcon(other.iconImage.sprite);
+        other.SetItemIcon(tempSprite);
     }
 
-    private void SetItem(Sprite sprite)
+    public void SetItemIcon(Sprite otherSprite)
     {
-        if (sprite != null)
+        if (otherSprite != null)
         {
-            iconImage.sprite = sprite;
-            IsUsing = true;
+            iconImage.sprite =  otherSprite;
+            IsUsing = true;                         //중요
             ShowIcon();
         }
-        else
+        else//다른 슬롯엔 아이템이 없었음을 의미
         {
             RemoveItem();
         }
     }
 
-    private void RemoveItem()
+    public void RemoveItem()
     {
         HideIcon();
         HideText();
-        IsUsing = false;
+        IsUsing = false;                            //중요
         iconImage.sprite = null;
     }
+    
+    
 
-    public void SetItemIcon(Sprite sprite)
-    {
-        iconImage.sprite = sprite;
-        ShowIcon();
-    }
-
-    public void RemoveItem(int idx)
-    {
-        HideIcon();
-        HideText();
-    }
-
-    public void HideAmountText(int idx)
+    public void HideAmountText()
     {
         HideText();
     }

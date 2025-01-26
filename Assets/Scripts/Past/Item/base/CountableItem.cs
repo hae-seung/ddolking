@@ -28,16 +28,10 @@ public abstract class CountableItem : Item
         return (nextAmount > MaxAmount) ? (nextAmount - MaxAmount) : 0;
     }
 
-    public CountableItem Clone(int amount)
+    public CountableItem Clone()
     {
-        if (Amount <= 1) return null;
-        
-        if (amount > Amount - 1)
-            amount = Amount - 1;
-
-        Amount -= amount;
-        return CreateItem(amount);
+        return CreateItem();
     }
     
-    protected abstract CountableItem CreateItem(int amount);
+    protected abstract CountableItem CreateItem();
 }

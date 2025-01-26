@@ -31,6 +31,6 @@ public class PortionObject : CountableObject<PortionItem>
 
     public override int GetItemId()
     {
-        return data.ID;
+        return data.ID;//생성전 미리 만들어져야함
     }
 }

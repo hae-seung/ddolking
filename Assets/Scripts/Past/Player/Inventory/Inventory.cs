@@ -67,7 +67,8 @@ public class Inventory : Singleton<Inventory>
                     {
                         CountableItem existingItem = _items[index] as CountableItem;
                         amount = existingItem.AddAmountAndGetExcess(amount); // 수량 추가 후 남은 수량 계산
-                        inventoryUI.UpdateItemAmount(index, existingItem.Amount);
+                        
+                        UpdateSlot(index);
                     }
                 }
                 // 1-2. 빈 슬롯 탐색
@@ -83,19 +84,12 @@ public class Inventory : Singleton<Inventory>
                     // 빈 슬롯 발견 시, 슬롯에 아이템 추가 및 잉여량 계산
                     else
                     {
-                        if (amount == 1)
-                        {
-                            _items[index] = item;
-                            amount = 0;
-                        }
-                        else
-                        {
-                            CountableItem citem = countableItem.Clone(amount);
+                        CountableItem citem = countableItem.Clone();
+                        citem.SetAmount(amount);
+                        _items[index] = citem;
+                        amount = (amount > citem.MaxAmount) ? (amount - citem.MaxAmount) : 0;
                         
-                            _items[index] = citem;
-                            amount -= citem.Amount;
-                        }
-                        inventoryUI.AddNewItem(index, _items[index]);
+                        UpdateSlot(index);
                     }
                 }
             }
@@ -106,7 +100,8 @@ public class Inventory : Singleton<Inventory>
             if (index != -1)
             {
                 _items[index] = item;
-                inventoryUI.AddNewItem(index, item);
+                amount = 0;
+                UpdateSlot(index);
             }
         }
         return amount; // 남은 아이템 수량 반환
@@ -142,17 +137,20 @@ public class Inventory : Singleton<Inventory>
     public void SwapItem(int from , int to)
     {
         (_items[from], _items[to]) = (_items[to], _items[from]);
-
+    
         Item itemA = _items[from];
         Item itemB = _items[to];
-
+    
         if (itemA != null && itemB != null &&
             itemA.itemData == itemB.itemData &&
             itemA is CountableItem ciA && itemB is CountableItem ciB)
         {
+            
+            if(itemA != itemB)
+                Debug.Log("같은데이터지만 다른 아이템이다");
             int maxAmount = ciB.MaxAmount;
             int sum = ciA.Amount + ciB.Amount;
-
+    
             if (sum <= maxAmount)
             {
                 ciA.SetAmount(0);
@@ -164,15 +162,15 @@ public class Inventory : Singleton<Inventory>
                 ciB.SetAmount(maxAmount);
             }
         }
-
+    
         UpdateSlot(from);
         UpdateSlot(to);
     }
-
+    
     public void UpdateSlot(int index)
     {
         Item item = _items[index];
-
+    
         if (item != null)
         {
             inventoryUI.SetItemIcon(index, item.itemData.IconImage);
@@ -192,7 +190,7 @@ public class Inventory : Singleton<Inventory>
             }
             else
             {
-                inventoryUI.UpdateItemAmount(index, 0);
+                inventoryUI.UpdateItemAmount(index, 0);//도구류는 0으로 
             }
         }
         else
@@ -200,7 +198,8 @@ public class Inventory : Singleton<Inventory>
             RemoveIcon();
         }
     
-        void RemoveIcon()
+        
+        void RemoveIcon()//해당 인덱스 자리의 아이템이 null이 되었을 때 IsUsing도 false로
         {
             inventoryUI.RemoveItem(index);
             inventoryUI.HideItemAmountText(index);
