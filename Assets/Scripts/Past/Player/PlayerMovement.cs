@@ -1,33 +1,45 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody2D rigid;
-    public Vector2 inputVec;
-    public float speed;
+    [SerializeField] private float moveSpeed = 5f;
+    private Rigidbody2D rb;
+    private Vector2 velocity = Vector2.zero;
+    //private Animator animator;
+    private SpriteRenderer visual;
+
+    private bool movementDisabled = false;
+
     private void Awake()
     {
-        Application.targetFrameRate = 75;
-        rigid = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        visual = GetComponentInChildren<SpriteRenderer>();
     }
 
-    private void Update()
+    private void Start()
     {
-       
+        GameEventsManager.Instance.inputEvents.onMovePressed += MovePressed;
     }
+    
+
+    // private void Update() //애니메이션
+    // {
+    //     
+    // }
 
     private void FixedUpdate()
     {
-        Vector2 nextPos = rigid.position + inputVec * speed * Time.deltaTime;
-        rigid.MovePosition(nextPos);
+        rb.velocity = velocity;
     }
 
-    private void OnMove(InputValue value)
+    private void MovePressed(Vector2 moveDir)
     {
-        inputVec = value.Get<Vector2>();
+        velocity = moveDir.normalized * moveSpeed;
+
+        if (movementDisabled)
+        {
+            velocity = Vector2.zero;
+        }
     }
 }

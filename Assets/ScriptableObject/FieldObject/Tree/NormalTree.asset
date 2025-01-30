@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c605ceab893c614d9ebb6e207d0c9bd, type: 3}
   m_Name: NormalTree
   m_EditorClassIdentifier: 
+  id: 50
   toolWear: 1
   durability: 3
   dropTable:
-  - dropItem: {fileID: 3365893065532988594, guid: f4d28d8e2af0e0f40b920c1f773e5741, type: 3}
-    minAmount: 1
-    maxAmount: 3
-  - dropItem: {fileID: 6217365138057915162, guid: 5ef88816c3e2fa44cbdf7cd87508c4af, type: 3}
-    minAmount: 1
-    maxAmount: 3
+  - dropItemPrefab: {fileID: 3382593057138888241, guid: fc2d22f7795ef7949b58095536f3cf71, type: 3}
+    minAmount: 2
+    maxAmount: 5

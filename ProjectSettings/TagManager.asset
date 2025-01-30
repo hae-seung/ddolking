@@ -4,12 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Slot
+  - Land
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Interactable
@@ -39,18 +39,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Ocean
-    uniqueID: 536755389
-    locked: 0
-  - name: Land
-    uniqueID: 435768251
-    locked: 0
-  - name: DropObject
-    uniqueID: 4086211127
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: UI
-    uniqueID: 1097572287
+  - name: Ocean
+    uniqueID: 21617589
+    locked: 0
+  - name: Land
+    uniqueID: 3768558011
+    locked: 0
+  - name: Front
+    uniqueID: 3929038009
     locked: 0
