@@ -11,15 +11,6 @@ public class ddol : MonoBehaviour
     {
         uiManager = FindObjectOfType<UIManager>();
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-            uiManager.HandleTab();
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-            uiManager.HandleEscape();
-
-    }
+    
     
 }

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-[DefaultExecutionOrder(-100)]
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     [Header("풀 기본 설정")]

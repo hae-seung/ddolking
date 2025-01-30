@@ -6,41 +6,62 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public GameObject quickSlotUI;
-    public GameObject invenStatus;
-    public GameObject craftTab;
-
-    private bool isActiveInven = false;
-    private bool isActiveCraft = false;
     
+    public GameObject invenStatusTab;
+    public GameObject craftTab;
+    public GameObject settingTab;
+    
+    private bool isActiveInven = false;
+
     private void Awake()
     {
-        invenStatus.SetActive(false);
+        invenStatusTab.SetActive(false);
         craftTab.SetActive(false);
+        settingTab.SetActive(false);
+        
+        DontDestroyOnLoad(gameObject);
     }
 
-    public void HandleTab()
+    private void OnEnable()
     {
-        if(isActiveInven)
+        GameEventsManager.Instance.inputEvents.onInventoryToggle += ToggleInventory;
+        GameEventsManager.Instance.inputEvents.onEscPressed += EscPressed;
+    }
+
+    private void EscPressed()
+    {
+        // Setting → Craft → Inventory 순서로 닫기
+        if (settingTab.activeSelf)
+        {
+            settingTab.SetActive(false);
+        }
+        else if (craftTab.activeSelf)
+        {
             craftTab.SetActive(false);
-        isActiveInven = !isActiveInven;
-        invenStatus.SetActive(isActiveInven);
+        }
+        else if (invenStatusTab.activeSelf)
+        {
+            invenStatusTab.SetActive(false);
+            isActiveInven = false;
+        }
+        else
+        {
+            // 모든 UI가 닫혀 있으면 Setting을 열기
+            settingTab.SetActive(true);
+        }
     }
 
-    public void HandleEscape()
+    private void ToggleInventory()
     {
-        if (isActiveCraft)
+        if (settingTab.activeSelf) 
+            return; 
+    
+        isActiveInven = !isActiveInven;
+        invenStatusTab.SetActive(isActiveInven);
+        
+        if (!isActiveInven)
         {
-            isActiveCraft = !isActiveCraft;
-            craftTab.SetActive(isActiveCraft);
-            return;
-        }
-
-        if (isActiveInven)
-        {
-            isActiveInven = !isActiveInven;
-            invenStatus.SetActive(isActiveInven);
-            return;
+            craftTab.SetActive(false);
         }
     }
-    
 }

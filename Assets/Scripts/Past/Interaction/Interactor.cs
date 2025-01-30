@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 
 public class Interactor : MonoBehaviour
@@ -15,6 +11,11 @@ public class Interactor : MonoBehaviour
     
     private readonly Collider2D[] colliders = new Collider2D[3];
     public int numFound;
+
+    private void OnEnable()
+    {
+        GameEventsManager.Instance.inputEvents.onInteractPressed += InteractPressed;
+    }
     
 
     private void Update()
@@ -29,9 +30,6 @@ public class Interactor : MonoBehaviour
             {
                 if(!interactionPromptUI.isDisplayed) 
                     interactionPromptUI.SetUp(interactableObject.InteractionPrompt);
-
-                if (Keyboard.current.fKey.wasPressedThisFrame)
-                    interactableObject.Interact(this);
             }
         }
         else
@@ -40,6 +38,15 @@ public class Interactor : MonoBehaviour
                 interactableObject = null;
             if(interactionPromptUI.isDisplayed)
                 interactionPromptUI.Close();
+        }
+    }
+    
+    private void InteractPressed()
+    {
+        if (numFound > 0)
+        {
+            if (interactableObject != null)
+                interactableObject.Interact(this);
         }
     }
     
