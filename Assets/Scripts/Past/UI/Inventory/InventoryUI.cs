@@ -13,6 +13,8 @@ public class InventoryUI : MonoBehaviour
     public RectTransform dragParent;     // 드래그 아이콘을 이동할 부모(Canvas 하위의 지정 오브젝트)
     [SerializeField] private ScrollRect inventoryScrollRect; // 스크롤뷰 참조 추가
     public GameObject slotPrefab;
+    public ToolTipUI _itemTooltip;
+    public PopupUI _popupUI;
 
     private Inventory inventory;
     private Slot _beginDragSlot;
@@ -24,6 +26,8 @@ public class InventoryUI : MonoBehaviour
     private int _originalChildIndex; 
     private RectTransform _originalParent;
     private bool _isDragging = false;
+
+    private Slot _pointerOverSlot = null; //현재 포인터가 위치한 곳의 슬롯
 
     private GraphicRaycaster _gr;
     private PointerEventData _ped;
@@ -46,12 +50,87 @@ public class InventoryUI : MonoBehaviour
     {
         _ped.position = Input.mousePosition;
 
+        OnPointerEnterAndExit();
+        
+        ShowOrHideItemTooltip();
+        
         HandlePointerDown();
         HandlePointerDrag();
         HandlePointerUp();
     }
+    
+    private void ShowOrHideItemTooltip()
+    {
+        // 마우스가 유효한 아이템 아이콘 위에 올라와 있다면 툴팁 보여주기
+        bool isValid = _pointerOverSlot != null 
+                       && _pointerOverSlot.IsUsing 
+                       && !_isDragging;
 
-// 드래그 중일 때 휠 스크롤 처리 및 자동 스크롤
+        if (isValid)
+        {
+            UpdateTooltipUI(_pointerOverSlot);
+            _itemTooltip.Show();
+        }
+        else
+            _itemTooltip.Hide();
+    }
+    
+    
+    private void UpdateTooltipUI(Slot slot)
+    {
+        // 툴팁 정보 갱신
+        _itemTooltip.SetItemInfo(inventory.GetItem(slot.SlotIdx));
+
+        // 툴팁 위치 조정
+        _itemTooltip.SetRectPosition(slot.SlotRect);
+    }
+    
+    
+
+    private void OnPointerEnterAndExit()
+    {
+        //이전 프레임의 슬롯
+        var prevSlot = _pointerOverSlot;
+
+        // 현재 프레임의 슬롯
+        var curSlot = _pointerOverSlot = RaycastAndGetFirstComponent<Slot>();
+
+        if (prevSlot == null)
+        {
+            // Enter
+            if (curSlot != null)
+            {
+                OnCurrentEnter();
+            }
+        }
+        else
+        {
+            // Exit
+            if (curSlot == null)
+            {
+                OnPrevExit();
+            }
+
+            // Change
+            else if (prevSlot != curSlot)
+            {
+                OnPrevExit();
+                OnCurrentEnter();
+            }
+        }
+
+        // ===================== Local Methods ===============================
+        void OnCurrentEnter()
+        {
+            curSlot.Highlight(true);
+        }
+        void OnPrevExit()
+        {
+            prevSlot.Highlight(false);
+        }
+    }
+
+    // 드래그 중일 때 휠 스크롤 처리 및 자동 스크롤
     private void HandleScrollWhileDragging()
     {
         if (_isDragging)
@@ -78,7 +157,7 @@ public class InventoryUI : MonoBehaviour
 
     private void HandlePointerDown()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))//좌클릭
         {
             _beginDragSlot = RaycastAndGetFirstComponent<Slot>();
 
@@ -97,6 +176,13 @@ public class InventoryUI : MonoBehaviour
                 HandleScrollDrag(false);
                 _isDragging = true;
             }
+        }
+        else if (Input.GetMouseButtonDown(1))//우클릭
+        {
+            Slot slot = RaycastAndGetFirstComponent<Slot>();
+            if (slot != null && slot.IsUsing)
+                TryUseItem(slot.SlotIdx);
+
         }
     }
 
@@ -119,13 +205,28 @@ public class InventoryUI : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && _isDragging)
         {
             Slot targetSlot = RaycastAndGetFirstComponent<Slot>();
-
-            ResetDraggedSlot(); // 원래 위치로 복귀
-
-            if (targetSlot != null && targetSlot != _beginDragSlot)
+            
+            if (targetSlot == null)
+            {
+                TrashCan trashCan = RaycastAndGetFirstComponent<TrashCan>();
+                if (trashCan != null)
+                {
+                    int selectedItemIndex = _beginDragSlot.SlotIdx;
+                    int selectedItemCount = inventory.GetItemCount(selectedItemIndex);
+                    string itemName = inventory.GetItemName(selectedItemIndex);
+                    
+                    _popupUI.OpenTrashPopup(itemName, selectedItemCount, (int count) =>
+                    {
+                        TryRemoveItem(selectedItemIndex, count);
+                    });
+                }
+            }
+            else if (targetSlot != null && targetSlot != _beginDragSlot)
             {
                 SwapItems(_beginDragSlot, targetSlot);
             }
+            
+            ResetDraggedSlot(); // 원래 위치로 복귀
 
             _beginDragSlot = null;
             _beginDragIconTransform = null;
@@ -139,6 +240,16 @@ public class InventoryUI : MonoBehaviour
     {
         inventoryScrollRect.horizontal = state;
         inventoryScrollRect.vertical = state;
+    }
+
+    private void TryRemoveItem(int index, int count)
+    {
+        inventory.RemoveItem(index, count);
+    }
+
+    private void TryUseItem(int index)
+    {
+        inventory.UseItem(index);
     }
     
 

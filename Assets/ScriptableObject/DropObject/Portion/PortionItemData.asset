@@ -18,4 +18,10 @@ MonoBehaviour:
   _iconImage: {fileID: 21300000, guid: acbba4f81e74aeb42a0cff89b55c60d3, type: 3}
   dropObjectPrefab: {fileID: 3382593057138888241, guid: fc2d22f7795ef7949b58095536f3cf71, type: 3}
   maxAmount: 2
-  value: 0.06
+  statModifier:
+  - stat: 0
+    increaseAmount: 100
+  - stat: 1
+    increaseAmount: 200
+  - stat: 4
+    increaseAmount: 15

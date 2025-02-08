@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4154424258194346608}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,9 +45,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8447587856513844223}
-  - component: {fileID: 2944461598108420050}
-  - component: {fileID: 8634705538607935713}
+  - component: {fileID: 2695587245092960507}
   - component: {fileID: 2849971052332456066}
+  - component: {fileID: 497534801217334236}
   m_Layer: 6
   m_Name: NormalTree
   m_TagString: Untagged
@@ -71,7 +71,7 @@ Transform:
   - {fileID: 6473826538711675784}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2944461598108420050
+--- !u!212 &2695587245092960507
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,13 +117,31 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.48}
+  m_Size: {x: 2, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!60 &8634705538607935713
+--- !u!114 &2849971052332456066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4155899601596985536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e5e93503a159ca4cb8845a1bdebd316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prompt: 
+  fieldObjectData: {fileID: 0}
+  interactionDuration: 0
+  tilemap: {fileID: 0}
+  tileType: 0
+  durabilityBar: {fileID: 0}
+--- !u!60 &497534801217334236
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,36 +178,18 @@ PolygonCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.49650222, y: 0.05229096}
     oldSize: {x: 2, y: 3}
-    newSize: {x: 0.32, y: 0.48}
+    newSize: {x: 2, y: 3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.40168095, y: 0.38571376}
-      - {x: 0.37982118, y: -0.025168777}
-      - {x: -0.36582565, y: -0.029411197}
-      - {x: -0.38361344, y: 0.3802517}
+    - - {x: -0.36800444, y: 0.40562713}
+      - {x: -0.36800444, y: -0.03187287}
+      - {x: 0.38199556, y: -0.03187287}
+      - {x: 0.38199556, y: 0.40562713}
   m_UseDelaunayMesh: 0
---- !u!114 &2849971052332456066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4155899601596985536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e5e93503a159ca4cb8845a1bdebd316, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prompt: 
-  fieldObjectData: {fileID: 0}
-  durabilityPanel: {fileID: 0}
-  durabilityBar: {fileID: 0}
-  interactionDuration: 0
-  tilemap: {fileID: 0}
 --- !u!1 &5242664623722495184
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 6455439349126023689}
   - component: {fileID: 3910660745166503575}
   - component: {fileID: 5283939150270308033}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9126102822079501901}
   - component: {fileID: 3512175753495831764}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 1422461501307240814}
   - component: {fileID: 2675598775137940693}
   - component: {fileID: 5483974041584690112}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 136023330698795944}
   - component: {fileID: 1005176273180948658}
   - component: {fileID: 8818644620235820025}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

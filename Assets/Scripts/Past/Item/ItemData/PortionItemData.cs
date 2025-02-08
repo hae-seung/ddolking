@@ -1,13 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PortionItemData", menuName = "SO/CountableItemData/PortionItemData", order = int.MaxValue)]
-public class PortionItemData : CountableItemData
+public class PortionItemData : ConsumeItemData
 {
-    [SerializeField] private float value;
-
-    public float Value => value;
-    
+    //넣을게 없네
 }
