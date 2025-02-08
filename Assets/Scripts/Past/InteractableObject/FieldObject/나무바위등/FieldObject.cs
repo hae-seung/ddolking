@@ -10,7 +10,7 @@ public enum TileTag
     Ocean
 }
 
-public class FieldObject : Interactable
+public class FieldObject : Interactable //나무 바위등 부술 수 있는 필드 오브젝트
 {
     public FieldObjectData fieldObjectData;
     private float durability;
@@ -51,6 +51,7 @@ public class FieldObject : Interactable
             durabilityBar.gameObject.SetActive(false);
             DropItems();
             DestroyFieldObject();
+            GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
         });
     }
 

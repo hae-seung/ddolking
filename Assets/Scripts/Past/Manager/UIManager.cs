@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject invenStatusTab;
     public GameObject craftTab;
     public GameObject settingTab;
+    public PopupUI popupUI;
     
     private bool isActiveInven = false;
 
@@ -18,6 +19,7 @@ public class UIManager : MonoBehaviour
         invenStatusTab.SetActive(false);
         craftTab.SetActive(false);
         settingTab.SetActive(false);
+        popupUI.FirstAwake();
         
         DontDestroyOnLoad(gameObject);
     }

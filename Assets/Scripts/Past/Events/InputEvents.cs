@@ -24,6 +24,7 @@ public class InputEvents
     public event Action onInteractPressed;//F : interaction, Dialogue기능은 나중에 추가
     public void InteractPressed()
     {
+        GameEventsManager.Instance.playerEvents.DisablePlayerMovement();
         onInteractPressed?.Invoke();
     }
 

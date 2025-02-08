@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         GameEventsManager.Instance.inputEvents.onMovePressed += MovePressed;
+        GameEventsManager.Instance.playerEvents.onEnablePlayerMovement += EnablePlayerMovement;
+        GameEventsManager.Instance.playerEvents.onDisablePlayerMovement += DisablePlayerMovement;
     }
     
 
@@ -41,5 +43,16 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity = Vector2.zero;
         }
+    }
+
+    private void EnablePlayerMovement()
+    {
+        movementDisabled = false;
+    }
+
+    private void DisablePlayerMovement()
+    {
+        movementDisabled = true;
+        velocity = Vector2.zero;
     }
 }

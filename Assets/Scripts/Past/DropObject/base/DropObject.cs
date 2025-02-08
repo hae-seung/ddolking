@@ -7,7 +7,7 @@ public abstract class DropObject : MonoBehaviour
     protected GameObject dropObjectPrefab;
     private Collider2D _collider;
     private float disableCollisionTime = 0.5f;
-    private float autoReleaseTime = 2f;  // 1분 후 자동 반환 시간
+    private float autoReleaseTime = 60f;  // 1분 후 자동 반환 시간
     protected bool isSpawned = false;  // 풀에서 가져왔거나 인스턴스화된 경우
 
     protected virtual void Awake()
