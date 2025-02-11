@@ -181,7 +181,9 @@ public class InventoryUI : MonoBehaviour
         {
             Slot slot = RaycastAndGetFirstComponent<Slot>();
             if (slot != null && slot.IsUsing)
+            {
                 TryUseItem(slot.SlotIdx);
+            }
 
         }
     }

@@ -4,13 +4,13 @@ public class PortionObject : CountableObject<PortionItem>
 {
     [SerializeField] private PortionItemData data;
 
-    protected override void MakeItemInstance()
+    protected override void MakeItemInstance()//풀이 아닌 최초 생성된 경우
     {
         countableItem = new PortionItem(data);
         itemId = data.ID;
     }
 
-    protected override void Awake()
+    protected override void Awake() //풀이 아닌 최초 생성된 경우
     {
         base.Awake();
         dropObjectPrefab = data.DropObjectPrefab;  // DropObject 프리팹 설정
@@ -28,9 +28,5 @@ public class PortionObject : CountableObject<PortionItem>
         countableItem = new PortionItem(data);
         base.OnEnable();
     }
-
-    public override int GetItemId()
-    {
-        return data.ID;//생성전 미리 만들어져야함
-    }
+    
 }

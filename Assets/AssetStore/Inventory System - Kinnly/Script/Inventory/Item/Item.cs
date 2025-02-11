@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Kinnly
 {
-    [CreateAssetMenu(fileName = "item", menuName = "ScriptableObjects/item")]
     public class Item : ScriptableObject
     {
         [Header("Details")]

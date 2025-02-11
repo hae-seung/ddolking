@@ -69,7 +69,10 @@ public class FieldObject : Interactable //나무 바위등 부술 수 있는 필
             {
                 Vector3 dropPosition = transform.position + new Vector3(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f), 0);
 
-                GameObject dropObj = ObjectPoolManager.Instance.SpawnObject(drop.DropItemId, dropPosition, Quaternion.identity);
+                GameObject dropObj = ObjectPoolManager.Instance.SpawnObject(
+                    drop.DropItemId, 
+                    dropPosition, 
+                    Quaternion.identity);
 
                 if (dropObj != null)
                 {

@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ToolTipUI : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI equipItemClassTxt;
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI statTxt;
     [SerializeField] private TextMeshProUGUI contentTxt;
-    [SerializeField] private GameObject interactableTxt;
+    [SerializeField] private GameObject interactableTxt; //우클릭시 상호작용가능을 나타냄
+    [SerializeField] private RectTransform parentRect;
     
     private StringBuilder sb = new StringBuilder();
     private RectTransform _rt;
@@ -40,12 +43,40 @@ public class ToolTipUI : MonoBehaviour
         
         statTxt.gameObject.SetActive(false);
         interactableTxt.SetActive(false);
+        equipItemClassTxt.gameObject.SetActive(false);
 
-        if (item is IUseable)
+        if (item is EquipItem equipItem)
+            SetClassText(equipItem);
+        
+        if (item is IUseable || item is AmuletItem amuletItem)
             interactableTxt.SetActive(true);
         
         if (item is IStatModifier statItem)
             SetStatText(statItem);
+    }
+
+    private void SetClassText(EquipItem equipItem)
+    {
+        switch (equipItem.EquipData.itemclass)
+        {
+            case ItemClass.Normal :
+                equipItemClassTxt.text = "일반";
+                equipItemClassTxt.color = Color.gray;
+                break;
+            case ItemClass.Epic :
+                equipItemClassTxt.text = "고급";
+                equipItemClassTxt.color = new Color32(138, 43, 226, 255);
+                break;
+            case ItemClass.Unique:
+                equipItemClassTxt.text = "희귀";
+                equipItemClassTxt.color = Color.yellow;
+                break;
+            case ItemClass.Legend :
+                equipItemClassTxt.text = "전설";
+                equipItemClassTxt.color = Color.green;
+                break;
+        }
+        equipItemClassTxt.gameObject.SetActive(true);
     }
 
     private void SetStatText(IStatModifier statItem)
@@ -98,51 +129,48 @@ public class ToolTipUI : MonoBehaviour
         // 1️⃣ 툴팁의 Pivot을 (0,1)로 설정 → 좌상단 기준 정렬
         _rt.pivot = new Vector2(0f, 1f);
 
-        // 2️⃣ 툴팁이 속한 부모 (InventoryUI)를 가져오기
-        RectTransform inventoryUI = _rt.parent as RectTransform;
-        if (inventoryUI == null) return;
+        // 🔹 `parentRect`가 null이 아니면 부모 UI로 사용
+        if (parentRect == null)
+        {
+            return;
+        }
 
-        // 3️⃣ 슬롯의 네 모서리 좌표를 가져와 정확한 우하단 위치 계산
+        // 2️⃣ 슬롯의 네 모서리 좌표를 가져와 정확한 우하단 위치 계산
         Vector3[] slotCorners = new Vector3[4];
         slotRect.GetWorldCorners(slotCorners);
         Vector3 slotBottomRight = slotCorners[3]; // 네 번째 요소가 우하단 좌표
 
-        // 4️⃣ 우하단 좌표를 스크린 좌표로 변환
+        // 3️⃣ 우하단 좌표를 스크린 좌표로 변환
         Vector2 tooltipScreenPos = RectTransformUtility.WorldToScreenPoint(null, slotBottomRight);
+        
 
-        // 5️⃣ 스크린 좌표를 InventoryUI 내부 좌표로 변환
+        // 4️⃣ 스크린 좌표를 `parentRect` 내부 좌표로 변환
         Vector2 tooltipLocalPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            inventoryUI, // 변환 기준 (툴팁이 속한 UI)
-            tooltipScreenPos, // 변환할 스크린 좌표
-            null, // Overlay 모드일 경우 null
+            parentRect,  // 변환 기준 (툴팁이 속한 부모 UI)
+            tooltipScreenPos,  // 변환할 스크린 좌표
+            null,  // Overlay 모드일 경우 null
             out tooltipLocalPos
         );
+        
 
-        // 6️⃣ 툴팁의 크기 가져오기
+        // 5️⃣ 툴팁의 크기 가져오기
         float width = _rt.rect.width;
         float height = _rt.rect.height;
 
-        // 7️⃣ 툴팁이 화면 밖으로 나가는지 확인
+        // 6️⃣ 툴팁이 화면 밖으로 나가는지 확인
         bool rightTruncated = tooltipScreenPos.x + width > Screen.width;
         bool bottomTruncated = tooltipScreenPos.y - height < 0f;
 
-        // 8️⃣ 툴팁 위치 조정 (오른쪽/아래쪽이 잘릴 경우)
-        if (rightTruncated && !bottomTruncated) // 오른쪽만 잘릴 때
-        {
-            tooltipLocalPos.x -= width;
-        }
-        else if (!rightTruncated && bottomTruncated) // 아래쪽만 잘릴 때
-        {
-            tooltipLocalPos.y += height;
-        }
-        else if (rightTruncated && bottomTruncated) // 오른쪽 + 아래쪽 모두 잘릴 때
-        {
-            tooltipLocalPos.x -= width;
-            tooltipLocalPos.y += height;
-        }
+        // 7️⃣ 툴팁 위치 조정 (오른쪽/아래쪽이 잘릴 경우)
+        if (rightTruncated) tooltipLocalPos.x -= width;
+        if (bottomTruncated) tooltipLocalPos.y += height;
+        
 
-        // 9️⃣ 툴팁 위치 적용
+        // 8️⃣ 툴팁 위치 적용
         _rt.anchoredPosition = tooltipLocalPos;
     }
+
+
+
 }

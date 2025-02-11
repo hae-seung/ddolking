@@ -44,18 +44,8 @@ public abstract class DropObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            HandleItemPickup();
+            CollectItem();
         }
-    }
-
-    private void HandleItemPickup()
-    {
-        if (!ObjectPoolManager.Instance.IsPoolRegistered(itemId))
-        {
-            ObjectPoolManager.Instance.RegisterPrefab(itemId, dropObjectPrefab);
-        }
-
-        CollectItem();
     }
 
     protected abstract void CollectItem();
@@ -96,5 +86,5 @@ public abstract class DropObject : MonoBehaviour
         isSpawned = true;
     }
 
-    public abstract int GetItemId();
+    
 }

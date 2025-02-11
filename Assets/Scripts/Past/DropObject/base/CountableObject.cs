@@ -14,6 +14,12 @@ public abstract class CountableObject<T> : DropObject where T : CountableItem
 
     protected override void CollectItem()
     {
+        if (!ObjectPoolManager.Instance.IsPoolRegistered(itemId))
+        {
+            ObjectPoolManager.Instance.RegisterPrefab(itemId, dropObjectPrefab);
+        }
+        
+        
         int amountBeforePickup = countableItem.Amount;
         int amountLeftAfterAdd = Inventory.Instance.Add(countableItem, countableItem.Amount);
 

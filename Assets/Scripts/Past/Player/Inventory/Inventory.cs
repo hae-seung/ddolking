@@ -6,9 +6,13 @@ public class Inventory : MonoBehaviour
     public static Inventory Instance { get; private set; }
     private List<Item> _items = new List<Item>(); // 인벤토리 슬롯 리스트
     //0~4번 인덱스까지는 퀵슬롯을 위한 자리
+
+    private Item equippedAmulet = null;
     
     [SerializeField] private InventoryUI inventoryUI;
+    [SerializeField] private StatusUI statusUI;
     private int slotCnt;
+    
     public int SlotCnt
     {
         get => slotCnt;
@@ -35,7 +39,7 @@ public class Inventory : MonoBehaviour
         UpdateInventory(SlotCnt); // List는 0, 슬롯은 열려있어서 각각 맞춰줘야함
     }
 
-    public void AddInventoryList(int count) // 배낭아이템이 사용
+    public void AddInventoryListAmount(int count) // 배낭아이템이 사용
     {
         SlotCnt += count; // 슬롯 개수 증가
         inventoryUI.AddSlot(count); // 슬롯 해금
@@ -147,7 +151,7 @@ public class Inventory : MonoBehaviour
     }
 
     
-    public void RemoveItem(int index, int count)
+    public void RemoveItem(int index, int count = 1)
     {
         if (!IsValidIndex(index)) 
             return;
@@ -180,6 +184,10 @@ public class Inventory : MonoBehaviour
             {
                 UpdateSlot(index);
             }
+        }
+        else if (_items[index] is AmuletItem)
+        {
+            EquipAmulet(index);
         }
 
     }
@@ -283,6 +291,29 @@ public class Inventory : MonoBehaviour
 
         return _items[index].itemData.Name;
     }
-    
+
+
+    private void EquipAmulet(int index)
+    {
+        if (equippedAmulet == null)
+        {
+            //단순 장착
+            equippedAmulet = _items[index];
+            RemoveItem(index);
+        }
+        else
+        {
+            //교체
+            (equippedAmulet, _items[index]) = (_items[index], equippedAmulet);
+            UpdateSlot(index);
+        }
+        
+        statusUI.UpdateAmulet(equippedAmulet);
+    }
+
+    public void UnEquipAmulet()
+    {
+        equippedAmulet = null;
+    }
     
 }
