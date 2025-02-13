@@ -308,7 +308,7 @@ public class Inventory : MonoBehaviour
             UpdateSlot(index);
         }
         
-        statusUI.UpdateAmulet(equippedAmulet);
+        statusUI.UpdateAmuletSlot(equippedAmulet);
     }
 
     public void UnEquipAmulet()

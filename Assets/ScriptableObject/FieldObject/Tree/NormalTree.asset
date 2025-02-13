@@ -16,6 +16,6 @@ MonoBehaviour:
   toolWear: 1
   durability: 3
   dropTable:
-  - dropItemPrefab: {fileID: 3382593057138888241, guid: fc2d22f7795ef7949b58095536f3cf71, type: 3}
+  - _itemData: {fileID: 11400000, guid: 0cb1940d146373d48a76da01f02499e9, type: 2}
     minAmount: 2
     maxAmount: 5
