@@ -1,53 +1,56 @@
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 
 public class Interactor : MonoBehaviour
 {
-    private IInteractable interactableObject;
-    [SerializeField]private Transform interactionPoint;
-    [SerializeField]private float interactionPointRadius = 0.5f;
-    [SerializeField]private LayerMask interactableMask;
-    [SerializeField] private InteractionPromptUI interactionPromptUI;
-    
-    private readonly Collider2D[] colliders = new Collider2D[3];
+    private Interactable interactableObject;
+    [SerializeField] private Transform interactionPoint;
+    [SerializeField] private float interactionPointRadius = 0.5f;
+    [SerializeField] private LayerMask interactableMask;
+
+    private readonly Collider2D[] colliders = new Collider2D[5];
     public int numFound;
 
     private void OnEnable()
     {
         GameEventsManager.Instance.inputEvents.onInteractPressed += InteractPressed;
     }
-    
 
     private void Update()
     {
-        numFound = Physics2D.OverlapCircleNonAlloc(interactionPoint.position, interactionPointRadius, 
+        numFound = Physics2D.OverlapCircleNonAlloc(interactionPoint.position, interactionPointRadius,
             colliders, interactableMask);
 
         if (numFound > 0)
         {
-            interactableObject = colliders[0].GetComponent<IInteractable>();
-            if (interactableObject != null)
+            Interactable newInteractable = colliders[0].GetComponent<Interactable>();
+
+            // 새로운 오브젝트에 접근했을 때만 UI 변경
+            if (newInteractable != null && newInteractable != interactableObject)
             {
-                if(!interactionPromptUI.isDisplayed) 
-                    interactionPromptUI.SetUp(interactableObject.InteractionPrompt);
+                if (interactableObject != null) 
+                    interactableObject.SetInteractState(false); // 이전 UI 끄기
+
+                interactableObject = newInteractable;
+                interactableObject.SetInteractState(true); // 새로운 UI 켜기
             }
         }
         else
         {
+            // 범위를 벗어나면 UI를 한 번만 끄기
             if (interactableObject != null)
+            {
+                interactableObject.SetInteractState(false);
                 interactableObject = null;
-            if(interactionPromptUI.isDisplayed)
-                interactionPromptUI.Close();
+            }
         }
     }
-    
-    private void InteractPressed()
+
+    private void InteractPressed(InputAction.CallbackContext context)
     {
-        if (numFound > 0)
+        if (numFound > 0 && interactableObject != null)
         {
-            if (interactableObject != null)
-                interactableObject.Interact(this);
+            interactableObject.Interact(this, context);
         }
     }
-    
 }

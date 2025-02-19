@@ -82,39 +82,39 @@ public class ToolTipUI : MonoBehaviour
     private void SetStatText(IStatModifier statItem)
     {
         List<StatModifier> statModifiers = statItem.GetStatModifier();
-
+    
         if (statModifiers != null)//스텟 변화가 일어나는 경우
         {
             sb.Clear();
             
             for (int i = 0; i < statModifiers.Count; i++)
             {
-                int increaseAmount = statModifiers[i].increaseAmount;
+                float increaseAmount = statModifiers[i].increaseAmount;
                 switch (statModifiers[i].stat)
                 {
                     case Stat.MaxHP:
-                        sb.AppendLine($"최대체력 : +{increaseAmount}");
+                        sb.AppendLine($"최대체력 : +{(int)increaseAmount}");
                         break;
                     case Stat.HP:
-                        sb.AppendLine($"체력 : +{increaseAmount}");
+                        sb.AppendLine($"체력 : +{(int)increaseAmount}");
                         break;
                     case Stat.MaxEnergy:
-                        sb.AppendLine($"최대기력 : +{increaseAmount}");
+                        sb.AppendLine($"최대기력 : +{(int)increaseAmount}");
                         break;
                     case Stat.Energy:
-                        sb.AppendLine($"기력 : +{increaseAmount}");
+                        sb.AppendLine($"기력 : +{(int)increaseAmount}");
                         break;
                     case Stat.Str:
-                        sb.AppendLine($"근력 : +{increaseAmount}");
+                        sb.AppendLine($"근력 : +{(int)increaseAmount}");
                         break;
                     case Stat.Luk:
-                        sb.AppendLine($"행운 : +{increaseAmount}");
+                        sb.AppendLine($"행운 : +{(int)increaseAmount}");
                         break;
                     case Stat.Speed:
-                        sb.AppendLine($"이동속도 : +{increaseAmount}");
+                        sb.AppendLine($"이동속도 : +{increaseAmount:F1}");
                         break;
                     case Stat.MineSpeed:
-                        sb.AppendLine($"채굴속도 : +{increaseAmount}");
+                        sb.AppendLine($"채굴속도 : +{increaseAmount:F1}");
                         break;
                 }
             }

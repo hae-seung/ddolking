@@ -20,8 +20,8 @@ MonoBehaviour:
   maxAmount: 2
   statModifier:
   - stat: 0
-    increaseAmount: 100
+    increaseAmount: 0
   - stat: 1
-    increaseAmount: 200
-  - stat: 4
+    increaseAmount: 20
+  - stat: 3
     increaseAmount: 15

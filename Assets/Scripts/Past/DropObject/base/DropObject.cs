@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -39,6 +40,7 @@ public abstract class DropObject : MonoBehaviour
         yield return new WaitForSeconds(disableCollisionTime);
         _collider.enabled = true;
     }
+    
 
     private void OnTriggerEnter2D(Collider2D other)
     {

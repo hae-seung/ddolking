@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
         invenStatusTab.SetActive(false);
         craftTab.SetActive(false);
         settingTab.SetActive(false);
+        
         popupUI.FirstAwake();
         
         DontDestroyOnLoad(gameObject);

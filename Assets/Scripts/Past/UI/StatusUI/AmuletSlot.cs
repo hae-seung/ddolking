@@ -33,6 +33,7 @@ public class AmuletSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             if (amount == 1)
             {
                 //해제 불가
+                Debug.Log("인벤토리가 가득차서 해제 불가능");
                 return;
             }
 

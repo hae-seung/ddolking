@@ -251,7 +251,7 @@ public class InventoryUI : MonoBehaviour
 
     private void TryUseItem(int index)
     {
-        inventory.UseItem(index);
+        inventory.InteractWithItem(index);
     }
     
 
@@ -287,14 +287,10 @@ public class InventoryUI : MonoBehaviour
     
     public void UpdateItemAmount(int idx, int amount = 0)
     {
-        if (0 <= idx && idx < slots.Count)
-        {
-            slots[idx].UpdateItemAmount(amount);
-            if (idx <= 4)
-            {
-                quickSlotUI.UpdateItemAmount(idx, amount);
-            }
-        }
+        if (0 <= idx && idx <= 4)
+            quickSlotUI.UpdateItemAmount(idx, amount);
+        
+        slots[idx].UpdateItemAmount(amount);
     }
 
 

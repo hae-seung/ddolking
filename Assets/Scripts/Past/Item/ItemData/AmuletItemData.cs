@@ -7,6 +7,9 @@ using UnityEngine;
 public class AmuletItemData : EquipItemData
 {
     [SerializeField] private List<AmuletEffect> _amuletEffects;
+    
+    
+    
     private void OnValidate()
     {
 #if UNITY_EDITOR

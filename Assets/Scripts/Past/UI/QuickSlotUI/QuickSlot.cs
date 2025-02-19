@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public class QuickSlot : MonoBehaviour
 {
+    [Header("슬롯 이미지")] 
+    [SerializeField] private Image slotImage;
+    
+    [Header("아이템 아이콘 이미지")]
     [SerializeField] private Image iconImage;
     [SerializeField] private TextMeshProUGUI amountText;
     
@@ -16,8 +20,13 @@ public class QuickSlot : MonoBehaviour
     private void HideText() => amountText.gameObject.SetActive(false);
 
     public bool IsUsing { get; private set; } = false;
-    
 
+
+    public void SetSlotImage(Color color)
+    {
+        slotImage.color = color;
+    }
+    
     public void UpdateAmount(int amount  = 0)//countableItem만 실행함
     {
         if(amount == 0)

@@ -20,7 +20,17 @@ public class PortionItem : ConsumeItem
 
     protected override bool UseItem()
     {
-        Amount--;
+        if (statModifiers != null)
+        {
+            for (int i = 0; i < statModifiers.Count; i++)
+            {
+                GameEventsManager.Instance.statusEvents.
+                    AddStat(statModifiers[i].stat, statModifiers[i].increaseAmount);
+            }
+
+            Amount--;
+            return true;
+        }
         return true;
     }
 }

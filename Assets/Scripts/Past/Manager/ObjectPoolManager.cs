@@ -100,9 +100,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     {
         if (!pools.ContainsKey(id))
         {
-            Debug.LogWarning($"ID {id}의 풀을 찾을 수 없습니다. 오브젝트를 삭제합니다.");
-            Destroy(obj);
-            return;
+            RegisterPrefab(id, obj);
         }
 
         pools[id].Release(obj);

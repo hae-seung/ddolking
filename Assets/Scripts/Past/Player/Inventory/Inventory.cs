@@ -7,7 +7,7 @@ public class Inventory : MonoBehaviour
     private List<Item> _items = new List<Item>(); // 인벤토리 슬롯 리스트
     //0~4번 인덱스까지는 퀵슬롯을 위한 자리
 
-    private Item equippedAmulet = null;
+    private AmuletItem equippedAmulet = null;
     
     [SerializeField] private InventoryUI inventoryUI;
     [SerializeField] private StatusUI statusUI;
@@ -170,7 +170,7 @@ public class Inventory : MonoBehaviour
         UpdateSlot(index);
     }
 
-    public void UseItem(int index)
+    public void InteractWithItem(int index)
     {
         if (!IsValidIndex(index))
             return;
@@ -298,13 +298,19 @@ public class Inventory : MonoBehaviour
         if (equippedAmulet == null)
         {
             //단순 장착
-            equippedAmulet = _items[index];
+            equippedAmulet = _items[index] as AmuletItem;
+            equippedAmulet.EquipAmulet();
             RemoveItem(index);
         }
-        else
+        else//스왑
         {
-            //교체
-            (equippedAmulet, _items[index]) = (_items[index], equippedAmulet);
+            AmuletItem temp = equippedAmulet;
+            equippedAmulet.UnEquipAmulet();
+            
+            equippedAmulet = _items[index] as AmuletItem;
+            _items[index] = temp;
+            equippedAmulet.EquipAmulet();
+            
             UpdateSlot(index);
         }
         
@@ -313,6 +319,7 @@ public class Inventory : MonoBehaviour
 
     public void UnEquipAmulet()
     {
+        equippedAmulet.UnEquipAmulet();
         equippedAmulet = null;
     }
     

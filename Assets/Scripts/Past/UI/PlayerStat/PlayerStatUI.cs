@@ -25,8 +25,7 @@ public class PlayerStatUI : MonoBehaviour
         GameEventsManager.Instance.playerEvents.onChangedExperience += ChangedExperience;
         GameEventsManager.Instance.playerEvents.onChangedLevel += ChangedLevel;
     }
-
-   
+    
 
     private void ChangedLevel(int curLevel, int nextExperienceToNextLevel)
     {
@@ -39,7 +38,7 @@ public class PlayerStatUI : MonoBehaviour
         experienceSlider.value = value;
     }
 
-    private void StatChanged(Stat goalStat, object changedValue)
+    private void StatChanged(Stat goalStat, float changedValue)
     {
         switch (goalStat)
         {

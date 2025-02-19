@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum InputEventContext
 {
@@ -21,11 +22,10 @@ public class InputEvents
     }
 
     
-    public event Action onInteractPressed;//F : interaction, Dialogue기능은 나중에 추가
-    public void InteractPressed()
+    public event Action<InputAction.CallbackContext> onInteractPressed;//F : interaction, Dialogue기능은 나중에 추가
+    public void InteractPressed(InputAction.CallbackContext context)
     {
-        GameEventsManager.Instance.playerEvents.DisablePlayerMovement();
-        onInteractPressed?.Invoke();
+        onInteractPressed?.Invoke(context);
     }
 
     
@@ -35,13 +35,22 @@ public class InputEvents
         onInventoryToggle?.Invoke();
     }
     
-    
     public event Action onEscPressed; //esc : 취소 버튼
     public void EscPressed()
     {
         onEscPressed?.Invoke();
     }
 
-    
-    
+    public event Action<string> onNumBtnPressed; //1~5번 버튼
+    public void NumBtnPressed(string key)
+    {
+        onNumBtnPressed?.Invoke(key);
+    }
+
+    public event Action<Vector3> onMouseMoved;
+    public void MouseMoved(Vector3 mousePos)
+    {
+        onMouseMoved?.Invoke(mousePos);
+    }
+
 }

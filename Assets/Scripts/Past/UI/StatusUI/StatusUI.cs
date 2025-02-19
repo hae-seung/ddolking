@@ -77,7 +77,7 @@ public class StatusUI : MonoBehaviour
     {
         for (int i = 0; i < btns.Length; i++)
         {
-            if(btns[i].interactable)//강화 가능할때만 텍스트도 보이기
+            if(btns[i].interactable)//스텟 레벨업 할때만 보이기
             {
                 btns[i].gameObject.SetActive(true);
                 _upgradeAmountLists[i].gameObject.SetActive(true);
@@ -88,21 +88,21 @@ public class StatusUI : MonoBehaviour
     
     
 
-    private void StatChanged(Stat stat, object value)
+    private void StatChanged(Stat stat, float value)
     {
         switch (stat)
         {
             case Stat.MaxHP:
-                maxHPTxt.text = value.ToString();
+                maxHPTxt.text = $"{(int)value}";
                 break;
             case Stat.MaxEnergy:
-                maxPowerTxt.text = value.ToString();
+                maxPowerTxt.text = $"{(int)value}";
                 break;
             case Stat.Str:
-                strTxt.text = value.ToString();
+                strTxt.text = $"{(int)value}";
                 break;
             case Stat.Luk:
-                lukTxt.text = value.ToString();
+                lukTxt.text = $"{(int)value}";
                 break;
             case Stat.Speed:
                 speedTxt.text = ((float)value).ToString("F1");
@@ -115,7 +115,6 @@ public class StatusUI : MonoBehaviour
 
     private void ChangedLevel(int curLevel, int needExperienceToNextLevel)
     {
-        Debug.Log("호출됨");
         if (curLevel <= 1)//게임 시작 초기화를 위해서 호출햇던거임
         {
             levelPointTxt.text = "포인트 : 0";
@@ -139,6 +138,7 @@ public class StatusUI : MonoBehaviour
         _upgradeAmountLists[index].text = $"+{data.increaseAmount}";
         if (data.curStatLevel == data.maxLevel)
         {
+            Debug.Log("만렙");
             btns[index].interactable = false;
             btns[index].gameObject.SetActive(false);
             _upgradeAmountLists[index].gameObject.SetActive(false);

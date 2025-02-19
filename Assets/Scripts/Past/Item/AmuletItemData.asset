@@ -22,7 +22,7 @@ MonoBehaviour:
   maxDurability: 1
   itemLevel: 0
   statModifier:
-  - stat: 4
-    increaseAmount: 1441
+  - stat: 0
+    increaseAmount: 500
   enhancementLogic: {fileID: 0}
   _amuletEffects: []

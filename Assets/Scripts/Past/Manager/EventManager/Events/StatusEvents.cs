@@ -7,8 +7,8 @@ public class StatusEvents
     /// <summary>
     /// 외부에서 스탯 변화를 일으키고 싶을때 호출 -> 스탯 매니저에서 값 갱신
     /// </summary>
-    public event Action<Stat, object> onAddStat;
-    public void AddStat(Stat stat, object value)
+    public event Action<Stat, float> onAddStat;
+    public void AddStat(Stat stat, float value)
     {
         onAddStat?.Invoke(stat, value);
     }
@@ -16,8 +16,8 @@ public class StatusEvents
     /// <summary>
     /// 스텟 매니저에서 스탯 변화가 일어난 경우 호출 -> UI같은 애들이 한 번에 갱신
     /// </summary>
-    public event Action<Stat, object> onStatChanged;
-    public void StatChanged(Stat goalStat, object value)
+    public event Action<Stat, float> onStatChanged;
+    public void StatChanged(Stat goalStat, float value)
     {
         onStatChanged?.Invoke(goalStat, value);
     }
