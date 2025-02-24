@@ -1,70 +1,95 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class UIManager : MonoBehaviour
-{
-    public GameObject quickSlotUI;
+public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는 통로 역할
+{ 
+    [SerializeField] private InventoryCanvas inventoryCanvas;
+    [SerializeField] private GameObject SettingCanvas;
+    [SerializeField] private CraftManualTable craftCanvas;
+    [SerializeField] private GameObject buildPanel;
+
+    private bool disableInput = false;
     
-    public GameObject invenStatusTab;
-    public GameObject craftTab;
-    public GameObject settingTab;
-    public PopupUI popupUI;
     
-    private bool isActiveInven = false;
-
-    private void Awake()
-    {
-        invenStatusTab.SetActive(false);
-        craftTab.SetActive(false);
-        settingTab.SetActive(false);
-        
-        popupUI.FirstAwake();
-        
-        DontDestroyOnLoad(gameObject);
-    }
-
     private void OnEnable()
     {
-        GameEventsManager.Instance.inputEvents.onInventoryToggle += ToggleInventory;
+        GameEventsManager.Instance.inputEvents.onInteractPressed += InteractPressed;
         GameEventsManager.Instance.inputEvents.onEscPressed += EscPressed;
+        GameEventsManager.Instance.inputEvents.onEnableInput += EnableInput;
+        GameEventsManager.Instance.inputEvents.onDisableInput += DisableInput;
+    }
+    
+
+    private void InteractPressed(InputAction.CallbackContext context)
+    {
+        if (disableInput)
+            return;
+        
+        if(context.control.name.Equals("tab"))
+            ToggleInventory();
     }
 
     private void EscPressed()
     {
-        // Setting → Craft → Inventory 순서로 닫기
-        if (settingTab.activeSelf)
+        //Setting → Craft → Inventory 순서로 닫기
+        if (SettingCanvas.activeSelf)
         {
-            settingTab.SetActive(false);
+            SettingCanvas.SetActive(false);
         }
-        else if (craftTab.activeSelf)
+        else if (craftCanvas.IsOpen)
         {
-            craftTab.SetActive(false);
+            craftCanvas.CloseTable();
         }
-        else if (invenStatusTab.activeSelf)
+        else if (inventoryCanvas.IsOpen)
         {
-            invenStatusTab.SetActive(false);
-            isActiveInven = false;
+            inventoryCanvas.ToggleInventory();
         }
         else
         {
-            // 모든 UI가 닫혀 있으면 Setting을 열기
-            settingTab.SetActive(true);
+            SettingCanvas.SetActive(true);
         }
     }
 
     private void ToggleInventory()
     {
-        if (settingTab.activeSelf) 
-            return; 
-    
-        isActiveInven = !isActiveInven;
-        invenStatusTab.SetActive(isActiveInven);
+        inventoryCanvas.ToggleInventory();
+    }
+
+    public void ToggleCraftTab(CraftManualType type)
+    {
+        craftCanvas.OpenTable(type);
+    }
+
+    public void ToggleBuildPanel(bool state)
+    {
+        if(state)
+            HideOtherCanvas();
+       
+        buildPanel.SetActive(state);
+    }
+
+    private void HideOtherCanvas()
+    {
+        if(inventoryCanvas.IsOpen)
+            inventoryCanvas.ToggleInventory();
         
-        if (!isActiveInven)
-        {
-            craftTab.SetActive(false);
-        }
+        if(craftCanvas.IsOpen)
+            craftCanvas.CloseTable();
+        
+        //setting 닫기
+    }
+    
+    private void DisableInput()
+    {
+        disableInput = true;
+    }
+
+    private void EnableInput()
+    {
+        disableInput = false;
     }
 }

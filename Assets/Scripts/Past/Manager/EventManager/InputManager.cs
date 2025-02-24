@@ -15,36 +15,40 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public void InteractPressed(InputAction.CallbackContext context)// F or 마우스 좌클릭
+    public void InteractPressed(InputAction.CallbackContext context)
     {
-        if (context.started)
+        bool isMouseClick = context.control.name.Equals("leftButton");
+
+        if (isMouseClick)
         {
-            GameEventsManager.Instance.inputEvents.InteractPressed(context);
+            if (context.started) // 한 번 클릭
+            {
+                GameEventsManager.Instance.inputEvents.InteractPressed(context);
+            }
+            else if (context.performed) // 0.2초 이상 꾹 눌렀을 때
+            {
+                GameEventsManager.Instance.inputEvents.InteractPressed(context);
+            }
+            else if (context.canceled) // 마우스를 떼었을 때
+            {
+                GameEventsManager.Instance.inputEvents.InteractPressed(context);
+            }
+        }
+        else // TAB, F 같은 다른 키는 한 번만 실행
+        {
+            if (context.started)
+            {
+                GameEventsManager.Instance.inputEvents.InteractPressed(context);
+            }
         }
     }
 
-    public void InventoryToggle(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            GameEventsManager.Instance.inputEvents.InventoryToggle();
-        }
-    }
 
     public void EscPressed(InputAction.CallbackContext context)
     {
         if (context.started)
         {
             GameEventsManager.Instance.inputEvents.EscPressed();
-        }
-    }
-
-    public void NumBtnPressed(InputAction.CallbackContext context)
-    {
-        if (context.started) // 키를 처음 눌렀을 때만 실행
-        {
-            string key = context.control.name;
-            GameEventsManager.Instance.inputEvents.NumBtnPressed(key);
         }
     }
     

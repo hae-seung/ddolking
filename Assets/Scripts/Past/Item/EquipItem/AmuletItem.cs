@@ -35,5 +35,9 @@ public class AmuletItem : EquipItem
             }
         }
     }
-    
+
+    protected override EquipItem CreateItem()
+    {
+        return new AmuletItem(EquipData as AmuletItemData);
+    }
 }

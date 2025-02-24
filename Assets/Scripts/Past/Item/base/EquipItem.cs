@@ -42,4 +42,11 @@ public abstract class EquipItem : Item, IStatModifier
     {
         return statModifiers;
     }
+    
+    public EquipItem Clone()
+    {
+        return CreateItem();
+    }
+    
+    protected abstract EquipItem CreateItem();
 }

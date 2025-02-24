@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using UnityEngine;
-using UnityEngine.XR;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerHand : MonoBehaviour
 {
@@ -12,9 +12,12 @@ public class PlayerHand : MonoBehaviour
     private Item currentGripItem; 
     //아이템과 상호작용은 Inventory의 InteractWithItem으로 호출할거임. 그래서 currentQuickSlotNumber로 호출
     
-    [SerializeField] private SpriteRenderer weaponImage;
-    [SerializeField] private SpriteRenderer toolImage;
-    [SerializeField] private SpriteRenderer elseImage;
+    [SerializeField] private Image weaponImage;
+    [SerializeField] private Image toolImage;
+    [SerializeField] private Image elseImage;
+    
+    
+    private bool disableInput = false;
     
     private void Awake()
     {
@@ -27,18 +30,23 @@ public class PlayerHand : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEventsManager.Instance.inputEvents.onNumBtnPressed += NumBtnPressed;
+        GameEventsManager.Instance.inputEvents.onInteractPressed += InteractPressed;
+        GameEventsManager.Instance.inputEvents.onEnableInput += EnableInput;
+        GameEventsManager.Instance.inputEvents.onDisableInput += DisableInput;
     }
+    
+    
 
-    private void OnDisable()
+    private void InteractPressed(InputAction.CallbackContext context)
     {
-        //GameEventsManager.Instance.inputEvents.onNumBtnPressed -= NumBtnPressed;
-    }
+        int selectedNum = 0;
 
-    private void NumBtnPressed(string key)
-    {
-        int selectedNum = int.Parse(key);
-
+        if (disableInput)
+            return;
+        
+        if (!int.TryParse(context.control.name, out selectedNum))
+            return;
+        
         if (selectedNum.Equals(currentQuickSlotNumber))
             return;
         
@@ -66,7 +74,7 @@ public class PlayerHand : MonoBehaviour
         elseImage.gameObject.SetActive(false);
 
         // 새로운 아이템이 있을 경우 적절한 이미지 활성화
-        SpriteRenderer targetImage = newItem switch
+        Image targetImage = newItem switch
         {
             WeaponItem => weaponImage,
             ToolItem => toolImage,
@@ -83,6 +91,7 @@ public class PlayerHand : MonoBehaviour
     }
 
 
+    #region 손에 아이템 쥐면서 스탯 변화
 
     private void ChangeStat(Item newItem)
     {
@@ -119,5 +128,19 @@ public class PlayerHand : MonoBehaviour
                     AddStat(statModifiers[i].stat, statModifiers[i].increaseAmount);
             }
         }
+    }
+
+    #endregion
+    
+    
+    
+    private void DisableInput()
+    {
+        disableInput = true;
+    }
+
+    private void EnableInput()
+    {
+        disableInput = false;
     }
 }

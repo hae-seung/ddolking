@@ -10,4 +10,9 @@ public class WeaponItem : EquipItem
     {
         this.data = data;
     }
+
+    protected override EquipItem CreateItem()
+    {
+        return new WeaponItem(EquipData as WeaponItemData);
+    }
 }

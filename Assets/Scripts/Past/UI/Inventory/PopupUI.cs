@@ -40,7 +40,7 @@ public class PopupUI : MonoBehaviour
     public event Action<int> onConfirmationOK;
     
     
-    public void FirstAwake()
+    public void Init()
     {
         InitEvents();
         HidePanel();

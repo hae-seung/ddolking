@@ -11,6 +11,7 @@ public class Inventory : MonoBehaviour
     
     [SerializeField] private InventoryUI inventoryUI;
     [SerializeField] private StatusUI statusUI;
+    [SerializeField] private PlayerBuild playerBuild;
     private int slotCnt;
     
     public int SlotCnt
@@ -113,7 +114,10 @@ public class Inventory : MonoBehaviour
             index = FindEmptySlotIndex();
             if (index != -1)
             {
-                _items[index] = item;
+                EquipItem eitem = item as EquipItem;
+                if(eitem == null)
+                    Debug.LogWarning("EquipItem이 아닌데");
+                _items[index] = eitem.Clone();
                 amount = 0;
                 UpdateSlot(index);
             }
@@ -176,7 +180,7 @@ public class Inventory : MonoBehaviour
             return;
         if (_items[index] == null)
             return;
-
+        
         if (_items[index] is IUseable uItem)
         {
             bool succeeded = uItem.Use();
@@ -189,7 +193,18 @@ public class Inventory : MonoBehaviour
         {
             EquipAmulet(index);
         }
-
+        else if (_items[index] is EstablishItem establishItem)
+        {
+            StartCoroutine(playerBuild.BuildItem(establishItem, (success) =>
+            {
+                if (success)
+                {
+                    establishItem.Use();
+                    UpdateSlot(index);
+                }
+            }));
+        }
+        
     }
     
     public void SwapItem(int from , int to)

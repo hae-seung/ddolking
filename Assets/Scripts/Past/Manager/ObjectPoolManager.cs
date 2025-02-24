@@ -87,9 +87,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             obj.transform.SetParent(null);
         }
 
-        // DropObject의 SetAsSpawned() 호출
-        obj.GetComponent<DropObject>()?.SetAsSpawned();
-
         Debug.Log($"ID {id}의 오브젝트 풀에서 가져옴: {obj.name}");
         return obj;
     }

@@ -48,7 +48,7 @@ public class ToolTipUI : MonoBehaviour
         if (item is EquipItem equipItem)
             SetClassText(equipItem);
         
-        if (item is IUseable || item is AmuletItem amuletItem)
+        if (item is IUseable || item is AmuletItem || item is EstablishItem)
             interactableTxt.SetActive(true);
         
         if (item is IStatModifier statItem)

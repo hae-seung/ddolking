@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 dir;
 
     private bool movementDisabled = false;
+    private bool mouseMovementDisabled = false;
 
     private void Awake()
     {
@@ -39,6 +40,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePressed(Vector2 moveDir)
     {
+        if (movementDisabled)
+        {
+            velocity = Vector2.zero;
+            animator.SetBool("isMove", false);
+            return;
+        }
+        
         if (moveDir != Vector2.zero)
             animator.SetBool("isMove", true);
         else
@@ -46,26 +54,27 @@ public class PlayerMovement : MonoBehaviour
         
         velocity = moveDir.normalized * moveSpeed;
         
-        if (movementDisabled)
-        {
-            velocity = Vector2.zero;
-        }
     }
     
     private void MouseMoved(Vector3 mousePos)
     {
-        dir = mousePos - transform.position;
-        animator.SetFloat("inputX", dir.x);
+        if(!mouseMovementDisabled)
+        {
+            dir = mousePos - transform.position;
+            animator.SetFloat("inputX", dir.x);
+        }
     }
 
     private void EnablePlayerMovement()
     {
         movementDisabled = false;
+        mouseMovementDisabled = false;
     }
 
     private void DisablePlayerMovement()
     {
         movementDisabled = true;
+        mouseMovementDisabled = true;
         velocity = Vector2.zero;
     }
     
