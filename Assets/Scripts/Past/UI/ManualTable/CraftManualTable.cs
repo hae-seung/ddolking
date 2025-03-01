@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening.Core.Easing;
 using UnityEngine;
 
-public class CraftManualTable : MonoBehaviour
+public class CraftManualTables : MonoBehaviour
 {
     [Header("테이블")]
     [SerializeField] private GameObject miniCraftTable;
@@ -24,15 +24,21 @@ public class CraftManualTable : MonoBehaviour
     private void Hide()
     {
         miniCraftTable.SetActive(false);
-        craftTable.SetActive(false);
-        furnaceTable.SetActive(false);
-        cookerTable.SetActive(false);
+        // craftTable.SetActive(false);
+        // furnaceTable.SetActive(false);
+        // cookerTable.SetActive(false);
         
         tableLog.SetActive(false);
     }
 
-    public void OpenTable(CraftManualType type)
+    public void ToggleTable(CraftManualType type)
     {
+        if (IsOpen)
+        {
+            CloseTable();
+            return;
+        }
+        
         switch (type)
         {
             case CraftManualType.MiniTable:
@@ -47,8 +53,10 @@ public class CraftManualTable : MonoBehaviour
     public void CloseTable()
     {
         Hide();
+        
         GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
         GameEventsManager.Instance.inputEvents.EnableInput();
-        IsOpen = false;
+        
+        IsOpen = false;//한개만 열리도록 보장
     }
 }

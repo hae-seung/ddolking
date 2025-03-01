@@ -288,6 +288,26 @@ public class Inventory : MonoBehaviour
         return _items[index];
     }
 
+    public int GetItemTotalAmount(ItemData itemData)
+    {
+        int sum = 0;
+        for (int i = 0; i < _items.Count; i++)
+        {
+            if (_items[i] == null)
+                continue;
+
+            if (_items[i].itemData == itemData)
+            {
+                if (_items[i] is CountableItem citem)
+                    sum += citem.Amount;
+                else
+                    sum += 1;
+            }
+        }
+
+        return sum;
+    }
+
     public int GetItemCount(int index)
     {
         if (!IsValidIndex(index))

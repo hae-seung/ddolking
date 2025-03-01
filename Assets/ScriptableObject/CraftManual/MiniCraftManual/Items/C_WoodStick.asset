@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: C_WoodStick
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 93a8549cdd8a7bd4da34718a3984b7fe, type: 2}
-  itemPrefab: {fileID: 7973477532707379287, guid: 3557c8dbd60d6264ead153d2455a8083, type: 3}
   craftNeedItems:
-  - itemData: {fileID: 0}
-    amount: 0
+  - itemData: {fileID: 11400000, guid: 8ed1d117413647f4383bf293aac5d76b, type: 2}
+    amount: 2
+  makingTime: 1

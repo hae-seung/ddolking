@@ -9,7 +9,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
 { 
     [SerializeField] private InventoryCanvas inventoryCanvas;
     [SerializeField] private GameObject SettingCanvas;
-    [SerializeField] private CraftManualTable craftCanvas;
+    [SerializeField] private CraftManualTables craftCanvas;
     [SerializeField] private GameObject buildPanel;
 
     private bool disableInput = false;
@@ -61,7 +61,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
 
     public void ToggleCraftTab(CraftManualType type)
     {
-        craftCanvas.OpenTable(type);
+        craftCanvas.ToggleTable(type);
     }
 
     public void ToggleBuildPanel(bool state)

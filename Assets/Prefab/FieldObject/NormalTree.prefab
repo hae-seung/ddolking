@@ -213,10 +213,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.3540144, y: 0.094329596}
-      - {x: -0.3540144, y: -0.3431704}
-      - {x: 0.3959856, y: -0.3431704}
-      - {x: 0.3959856, y: 0.094329596}
+    - - {x: -0.20356835, y: 0.08384853}
+      - {x: -0.20356835, y: -0.30504036}
+      - {x: 0.2408761, y: -0.30504036}
+      - {x: 0.2408761, y: 0.08384853}
   m_UseDelaunayMesh: 0
 --- !u!114 &7932373575640593849
 MonoBehaviour:
@@ -250,26 +250,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4198148336839225982, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4587725552250789723, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
-      propertyPath: m_Value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4986198912473089294, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5176481616977168223, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6065258827181263165, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6251145574147950599, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -296,7 +276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6251145574147950599, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6251145574147950599, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
       propertyPath: m_SizeDelta.y
@@ -332,11 +312,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6251145574147950599, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.039
+      value: 0.006
       objectReference: {fileID: 0}
     - target: {fileID: 6251145574147950599, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.386
+      value: -0.378
       objectReference: {fileID: 0}
     - target: {fileID: 6251145574147950599, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -353,10 +333,6 @@ PrefabInstance:
     - target: {fileID: 7272762379105997404, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
       propertyPath: m_Name
       value: HealthBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 7272762379105997404, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

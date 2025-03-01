@@ -127,7 +127,7 @@ public class BreakableObject : Interactable
 
             for (int i = 0; i < Random.Range(drop.MinAmount, drop.MaxAmount + 1); i++)
             {
-                Vector3 dropPosition = transform.position + new Vector3(Random.Range(-1.5f, 1.5f), Random.Range(-1.5f, 1.5f), 0);
+                Vector3 dropPosition = transform.position + new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0);
                 GameObject dropObj = ObjectPoolManager.Instance.SpawnObject(
                     drop.DropItemId,
                     dropPosition,

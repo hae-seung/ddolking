@@ -110,7 +110,6 @@ public class PlayerBuild : MonoBehaviour
         
         //빌딩 시스템off
         callback(true);
-        
         gameObject.SetActive(false);
         buildComplete = false;
         isBuilding = false;
