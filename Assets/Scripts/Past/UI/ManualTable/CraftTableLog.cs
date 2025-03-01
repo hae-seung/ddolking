@@ -10,6 +10,7 @@ public class CraftTableLog : MonoBehaviour
     [Header("테이블 로그")] 
     [SerializeField] private Image craftItemImage;
     [SerializeField] private Image backgroundImage;
+    [SerializeField] private TextMeshProUGUI itemNameTxt;
     [SerializeField] private TextMeshProUGUI itemDescriptionTxt;
     [SerializeField] private List<CraftTableNeedItem> needItemLists;
 
@@ -24,7 +25,8 @@ public class CraftTableLog : MonoBehaviour
     private int willMakeItemAmount = 0;
     private int maxAmount = 0;
     private bool isCraftable = true;
-    
+
+    private Action<CraftItemSO, int> MakeItem = null;
     
     private void Awake()
     {
@@ -50,22 +52,24 @@ public class CraftTableLog : MonoBehaviour
         amountTxt.text = "1";
 
 
-        craftItemImage.sprite = craftItem.CraftItemData.IconImage;
+        
         //아이템 리스트 설정
         itemDescriptionTxt.text = craftItem.CraftItemData.Description;
+        craftItemImage.sprite = craftItem.CraftItemData.IconImage;
+        itemNameTxt.text = craftItem.CraftItemData.Name;
         for (int i = 0; i < craftNeedItems.Count; i++)
         {
             needItemLists[i].SetNeedItem(craftNeedItems[i]);
             needItemLists[i].gameObject.SetActive(true);
-            
             needItemLists[i].SetItemAmount(craftNeedItems[i], 1);
+            
             if (!needItemLists[i].HasEnoughItems)
                 isCraftable = false;
         }
 
         confirmBtn.interactable = isCraftable;
         
-        //로그 Open
+        //테이블로그 Open
         gameObject.SetActive(true);
     }
     
@@ -108,6 +112,21 @@ public class CraftTableLog : MonoBehaviour
                 SetNeedItemsAmount(nextAmount);
             }
         });
+        
+        confirmBtn.onClick.AddListener(() =>
+        {
+            int.TryParse(amountTxt.text, out int amount);
+            
+            MakeItem?.Invoke(craftItemData, amount);
+            MakeItem = null;
+            UIManager.Instance.CloseCraftTab();
+            
+            //아이템 수량 감소
+            for (int i = 0; i < craftNeedItems.Count; i++)
+            {
+                Inventory.Instance.RemoveItem(craftNeedItems[i].itemData, needItemLists[i].ItemTotalAmount);
+            }
+        });
     }
 
     private void SetNeedItemsAmount(int multiplier)
@@ -128,5 +147,10 @@ public class CraftTableLog : MonoBehaviour
     public void SetImage(Sprite backGroundSprite)
     {
         backgroundImage.sprite = backGroundSprite;
+    }
+
+    public void SetConfirmEvent(Action<CraftItemSO, int> makeItem)
+    {
+        MakeItem = makeItem;
     }
 }

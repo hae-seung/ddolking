@@ -57,8 +57,4 @@ public abstract class DropObject : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-  
-
-    
 }

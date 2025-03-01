@@ -5,7 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CraftManualSO", menuName = "SO/CraftItem/ManualSO")]
 public class CraftManualSO : ScriptableObject
 {
-    [SerializeField] private List<CraftItemSO> craftItemSo;
+    [SerializeField] private List<CraftItemSO> craftItemSo = new List<CraftItemSO>();
 
     public List<CraftItemSO> CraftItems => craftItemSo;
+
+    
+    
 }

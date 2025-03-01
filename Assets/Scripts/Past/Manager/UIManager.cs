@@ -54,21 +54,36 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
         }
     }
 
+    #region ToggleInventory
+
     private void ToggleInventory()
     {
         inventoryCanvas.ToggleInventory();
     }
 
-    public void ToggleCraftTab(CraftManualType type)
+    #endregion
+
+    #region CraftTableToggle
+
+    public void OpenCraftTab(CraftManualType type, Action<CraftItemSO , int> makeItem)
     {
-        craftCanvas.ToggleTable(type);
+        craftCanvas.OpenTable(type, makeItem);
     }
+
+    public void CloseCraftTab()
+    {
+        craftCanvas.CloseTable();
+    }
+
+    #endregion
+    
+    #region BuildSystem
 
     public void ToggleBuildPanel(bool state)
     {
-        if(state)
+        if (state)
             HideOtherCanvas();
-       
+
         buildPanel.SetActive(state);
     }
 
@@ -82,7 +97,11 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
         
         //setting 닫기
     }
-    
+
+    #endregion
+
+    #region 입력 이벤트 제어
+
     private void DisableInput()
     {
         disableInput = true;
@@ -92,4 +111,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     {
         disableInput = false;
     }
+
+    #endregion
+    
 }

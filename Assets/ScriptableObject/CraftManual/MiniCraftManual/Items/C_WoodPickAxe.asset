@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae77d3b2164203418d3fc57bf50ec18, type: 3}
   m_Name: C_WoodPickAxe
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  itemPrefab: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 1d13c3116f40b5d4a8a087d1d20a12d1, type: 2}
+  resultAmount: 1
   craftNeedItems:
-  - itemData: {fileID: 0}
-    amount: 0
+  - itemData: {fileID: 11400000, guid: 93a8549cdd8a7bd4da34718a3984b7fe, type: 2}
+    amount: 2
+  - itemData: {fileID: 11400000, guid: 8ed1d117413647f4383bf293aac5d76b, type: 2}
+    amount: 3
+  makingTime: 5

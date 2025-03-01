@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.Events;
 
 public class CraftTable : MonoBehaviour
 {
@@ -44,6 +41,6 @@ public class CraftTable : MonoBehaviour
 
     public void onCloseBtnClicked()
     {
-        UIManager.Instance.ToggleCraftTab(type);
+        UIManager.Instance.CloseCraftTab();
     }
 }

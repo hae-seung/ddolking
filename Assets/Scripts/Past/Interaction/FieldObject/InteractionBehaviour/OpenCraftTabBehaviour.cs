@@ -1,15 +1,29 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class CraftTabBehaviour : InteractionBehaviour
 {
-    [SerializeField] CraftManualType craftManualType;
+    [SerializeField] private CraftManualType craftManualType;
+    [SerializeField] private Interactable interactableObject;
+    [SerializeField] private MakingItemUI makingItemUI;
     
+    public bool IsMaking { get; private set; } = false;
     
     protected override void Interact(Interactor interactor)
     {
-        UIManager.Instance.ToggleCraftTab(craftManualType);
+        if (IsMaking)
+            return;
+        
+        UIManager.Instance.OpenCraftTab(craftManualType, (CraftItemSO craftItem, int amount) =>
+        {
+            makingItemUI.MakeItem(craftItem, amount, onMakingFinished);
+            IsMaking = true;
+        });
     }
+
+    private void onMakingFinished()
+    {
+        IsMaking = false;
+    }
+    
 }

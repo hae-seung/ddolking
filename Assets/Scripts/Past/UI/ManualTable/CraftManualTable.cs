@@ -12,7 +12,7 @@ public class CraftManualTables : MonoBehaviour
     [SerializeField] private GameObject furnaceTable;
     [SerializeField] private GameObject cookerTable;
 
-    [SerializeField] private GameObject tableLog;
+    [SerializeField] private CraftTableLog tableLog;
     
     public bool IsOpen { get; private set; }
     
@@ -28,25 +28,31 @@ public class CraftManualTables : MonoBehaviour
         // furnaceTable.SetActive(false);
         // cookerTable.SetActive(false);
         
-        tableLog.SetActive(false);
+        tableLog.gameObject.SetActive(false);
     }
 
-    public void ToggleTable(CraftManualType type)
+    public void OpenTable(CraftManualType type, Action<CraftItemSO , int> makeItem)
     {
         if (IsOpen)
-        {
-            CloseTable();
             return;
-        }
+        
+        tableLog.SetConfirmEvent(makeItem);
         
         switch (type)
         {
             case CraftManualType.MiniTable:
                 miniCraftTable.SetActive(true);
                 break;
+            case CraftManualType.Furnace:
+                break;
+            case CraftManualType.NormalTable:
+                break;
+            case CraftManualType.Cooker:
+                break;
         }
         GameEventsManager.Instance.playerEvents.DisablePlayerMovement();
         GameEventsManager.Instance.inputEvents.DisableInput();
+        
         IsOpen = true;
     }
 

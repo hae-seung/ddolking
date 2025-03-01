@@ -154,6 +154,45 @@ public class Inventory : MonoBehaviour
         return -1;
     }
 
+
+    public void RemoveItem(ItemData data, int totalAmount = 1)
+    {
+        int reaminAmount = totalAmount;
+        
+        for (int i = 0; i < _items.Count; i++)
+        {
+            if (reaminAmount <= 0)
+            {
+                break;
+            }
+            
+            if(_items[i] == null)
+                continue;
+
+            if (_items[i].itemData == data)
+            {
+                if (_items[i] is CountableItem citem)
+                {
+                    if (citem.Amount <= reaminAmount)
+                    {
+                        _items[i] = null;
+                    }
+                    else
+                    {
+                        citem.SetAmount(citem.Amount - reaminAmount);
+                    }
+
+                    reaminAmount -= citem.Amount;
+                }
+                else
+                {
+                    _items[i] = null;
+                    reaminAmount -= 1;
+                }
+                UpdateSlot(i);
+            }
+        }
+    }
     
     public void RemoveItem(int index, int count = 1)
     {

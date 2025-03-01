@@ -27,9 +27,14 @@ public abstract class EquipObject<T> : DropObject where T : EquipItem
 
     protected override void CollectItem()
     {
+        if (!ObjectPoolManager.Instance.IsPoolRegistered(itemData.ID))
+        {
+            ObjectPoolManager.Instance.RegisterPrefab(itemData.ID, dropObjectPrefab);
+        }
+        
         int amount = Inventory.Instance.Add(equipItem);
         if (amount <= 0)
-            Destroy(gameObject); //장비 아이템은 몇 없으므로 풀에 등록하지 않음
+            DestroyDropObject();
     }
 
     protected abstract void MakeItemInstance();

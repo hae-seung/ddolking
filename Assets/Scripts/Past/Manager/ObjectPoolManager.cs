@@ -66,13 +66,13 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     }
 
     // 아이템 스폰 (필드에서 드롭 시)
-    public GameObject SpawnObject(int id, Vector3 position, Quaternion rotation, Transform parent = null)
+    public GameObject SpawnObject(int id, Vector3 position, Quaternion rotation, Transform parent = null, int count = 1)
     {
         if (!pools.ContainsKey(id))
         {
-            Debug.LogWarning($"ID {id}의 풀을 찾을 수 없습니다. 새로운 오브젝트를 생성합니다.");
             RegisterPrefab(id, registeredPrefabs[id]);
         }
+        
 
         GameObject obj = pools[id].Get();
         obj.transform.position = position;
@@ -86,8 +86,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         {
             obj.transform.SetParent(null);
         }
-
-        Debug.Log($"ID {id}의 오브젝트 풀에서 가져옴: {obj.name}");
+        
         return obj;
     }
 

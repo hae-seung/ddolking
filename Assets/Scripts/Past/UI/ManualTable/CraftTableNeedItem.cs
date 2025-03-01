@@ -15,6 +15,7 @@ public class CraftTableNeedItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemAmountTxt;
 
     public bool HasEnoughItems { get; private set; } = false;
+    public int ItemTotalAmount { get; private set; }
     
     public void SetNeedItem(CraftNeedItem craftNeedItem)
     {
@@ -24,12 +25,12 @@ public class CraftTableNeedItem : MonoBehaviour
 
     public void SetItemAmount(CraftNeedItem craftNeedItem, int multiplier) //todo : 갯수 부족한지 충분한지 색으로 표시
     {
-        int totalAmount = craftNeedItem.amount * multiplier;
+        ItemTotalAmount = craftNeedItem.amount * multiplier;
         
         int amount = Inventory.Instance.GetItemTotalAmount(craftNeedItem.itemData);
-        itemAmountTxt.text = $"{amount} / {totalAmount}";
+        itemAmountTxt.text = $"{amount} / {ItemTotalAmount}";
 
-        HasEnoughItems = amount >= totalAmount;
+        HasEnoughItems = amount >= ItemTotalAmount;
         backGroundImage.color = HasEnoughItems ? Color.white : Color.red;
     }
 }

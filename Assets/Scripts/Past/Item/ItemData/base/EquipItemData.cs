@@ -47,10 +47,10 @@ public class EquipItemDataEditor : Editor
         SerializedProperty isEnhanceableProp = serializedObject.FindProperty("isEnhanceable");
         SerializedProperty enhancementLogicProp = serializedObject.FindProperty("enhancementLogic");
 
-        // 🔹 enhancementLogic을 제외한 모든 필드 자동 표시 (부모 필드 포함)
+        //enhancementLogic을 제외한 모든 필드 자동 표시 (부모 필드 포함)
         DrawPropertiesExcluding(serializedObject, "enhancementLogic");
 
-        // 🔹 isEnhanceable이 true일 때만 enhancementLogic 표시
+        //isEnhanceable이 true일 때만 enhancementLogic 표시
         if (isEnhanceableProp.boolValue)
         {
             EditorGUILayout.PropertyField(enhancementLogicProp);
