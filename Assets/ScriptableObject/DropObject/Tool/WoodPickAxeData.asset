@@ -20,9 +20,9 @@ MonoBehaviour:
   dropObjectPrefab: {fileID: 2652614519532663570, guid: ec144776b3a45134b9f33eb3c392912d, type: 3}
   isEnhanceable: 0
   itemclass: 3
-  maxDurability: 100
+  maxDurability: 50
   itemLevel: 0
   statModifier:
   - stat: 7
-    increaseAmount: 10
+    increaseAmount: 5
   enhancementLogic: {fileID: 0}

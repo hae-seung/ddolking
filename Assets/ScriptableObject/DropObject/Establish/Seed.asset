@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eae7a91ca788315498e43e2db6af0122, type: 3}
   m_Name: Seed
   m_EditorClassIdentifier: 
-  _id: 4003
+  _id: 4000
   _name: "\uC528\uC557"
   _description: "\uB2E8\uB2E8\uD55C \uC528\uC557\uC774\uB2E4.\n\uBB34\uB7ED\uBB34\uB7ED
     \uC790\uB77C\uAC70\uB77C"

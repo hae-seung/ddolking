@@ -6,7 +6,7 @@ using UnityEngine;
 public class EstablishItemData : CountableItemData
 {
     //대표 예시 : 씨앗
-    [Header("실제 설치할 오브젝트의 데이터")]
+    [Header("실제 설치할 필드오브젝트의 데이터")]
     [SerializeField] private FieldObjectData establishObjectData; 
     
     [Header("설치하기 전 나타날 프리뷰")] 

@@ -25,7 +25,7 @@ public class StatusManager : MonoBehaviour
         { Stat.Str, new StatData(0, 5f, -1) },
         { Stat.Luk, new StatData(0, 1f, 100) },
         { Stat.Speed, new StatData(0, 0.5f, 10) },
-        { Stat.MineSpeed, new StatData(0, 2f, 50) }
+        { Stat.MineSpeed, new StatData(0, 0.5f, -1) }
     };
     
     private void Awake()

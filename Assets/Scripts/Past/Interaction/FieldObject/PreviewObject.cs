@@ -1,21 +1,21 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class PreviewObject : MonoBehaviour
 {
     public bool CanEstablish { get; private set; }
 
-    private CircleCollider2D _circleCollider2D;
-    private SpriteRenderer spriteRenderer;
-    private readonly Collider2D[] colliders = new Collider2D[5];
-    private LayerMask ignoreLayerMask;
+    private BoxCollider2D _boxCollider2D;
+    private SpriteRenderer _spriteRenderer;
+    private readonly Collider2D[] _colliders = new Collider2D[5];
+    private LayerMask _ignoreLayerMask;
 
     private void Awake()
     {
-        _circleCollider2D = GetComponent<CircleCollider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        ignoreLayerMask = LayerMask.GetMask("Land", "Ignore Raycast"); //무시할 레이어들
+        _boxCollider2D = GetComponent<BoxCollider2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _ignoreLayerMask = LayerMask.GetMask("Land", "Ignore Raycast"); // 무시할 레이어들
     }
 
     private void Update()
@@ -25,24 +25,26 @@ public class PreviewObject : MonoBehaviour
 
     private void CheckForCollisions()
     {
-        int numCollisions = Physics2D.OverlapCircleNonAlloc(//Overlap은 ignoreRaycast레이어도 감지해서 또 설정해줌.
-            (Vector2)transform.position + _circleCollider2D.offset,
-            _circleCollider2D.radius,
-            colliders,
-            ~ignoreLayerMask //Land와 Ignore Raycast는 감지하지 않음
+        Vector2 boxCenter = (Vector2)transform.position + _boxCollider2D.offset;
+        Vector2 boxSize = _boxCollider2D.size;
+
+        int numCollisions = Physics2D.OverlapBoxNonAlloc( // BoxCollider2D 범위 기반 감지
+            boxCenter, 
+            boxSize, 
+            0f, // 회전 없음 (필요 시 z축 회전값 입력)
+            _colliders,
+            ~_ignoreLayerMask // Land와 Ignore Raycast는 감지하지 않음
         );
 
         if (numCollisions == 0)
         {
             CanEstablish = true;
-            spriteRenderer.color = Color.white;
+            _spriteRenderer.color = Color.white;
         }
         else
         {
             CanEstablish = false;
-            spriteRenderer.color = Color.red;
+            _spriteRenderer.color = Color.red;
         }
     }
-
-
 }

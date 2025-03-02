@@ -18,7 +18,7 @@ public abstract class EquipItemData : ItemData
     public ItemClass itemclass;
     public float maxDurability;
     public int itemLevel;
-    [SerializeField] private List<StatModifier> statModifier; //상승시킬 플레이어 능력
+    [SerializeField] private List<StatModifier> statModifier = new(); //상승시킬 플레이어 능력
     [SerializeField] private ItemEnhancementLogic enhancementLogic;//StatModifier에 없는 능력도 강화로 생기게 가능
     
     public List<StatModifier> GetStatModifier()

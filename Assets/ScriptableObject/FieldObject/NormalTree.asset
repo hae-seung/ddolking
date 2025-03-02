@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c605ceab893c614d9ebb6e207d0c9bd, type: 3}
   m_Name: NormalTree
   m_EditorClassIdentifier: 
-  id: 5000
+  id: 6000
   toolWear: 1
   durability: 10
   dropTable:

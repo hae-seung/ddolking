@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c605ceab893c614d9ebb6e207d0c9bd, type: 3}
   m_Name: Sapling
   m_EditorClassIdentifier: 
-  id: 5001
+  id: 6001
   toolWear: 1
   durability: 1
   dropTable:
