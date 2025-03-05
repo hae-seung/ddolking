@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -22,7 +21,9 @@ public class BreakableObject : Interactable
     [SerializeField] private DrawOutline drawOutline; //  외곽선 스크립트 참조
     [SerializeField] private float breakTime;
     private Coroutine breakCoroutine;
-    
+
+    [Header("닷트윈")] 
+    [SerializeField] private DOTweenAnimation _doTweenAnimation;
 
     private void Start()
     {
@@ -45,7 +46,7 @@ public class BreakableObject : Interactable
         durabilityBar.gameObject.SetActive(false);
     }
 
-    public override void Interact(Interactor interactor, InputAction.CallbackContext context)
+    public override void Interact(Interactor interactor, InputAction.CallbackContext context, Item currentGripItem = null)
     {
         if (!drawOutline.CanInteract) return;
 
@@ -54,12 +55,12 @@ public class BreakableObject : Interactable
             if (context.started) // 한 번 클릭
             {
                 GameEventsManager.Instance.playerEvents.DisablePlayerMovement();
-                BreakObject(interactor); // 한 번 실행
+                BreakObject(currentGripItem); // 한 번 실행
                 GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
             }
             else if (context.performed && breakCoroutine == null) // `Hold Time`이 지나서 실제로 꾹 눌림
             {
-                breakCoroutine = StartCoroutine(BreakObjectRepeatedly(interactor));
+                breakCoroutine = StartCoroutine(BreakObjectRepeatedly(currentGripItem));
             }
             else if (context.canceled) // 마우스를 떼면 반복 실행 중지
             {
@@ -70,11 +71,11 @@ public class BreakableObject : Interactable
     }
 
     // 0.5초마다 BreakObject 호출하는 코루틴 (즉시 실행 후 반복)
-    private IEnumerator BreakObjectRepeatedly(Interactor interactor)
+    private IEnumerator BreakObjectRepeatedly(Item gripItem)
     {
         while (true) // 코루틴이 취소될 때까지 무한 루프
         {
-            BreakObject(interactor);
+            BreakObject(gripItem);
             yield return new WaitForSeconds(breakTime);
         }
     }
@@ -90,23 +91,29 @@ public class BreakableObject : Interactable
     }
 
     // 오브젝트 체력 감소
-    private void BreakObject(Interactor interactor)
+    private void BreakObject(Item gripItem)
     {
         if (durability > 0)
         {
-            float damageAmount = 10; // TODO: 계산식 적용
-            ReduceDurability(damageAmount);
+            float damageAmount = GameEventsManager.Instance.calculatorEvents.CalculateMineDamage(Stat.MineSpeed);
+            ReduceDurability(damageAmount, gripItem);
         }
     }
-    
 
-    private void ReduceDurability(float amount)
+    
+    private void ReduceDurability(float amount, Item gripItem)
     {
+        if(_doTweenAnimation!= null)
+        {
+            _doTweenAnimation.DORestart();
+        }
+        
+        
         durabilityBar.gameObject.SetActive(true);
 
         durability = Mathf.Max(durability - amount, 0);
         durabilityBar.value = durability;
-
+        
         if (durability <= 0)
         {
             durabilityBar.gameObject.SetActive(false);
@@ -114,6 +121,12 @@ public class BreakableObject : Interactable
             DestroyFieldObject();
             GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
         }
+
+        if (gripItem != null && gripItem is ToolItem toolItem)
+        {
+            toolItem.ReduceDurability(toolWear);
+        }
+        
     }
 
     private void DropItems()
@@ -131,7 +144,7 @@ public class BreakableObject : Interactable
                 GameObject dropObj = ObjectPoolManager.Instance.SpawnObject(
                     drop.DropItemId,
                     dropPosition,
-                    Quaternion.Euler(0, 0, Random.Range(0f, 360f)));
+                    Quaternion.identity);
 
                 if (dropObj != null)
                 {
@@ -153,7 +166,10 @@ public class BreakableObject : Interactable
     public override void SetInteractState(bool state)
     {
         if(!state)
+        {
             durabilityBar.gameObject.SetActive(false);
+            StopBreakObject();
+        }
         
         drawOutline.SetPlayerNear(state);
     }

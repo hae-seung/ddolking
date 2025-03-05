@@ -12,6 +12,7 @@ public class ToolTipUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI statTxt;
     [SerializeField] private TextMeshProUGUI contentTxt;
+    [SerializeField] private TextMeshProUGUI durabilityTxt;
     [SerializeField] private GameObject interactableTxt; //우클릭시 상호작용가능을 나타냄
     [SerializeField] private RectTransform parentRect;
     
@@ -39,20 +40,33 @@ public class ToolTipUI : MonoBehaviour
     public void SetItemInfo(Item item)
     {
         itemName.text = item.itemData.Name;
-        contentTxt.text = item.itemData.Description;
+        contentTxt.text = $"{item.itemData.Description}";
         
         statTxt.gameObject.SetActive(false);
         interactableTxt.SetActive(false);
         equipItemClassTxt.gameObject.SetActive(false);
+        durabilityTxt.gameObject.SetActive(false);
 
         if (item is EquipItem equipItem)
-            SetClassText(equipItem);
+            SetEquipItemText(equipItem);
         
         if (item is IUseable || item is AmuletItem || item is EstablishItem)
             interactableTxt.SetActive(true);
         
         if (item is IStatModifier statItem)
             SetStatText(statItem);
+    }
+
+    private void SetEquipItemText(EquipItem equipItem)
+    {
+        SetClassText(equipItem);
+        SetDurabilityText(equipItem);
+    }
+
+    private void SetDurabilityText(EquipItem equipItem)
+    {
+        durabilityTxt.text = $"{equipItem.CurDurability} / {equipItem.EquipData.maxDurability}";
+        durabilityTxt.gameObject.SetActive(true);
     }
 
     private void SetClassText(EquipItem equipItem)
@@ -114,7 +128,7 @@ public class ToolTipUI : MonoBehaviour
                         sb.AppendLine($"이동속도 : +{increaseAmount:F1}");
                         break;
                     case Stat.MineSpeed:
-                        sb.AppendLine($"채굴속도 : +{increaseAmount:F1}");
+                        sb.AppendLine($"채굴력 : +{increaseAmount:F1}");
                         break;
                 }
             }

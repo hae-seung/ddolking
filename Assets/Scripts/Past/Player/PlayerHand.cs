@@ -11,7 +11,8 @@ public class PlayerHand : MonoBehaviour
     private int currentQuickSlotNumber;// 1 ~ 5번
     private Item currentGripItem; 
     //아이템과 상호작용은 Inventory의 InteractWithItem으로 호출할거임. 그래서 currentQuickSlotNumber로 호출
-    
+
+    [SerializeField] private Interactor interactor;
     [SerializeField] private Image weaponImage;
     [SerializeField] private Image toolImage;
     [SerializeField] private Image elseImage;
@@ -43,6 +44,8 @@ public class PlayerHand : MonoBehaviour
 
         if (disableInput)
             return;
+        
+        interactor.InteractPressed(context, currentGripItem);
         
         if (!int.TryParse(context.control.name, out selectedNum))
             return;

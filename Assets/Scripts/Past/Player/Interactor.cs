@@ -10,7 +10,6 @@ public class Interactor : MonoBehaviour
     [SerializeField] private LayerMask interactableMask;
     [SerializeField] private float interactTimebet;
     private float lastInteractTime;
-    private bool disableInput = false;
 
     private readonly Collider2D[] colliders = new Collider2D[5];
     public int numFound;
@@ -19,24 +18,7 @@ public class Interactor : MonoBehaviour
     {
         lastInteractTime = 0f;
     }
-
-    private void OnEnable()
-    {
-        GameEventsManager.Instance.inputEvents.onInteractPressed += InteractPressed;
-        GameEventsManager.Instance.inputEvents.onEnableInput += EnableInput;
-        GameEventsManager.Instance.inputEvents.onDisableInput += DisableInput;
-    }
-
-    private void DisableInput()
-    {
-        disableInput = true;
-    }
-
-    private void EnableInput()
-    {
-        disableInput = false;
-    }
-
+    
     private void Update()
     {
         numFound = Physics2D.OverlapCircleNonAlloc(interactionPoint.position, interactionPointRadius,
@@ -67,16 +49,13 @@ public class Interactor : MonoBehaviour
         }
     }
 
-    private void InteractPressed(InputAction.CallbackContext context)
+    public void InteractPressed(InputAction.CallbackContext context, Item currentGripItem)
     {
-        if (disableInput)
-            return;
-        
         if (numFound > 0 && 
             interactableObject != null && 
             Time.time >= lastInteractTime + interactTimebet)
         {
-            interactableObject.Interact(this, context);
+            interactableObject.Interact(this, context, currentGripItem);
             lastInteractTime = Time.time;
         }
     }

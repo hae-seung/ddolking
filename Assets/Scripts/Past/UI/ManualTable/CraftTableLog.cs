@@ -22,7 +22,6 @@ public class CraftTableLog : MonoBehaviour
 
     private CraftItemSO craftItemData;
     private List<CraftNeedItem> craftNeedItems;
-    private int willMakeItemAmount = 0;
     private int maxAmount = 0;
     private bool isCraftable = true;
 
@@ -44,7 +43,6 @@ public class CraftTableLog : MonoBehaviour
         isCraftable = true;
         
         //갯수 설정
-        willMakeItemAmount = 1;
         if (craftItem.CraftItemData is CountableItemData cData)
             maxAmount = cData.MaxAmount;
         else

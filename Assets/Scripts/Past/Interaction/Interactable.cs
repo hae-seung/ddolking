@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public abstract class Interactable : MonoBehaviour
 {
-   public abstract void Interact(Interactor interactor, InputAction.CallbackContext context);
+   public abstract void Interact(Interactor interactor, InputAction.CallbackContext context, Item currentGripItem = null);
 
    public abstract void SetInteractState(bool state);
 }

@@ -17,5 +17,5 @@ MonoBehaviour:
   _description: "\uC0DD\uAC01\uBCF4\uB2E4 \uC798 \uAE4E\uC740 \uB098\uBB34 \uB9C9\uB300\uAE30\uC774\uB2E4.\n\uB2E8\uB2E8\uD574\uC11C
     \uC870\uD569\uC774 \uAC00\uB2A5\uD560\uC9C0\uB3C4?"
   _iconImage: {fileID: 21300000, guid: a26ac4716020ccf4a99f7cee442f29cf, type: 3}
-  dropObjectPrefab: {fileID: 7973477532707379287, guid: 3557c8dbd60d6264ead153d2455a8083, type: 3}
+  dropObjectPrefab: {fileID: 4909439658362368442, guid: 9f811ff22b76b5c49917745991968f62, type: 3}
   maxAmount: 99

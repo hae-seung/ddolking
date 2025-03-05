@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponItem : EquipItem
+public class WeaponItem : EquipItem, IDurabilityReduceable
 {
     private WeaponItemData data;
     //스킬저장
@@ -14,5 +14,10 @@ public class WeaponItem : EquipItem
     protected override EquipItem CreateItem()
     {
         return new WeaponItem(EquipData as WeaponItemData);
+    }
+
+    public void ReduceDurability(float amount)
+    {
+        
     }
 }

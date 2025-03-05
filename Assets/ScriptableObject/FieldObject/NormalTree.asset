@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: NormalTree
   m_EditorClassIdentifier: 
   id: 6000
-  toolWear: 1
-  durability: 10
+  toolWear: 0.1
+  durability: 50
   dropTable:
   - _itemData: {fileID: 11400000, guid: 2d3e1eb0e1f59784c82d9d4fd39ed9fe, type: 2}
     minAmount: 0

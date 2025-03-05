@@ -17,12 +17,12 @@ MonoBehaviour:
   _description: "\uC57D\uD558\uC9C0\uB9CC \uCC44\uAD74\uD558\uAE30\uC5D4 \uAD1C\uCC2E\uC744\uAC70
     \uAC19\uB2E4"
   _iconImage: {fileID: 21300000, guid: c103a4eeb67a43f4ca2f7e48c4ae05db, type: 3}
-  dropObjectPrefab: {fileID: 2652614519532663570, guid: ec144776b3a45134b9f33eb3c392912d, type: 3}
+  dropObjectPrefab: {fileID: 6617255141166542592, guid: f54b08dac04b64042943bfca3e659fe8, type: 3}
   isEnhanceable: 0
   itemclass: 3
   maxDurability: 50
   itemLevel: 0
   statModifier:
   - stat: 7
-    increaseAmount: 5
+    increaseAmount: 1
   enhancementLogic: {fileID: 0}

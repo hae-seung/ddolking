@@ -47,6 +47,11 @@ public class MakingItemUI : MonoBehaviour
             for (int time = 1; time <= _craftItemSo.MakingTime; time++)//아이템 1개 제작
             {
                 slider.value = time;
+                if (slider.value == slider.maxValue)
+                {
+                    yield return new WaitForSeconds(0.1f);
+                    break;
+                }
                 yield return new WaitForSeconds(1);
             }
 

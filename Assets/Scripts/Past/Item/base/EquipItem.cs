@@ -11,7 +11,8 @@ public abstract class EquipItem : Item, IStatModifier
     protected float curDurability;
     private int curDurabilityPower = 0;
     //내구력 노말 : 3%, 에픽 : 5%, 유니크 : 7%, 레전더리 : 10% 고정값, 3렙강화 부터 무조건 활성화
-    
+
+    public float CurDurability => curDurability;
     
     protected EquipItem(EquipItemData data) : base(data)
     {
@@ -28,7 +29,7 @@ public abstract class EquipItem : Item, IStatModifier
         SetDurabilityPower(curLevel);
     }
 
-    private void SetDurabilityPower(int curLevel)
+    private void SetDurabilityPower(int curLevel)//강화할때 사용
     {
         if (curLevel < 3)
             return;

@@ -154,7 +154,11 @@ public class Inventory : MonoBehaviour
         return -1;
     }
 
+    #region 아이템 제거
 
+    /// <summary>
+    /// 아이템 데이터로 지우기(객체가 따로 데이터를 가지지 않는 경우이며 대부분 CraftTable에서 호출)
+    /// </summary>
     public void RemoveItem(ItemData data, int totalAmount = 1)
     {
         int reaminAmount = totalAmount;
@@ -194,6 +198,10 @@ public class Inventory : MonoBehaviour
         }
     }
     
+    
+    /// <summary>
+    /// index로 아이템 지우기 (인벤토리 UI에서 실행)
+    /// </summary>
     public void RemoveItem(int index, int count = 1)
     {
         if (!IsValidIndex(index)) 
@@ -212,6 +220,26 @@ public class Inventory : MonoBehaviour
         
         UpdateSlot(index);
     }
+
+
+    /// <summary>
+    /// 아이템 객체로 지우기(장비 아이템들 같은 경우 객체가 개인 정보를 다 다르게 가지는 경우)
+    /// </summary>
+    public void RemoveItem(Item item)
+    {
+        for (int i = 0; i < _items.Count; i++)
+        {
+            if (_items[i] == item)
+            {
+                _items[i] = null;
+                UpdateSlot(i);
+                break;
+            }
+        }
+    }
+    
+    
+    #endregion
 
     public void InteractWithItem(int index)
     {

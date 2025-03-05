@@ -17,7 +17,7 @@ MonoBehaviour:
   _description: "\uACFC\uAC70\uC758 \uD658\uACBD\uC5D0 \uC801\uC751\uD558\uB3C4\uB85D
     \uB3C4\uC640\uC900\uB2E4"
   _iconImage: {fileID: 21300000, guid: 7b2aabfb95ea8a84baada2d626f0665b, type: 3}
-  dropObjectPrefab: {fileID: 2652614519532663570, guid: 3d84d7117e3ca2f45920e0daddc73e83, type: 3}
+  dropObjectPrefab: {fileID: 216930155808993092, guid: 369fe5de87c3aa64e8b2b4177384c483, type: 3}
   isEnhanceable: 0
   itemclass: 5
   maxDurability: 1

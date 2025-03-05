@@ -23,7 +23,7 @@ public class StatusManager : MonoBehaviour
         { Stat.MaxHP, new StatData(0, 50f, -1) },
         { Stat.MaxEnergy, new StatData(0, 20f, 50) },
         { Stat.Str, new StatData(0, 5f, -1) },
-        { Stat.Luk, new StatData(0, 1f, 100) },
+        { Stat.Luk, new StatData(0, 1f, 45) },
         { Stat.Speed, new StatData(0, 0.5f, 10) },
         { Stat.MineSpeed, new StatData(0, 0.5f, -1) }
     };
@@ -79,11 +79,6 @@ public class StatusManager : MonoBehaviour
         return null;
     }
 
-    private void OnDisable()
-    {
-        // TODO: 구독 해제
-    }
-
     private void AddStat(Stat goalStat, float amount)
     {
         if (!status.TryGetValue(goalStat, out float currentStat))
@@ -123,7 +118,7 @@ public class StatusManager : MonoBehaviour
     /// <summary>
     /// 지정한 스탯의 현재 값을 반환합니다. (없으면 0)
     /// </summary>
-    private float GetStatValue(Stat stat)
+    public float GetStatValue(Stat stat)
     {
         return status.TryGetValue(stat, out float value) ? value : 0f;
     }

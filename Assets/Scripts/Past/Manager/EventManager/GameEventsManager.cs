@@ -8,6 +8,7 @@ public class GameEventsManager : Singleton<GameEventsManager>
     public InputEvents inputEvents;
     public PlayerEvents playerEvents;
     public StatusEvents statusEvents;
+    public CalculatorEvents calculatorEvents;
     
     protected override void Awake()
     {
@@ -15,5 +16,6 @@ public class GameEventsManager : Singleton<GameEventsManager>
         inputEvents = new InputEvents();
         playerEvents = new PlayerEvents();
         statusEvents = new StatusEvents();
+        calculatorEvents= new CalculatorEvents();
     }
 }

@@ -40,4 +40,6 @@ public class StatusEvents
         return onGetStatData?.Invoke(targetStat);
     }
 
+    
+
 }

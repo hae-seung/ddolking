@@ -11,7 +11,7 @@ public class InteractableObject : Interactable
         SetInteractState(false);
     }
 
-    public override void Interact(Interactor interactor, InputAction.CallbackContext context)
+    public override void Interact(Interactor interactor, InputAction.CallbackContext context, Item currentGripItem = null)
     {
         if (context.control.name.Equals("f"))
         {

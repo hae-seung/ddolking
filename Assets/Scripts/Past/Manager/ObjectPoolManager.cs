@@ -28,8 +28,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             OnDestroyPoolObject,
             false, defaultCapacity, maxPoolSize
         );
-
-        Debug.Log($"ID {id}의 프리팹이 풀에 등록되었습니다.");
+        
     }
 
     // 아이템 생성 (Instantiate)
@@ -70,6 +69,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     {
         if (!pools.ContainsKey(id))
         {
+            Debug.Log($"{id}가 등록되지 않았습니다");
             RegisterPrefab(id, registeredPrefabs[id]);
         }
         
