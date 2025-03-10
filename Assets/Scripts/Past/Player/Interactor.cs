@@ -8,16 +8,9 @@ public class Interactor : MonoBehaviour
     [SerializeField] private Transform interactionPoint;
     [SerializeField] private float interactionPointRadius = 0.5f;
     [SerializeField] private LayerMask interactableMask;
-    [SerializeField] private float interactTimebet;
-    private float lastInteractTime;
 
     private readonly Collider2D[] colliders = new Collider2D[5];
     public int numFound;
-    
-    private void Awake()
-    {
-        lastInteractTime = 0f;
-    }
     
     private void Update()
     {
@@ -51,12 +44,9 @@ public class Interactor : MonoBehaviour
 
     public void InteractPressed(InputAction.CallbackContext context, Item currentGripItem)
     {
-        if (numFound > 0 && 
-            interactableObject != null && 
-            Time.time >= lastInteractTime + interactTimebet)
+        if (numFound > 0 && interactableObject != null)
         {
             interactableObject.Interact(this, context, currentGripItem);
-            lastInteractTime = Time.time;
         }
     }
 }

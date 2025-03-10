@@ -10,29 +10,33 @@ using Random = UnityEngine.Random;
 public class BreakableObject : Interactable
 {
     [Header("내구도 설정")]
-    public FieldObjectData fieldObjectData;
+    [SerializeField] private FieldObjectData fieldObjectData;
     private float durability;
     private float toolWear;
     private List<DropTable> dropTable = new();
 
     [Header("오브젝트 체력")]
-    public Slider durabilityBar;
+    [SerializeField] private Slider durabilityBar;
+    [SerializeField] private DrawOutline drawOutline;
 
-    [SerializeField] private DrawOutline drawOutline; //  외곽선 스크립트 참조
-    [SerializeField] private float breakTime;
-    private Coroutine breakCoroutine;
+    private const float BreakTime = 0.41f;
+    private const float HoldThreshold = 0.15f;
+    
+    private Coroutine breakCoroutine, waitBreakCoroutine;
+    private bool  isCooldown, isHolding;
 
-    [Header("닷트윈")] 
+    [Header("닷트윈")]
     [SerializeField] private DOTweenAnimation _doTweenAnimation;
 
-    private void Start()
-    {
-        SetData();
-    }
+    protected virtual void Start() => SetData();
 
-    private void OnEnable()
+    private void OnEnable() => ResetState();
+
+    private void ResetState()
     {
         SetData();
+        isCooldown = false;
+        isHolding = false;
     }
 
     private void SetData()
@@ -41,7 +45,6 @@ public class BreakableObject : Interactable
         durability = fieldObjectData.durability;
         dropTable = new List<DropTable>(fieldObjectData.dropTable);
         durabilityBar.maxValue = durability;
-        durabilityBar.minValue = 0;
         durabilityBar.value = durability;
         durabilityBar.gameObject.SetActive(false);
     }
@@ -50,83 +53,138 @@ public class BreakableObject : Interactable
     {
         if (!drawOutline.CanInteract) return;
 
-        if (context.control.name.Equals("leftButton"))
+        float holdTime = (float)(context.time - context.startTime);
+
+        switch (context.phase)
         {
-            if (context.started) // 한 번 클릭
-            {
-                GameEventsManager.Instance.playerEvents.DisablePlayerMovement();
-                BreakObject(currentGripItem); // 한 번 실행
-                GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
-            }
-            else if (context.performed && breakCoroutine == null) // `Hold Time`이 지나서 실제로 꾹 눌림
-            {
-                breakCoroutine = StartCoroutine(BreakObjectRepeatedly(currentGripItem));
-            }
-            else if (context.canceled) // 마우스를 떼면 반복 실행 중지
-            {
+            case InputActionPhase.Started:
+                isHolding = true;
+                break;
+
+            case InputActionPhase.Performed:
+                HandleAttack(holdTime, currentGripItem);
+                break;
+
+            case InputActionPhase.Canceled:
+                isHolding = false;
                 StopBreakObject();
-                GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
-            }
+                break;
         }
     }
 
-    // 0.5초마다 BreakObject 호출하는 코루틴 (즉시 실행 후 반복)
-    private IEnumerator BreakObjectRepeatedly(Item gripItem)
+    private void HandleAttack(float holdTime, Item gripItem)
     {
-        while (true) // 코루틴이 취소될 때까지 무한 루프
+        if (isCooldown)
+            return;
+        
+        if (holdTime >= HoldThreshold)
+        {
+            StartBreakCoroutine(ref breakCoroutine, BreakRepeatedly(gripItem));
+        }
+        else
+        {
+            isHolding = false;
+            StartBreakCoroutine(ref breakCoroutine, BreakOnce(gripItem));
+        }
+    }
+
+    private void StartBreakCoroutine(ref Coroutine coroutine, IEnumerator routine)
+    {
+        if (coroutine == null)
+        {
+            coroutine = StartCoroutine(routine);
+        }
+    }
+
+    private IEnumerator BreakOnce(Item gripItem)
+    {
+        StartBreakState();
+        BreakObject(gripItem);
+
+        yield return new WaitForSeconds(BreakTime);
+
+        EndBreakState();
+    }
+
+    private IEnumerator BreakRepeatedly(Item gripItem)
+    {
+        StartBreakState();
+
+        while (isHolding)
         {
             BreakObject(gripItem);
-            yield return new WaitForSeconds(breakTime);
+            yield return new WaitForSeconds(BreakTime);
         }
+
+        if (waitBreakCoroutine == null)
+            waitBreakCoroutine = StartCoroutine(WaitBreak());
+        
+        breakCoroutine = null;
     }
 
-    // 마우스를 떼면 반복 실행 중지
+    private IEnumerator WaitBreak()
+    {
+        yield return new WaitForSeconds(BreakTime);
+        EndBreakState();
+        waitBreakCoroutine = null;
+    }
+
+    private void StartBreakState()
+    {
+        isCooldown = true;
+        GameEventsManager.Instance.playerEvents.PlayAnimation("isMine", true);
+        GameEventsManager.Instance.playerEvents.DisablePlayerMovement();
+    }
+
+    private void EndBreakState()
+    {
+        GameEventsManager.Instance.playerEvents.PlayAnimation("isMine", false);
+        GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
+        isCooldown = false;
+    }
+
+    private void BreakObject(Item gripItem)
+    {
+        if (durability <= 0) return;
+
+        float damageAmount = GameEventsManager.Instance.calculatorEvents.CalculateMineDamage(Stat.MineSpeed);
+        ReduceDurability(damageAmount, gripItem);
+    }
+
+    private void ReduceDurability(float amount, Item gripItem)
+    {
+        _doTweenAnimation?.DORestart();
+
+        durabilityBar.gameObject.SetActive(true);
+        durability = Mathf.Max(durability - amount, 0);
+        durabilityBar.value = durability;
+
+        if (durability <= 0)
+        {
+            durabilityBar.gameObject.SetActive(false);
+            StopBreakObject();
+            
+            GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
+            DropItems();
+            DestroyFieldObject();
+        }
+
+        if (gripItem is ToolItem toolItem)
+            toolItem.ReduceDurability(toolWear);
+    }
+
     private void StopBreakObject()
     {
+
+        isHolding = false;
         if (breakCoroutine != null)
         {
             StopCoroutine(breakCoroutine);
             breakCoroutine = null;
         }
-    }
 
-    // 오브젝트 체력 감소
-    private void BreakObject(Item gripItem)
-    {
-        if (durability > 0)
-        {
-            float damageAmount = GameEventsManager.Instance.calculatorEvents.CalculateMineDamage(Stat.MineSpeed);
-            ReduceDurability(damageAmount, gripItem);
-        }
-    }
-
-    
-    private void ReduceDurability(float amount, Item gripItem)
-    {
-        if(_doTweenAnimation!= null)
-        {
-            _doTweenAnimation.DORestart();
-        }
-        
-        
-        durabilityBar.gameObject.SetActive(true);
-
-        durability = Mathf.Max(durability - amount, 0);
-        durabilityBar.value = durability;
-        
-        if (durability <= 0)
-        {
-            durabilityBar.gameObject.SetActive(false);
-            DropItems();
-            DestroyFieldObject();
-            GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
-        }
-
-        if (gripItem != null && gripItem is ToolItem toolItem)
-        {
-            toolItem.ReduceDurability(toolWear);
-        }
-        
+        if (waitBreakCoroutine == null)
+            waitBreakCoroutine = StartCoroutine(WaitBreak());
     }
 
     private void DropItems()
@@ -134,43 +192,29 @@ public class BreakableObject : Interactable
         foreach (var drop in dropTable)
         {
             if (!ObjectPoolManager.Instance.IsPoolRegistered(drop.DropItemId))
-            {
                 ObjectPoolManager.Instance.RegisterPrefab(drop.DropItemId, drop.DropItemPrefab);
-            }
 
             for (int i = 0; i < Random.Range(drop.MinAmount, drop.MaxAmount + 1); i++)
             {
                 Vector3 dropPosition = transform.position + new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0);
-                GameObject dropObj = ObjectPoolManager.Instance.SpawnObject(
-                    drop.DropItemId,
-                    dropPosition,
-                    Quaternion.identity);
+                GameObject dropObj = ObjectPoolManager.Instance.SpawnObject(drop.DropItemId, dropPosition, Quaternion.identity);
 
-                if (dropObj != null)
-                {
-                    dropObj.transform.DOJump(dropPosition, 1f, 1, 0.8f).SetEase(Ease.OutBounce);
-                }
-                else
-                {
-                    Debug.LogError($"ID {drop.DropItemId}의 드랍 아이템을 생성할 수 없습니다!");
-                }
+                dropObj?.transform.DOJump(dropPosition, 1f, 1, 0.8f).SetEase(Ease.OutBounce);
             }
         }
     }
 
-    public void DestroyFieldObject()
-    {
-        ObjectPoolManager.Instance.ReleaseObject(fieldObjectData.id, gameObject);
-    }
+    public void DestroyFieldObject() => ObjectPoolManager.Instance.ReleaseObject(fieldObjectData.id, gameObject);
 
     public override void SetInteractState(bool state)
     {
-        if(!state)
+        if (!state)
         {
             durabilityBar.gameObject.SetActive(false);
             StopBreakObject();
+            GameEventsManager.Instance.playerEvents.PlayAnimation("isMine", false);
         }
-        
+
         drawOutline.SetPlayerNear(state);
     }
 }

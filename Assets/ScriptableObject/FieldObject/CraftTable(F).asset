@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 6002
   toolWear: 1
-  durability: 50
+  durability: 100
   dropTable:
   - _itemData: {fileID: 11400000, guid: d584f157907439e40b43217435e95ba5, type: 2}
     minAmount: 1

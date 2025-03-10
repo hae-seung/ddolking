@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool movementDisabled = false;
     private bool mouseMovementDisabled = false;
+    private string moveParameter = "isMove";
 
     private void Awake()
     {
@@ -43,14 +44,14 @@ public class PlayerMovement : MonoBehaviour
         if (movementDisabled)
         {
             velocity = Vector2.zero;
-            animator.SetBool("isMove", false);
+            animator.SetBool(moveParameter, false);
             return;
         }
         
         if (moveDir != Vector2.zero)
-            animator.SetBool("isMove", true);
+            animator.SetBool(moveParameter, true);
         else
-            animator.SetBool("isMove", false);
+            animator.SetBool(moveParameter, false);
         
         velocity = moveDir.normalized * moveSpeed;
         
