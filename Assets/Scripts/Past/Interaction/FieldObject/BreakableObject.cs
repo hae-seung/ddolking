@@ -125,6 +125,12 @@ public class BreakableObject : Interactable
     private IEnumerator WaitBreak()
     {
         yield return new WaitForSeconds(BreakTime);
+
+        if (!gameObject.activeSelf)
+        {
+            yield break;
+        }
+
         EndBreakState();
         waitBreakCoroutine = null;
     }
@@ -175,8 +181,11 @@ public class BreakableObject : Interactable
 
     private void StopBreakObject()
     {
-
         isHolding = false;
+
+        if (!gameObject.activeSelf)
+            return;
+        
         if (breakCoroutine != null)
         {
             StopCoroutine(breakCoroutine);
@@ -204,7 +213,14 @@ public class BreakableObject : Interactable
         }
     }
 
-    public void DestroyFieldObject() => ObjectPoolManager.Instance.ReleaseObject(fieldObjectData.id, gameObject);
+    public void DestroyFieldObject()
+    {
+        StopAllCoroutines();
+        breakCoroutine = null;
+        waitBreakCoroutine = null;
+        
+        ObjectPoolManager.Instance.ReleaseObject(fieldObjectData.id, gameObject);
+    }
 
     public override void SetInteractState(bool state)
     {

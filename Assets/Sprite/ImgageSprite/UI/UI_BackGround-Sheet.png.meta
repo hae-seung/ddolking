@@ -71,7 +71,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -166,7 +166,7 @@ TextureImporter:
         height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 0, z: 3, w: 4}
+      border: {x: 3, y: 4, z: 3, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -187,7 +187,7 @@ TextureImporter:
         height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 3, z: 3, w: 3}
+      border: {x: 3, y: 4, z: 3, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -208,13 +208,34 @@ TextureImporter:
         height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 4, y: 4, z: 3, w: 4}
+      border: {x: 3, y: 4, z: 3, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
       spriteID: 082e53d2e452cf5458c09583036cf7af
       internalID: -1882148121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_BackGround-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 0
+        width: 1
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 4, z: 0, w: 4}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 475d6541950d69240a1dae61fbb64a9f
+      internalID: -137257638
       vertices: []
       indices: 
       edges: []
@@ -234,6 +255,7 @@ TextureImporter:
       UI_BackGround-Sheet_1: -182061521
       UI_BackGround-Sheet_2: -1799224313
       UI_BackGround-Sheet_3: -1882148121
+      UI_BackGround-Sheet_4: -137257638
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
