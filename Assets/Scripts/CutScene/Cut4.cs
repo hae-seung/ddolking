@@ -1,22 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-
-public class Cut0 : Cut
+public class Cut4 : Cut
 {
-    public override void ShowText(string sceneName)//id로 실행되면 자동으로 텍스트 나오게 됨
+    public override void ShowText(string sceneName)
     {
         switch (sceneName)
         {
-            case "scene0":
+            case "chat1":
                 cameraTween.endValueColor = cameraBackground[0];
                 CutManager.Instance.ShowText(texts[0]);
                 break;
-            case "scene1":
+            case "chat2":
                 cameraTween.endValueColor = cameraBackground[1];
                 CutManager.Instance.ShowText(texts[1]);
                 break;
-            
+            case "chat3":
+                cameraTween.endValueColor = cameraBackground[2];
+                CutManager.Instance.ShowText(texts[2]);
+                break;
         }
         cameraTween.CreateTween(true, true);
     }
-    
 }

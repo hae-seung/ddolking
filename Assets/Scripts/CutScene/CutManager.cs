@@ -11,6 +11,7 @@ public class CutManager : MonoBehaviour
     [SerializeField] private GameObject cut0;
 
     [SerializeField] private Subtitle subtitle;
+    [SerializeField] private SubmitBtn submitBtn;
 
     private void Awake()
     {
@@ -38,5 +39,9 @@ public class CutManager : MonoBehaviour
     {
         subtitle.gameObject.SetActive(true);
         subtitle.ShowText(text);
+        Debug.Log(text);
     }
+    
+    
+    
 }

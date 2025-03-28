@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class Subtitle : MonoBehaviour
 {
+    [SerializeField] private AudioSource _audioSource;
     private Text subtitleText;
     private WaitForSeconds typingWait;
     private string msg;
@@ -19,9 +20,14 @@ public class Subtitle : MonoBehaviour
 
     public void ShowText(string text)
     {
+        gameObject.SetActive(true);
         subtitleText.text = "";
         msg = text;
-        StartCoroutine(TypingMsg());
+        if (msg.Length != 0)
+        {
+            _audioSource.Play();
+            StartCoroutine(TypingMsg());
+        }
     }
 
     private IEnumerator TypingMsg()
@@ -33,7 +39,15 @@ public class Subtitle : MonoBehaviour
         {
             stringBuilder.Append(msg[i]);
             subtitleText.text = stringBuilder.ToString();
+            _audioSource.pitch = Random.Range(0.8f, 1.2f);
             yield return typingWait;
         }
+        _audioSource.Stop();
+    }
+
+    public void SetTextNULL()
+    {
+        gameObject.SetActive(false);
+        subtitleText.text = "";
     }
 }

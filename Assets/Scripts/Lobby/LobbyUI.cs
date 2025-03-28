@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LobbyUI : MonoBehaviour
 {
@@ -25,5 +26,10 @@ public class LobbyUI : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void LoadCutScene()
+    {
+        SceneManager.LoadScene("CutScene_1");
     }
 }
