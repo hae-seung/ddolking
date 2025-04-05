@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Pipes;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerBuild : MonoBehaviour
@@ -12,7 +14,6 @@ public class PlayerBuild : MonoBehaviour
     private bool buildComplete = false;
 
     private Vector2 mousePosition;
-    private Ray ray;
     private Camera mainCamera;
 
     private void Start() // UIManager가 싱글톤 초기화 후 실행
@@ -38,11 +39,8 @@ public class PlayerBuild : MonoBehaviour
 
         UpdatePreviewPosition();
 
-        ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Vector2 rayOrigin = ray.origin;
-
         // Raycast를 사용하여 Land 감지
-        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.zero, Mathf.Infinity);
+        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
         if (hit.collider == null)
             return;
@@ -146,6 +144,7 @@ public class PlayerBuild : MonoBehaviour
         if (previewObject == null) return;
 
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition = new Vector2(Mathf.Round(mousePosition.x), Mathf.Round(mousePosition.y));
         previewObject.transform.position = mousePosition;
     }
 }

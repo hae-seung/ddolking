@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CutManager : MonoBehaviour
 {
@@ -41,7 +42,11 @@ public class CutManager : MonoBehaviour
         subtitle.ShowText(text);
         Debug.Log(text);
     }
-    
+
+    public void GameStart()
+    {
+        SceneManager.LoadScene("Past_2");
+    }
     
     
 }

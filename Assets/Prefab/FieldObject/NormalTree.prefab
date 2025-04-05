@@ -65,7 +65,7 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01865387, y: 0.91718185}
+  m_Offset: {x: 0, y: 1}
   m_Size: {x: 1.7777778, y: 2.6666667}
   m_Direction: 0
 --- !u!114 &4859434713896699732
@@ -206,7 +206,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.4895072, y: 0.1560568}
-    oldSize: {x: 1.7777778, y: 2.6666667}
+    oldSize: {x: 2, y: 3}
     newSize: {x: 0.32, y: 0.48}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -214,10 +214,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.20356835, y: 0.08384853}
-      - {x: -0.20356835, y: -0.30504036}
-      - {x: 0.2408761, y: -0.30504036}
-      - {x: 0.2408761, y: 0.08384853}
+    - - {x: -0.2290144, y: 0.094329596}
+      - {x: -0.2290144, y: -0.3431704}
+      - {x: 0.2709856, y: -0.3431704}
+      - {x: 0.2709856, y: 0.094329596}
   m_UseDelaunayMesh: 0
 --- !u!114 &7932373575640593849
 MonoBehaviour:
@@ -234,7 +234,6 @@ MonoBehaviour:
   fieldObjectData: {fileID: 11400000, guid: 08b8fd33348a70748a3c72c458b98f93, type: 2}
   durabilityBar: {fileID: 5449693361223551559}
   drawOutline: {fileID: 4859434713896699732}
-  breakTime: 0.5
   _doTweenAnimation: {fileID: 6054918287738480861}
 --- !u!114 &6054918287738480861
 MonoBehaviour:
@@ -282,7 +281,7 @@ MonoBehaviour:
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
   delay: 0
-  duration: 0.5
+  duration: 0.3
   easeType: 37
   easeCurve:
     serializedVersion: 2
@@ -331,7 +330,7 @@ MonoBehaviour:
   animationType: 5
   targetType: 11
   forcedTargetType: 0
-  autoPlay: 1
+  autoPlay: 0
   useTargetAsV3: 0
   endValueFloat: 0.95
   endValueV3: {x: 0, y: 0, z: 0}
@@ -431,11 +430,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6251145574147950599, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.006
+      value: 0.029
       objectReference: {fileID: 0}
     - target: {fileID: 6251145574147950599, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.378
+      value: -0.442
       objectReference: {fileID: 0}
     - target: {fileID: 6251145574147950599, guid: 82a8bfda5bcd55644be0705cda254d70, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

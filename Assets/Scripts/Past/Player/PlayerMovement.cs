@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private bool movementDisabled = false;
     private bool mouseMovementDisabled = false;
     private string moveParameter = "isMove";
+    private string flipParameter = "inputX";
 
     private void Awake()
     {
@@ -26,8 +27,11 @@ public class PlayerMovement : MonoBehaviour
         GameEventsManager.Instance.playerEvents.onEnablePlayerMovement += EnablePlayerMovement;
         GameEventsManager.Instance.playerEvents.onDisablePlayerMovement += DisablePlayerMovement;
     }
-    
 
+    public void SetSpeed(float speed)
+    {
+        moveSpeed = speed;
+    }
 
     // private void Update() //애니메이션
     // {
@@ -62,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         if(!mouseMovementDisabled)
         {
             dir = mousePos - transform.position;
-            animator.SetFloat("inputX", dir.x);
+            animator.SetFloat(flipParameter, dir.x);
         }
     }
 
@@ -78,6 +82,10 @@ public class PlayerMovement : MonoBehaviour
         mouseMovementDisabled = true;
         velocity = Vector2.zero;
     }
-    
+
+    public void FlipCharacter(float value)
+    {
+        animator.SetFloat(flipParameter, value);
+    }
     
 }

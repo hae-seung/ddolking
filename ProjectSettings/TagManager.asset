@@ -43,11 +43,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Ocean
-    uniqueID: 21617589
-    locked: 0
   - name: Land
     uniqueID: 3768558011
+    locked: 0
+  - name: Ocean
+    uniqueID: 21617589
     locked: 0
   - name: Front
     uniqueID: 3929038009

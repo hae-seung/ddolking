@@ -130,9 +130,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1881744504562359348}
   - component: {fileID: 6103498586824592301}
-  - component: {fileID: 8272883065957226240}
   - component: {fileID: 6132778495211643553}
   - component: {fileID: 9030583090366800954}
+  - component: {fileID: 2790944064689868016}
   m_Layer: 6
   m_Name: Sapling
   m_TagString: Untagged
@@ -209,8 +209,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!60 &8272883065957226240
-PolygonCollider2D:
+--- !u!114 &6132778495211643553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6288851741859774595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49d7536efa6b0d428d9768663d7e801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fieldObjectData: {fileID: 11400000, guid: e940da95c5764d344971eb2c3e6aeeff, type: 2}
+  durabilityBar: {fileID: 1893101800547793874}
+  drawOutline: {fileID: 7262410644445784981}
+  _doTweenAnimation: {fileID: 0}
+--- !u!114 &9030583090366800954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6288851741859774595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 797b71a1053332345af05d2ec0b69e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  growTime: 60
+  spawnFieldObject: {fileID: 11400000, guid: 08b8fd33348a70748a3c72c458b98f93, type: 2}
+--- !u!61 &2790944064689868016
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -241,7 +271,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -251,47 +281,9 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.35714287, y: 0.42857146}
-      - {x: -0.42857146, y: 0.35714287}
-      - {x: -0.42857146, y: -0.25}
-      - {x: -0.35714287, y: -0.42857146}
-      - {x: 0.3214286, y: -0.42857146}
-      - {x: 0.42857146, y: -0.071428575}
-      - {x: 0.42857146, y: 0.39285716}
-      - {x: 0.39285716, y: 0.42857146}
-  m_UseDelaunayMesh: 0
---- !u!114 &6132778495211643553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6288851741859774595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c49d7536efa6b0d428d9768663d7e801, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fieldObjectData: {fileID: 11400000, guid: e940da95c5764d344971eb2c3e6aeeff, type: 2}
-  durabilityBar: {fileID: 1893101800547793874}
-  drawOutline: {fileID: 7262410644445784981}
-  breakTime: 0.5
---- !u!114 &9030583090366800954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6288851741859774595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 797b71a1053332345af05d2ec0b69e7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  growTime: 2
-  spawnFieldObject: {fileID: 11400000, guid: 08b8fd33348a70748a3c72c458b98f93, type: 2}
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 0.4}
+  m_EdgeRadius: 0
 --- !u!1 &6979963033024749959
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +475,7 @@ Transform:
   m_GameObject: {fileID: 7350083431244707751}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.038, y: -0.038, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -522,7 +514,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 0.6, y: 0.6}
   m_Direction: 0
 --- !u!114 &7262410644445784981
 MonoBehaviour:

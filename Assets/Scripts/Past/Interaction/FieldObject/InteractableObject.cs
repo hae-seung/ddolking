@@ -4,11 +4,12 @@ using UnityEngine.InputSystem;
 public class InteractableObject : Interactable
 {
     [SerializeField] private GameObject interactionUI;
-    [SerializeField] private InteractionBehaviour interactionBehaviour;
+    private InteractionBehaviour interactionBehaviour;
 
     private void Awake()
     {
         SetInteractState(false);
+        interactionBehaviour = GetComponent<InteractionBehaviour>();
     }
 
     public override void Interact(Interactor interactor, InputAction.CallbackContext context, Item currentGripItem = null)

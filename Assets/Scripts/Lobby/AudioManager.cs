@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,10 +17,12 @@ public class AudioManager : Singleton<AudioManager>
     private int channels = 30;
     private List<AudioSource> sfxPlayers;
     private int channelIndex = 0;
-    
 
+    public bool isFinishInit { get; private set; }
+    
     protected override void Awake()
     {
+        isFinishInit = false;
         base.Awake();
         Init();
     }
@@ -28,6 +31,10 @@ public class AudioManager : Singleton<AudioManager>
     {
         InitBGM();
         InitSFX();
+    }
+
+    private void Start()
+    {
         InitVolume();
     }
 
@@ -37,6 +44,7 @@ public class AudioManager : Singleton<AudioManager>
         audioMixer.SetFloat("MasterSound", DataManager.Instance.settingOption.MasterSound);
         audioMixer.SetFloat("SfxSound", DataManager.Instance.settingOption.SFXSound);
         audioMixer.SetFloat("BgmSound", DataManager.Instance.settingOption.BGMSound);
+        isFinishInit = true;
     }
 
     private void InitSFX()
@@ -67,6 +75,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayBgm(AudioClip audioClip)
     {
+        StopBgm();
         bgmPlayer.clip = audioClip;
         bgmPlayer.Play();
     }

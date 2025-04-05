@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,11 +15,12 @@ public class LobbyUI : MonoBehaviour
     
     private void Start()
     {
-        PlayLobbyBgm();
+        StartCoroutine(PlayLobbyBgm());
     }
 
-    private void PlayLobbyBgm()
+    private IEnumerator PlayLobbyBgm()
     {
+        yield return new WaitUntil(() => AudioManager.Instance.isFinishInit);
         AudioManager.Instance.PlayBgm(lobbyBgm);
     }
 

@@ -1,18 +1,19 @@
+
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SIMPLE : MonoBehaviour
 {
-    public int experience;
+    private Button btn;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Start()
     {
-        if(other.CompareTag("Player"))
+        btn = GetComponent<Button>();
+        btn.onClick.AddListener(() =>
         {
-            GameEventsManager.Instance.playerEvents.GainExperience(experience);
-            Destroy(gameObject);
-        }
+            SceneManager.LoadScene("Past_2");
+        });
     }
 }
