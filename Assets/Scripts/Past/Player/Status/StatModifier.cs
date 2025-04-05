@@ -2,5 +2,5 @@
 public struct StatModifier
 {
     public Stat stat;
-    public int increaseAmount;
+    public float increaseAmount;
 }

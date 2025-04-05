@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 public class PopupUI : MonoBehaviour
 {
+    [Header("인벤토리UI 레이캐스터 블락")] 
+    [SerializeField] private GameObject raycastBlocker;
+    
     [Header("아이템버리기 팝업")] 
     [SerializeField] private GameObject popup;
     [SerializeField] private TextMeshProUGUI itemName;
@@ -18,10 +21,18 @@ public class PopupUI : MonoBehaviour
     [SerializeField] private Button cancelBtn;
 
     private int maxAmount;
-    
 
-    public void ShowPanel() => gameObject.SetActive(true);
-    public void HidePanel() => gameObject.SetActive(false);
+
+    public void ShowPanel()
+    {
+        gameObject.SetActive(true);
+        raycastBlocker.SetActive(true);
+    } 
+    public void HidePanel()
+    {
+        gameObject.SetActive(false);
+        raycastBlocker.SetActive(false);
+    }
 
     private void ShowTrashPopup() => popup.SetActive(true);
     private void HideTrashPopup() => popup.SetActive(false);
@@ -29,7 +40,7 @@ public class PopupUI : MonoBehaviour
     public event Action<int> onConfirmationOK;
     
     
-    public void FirstAwake()
+    public void Init()
     {
         InitEvents();
         HidePanel();

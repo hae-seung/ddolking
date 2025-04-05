@@ -6,9 +6,14 @@ public class Inventory : MonoBehaviour
     public static Inventory Instance { get; private set; }
     private List<Item> _items = new List<Item>(); // 인벤토리 슬롯 리스트
     //0~4번 인덱스까지는 퀵슬롯을 위한 자리
+
+    private AmuletItem equippedAmulet = null;
     
     [SerializeField] private InventoryUI inventoryUI;
+    [SerializeField] private StatusUI statusUI;
+    [SerializeField] private PlayerBuild playerBuild;
     private int slotCnt;
+    
     public int SlotCnt
     {
         get => slotCnt;
@@ -35,7 +40,7 @@ public class Inventory : MonoBehaviour
         UpdateInventory(SlotCnt); // List는 0, 슬롯은 열려있어서 각각 맞춰줘야함
     }
 
-    public void AddInventoryList(int count) // 배낭아이템이 사용
+    public void AddInventoryListAmount(int count) // 배낭아이템이 사용
     {
         SlotCnt += count; // 슬롯 개수 증가
         inventoryUI.AddSlot(count); // 슬롯 해금
@@ -109,7 +114,10 @@ public class Inventory : MonoBehaviour
             index = FindEmptySlotIndex();
             if (index != -1)
             {
-                _items[index] = item;
+                EquipItem eitem = item as EquipItem;
+                if(eitem == null)
+                    Debug.LogWarning("EquipItem이 아닌데");
+                _items[index] = eitem.Clone();
                 amount = 0;
                 UpdateSlot(index);
             }
@@ -146,8 +154,55 @@ public class Inventory : MonoBehaviour
         return -1;
     }
 
+    #region 아이템 제거
+
+    /// <summary>
+    /// 아이템 데이터로 지우기(객체가 따로 데이터를 가지지 않는 경우이며 대부분 CraftTable에서 호출)
+    /// </summary>
+    public void RemoveItem(ItemData data, int totalAmount = 1)
+    {
+        int reaminAmount = totalAmount;
+        
+        for (int i = 0; i < _items.Count; i++)
+        {
+            if (reaminAmount <= 0)
+            {
+                break;
+            }
+            
+            if(_items[i] == null)
+                continue;
+
+            if (_items[i].itemData == data)
+            {
+                if (_items[i] is CountableItem citem)
+                {
+                    if (citem.Amount <= reaminAmount)
+                    {
+                        _items[i] = null;
+                    }
+                    else
+                    {
+                        citem.SetAmount(citem.Amount - reaminAmount);
+                    }
+
+                    reaminAmount -= citem.Amount;
+                }
+                else
+                {
+                    _items[i] = null;
+                    reaminAmount -= 1;
+                }
+                UpdateSlot(i);
+            }
+        }
+    }
     
-    public void RemoveItem(int index, int count)
+    
+    /// <summary>
+    /// index로 아이템 지우기 (인벤토리 UI에서 실행)
+    /// </summary>
+    public void RemoveItem(int index, int count = 1)
     {
         if (!IsValidIndex(index)) 
             return;
@@ -166,13 +221,33 @@ public class Inventory : MonoBehaviour
         UpdateSlot(index);
     }
 
-    public void UseItem(int index)
+
+    /// <summary>
+    /// 아이템 객체로 지우기(장비 아이템들 같은 경우 객체가 개인 정보를 다 다르게 가지는 경우)
+    /// </summary>
+    public void RemoveItem(Item item)
+    {
+        for (int i = 0; i < _items.Count; i++)
+        {
+            if (_items[i] == item)
+            {
+                _items[i] = null;
+                UpdateSlot(i);
+                break;
+            }
+        }
+    }
+    
+    
+    #endregion
+
+    public void InteractWithItem(int index)
     {
         if (!IsValidIndex(index))
             return;
         if (_items[index] == null)
             return;
-
+        
         if (_items[index] is IUseable uItem)
         {
             bool succeeded = uItem.Use();
@@ -181,7 +256,22 @@ public class Inventory : MonoBehaviour
                 UpdateSlot(index);
             }
         }
-
+        else if (_items[index] is AmuletItem)
+        {
+            EquipAmulet(index);
+        }
+        else if (_items[index] is EstablishItem establishItem)
+        {
+            StartCoroutine(playerBuild.BuildItem(establishItem, (success) =>
+            {
+                if (success)
+                {
+                    establishItem.Use();
+                    UpdateSlot(index);
+                }
+            }));
+        }
+        
     }
     
     public void SwapItem(int from , int to)
@@ -265,6 +355,26 @@ public class Inventory : MonoBehaviour
         return _items[index];
     }
 
+    public int GetItemTotalAmount(ItemData itemData)
+    {
+        int sum = 0;
+        for (int i = 0; i < _items.Count; i++)
+        {
+            if (_items[i] == null)
+                continue;
+
+            if (_items[i].itemData == itemData)
+            {
+                if (_items[i] is CountableItem citem)
+                    sum += citem.Amount;
+                else
+                    sum += 1;
+            }
+        }
+
+        return sum;
+    }
+
     public int GetItemCount(int index)
     {
         if (!IsValidIndex(index))
@@ -283,6 +393,36 @@ public class Inventory : MonoBehaviour
 
         return _items[index].itemData.Name;
     }
-    
+
+
+    private void EquipAmulet(int index)
+    {
+        if (equippedAmulet == null)
+        {
+            //단순 장착
+            equippedAmulet = _items[index] as AmuletItem;
+            equippedAmulet.EquipAmulet();
+            RemoveItem(index);
+        }
+        else//스왑
+        {
+            AmuletItem temp = equippedAmulet;
+            equippedAmulet.UnEquipAmulet();
+            
+            equippedAmulet = _items[index] as AmuletItem;
+            _items[index] = temp;
+            equippedAmulet.EquipAmulet();
+            
+            UpdateSlot(index);
+        }
+        
+        statusUI.UpdateAmuletSlot(equippedAmulet);
+    }
+
+    public void UnEquipAmulet()
+    {
+        equippedAmulet.UnEquipAmulet();
+        equippedAmulet = null;
+    }
     
 }

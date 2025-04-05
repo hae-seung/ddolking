@@ -85,9 +85,6 @@ public class Slot : MonoBehaviour
 
     public void Highlight(bool show)
     {
-        if (!IsUsing)
-            return;
-        
         if (show)
             StartCoroutine(nameof(HighlightFadeInRoutine));
         else

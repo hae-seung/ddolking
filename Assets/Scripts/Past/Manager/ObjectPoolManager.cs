@@ -28,8 +28,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             OnDestroyPoolObject,
             false, defaultCapacity, maxPoolSize
         );
-
-        Debug.Log($"ID {id}의 프리팹이 풀에 등록되었습니다.");
+        
     }
 
     // 아이템 생성 (Instantiate)
@@ -66,13 +65,14 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     }
 
     // 아이템 스폰 (필드에서 드롭 시)
-    public GameObject SpawnObject(int id, Vector3 position, Quaternion rotation, Transform parent = null)
+    public GameObject SpawnObject(int id, Vector3 position, Quaternion rotation, Transform parent = null, int count = 1)
     {
         if (!pools.ContainsKey(id))
         {
-            Debug.LogWarning($"ID {id}의 풀을 찾을 수 없습니다. 새로운 오브젝트를 생성합니다.");
+            Debug.Log($"{id}가 등록되지 않았습니다");
             RegisterPrefab(id, registeredPrefabs[id]);
         }
+        
 
         GameObject obj = pools[id].Get();
         obj.transform.position = position;
@@ -86,11 +86,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         {
             obj.transform.SetParent(null);
         }
-
-        // DropObject의 SetAsSpawned() 호출
-        obj.GetComponent<DropObject>()?.SetAsSpawned();
-
-        Debug.Log($"ID {id}의 오브젝트 풀에서 가져옴: {obj.name}");
+        
         return obj;
     }
 
@@ -100,9 +96,7 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     {
         if (!pools.ContainsKey(id))
         {
-            Debug.LogWarning($"ID {id}의 풀을 찾을 수 없습니다. 오브젝트를 삭제합니다.");
-            Destroy(obj);
-            return;
+            RegisterPrefab(id, obj);
         }
 
         pools[id].Release(obj);

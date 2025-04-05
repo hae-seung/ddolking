@@ -1,7 +1,7 @@
 public enum Stat
 {
     MaxHP,
-    Hp,
+    HP,
     MaxEnergy,
     Energy,
     Str,

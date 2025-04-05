@@ -6,10 +6,14 @@ using UnityEngine;
 public class Singleton<T>: MonoBehaviour where T : MonoBehaviour
 {
     private static T instance;
+    private static bool isQuit = false;
     public static T Instance
     {
         get
         {
+            if (isQuit)
+                return null;
+            
             if (instance == null)
             {
                 instance = FindObjectOfType<T>();
@@ -28,7 +32,7 @@ public class Singleton<T>: MonoBehaviour where T : MonoBehaviour
 
     protected virtual void Awake()
     {
-        
+        isQuit = false;
         if (instance == null)
         {
             instance = this as T;
@@ -38,5 +42,10 @@ public class Singleton<T>: MonoBehaviour where T : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    protected virtual void OnApplicationQuit()
+    {
+        isQuit = true;
     }
 }

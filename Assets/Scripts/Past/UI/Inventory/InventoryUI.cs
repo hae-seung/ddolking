@@ -8,6 +8,11 @@ public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private List<Slot> slots = new List<Slot>();
 
+    [Header("슬롯 초기화를 위한 부모")] 
+    [SerializeField] private GameObject inventoryQuickSlotParent;
+    [SerializeField] private GameObject slotParent;
+    
+    [Space(20)]
     public QuickSlotUI quickSlotUI;
     public RectTransform contentParent;  // 기존 부모
     public RectTransform dragParent;     // 드래그 아이콘을 이동할 부모(Canvas 하위의 지정 오브젝트)
@@ -45,7 +50,9 @@ public class InventoryUI : MonoBehaviour
         _ped = new PointerEventData(EventSystem.current);
         _rrList = new List<RaycastResult>();
     }
-
+    
+    
+    
     private void Update()
     {
         _ped.position = Input.mousePosition;
@@ -181,7 +188,9 @@ public class InventoryUI : MonoBehaviour
         {
             Slot slot = RaycastAndGetFirstComponent<Slot>();
             if (slot != null && slot.IsUsing)
+            {
                 TryUseItem(slot.SlotIdx);
+            }
 
         }
     }
@@ -249,7 +258,7 @@ public class InventoryUI : MonoBehaviour
 
     private void TryUseItem(int index)
     {
-        inventory.UseItem(index);
+        inventory.InteractWithItem(index);
     }
     
 
@@ -285,14 +294,10 @@ public class InventoryUI : MonoBehaviour
     
     public void UpdateItemAmount(int idx, int amount = 0)
     {
-        if (0 <= idx && idx < slots.Count)
-        {
-            slots[idx].UpdateItemAmount(amount);
-            if (idx <= 4)
-            {
-                quickSlotUI.UpdateItemAmount(idx, amount);
-            }
-        }
+        if (0 <= idx && idx <= 4)
+            quickSlotUI.UpdateItemAmount(idx, amount);
+        
+        slots[idx].UpdateItemAmount(amount);
     }
 
 
@@ -318,5 +323,21 @@ public class InventoryUI : MonoBehaviour
             quickSlotUI.HideAmountText(idx);
 
         slots[idx].HideAmountText();
+    }
+    
+    
+    
+    
+    [ContextMenu("슬롯초기화")]
+    public void InitSlots()
+    {
+        Slot[] quickSlots = inventoryQuickSlotParent.GetComponentsInChildren<Slot>();
+        Slot[] normalSlots = slotParent.GetComponentsInChildren<Slot>();
+        
+        for(int i = 0; i<quickSlots.Length; i++)
+            slots.Add(quickSlots[i]);
+        
+        for(int i = 0; i<normalSlots.Length; i++)
+            slots.Add(normalSlots[i]);
     }
 }
