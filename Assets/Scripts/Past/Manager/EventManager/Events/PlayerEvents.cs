@@ -57,9 +57,16 @@ public class PlayerEvents
     public event Action<int, int> onChangedLevel;
     public void ChangedLevel(int curLevel, int needExperienceToNextLevel)
     {
-        Debug.Log("레벨변화호출");
         onChangedLevel?.Invoke(curLevel, needExperienceToNextLevel);
     }
-    
-    
+
+    public event Func<int> onGetLevel;
+    public int GetLevel()
+    {
+        if (onGetLevel != null)
+            return (int)onGetLevel?.Invoke();
+
+        return -1;
+    }
+
 }

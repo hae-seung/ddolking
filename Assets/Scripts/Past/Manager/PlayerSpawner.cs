@@ -1,13 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerSpawner : MonoBehaviour
 {
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Interactor player;
     [SerializeField] private AudioClip pastBgm;
+    [SerializeField] private Light2D light;
     
     private void Start()
     {

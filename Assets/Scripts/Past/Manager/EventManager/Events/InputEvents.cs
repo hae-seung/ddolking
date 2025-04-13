@@ -60,5 +60,5 @@ public class InputEvents
     {
         onDisableInput?.Invoke();
     }
-
+    
 }

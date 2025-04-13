@@ -1,33 +1,24 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using DG.Tweening.Core.Easing;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CraftManualTables : MonoBehaviour
 {
     [Header("테이블")]
-    [SerializeField] private GameObject miniCraftTable;
-    [SerializeField] private GameObject craftTable;
-    [SerializeField] private GameObject furnaceTable;
-    [SerializeField] private GameObject cookerTable;
-
+    [SerializeField] private CraftTable craftTable;
     [SerializeField] private CraftTableLog tableLog;
     
     public bool IsOpen { get; private set; }
     
     private void Awake()
     {
+        craftTable.Init();
         Hide();
     }
 
     private void Hide()
     {
-        miniCraftTable.SetActive(false);
-        // craftTable.SetActive(false);
-        // furnaceTable.SetActive(false);
-        // cookerTable.SetActive(false);
-        
+        craftTable.gameObject.SetActive(false);
         tableLog.gameObject.SetActive(false);
     }
 
@@ -37,19 +28,9 @@ public class CraftManualTables : MonoBehaviour
             return;
         
         tableLog.SetConfirmEvent(makeItem);
+
+        craftTable.OpenTable(type);
         
-        switch (type)
-        {
-            case CraftManualType.MiniTable:
-                miniCraftTable.SetActive(true);
-                break;
-            case CraftManualType.Furnace:
-                break;
-            case CraftManualType.NormalTable:
-                break;
-            case CraftManualType.Cooker:
-                break;
-        }
         GameEventsManager.Instance.playerEvents.DisablePlayerMovement();
         GameEventsManager.Instance.inputEvents.DisableInput();
         

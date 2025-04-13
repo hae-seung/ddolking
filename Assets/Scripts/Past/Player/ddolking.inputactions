@@ -287,8 +287,19 @@
                 },
                 {
                     "name": "",
-                    "id": "67f5bba2-9c86-4304-9b11-125031300762",
-                    "path": "<Keyboard>/#(E)",
+                    "id": "5ba27e48-a364-48c8-a88b-0c5a3f0da02d",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "41142a2c-88bb-4e32-9c23-bec5848a16ab",
+                    "path": "<Keyboard>/{Submit}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

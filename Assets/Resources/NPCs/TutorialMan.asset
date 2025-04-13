@@ -17,4 +17,4 @@ MonoBehaviour:
   npcJob: ???
   npcPortrait:
   - portraitId: 0
-    portrait: {fileID: 21300000, guid: eed1ebcab0d6c3743950949d537f1f5b, type: 3}
+    portrait: {fileID: 21300000, guid: 4494a9a9f04b5f04da53276024d5e7ff, type: 3}
