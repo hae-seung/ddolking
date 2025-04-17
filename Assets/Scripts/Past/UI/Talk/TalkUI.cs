@@ -48,14 +48,7 @@ public class TalkUI : MonoBehaviour
     {
         speaker.text = npc.npcName;
         speakerJob.text = npc.npcJob;
-        for (int i = 0; i < npc.npcPortrait.Count; i++)
-        {
-            if (data.portaritId.Equals(npc.npcPortrait[i].portraitId))
-            {
-                portrait.sprite = npc.npcPortrait[i].portrait;
-                break;
-            }
-        }
+        portrait.sprite = npc.npcPortrait[data.portaritId];
         
         originText = data.context;
         isFinish = false;

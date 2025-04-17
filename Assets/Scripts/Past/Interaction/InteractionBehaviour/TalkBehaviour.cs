@@ -7,7 +7,6 @@ public class TalkBehaviour : InteractionBehaviour
 {
     //일반적인 조건없이 그냥 말하는 npc
     
-    
     [SerializeField] private List<TalkSessionData> talkSessionDatas;
 
     private int currentIndex = 0;

@@ -10,6 +10,7 @@ using System;
 [CustomPropertyDrawer(typeof(TypeManual))]
 [CustomPropertyDrawer(typeof(TypeColor))]
 [CustomPropertyDrawer(typeof(TypeString))]
+[CustomPropertyDrawer(typeof(IdPortrait))]
 public class SerializableDictionaryPropertyDrawer : PropertyDrawer
 {
 	const string KeysFieldName = "m_keys";

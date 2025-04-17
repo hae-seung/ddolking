@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71ec9bfe56e5802439e1feb741e8eedf, type: 3}
-  m_Name: TutorialMan
+  m_Script: {fileID: 11500000, guid: c7281e734465c614f8f40c277d7f506e, type: 3}
+  m_Name: ShopEmployee 2
   m_EditorClassIdentifier: 
-  npcId: 0
-  npcName: ???
-  npcJob: ???
-  npcPortrait:
-  - portraitId: 0
-    portrait: {fileID: 21300000, guid: 4494a9a9f04b5f04da53276024d5e7ff, type: 3}
+  sessionId: 0
+  talkDatas:
+  - npcId: 3
+    context: "\uD798\uB4E4\uAD70 \uC774\uAC8C \uBA70\uCE60\uC9F8\uC778\uC9C0.."
+    portaritId: 0
