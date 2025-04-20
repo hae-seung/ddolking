@@ -40,8 +40,30 @@ public class PlayerWallet : MonoBehaviour
 
     public void SpendMoney(MoneyType type, int amount)
     {
+        if (type == MoneyType.past)
+        {
+            pastMoney -= amount;
+        }
+        else
+        {
+            modernMoney -= amount;
+        }
         
+        playerStatUI.ChangeMoney(modernMoney, pastMoney);
     }
-    
+
+    public void GetMoney(MoneyType type, int amount)
+    {
+        if (type == MoneyType.past)
+        {
+            pastMoney += amount;
+        }
+        else
+        {
+            modernMoney += amount;
+        }
+        
+        playerStatUI.ChangeMoney(modernMoney, pastMoney);
+    }
     
 }

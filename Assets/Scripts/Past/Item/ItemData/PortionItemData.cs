@@ -5,4 +5,9 @@ using UnityEngine;
 public class PortionItemData : ConsumeItemData
 {
     //넣을게 없네
+    
+    public override Item CreateItem()
+    {
+        return new PortionItem(this);
+    }
 }

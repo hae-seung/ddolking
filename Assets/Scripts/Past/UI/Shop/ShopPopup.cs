@@ -1,55 +1,46 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PopupUI : MonoBehaviour
+public class ShopPopup : MonoBehaviour
 {
-    [Header("인벤토리UI 레이캐스터 블락")] 
+    [Header("레이캐스터 블락")] 
     [SerializeField] private GameObject raycastBlocker;
     
-    [Header("아이템버리기 팝업")] 
-    [SerializeField] private GameObject popup;
+    [Header("팝업")] 
     [SerializeField] private TextMeshProUGUI itemName;
+    [SerializeField] private Image itemImage;
+    [SerializeField] private TextMeshProUGUI popupTypeTxt;
+    
+    
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private Button plusBtn;
     [SerializeField] private Button minusBtn;
     [SerializeField] private Button confirmBtn;
     [SerializeField] private Button cancelBtn;
 
+
+    private string buyText = "구매";
+    private string sellText = "판매";
     private int maxAmount;
     public event Action<int> onConfirmationOK;
-
-    public void ShowPanel()
-    {
-        gameObject.SetActive(true);
-        raycastBlocker.SetActive(true);
-    } 
-    public void HidePanel()
-    {
-        gameObject.SetActive(false);
-        raycastBlocker.SetActive(false);
-    }
-
-    private void ShowTrashPopup() => popup.SetActive(true);
-    private void HideTrashPopup() => popup.SetActive(false);
     
     
     public void Init()
     {
         InitEvents();
         HidePanel();
-        HideTrashPopup();
     }
 
     private void InitEvents()
     {
         confirmBtn.onClick.AddListener(HidePanel);
-        confirmBtn.onClick.AddListener(HideTrashPopup);
         confirmBtn.onClick.AddListener(() => onConfirmationOK?.Invoke(int.Parse(inputField.text)));
         
         cancelBtn.onClick.AddListener(HidePanel);
-        cancelBtn.onClick.AddListener(HideTrashPopup);
         
         //plus btn
         plusBtn.onClick.AddListener(() =>
@@ -100,16 +91,38 @@ public class PopupUI : MonoBehaviour
         });
     }
 
-    public void OpenTrashPopup(string itemName, int count, Action<int> onConfirm)
+    
+    public void OpenPopup(ItemData item, int count, ShopMode shopMode,Action<int> onConfirm)
     {
         onConfirmationOK = onConfirm;
-        this.itemName.text = itemName;
+        itemName.text = item.Name;
+        itemImage.sprite = item.IconImage;
+
+        if (shopMode == ShopMode.buy)
+        {
+            popupTypeTxt.text = buyText;
+        }
+        else
+        {
+            popupTypeTxt.text = sellText;
+        }
         
         maxAmount = count;
         inputField.text = "1";
         
         ShowPanel();
-        ShowTrashPopup();
+    }
+    
+    
+    private void ShowPanel()
+    {
+        gameObject.SetActive(true);
+        raycastBlocker.SetActive(true);
+    } 
+    private void HidePanel()
+    {
+        gameObject.SetActive(false);
+        raycastBlocker.SetActive(false);
     }
     
 }

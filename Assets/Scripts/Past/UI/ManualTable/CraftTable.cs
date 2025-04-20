@@ -60,6 +60,8 @@ public class CraftTable : MonoBehaviour
         _craftTableLog.SetImage(craftLogBackgroundSprite[type]);
         nameText.text = tableName[type];
 
+        
+        //버튼 갯수 부족하면 버튼 추가
         if (_btns.Count < manual.CraftItems.Count)
         {
             int diff = manual.CraftItems.Count - _btns.Count;
@@ -67,20 +69,27 @@ public class CraftTable : MonoBehaviour
             {
                 CraftManualItemBtn btn = Instantiate(craftManualItemBtnPrefab, contentParent.transform)
                     .GetComponent<CraftManualItemBtn>();
+
+                btn.Init(_craftTableLog);
                 _btns.Add(btn);
             }
         }
 
+        
+        
         for (int i = 0; i < _btns.Count; i++)
         {
-            _btns[i].gameObject.SetActive(false);
+            if (i < manual.CraftItems.Count)
+            {
+                _btns[i].SetBtn(manual.CraftItems[i], menuColor[type]);
+                _btns[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                _btns[i].gameObject.SetActive(false);
+            }
         }
 
-        for (int i = 0; i < manual.CraftItems.Count; i++)
-        {
-            _btns[i].SetBtn(manual.CraftItems[i], _craftTableLog, menuColor[type]);
-            _btns[i].gameObject.SetActive(true);
-        }
         
         gameObject.SetActive(true);
         _doTweenAnimation.DORestartById("show");

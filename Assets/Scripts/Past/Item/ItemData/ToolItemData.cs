@@ -7,4 +7,9 @@ using UnityEngine;
 public class ToolItemData : EquipItemData
 {
     //차별화된 기능 없음.
+    
+    public override Item CreateItem()
+    {
+        return new ToolItem(this);
+    }
 }

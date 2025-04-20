@@ -13,7 +13,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] private StatusUI statusUI;
     [SerializeField] private PlayerBuild playerBuild;
     private int slotCnt;
-    
+
+
+    public IReadOnlyList<Item> Items => _items;
     public int SlotCnt
     {
         get => slotCnt;

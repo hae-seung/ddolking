@@ -11,6 +11,10 @@ using System;
 [CustomPropertyDrawer(typeof(TypeColor))]
 [CustomPropertyDrawer(typeof(TypeString))]
 [CustomPropertyDrawer(typeof(IdPortrait))]
+[CustomPropertyDrawer(typeof(ItemPrice))]
+
+
+
 public class SerializableDictionaryPropertyDrawer : PropertyDrawer
 {
 	const string KeysFieldName = "m_keys";

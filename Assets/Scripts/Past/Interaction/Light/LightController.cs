@@ -4,13 +4,13 @@ using UnityEngine.Rendering.Universal;
 
 public class LightController : MonoBehaviour
 {
-    private Light2D light;
+    private Light2D light2D;
     private bool isFirstObject = true;
 
     private void Awake()
     {
         isFirstObject = true;
-        light = GetComponent<Light2D>();
+        light2D = GetComponent<Light2D>();
     }
 
     private void OnEnable()
@@ -35,7 +35,7 @@ public class LightController : MonoBehaviour
     
     private void TurnLight(bool state)
     {
-        light.enabled = state;
+        light2D.enabled = state;
     }
     
 
@@ -45,9 +45,9 @@ public class LightController : MonoBehaviour
         if (currentHour != -1)
         {
             if (currentHour >= 16 || currentHour <= 8)
-                light.enabled = true;
+                light2D.enabled = true;
             else
-                light.enabled = false;
+                light2D.enabled = false;
         }
         else
         {

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8464793191757018871}
   - component: {fileID: 1741928075732587883}
   - component: {fileID: 705951068613535667}
+  - component: {fileID: 75970072235345137}
   m_Layer: 6
   m_Name: Shop
   m_TagString: Untagged
@@ -153,6 +154,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionUI: {fileID: 4083637985937245045}
+--- !u!114 &75970072235345137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088844848328722471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6050d6a18645141916da4aa2400f19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopType: past
 --- !u!1 &4083637985937245045
 GameObject:
   m_ObjectHideFlags: 0

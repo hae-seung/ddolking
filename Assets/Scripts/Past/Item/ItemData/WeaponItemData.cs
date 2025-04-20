@@ -7,4 +7,9 @@ public class WeaponItemData : EquipItemData
 {
     
     //무기는 스킬도 가짐
+    
+    public override Item CreateItem()
+    {
+        return new WeaponItem(this);
+    }
 }

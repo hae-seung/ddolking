@@ -13,6 +13,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     [SerializeField] private CraftManualTables craftCanvas;
     [SerializeField] private GameObject buildPanel;
     [SerializeField] private Sign sign;
+    [SerializeField] private ShopCanvas shopCanvas;
 
     private bool disableInput = false;
     
@@ -66,7 +67,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
 
     #endregion
 
-    #region CraftTableToggle
+    #region ToggleCraftTable
 
     public void OpenCraftTab(CraftManualType type, Action<CraftItemSO , int> makeItem)
     {
@@ -116,8 +117,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     }
 
     #endregion
-
-
+    
     #region 표지판 탭
 
     public void OpenSignTab(int needLevel, int needMoney, Action UnlockSign)
@@ -130,6 +130,19 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
         sign.CloseSignTab();
     }
 
+    #endregion
+
+    #region ToggleShop
+
+    public void OpenShop(string shopType)
+    {
+        shopCanvas.OpenShop(shopType);
+    }
+    
+    public void ShopWarn(int amount)
+    {
+        shopCanvas.Warn(amount);
+    }
     #endregion
     
 }

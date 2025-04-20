@@ -7,7 +7,11 @@ using UnityEngine;
 public class AmuletItemData : EquipItemData
 {
     [SerializeField] private List<AmuletEffect> _amuletEffects;
-    
+
+    public override Item CreateItem()
+    {
+        return new AmuletItem(this);
+    }
     
     
     private void OnValidate()

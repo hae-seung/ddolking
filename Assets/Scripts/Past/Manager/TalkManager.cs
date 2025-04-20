@@ -11,7 +11,7 @@ public class TalkManager : Singleton<TalkManager>
     private DOTweenAnimation talkPanel;
     
     
-    public bool isTalk { get; private set; } //튜토리얼용
+    public bool isTalk { get; private set; } 
     
     protected override void Awake()
     {
@@ -82,6 +82,9 @@ public class TalkManager : Singleton<TalkManager>
 
     public void StartTalk(List<TalkData> talks)
     {
+        if (isTalk)
+            return;
+        
         if(!talkPanel.gameObject.activeSelf)
             talkPanel.gameObject.SetActive(true);
         
@@ -95,6 +98,7 @@ public class TalkManager : Singleton<TalkManager>
 
     private IEnumerator AutoTalk(List<TalkData> talks)
     {
+        isTalk = true;
         NPCData npc;
         for (int i = 0; i < talks.Count; i++)
         {
