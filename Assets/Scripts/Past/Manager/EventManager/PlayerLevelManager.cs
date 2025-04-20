@@ -9,6 +9,8 @@ public class PlayerLevelManager : MonoBehaviour
     private int level = 1;
 
 
+    
+    
     private void Start()
     {
         InvokeEvents();
@@ -23,6 +25,12 @@ public class PlayerLevelManager : MonoBehaviour
     private void OnEnable()
     {
         GameEventsManager.Instance.playerEvents.onGainExperience += GainExperience;
+        GameEventsManager.Instance.playerEvents.onGetLevel += GetLevel;
+    }
+
+    private int GetLevel()
+    {
+        return level;
     }
 
     private void GainExperience(int experience)

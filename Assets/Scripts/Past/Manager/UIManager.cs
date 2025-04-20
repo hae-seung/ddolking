@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는 통로 역할
@@ -11,6 +12,8 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     [SerializeField] private GameObject SettingCanvas;
     [SerializeField] private CraftManualTables craftCanvas;
     [SerializeField] private GameObject buildPanel;
+    [SerializeField] private Sign sign;
+    [SerializeField] private ShopCanvas shopCanvas;
 
     private bool disableInput = false;
     
@@ -53,6 +56,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
             SettingCanvas.SetActive(true);
         }
     }
+    
 
     #region ToggleInventory
 
@@ -63,7 +67,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
 
     #endregion
 
-    #region CraftTableToggle
+    #region ToggleCraftTable
 
     public void OpenCraftTab(CraftManualType type, Action<CraftItemSO , int> makeItem)
     {
@@ -87,7 +91,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
         buildPanel.SetActive(state);
     }
 
-    private void HideOtherCanvas()
+    public void HideOtherCanvas()
     {
         if(inventoryCanvas.IsOpen)
             inventoryCanvas.ToggleInventory();
@@ -112,6 +116,33 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
         disableInput = false;
     }
 
+    #endregion
+    
+    #region 표지판 탭
+
+    public void OpenSignTab(int needLevel, int needMoney, Action UnlockSign)
+    {
+        sign.OpenSignTab(needLevel, needMoney, UnlockSign);
+    }
+
+    public void CloseSignTab()
+    {
+        sign.CloseSignTab();
+    }
+
+    #endregion
+
+    #region ToggleShop
+
+    public void OpenShop(string shopType)
+    {
+        shopCanvas.OpenShop(shopType);
+    }
+    
+    public void ShopWarn(int amount)
+    {
+        shopCanvas.Warn(amount);
+    }
     #endregion
     
 }

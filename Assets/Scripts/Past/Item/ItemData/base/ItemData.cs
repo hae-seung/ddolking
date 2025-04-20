@@ -8,6 +8,12 @@ public class ItemData : ScriptableObject
     [SerializeField] private Sprite _iconImage;
     [Tooltip("인벤토리에서 버릴때 생성시킬 오브젝트")]
     [SerializeField] private GameObject dropObjectPrefab;
+
+
+    public virtual Item CreateItem()
+    {
+        return new Item(this);
+    }
     
     public int ID => _id;
     public string Name => _name;

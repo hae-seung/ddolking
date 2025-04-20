@@ -14,4 +14,10 @@ public class EstablishItemData : CountableItemData
     
     public FieldObjectData EstablishObjectData => establishObjectData;
     public GameObject PreviewObject => establishObjectPreview;
+    
+    
+    public override Item CreateItem()
+    {
+        return new EstablishItem(this);
+    }
 }

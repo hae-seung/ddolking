@@ -52,6 +52,7 @@ public class InputManager : MonoBehaviour
         }
     }
     
+    
     public void MouseMoved(InputAction.CallbackContext context)
     {
         if (context.performed) // 마우스가 움직였을 때만 실행

@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PopupUI : MonoBehaviour
@@ -21,7 +18,7 @@ public class PopupUI : MonoBehaviour
     [SerializeField] private Button cancelBtn;
 
     private int maxAmount;
-
+    public event Action<int> onConfirmationOK;
 
     public void ShowPanel()
     {
@@ -36,8 +33,6 @@ public class PopupUI : MonoBehaviour
 
     private void ShowTrashPopup() => popup.SetActive(true);
     private void HideTrashPopup() => popup.SetActive(false);
-
-    public event Action<int> onConfirmationOK;
     
     
     public void Init()

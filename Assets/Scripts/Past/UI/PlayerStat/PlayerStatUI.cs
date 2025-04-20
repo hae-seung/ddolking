@@ -1,4 +1,3 @@
-
 using System;
 using TMPro;
 using UnityEngine;
@@ -18,14 +17,43 @@ public class PlayerStatUI : MonoBehaviour
     [SerializeField] private Slider experienceSlider;
     [SerializeField] private TextMeshProUGUI levelTxt;
 
+    [Header("Day")] 
+    [SerializeField] private TextMeshProUGUI dayText;
+    [SerializeField] private TextMeshProUGUI timeText;
+
+    [Header("Money")]
+    [SerializeField]private TextMeshProUGUI modernMoneyText;
+    [SerializeField]private TextMeshProUGUI pastMoneyText;
+
 
     private void Awake()
     {
-        GameEventsManager.Instance.statusEvents.onStatChanged += StatChanged;
         GameEventsManager.Instance.playerEvents.onChangedExperience += ChangedExperience;
         GameEventsManager.Instance.playerEvents.onChangedLevel += ChangedLevel;
+        
+        GameEventsManager.Instance.statusEvents.onStatChanged += StatChanged;
+        
+        GameEventsManager.Instance.dayEvents.onChangeDay += ChangeDay;
+        GameEventsManager.Instance.dayEvents.onChangeTime += ChangeTime;
     }
-    
+
+    private void ChangeTime(int currentTime)
+    {
+        if (currentTime > 12)
+        {
+            timeText.text = $"PM \n {currentTime - 12}";
+        }
+        else
+        {
+            timeText.text = $"AM \n {currentTime}";
+        }
+    }
+
+    private void ChangeDay(int currentDay)
+    {
+        dayText.text = $"D+{currentDay}";
+    }
+
 
     private void ChangedLevel(int curLevel, int nextExperienceToNextLevel)
     {
@@ -61,5 +89,11 @@ public class PlayerStatUI : MonoBehaviour
             default:
                 return;
         }
+    }
+
+    public void ChangeMoney(int modernAmount, int pastAmount)
+    {
+        modernMoneyText.text = $"x{modernAmount}";
+        pastMoneyText.text = $"x{pastAmount}";
     }
 }

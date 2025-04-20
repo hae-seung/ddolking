@@ -7,4 +7,9 @@ using UnityEngine;
 public class EtcItemData : CountableItemData
 {
     //넣을거 없음
+    
+    public override Item CreateItem()
+    {
+        return new ETCItem(this);
+    }
 }

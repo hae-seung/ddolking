@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Past_2.unity
     guid: 6b68c5f975b20c64da5e59a5f9fb407a
+  - enabled: 1
+    path: Assets/Scenes/Example.unity
+    guid: ba41fbb09b77e6841a622a821435f0c5
   m_configObjects: {}

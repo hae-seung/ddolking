@@ -2,8 +2,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class ObjectPoolManager : Singleton<ObjectPoolManager>
+public class ObjectPoolManager : MonoBehaviour
 {
+    public static ObjectPoolManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
     [Header("풀 기본 설정")]
     public int defaultCapacity = 10;
     public int maxPoolSize = 50;

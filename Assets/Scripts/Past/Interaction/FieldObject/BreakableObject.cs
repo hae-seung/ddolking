@@ -37,7 +37,10 @@ public class BreakableObject : Interactable
         SetData();
         isCooldown = false;
         isHolding = false;
+        
+        drawOutline.onPointerExit += HandlePointerExit;
     }
+    
 
     private void SetData()
     {
@@ -195,6 +198,13 @@ public class BreakableObject : Interactable
         if (waitBreakCoroutine == null)
             waitBreakCoroutine = StartCoroutine(WaitBreak());
     }
+    
+    private void HandlePointerExit()
+    {
+        StopBreakObject();
+    }
+    
+    
 
     private void DropItems()
     {
@@ -218,6 +228,8 @@ public class BreakableObject : Interactable
         StopAllCoroutines();
         breakCoroutine = null;
         waitBreakCoroutine = null;
+
+        drawOutline.onPointerExit -= HandlePointerExit;
         
         ObjectPoolManager.Instance.ReleaseObject(fieldObjectData.id, gameObject);
     }

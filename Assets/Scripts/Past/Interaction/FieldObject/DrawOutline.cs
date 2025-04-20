@@ -1,18 +1,22 @@
+using System;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.Serialization;
 
 public class DrawOutline : MonoBehaviour
 {
-    [Header("외곽선 설정")]
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    private Color color = Color.red;
-    private int outlineSize = 1;
-    private static readonly int OutlineID = Shader.PropertyToID("_Outline");
-    private static readonly int OutlineColorID = Shader.PropertyToID("_OutlineColor");
-    private static readonly int OutlineSizeID = Shader.PropertyToID("_OutlineSize");
+    [SerializeField] private GameObject targetObject;
+    
 
     private bool isPointerHovering = false;
     private bool isPlayerNear = false;
+
+    public event Action onPointerExit;
+
+    private void Start()
+    {
+        targetObject.SetActive(false);
+    }
 
     public bool CanInteract => isPointerHovering && isPlayerNear;
 
@@ -89,11 +93,10 @@ public class DrawOutline : MonoBehaviour
 
     private void UpdateOutline(bool outline)
     {
-        MaterialPropertyBlock mpb = new MaterialPropertyBlock();
-        spriteRenderer.GetPropertyBlock(mpb);
-        mpb.SetFloat(OutlineID, outline ? 1f : 0);
-        mpb.SetColor(OutlineColorID, color);
-        mpb.SetFloat(OutlineSizeID, outlineSize);
-        spriteRenderer.SetPropertyBlock(mpb);
+        targetObject.SetActive(outline);
+        if (!outline)
+        {
+            onPointerExit?.Invoke();
+        }
     }
 }

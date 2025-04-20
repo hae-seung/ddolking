@@ -8,19 +8,23 @@ public class CraftManualItemBtn : MonoBehaviour
     [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemNameTxt;
     [SerializeField] private Image buttonImage;
-    
 
-    public void SetBtn(CraftItemSO craftItem, CraftTableLog tableLog, Color buttonColor)
+    private CraftItemSO _craftItem;
+
+    public void SetBtn(CraftItemSO craftItem, Color buttonColor)
     {
         itemImage.sprite = craftItem.CraftItemData.IconImage;
         itemNameTxt.text = craftItem.CraftItemData.Name;
         buttonImage.color = buttonColor;
-        
-        button.onClick.AddListener(() =>
-        {
-            tableLog.SetCraftItemMenu(craftItem);
-        });
+        _craftItem = craftItem;
     }
 
+    public void Init(CraftTableLog tableLog)
+    {
+        button.onClick.AddListener(() =>
+        {
+            tableLog.SetCraftItemMenu(_craftItem);
+        });
+    }
    
 }

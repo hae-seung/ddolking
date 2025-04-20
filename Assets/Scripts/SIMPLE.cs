@@ -1,4 +1,3 @@
-
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,14 +5,14 @@ using UnityEngine.UI;
 
 public class SIMPLE : MonoBehaviour
 {
-    private Button btn;
+    
 
-    private void Start()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        btn = GetComponent<Button>();
-        btn.onClick.AddListener(() =>
+        Debug.Log("dd");
+        if (other.name == "Player")
         {
-            SceneManager.LoadScene("Past_2");
-        });
+            SceneManager.LoadScene("Example");
+        }
     }
 }
