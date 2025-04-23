@@ -88572,7 +88572,7 @@ MonoBehaviour:
   dayColor: {r: 1, g: 1, b: 1, a: 1}
   twilightColor: {r: 0.5529412, g: 0.41960785, b: 0.21176471, a: 1}
   nightColor: {r: 0.019607844, g: 0.019607844, b: 0.019607844, a: 1}
-  dayDuration: 60
+  dayDuration: 10
   timeOfDay: 8
 --- !u!1001 &1499172171
 PrefabInstance:
@@ -103522,11 +103522,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4518824822987136432, guid: 304495c99824945489390021f437eae6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.86
+      value: 30.23
       objectReference: {fileID: 0}
     - target: {fileID: 4518824822987136432, guid: 304495c99824945489390021f437eae6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.76
+      value: -0.58
       objectReference: {fileID: 0}
     - target: {fileID: 4518824822987136432, guid: 304495c99824945489390021f437eae6, type: 3}
       propertyPath: m_LocalPosition.z

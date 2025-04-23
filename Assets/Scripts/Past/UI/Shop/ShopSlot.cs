@@ -44,8 +44,11 @@ public class ShopSlot : MonoBehaviour
         button.onClick.AddListener(() =>
         {
             if (!hasFreeSlot)
-                UIManager.Instance.ShopWarn(-1);//인벤칸 모자름
-            
+            {
+                UIManager.Instance.ShopWarn(-1); //인벤칸 모자름}
+                return;
+            }
+
             if (shopMode == ShopMode.buy)//구매
             {
                 if (isInfinite)//무한대로 구매가능일때
