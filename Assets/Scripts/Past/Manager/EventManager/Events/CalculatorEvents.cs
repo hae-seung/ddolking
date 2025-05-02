@@ -11,4 +11,13 @@ public class CalculatorEvents
         float mineDamage = onCalculateMineDamage.Invoke(stat);
         return mineDamage;
     }
+
+    public event Func<float, float> onCalculateDamage;
+
+    public float CalculateDamage(float damage)
+    {
+        float takeDamage = onCalculateDamage(damage);
+        return takeDamage;
+    }
+
 }

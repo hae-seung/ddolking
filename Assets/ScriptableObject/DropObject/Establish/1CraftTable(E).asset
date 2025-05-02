@@ -21,3 +21,6 @@ MonoBehaviour:
   maxAmount: 1
   establishObjectData: {fileID: 11400000, guid: e4eb9888f9d124f41b721625c57dc9fc, type: 2}
   establishObjectPreview: {fileID: 5618725198181462995, guid: 7f746cda84cd9e34bb67957adc00b711, type: 3}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128

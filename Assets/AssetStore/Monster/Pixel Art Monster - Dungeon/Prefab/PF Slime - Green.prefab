@@ -28,6 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 20027387384241076}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -35,7 +36,6 @@ Transform:
   m_Children:
   - {fileID: 9120158332558703465}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &973485612
 MonoBehaviour:
@@ -49,12 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9417f4774a985e84aa085a73471db9fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 9120158332566115467}
   renderers:
   - {fileID: 9120158332562041417}
+  animator: {fileID: 9120158332566115467}
   fx: {fileID: 0}
   dieFxPrefab: {fileID: 0}
-  facing: 1
   isHiding: 0
   isInJumpPrepare: 0
   isGrounded: 0
@@ -123,6 +122,25 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -156,6 +174,12 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 6200000, guid: 07dabb9f2913bd946952990cde61d21d, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -165,6 +189,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 777372311523564788}
     m_Modifications:
     - target: {fileID: 100002, guid: 569ae7d25d82b6f48893dd1c60391d60, type: 3}
@@ -232,17 +257,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 4228e1bf3c323464ca168031e39434c0, type: 2}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100002, guid: 569ae7d25d82b6f48893dd1c60391d60, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7936559004437955312}
   m_SourcePrefab: {fileID: 100100000, guid: 569ae7d25d82b6f48893dd1c60391d60, type: 3}
 --- !u!4 &9120158332558703465 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400002, guid: 569ae7d25d82b6f48893dd1c60391d60,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 400002, guid: 569ae7d25d82b6f48893dd1c60391d60, type: 3}
   m_PrefabInstance: {fileID: 9120158332558828011}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &9120158332558862153 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 100002, guid: 569ae7d25d82b6f48893dd1c60391d60,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 100002, guid: 569ae7d25d82b6f48893dd1c60391d60, type: 3}
   m_PrefabInstance: {fileID: 9120158332558828011}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7936559004437955312
@@ -268,13 +297,11 @@ MonoBehaviour:
       m_Calls: []
 --- !u!137 &9120158332562041417 stripped
 SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 13700002, guid: 569ae7d25d82b6f48893dd1c60391d60,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 13700002, guid: 569ae7d25d82b6f48893dd1c60391d60, type: 3}
   m_PrefabInstance: {fileID: 9120158332558828011}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &9120158332566115467 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 9500000, guid: 569ae7d25d82b6f48893dd1c60391d60,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 569ae7d25d82b6f48893dd1c60391d60, type: 3}
   m_PrefabInstance: {fileID: 9120158332558828011}
   m_PrefabAsset: {fileID: 0}

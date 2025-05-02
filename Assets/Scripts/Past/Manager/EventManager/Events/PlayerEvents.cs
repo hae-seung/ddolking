@@ -69,4 +69,10 @@ public class PlayerEvents
         return -1;
     }
 
+    public event Action onDead;
+    public void Dead()
+    {
+        onDead?.Invoke();
+    }
+
 }

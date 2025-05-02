@@ -23,7 +23,7 @@ public class StatusManager : MonoBehaviour
         { Stat.MaxHP, new StatData(0, 50f, -1) },
         { Stat.MaxEnergy, new StatData(0, 20f, 50) },
         { Stat.Str, new StatData(0, 5f, -1) },
-        { Stat.Luk, new StatData(0, 1f, 45) },
+        { Stat.Critical, new StatData(0, 1f, 45) },
         { Stat.Speed, new StatData(0, 0.5f, 10) },
         { Stat.MineSpeed, new StatData(0, 0.5f, -1) }
     };
@@ -35,6 +35,7 @@ public class StatusManager : MonoBehaviour
         GameEventsManager.Instance.statusEvents.onGetStatData += GetStatData;
     }
     
+
     private void Start()
     {
         InitStatus();
@@ -51,12 +52,13 @@ public class StatusManager : MonoBehaviour
 
     private void InitStatus()
     {
+        status[Stat.Defense] = 0f;
         status[Stat.MaxHP] = 100f;
-        status[Stat.HP] = 10f;
+        status[Stat.HP] = 100f;
         status[Stat.MaxEnergy] = 100f;
         status[Stat.Energy] = 10f;
         status[Stat.Str] = 5f;
-        status[Stat.Luk] = 5f;
+        status[Stat.Critical] = 5f;
         status[Stat.Speed] = 2f;
         status[Stat.MineSpeed] = 5f;
     }
@@ -97,6 +99,7 @@ public class StatusManager : MonoBehaviour
             if (goalStat == Stat.HP && newVal <= 0)
             {
                 // 플레이어 사망 처리 로직 추가
+                Dead();
             }
 
             status[goalStat] = Mathf.Min(newVal, maxVal);
@@ -134,5 +137,11 @@ public class StatusManager : MonoBehaviour
             status[currentStat] = newMaxValue;
             GameEventsManager.Instance.statusEvents.StatChanged(currentStat, newMaxValue);
         }
+    }
+    
+    
+    private void Dead()
+    {
+        GameEventsManager.Instance.playerEvents.Dead();
     }
 }

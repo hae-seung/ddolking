@@ -14,11 +14,9 @@ public class PlayerBuild : MonoBehaviour
     private bool buildComplete = false;
 
     private Vector2 mousePosition;
-    private Camera mainCamera;
-
+    
     private void Start() // UIManager가 싱글톤 초기화 후 실행
     {
-        mainCamera = Camera.main;
         
         gameObject.SetActive(false);
         
@@ -30,7 +28,9 @@ public class PlayerBuild : MonoBehaviour
 
     private void Update()
     {
-        // 우클릭(취소) 시 코루틴 종료 및 초기화
+        if (establishItemData == null)
+            return;
+
         if (Input.GetMouseButtonDown(1))
         {
             CancelBuilding();
@@ -38,21 +38,30 @@ public class PlayerBuild : MonoBehaviour
         }
 
         UpdatePreviewPosition();
+        
+        Collider2D[] hits = Physics2D.OverlapPointAll(mousePosition);
+        bool isOnValidTarget = false;
 
-        // Raycast를 사용하여 Land 감지
-        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-
-        if (hit.collider == null)
-            return;
-
-        if (hit.transform.CompareTag("Land") && previewObject.CanEstablish)
+        foreach (var c in hits)
         {
-            if (Input.GetMouseButtonDown(0)) // 좌클릭(설치)
+            if (((1 << c.gameObject.layer) & establishItemData.TargetLayer) != 0)
             {
-                buildComplete = true; // 설치 완료 후 `Coroutine` 종료됨
+                isOnValidTarget = true;
+                break;
             }
         }
+
+        // 설치 가능 여부 계산
+        bool isValidPlacement = isOnValidTarget && previewObject.CanEstablish;
+        
+        previewObject.SetPlacementValidity(isValidPlacement);
+
+        if (isValidPlacement && Input.GetMouseButtonDown(0))
+        {
+            buildComplete = true;
+        }
     }
+    
 
     public IEnumerator BuildItem(EstablishItem establishItem, Action<bool> callback)
     {

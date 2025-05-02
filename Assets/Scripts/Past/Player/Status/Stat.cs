@@ -1,11 +1,12 @@
 public enum Stat
 {
+    Defense,
     MaxHP,
     HP,
     MaxEnergy,
     Energy,
     Str,
-    Luk,
+    Critical,
     Speed,
     MineSpeed
 }
