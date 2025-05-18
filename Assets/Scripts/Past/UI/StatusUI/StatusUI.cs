@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class StatusUI : MonoBehaviour
@@ -12,7 +13,7 @@ public class StatusUI : MonoBehaviour
 
     [Header("스텟 수치 텍스트")] 
     [SerializeField] private TextMeshProUGUI strTxt;
-    [SerializeField] private TextMeshProUGUI lukTxt;
+    [SerializeField] private TextMeshProUGUI criticalTxt;
     [SerializeField] private TextMeshProUGUI maxHPTxt;
     [SerializeField] private TextMeshProUGUI maxPowerTxt;
     [SerializeField] private TextMeshProUGUI speedTxt;
@@ -101,8 +102,8 @@ public class StatusUI : MonoBehaviour
             case Stat.Str:
                 strTxt.text = $"{(int)value}";
                 break;
-            case Stat.Luk:
-                lukTxt.text = $"{(int)value}";
+            case Stat.Critical:
+                criticalTxt.text = $"{(int)value}";
                 break;
             case Stat.Speed:
                 speedTxt.text = ((float)value).ToString("F1");

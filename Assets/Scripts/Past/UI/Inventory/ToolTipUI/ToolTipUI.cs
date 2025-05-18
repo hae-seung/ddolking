@@ -121,8 +121,8 @@ public class ToolTipUI : MonoBehaviour
                     case Stat.Str:
                         sb.AppendLine($"근력 : +{(int)increaseAmount}");
                         break;
-                    case Stat.Luk:
-                        sb.AppendLine($"행운 : +{(int)increaseAmount}");
+                    case Stat.Critical:
+                        sb.AppendLine($"치명타 : +{(int)increaseAmount}");
                         break;
                     case Stat.Speed:
                         sb.AppendLine($"이동속도 : +{increaseAmount:F1}");

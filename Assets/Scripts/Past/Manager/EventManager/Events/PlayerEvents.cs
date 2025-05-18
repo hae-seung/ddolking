@@ -69,4 +69,23 @@ public class PlayerEvents
         return -1;
     }
 
+    public event Action onDead;
+    public void Dead()
+    {
+        onDead?.Invoke();
+    }
+
+
+    public event Action onMineEnter;
+    public void MineEnter()
+    {
+        onMineEnter?.Invoke();
+    }
+
+    public event Action onMineExit;
+    public void ExitMine()
+    {
+        onMineExit?.Invoke();
+    }
+
 }

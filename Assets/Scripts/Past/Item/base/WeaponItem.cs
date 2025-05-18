@@ -1,0 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WeaponItem : EquipItem, IDurabilityReduceable
+{
+    private WeaponItemData data;
+
+    public float AttackDelay => data.AttackDelay;
+    
+    //스킬저장
+    public WeaponItem(WeaponItemData data) : base(data)
+    {
+        this.data = data;
+    }
+
+    protected override EquipItem CreateItem()
+    {
+        return new WeaponItem(EquipData as WeaponItemData);
+    }
+
+    public void ReduceDurability(float amount)
+    {
+        //내구력% 계산하여 내구력 감소 시키기
+    }
+
+    public void ExecuteAttack(Vector2 dir, Vector2 origin)
+    {
+        data.ExecuteAttack(dir, origin, this);
+    }
+}

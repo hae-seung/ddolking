@@ -8,14 +8,23 @@ public class DayManager : MonoBehaviour
     [SerializeField] private Color nightColor;
 
     private Light2D globalLight;
+    
     [Tooltip("인게임 하루 시간 (초단위)")]
     [SerializeField] private float dayDuration = 1200f; // 실제 시간 20분 (1200초)
+    
     [Tooltip("게임내 현재 시간")]
     [SerializeField] private float timeOfDay = 12f; // 게임 내 시간이 6:00 AM에서 시작 (6시)
+    
+    
     private int currentDay;
     private int currentHour;
     private int hour;
-    private bool turnOnLight = false;
+
+    
+    [SerializeField] private Color mineColor;
+    private bool isMine = false;
+    private Color tempColor;
+    
     
     private void Awake()
     {
@@ -24,6 +33,8 @@ public class DayManager : MonoBehaviour
         currentHour = GetCurrentTime();
         
         GameEventsManager.Instance.dayEvents.onGetCurrentTime += GetCurrentTime;
+        GameEventsManager.Instance.playerEvents.onMineEnter += EnterMine;
+        GameEventsManager.Instance.playerEvents.onMineExit += ExitMine;
     }
 
     private void Start()
@@ -44,11 +55,7 @@ public class DayManager : MonoBehaviour
             currentDay++;
             GameEventsManager.Instance.dayEvents.ChangeDay(currentDay);
         }
-
-        // 색상 변화
-        globalLight.color = GetColorForTimeOfDay(timeOfDay);
-        GameEventsManager.Instance.dayEvents.TurnOnLight(turnOnLight);
-
+        
         // 시간 확인
         hour = GetCurrentTime();
         if (hour != currentHour)
@@ -56,20 +63,21 @@ public class DayManager : MonoBehaviour
             currentHour = hour;
             GameEventsManager.Instance.dayEvents.ChangeTime(currentHour);
         }
+        
+        // 색상 변화
+        if(!isMine)
+            globalLight.color = GetColorForTimeOfDay(timeOfDay);
     }
 
     // 시간에 따라 색상을 결정하는 함수
     private Color GetColorForTimeOfDay(float time)
     {
-        turnOnLight = true;
-        
         if (time >= 6f && time < 8f) // 6:00 AM ~ 8:00 AM: 황혼 -> dayColor
         {
             return Color.Lerp(twilightColor, dayColor, (time - 6f) / 2f);
         }
         if (time >= 8f && time < 16f) // 8:00 AM ~ 4:00 PM: dayColor 유지
         {
-            turnOnLight = false;//아침중에는 불끄기
             return dayColor;
         }
         if (time >= 16f && time < 18f) // 4:00 PM ~ 6:00 PM: dayColor -> 황혼
@@ -97,5 +105,19 @@ public class DayManager : MonoBehaviour
     private int GetCurrentTime()
     {
         return Mathf.FloorToInt(timeOfDay); // 시간은 정수 값으로 반환 (소수점 버리기)
+    }
+
+
+    private void EnterMine()
+    {
+        isMine = true;
+        tempColor = globalLight.color;
+        globalLight.color = mineColor;
+    }
+
+    private void ExitMine()
+    {
+        isMine = false;
+        globalLight.color = tempColor;
     }
 }

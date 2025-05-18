@@ -81,7 +81,7 @@ public class ObjectPoolManager : MonoBehaviour
     {
         if (!pools.ContainsKey(id))
         {
-            Debug.Log($"{id}가 등록되지 않았습니다");
+            Debug.Log($"{id}가 등록되지 않아 자동으로 등록됩니다");
             RegisterPrefab(id, registeredPrefabs[id]);
         }
         

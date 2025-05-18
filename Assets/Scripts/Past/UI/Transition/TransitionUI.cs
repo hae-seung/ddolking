@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class TransitionUI : MonoBehaviour
 {
-    public static TransitionUI Instance;
-    
     private DOTweenAnimation _doTweenAnimation;
     [SerializeField] private GameObject side1;
     [SerializeField] private GameObject side2;
@@ -16,13 +14,6 @@ public class TransitionUI : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-        {
-            Destroy(gameObject);
-        }
-
         _doTweenAnimation = side1.GetComponent<DOTweenAnimation>();
     }
 

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -8,14 +7,26 @@ public class PreviewObject : MonoBehaviour
 
     private BoxCollider2D _boxCollider2D;
     private SpriteRenderer _spriteRenderer;
-    private readonly Collider2D[] _colliders = new Collider2D[5];
-    private LayerMask _ignoreLayerMask;
+    private readonly Collider2D[] _colliders = new Collider2D[10];
+    private ContactFilter2D _contactFilter2D;
+
+    [Header("Land는 무조건 체크 / 설치할 곳 레이어만 체크")]
+    [Tooltip("Land는 항상 감지되기때문")]
+    [SerializeField] private LayerMask _blockedLayerMask;
 
     private void Awake()
     {
         _boxCollider2D = GetComponent<BoxCollider2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _ignoreLayerMask = LayerMask.GetMask("Land", "Ignore Raycast"); // 무시할 레이어들
+
+        
+        //트리거는 무시, 콜라이더만 감지
+        _contactFilter2D = new ContactFilter2D
+        {
+            useLayerMask = true,
+            layerMask = ~_blockedLayerMask,
+            useTriggers = false
+        };
     }
 
     private void Update()
@@ -28,23 +39,33 @@ public class PreviewObject : MonoBehaviour
         Vector2 boxCenter = (Vector2)transform.position + _boxCollider2D.offset;
         Vector2 boxSize = _boxCollider2D.size;
 
-        int numCollisions = Physics2D.OverlapBoxNonAlloc( // BoxCollider2D 범위 기반 감지
-            boxCenter, 
-            boxSize, 
-            0f, // 회전 없음 (필요 시 z축 회전값 입력)
-            _colliders,
-            ~_ignoreLayerMask // Land와 Ignore Raycast는 감지하지 않음
+        int numCollisions = Physics2D.OverlapBox(
+            boxCenter,
+            boxSize,
+            0f,
+            _contactFilter2D,
+            _colliders
         );
 
-        if (numCollisions == 0)
+        CanEstablish = true;
+
+        
+        //충돌된 콜리전이 있다면 설치불가
+        for (int i = 0; i < numCollisions; i++)
         {
-            CanEstablish = true;
-            _spriteRenderer.color = Color.white;
-        }
-        else
-        {
+            GameObject hitObject = _colliders[i].gameObject;
+
+            // 자기 자신 무시
+            if (hitObject == gameObject)
+                continue;
             CanEstablish = false;
-            _spriteRenderer.color = Color.red;
+            break;
         }
     }
+
+    public void SetPlacementValidity(bool isValid)
+    {
+        _spriteRenderer.color = isValid ? Color.white : Color.red;
+    }
+
 }

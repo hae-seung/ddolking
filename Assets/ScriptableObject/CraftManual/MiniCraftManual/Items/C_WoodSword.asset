@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae77d3b2164203418d3fc57bf50ec18, type: 3}
   m_Name: C_WoodSword
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 873ae3bd41b37f346ab2e75b2bbc0de8, type: 2}
+  itemData: {fileID: 11400000, guid: 72df2c19157627042b5cab1d76a1025b, type: 2}
   craftNeedItems:
   - itemData: {fileID: 11400000, guid: 93a8549cdd8a7bd4da34718a3984b7fe, type: 2}
     amount: 1

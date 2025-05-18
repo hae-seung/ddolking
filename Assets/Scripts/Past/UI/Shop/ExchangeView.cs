@@ -119,7 +119,7 @@ public class ExchangeView : MonoBehaviour
         int ran = Random.Range(0, 100);  // 0~99
         int successRate = probability * 10;
 
-        bool isSuccess = ran < successRate;
+        bool isSuccess = successRate > ran;
 
         if (isSuccess)//상승
         {

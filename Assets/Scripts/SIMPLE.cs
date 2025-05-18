@@ -7,12 +7,9 @@ public class SIMPLE : MonoBehaviour
 {
     
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void Click()
     {
-        Debug.Log("dd");
-        if (other.name == "Player")
-        {
-            SceneManager.LoadScene("Example");
-        }
+        
+        SceneManager.LoadScene("Past_2");
     }
 }

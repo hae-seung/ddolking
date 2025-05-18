@@ -75,9 +75,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayBgm(AudioClip audioClip)
     {
-        StopBgm();
-        bgmPlayer.clip = audioClip;
-        bgmPlayer.Play();
+        StopAndPlayBgm(audioClip);
     }
 
     public void PlaySfx(AudioClip audioClip)
@@ -113,18 +111,23 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
-    public void StopBgm()
+    public void StopAndPlayBgm(AudioClip clip)
     {
         if (bgmPlayer.isPlaying)
         {
-            StartCoroutine(FadeOutAndStopBgm());
+            StartCoroutine(FadeOutAndStopBgm(clip));
+        }
+        else
+        {
+            bgmPlayer.clip = clip;
+            bgmPlayer.Play();
         }
     }
 
-    private IEnumerator FadeOutAndStopBgm()
+    private IEnumerator FadeOutAndStopBgm(AudioClip clip)
     {
         float startVolume = bgmPlayer.volume;
-        float fadeDuration = 3f;
+        float fadeDuration = 2f;
         float elapsedTime = 0f;
 
         while (elapsedTime < fadeDuration)
@@ -135,7 +138,10 @@ public class AudioManager : Singleton<AudioManager>
         }
 
         bgmPlayer.Stop();
+
+        bgmPlayer.clip = clip;
         bgmPlayer.volume = startVolume;
+        bgmPlayer.Play();
     }
 
     public void ChangeVolume(SettingOption.Sound sound, float value)

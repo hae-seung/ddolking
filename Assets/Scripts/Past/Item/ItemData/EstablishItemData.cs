@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EstablishItemData", menuName = "SO/CountableItemData/Establish")]
@@ -11,10 +12,13 @@ public class EstablishItemData : CountableItemData
     
     [Header("설치하기 전 나타날 프리뷰")] 
     [SerializeField] private GameObject establishObjectPreview;
+
+    [Header("설치할 레이어")] 
+    [SerializeField] private LayerMask targetLayer;
     
     public FieldObjectData EstablishObjectData => establishObjectData;
     public GameObject PreviewObject => establishObjectPreview;
-    
+    public LayerMask TargetLayer => targetLayer;
     
     public override Item CreateItem()
     {

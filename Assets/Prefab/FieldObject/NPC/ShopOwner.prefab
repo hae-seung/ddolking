@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 4069133313972616918}
   - component: {fileID: 5845400657855012535}
   - component: {fileID: 7341756489120762644}
+  - component: {fileID: 7631821100797518833}
   m_Layer: 6
   m_Name: ShopOwner
   m_TagString: Untagged
@@ -204,6 +205,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   talkSessionDatas:
   - {fileID: 11400000, guid: dbd65e8d27001914a86797ece85755b8, type: 2}
+--- !u!208 &7631821100797518833
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8302705219648919350}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.05, y: 0.4, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1001 &1127874347530702343
 PrefabInstance:
   m_ObjectHideFlags: 0

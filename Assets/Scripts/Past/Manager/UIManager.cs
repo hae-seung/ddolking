@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -12,8 +11,10 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     [SerializeField] private GameObject SettingCanvas;
     [SerializeField] private CraftManualTables craftCanvas;
     [SerializeField] private GameObject buildPanel;
-    [SerializeField] private Sign sign;
+    [SerializeField] private SignUI sign;
     [SerializeField] private ShopCanvas shopCanvas;
+    [SerializeField] private TransitionUI transitionUI;
+    [SerializeField] private MineUI mineUI;
 
     private bool disableInput = false;
     
@@ -56,7 +57,16 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
             SettingCanvas.SetActive(true);
         }
     }
-    
+
+
+    #region Transition
+
+    public void StartTransition()
+    {
+        transitionUI.EnableTransitionUI();
+    }
+
+    #endregion
 
     #region ToggleInventory
 
@@ -71,6 +81,8 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
 
     public void OpenCraftTab(CraftManualType type, Action<CraftItemSO , int> makeItem)
     {
+        if (craftCanvas.IsOpen)
+            return;
         craftCanvas.OpenTable(type, makeItem);
     }
 
@@ -143,6 +155,15 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     {
         shopCanvas.Warn(amount);
     }
+    #endregion
+
+    #region MineUI
+
+    public void OpenMineUI(string name, string list,int remainTime ,Action EnterMine, Action ExitMine)
+    {
+        mineUI.OpenMineUI(name, list, remainTime,EnterMine, ExitMine);
+    }
+
     #endregion
     
 }
