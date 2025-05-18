@@ -8,7 +8,7 @@ public class PlacePlayerBehaviour : InteractionBehaviour
     
     protected override void Interact(Interactor interactor)
     {
-        TransitionUI.Instance.EnableTransitionUI();
+        UIManager.Instance.StartTransition();
         interactor.transform.position = goalTransform.position;
     }
 }

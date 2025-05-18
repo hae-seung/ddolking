@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -16,7 +15,7 @@ public class PlayerSpawner : MonoBehaviour
     }
 
     private void PlayBgm()
-    {
+    { 
        AudioManager.Instance.PlayBgm(pastBgm);
     }
 

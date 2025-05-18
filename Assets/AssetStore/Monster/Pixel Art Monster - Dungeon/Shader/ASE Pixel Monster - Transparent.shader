@@ -198,7 +198,7 @@ Shader "Cainos/Pixel Art Monster - Dungeon/Transparent - 2D Lit"
 				#endif
 
 				Color *= IN.color;
-
+				
 				SurfaceData2D surfaceData;
 				InitializeSurfaceData(Color.rgb, Color.a, Mask, surfaceData);
 				InputData2D inputData;
@@ -514,7 +514,6 @@ Shader "Cainos/Pixel Art Monster - Dungeon/Transparent - 2D Lit"
 				#endif
 
 				Color *= IN.color;
-
 				return Color;
 			}
 

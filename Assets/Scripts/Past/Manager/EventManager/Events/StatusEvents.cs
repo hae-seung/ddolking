@@ -40,6 +40,11 @@ public class StatusEvents
         return onGetStatData?.Invoke(targetStat);
     }
 
-    
+    public event Func<Stat, float> onGetStatValue;
+
+    public float GetStatValue(Stat targetStat)
+    {
+        return (float)onGetStatValue?.Invoke(targetStat);
+    }
 
 }

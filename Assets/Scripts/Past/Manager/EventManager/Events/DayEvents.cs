@@ -13,12 +13,7 @@ public class DayEvents
     {
         onChangeTime?.Invoke(time);
     }
-
-    public Action<bool> onTurnLight;
-    public void TurnOnLight(bool state)
-    {
-        onTurnLight?.Invoke(state);
-    }
+    
 
     public Func<int> onGetCurrentTime;
     public int GetCurrentTime()

@@ -14,7 +14,6 @@ public class InjureState : BaseState
     {
         hasRequestedTransition = false;
         controller.PlayInjureAnim();
-        Debug.Log("아이고 나죽네");
     }
 
     public override void UpdateState()

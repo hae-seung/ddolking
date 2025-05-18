@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 4000
   _name: "\uC528\uC557"
-  _description: "\uB2E8\uB2E8\uD55C \uC528\uC557\uC774\uB2E4.\n\uBB34\uB7ED\uBB34\uB7ED
+  _description: "\uC0DD\uBA85\uC758 \uC528\uC557\uC774\uB2E4.\n\uBB34\uB7ED\uBB34\uB7ED
     \uC790\uB77C\uAC70\uB77C"
   _iconImage: {fileID: 21300000, guid: 6928b4fbf2c924746a14b633db0d7872, type: 3}
   dropObjectPrefab: {fileID: 7918350661112232804, guid: 469f295006280964e8d8114526633e49, type: 3}

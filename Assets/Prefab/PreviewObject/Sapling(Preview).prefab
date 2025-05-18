@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _blockedLayerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
 --- !u!212 &-8946189182890719782
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ using System;
 [CustomPropertyDrawer(typeof(TypeString))]
 [CustomPropertyDrawer(typeof(IdPortrait))]
 [CustomPropertyDrawer(typeof(ItemPrice))]
+[CustomPropertyDrawer(typeof(TypeDamage))]
 
 
 

@@ -13,12 +13,13 @@ public class Monster : LivingEntity
     private MonsterController controller;
 
     
-    [Header("날짜가 지날수록 강해지는 스텟")] //Awake에서 초기화, Enable에서 강화
+    [Header("성장스텟")] //Awake에서 초기화, Enable에서 강화
     //부모의 hp
     //보모의 toolWear
     //부모의 defense
     private float attackDamage;
     private float bodyDamage;
+    private int level;
     
     [Header("고정스텟")]//Awake에서 초기화
     private float attackRange;
@@ -45,12 +46,16 @@ public class Monster : LivingEntity
     {
         base.Awake();
         
+        //몬스터 데이터
         attackRange = monsterData.AttackRange;
         attackRangeY = monsterData.AttackRange / 2;
         sightRange = monsterData.SightRange;
         attackDamage = monsterData.AttackDamage;
         bodyDamage = monsterData.BodyDamage;
+        
+        //부모
         defense = monsterData.Defense;
+        toolWear = monsterData.ToolWear;
         
         lastAttackTime = 0f;
     }
@@ -71,8 +76,13 @@ public class Monster : LivingEntity
     {
         facingRight = true;
         controller.SetFacing(rightFace);
-
-        hp = 30f;
+        
+        hp = monsterData.Hp;//날짜에 따른 성장 체력
+        
+        
+        
+        //마지막 실행
+        base.OnEnable();
     }
 
 
@@ -81,7 +91,6 @@ public class Monster : LivingEntity
         if (other.gameObject.tag.Equals("Player"))
         {
             target.OnDamage(bodyDamage);
-            Debug.Log("몸샷");
         }
     }
 
@@ -92,23 +101,21 @@ public class Monster : LivingEntity
         if (monsterAttack.Attack())
         {
             //플레이어에게 공격로직
-            Debug.Log("공격");
             target.OnDamage(attackDamage);
         }
     }
 
-    public override void OnDamage(float damage)
+    public override void OnDamage(float damage, bool isCritical,WeaponItem weapon = null)
     {
         damage *= (1 - defense);
         hp -= damage;
         
+        base.OnDamage(damage, isCritical, weapon);
+        
         if (hp <= 0)
         {
             OnDead();
-            return;
         }
-        
-        base.OnDamage(damage);
     }
     
 

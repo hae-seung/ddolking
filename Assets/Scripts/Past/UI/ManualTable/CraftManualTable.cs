@@ -25,12 +25,15 @@ public class CraftManualTables : MonoBehaviour
     public void OpenTable(CraftManualType type, Action<CraftItemSO , int> makeItem)
     {
         if (IsOpen)
+        {
             return;
+        }
         
         tableLog.SetConfirmEvent(makeItem);
 
         craftTable.OpenTable(type);
         
+        Debug.Log("멈춰!");
         GameEventsManager.Instance.playerEvents.DisablePlayerMovement();
         GameEventsManager.Instance.inputEvents.DisableInput();
         
@@ -41,6 +44,7 @@ public class CraftManualTables : MonoBehaviour
     {
         Hide();
         
+        Debug.Log("움직여");
         GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
         GameEventsManager.Instance.inputEvents.EnableInput();
         

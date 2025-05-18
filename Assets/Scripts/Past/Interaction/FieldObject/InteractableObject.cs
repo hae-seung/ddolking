@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class InteractableObject : Interactable
 {
+    [Header("You Need InteractionBehaviour")]
+    [Space(20)]
     [SerializeField] private GameObject interactionUI;
     private InteractionBehaviour interactionBehaviour;
 

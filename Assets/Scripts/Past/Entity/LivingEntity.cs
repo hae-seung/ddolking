@@ -4,17 +4,29 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AI;
+using DamageNumbersPro;
 using Random = UnityEngine.Random;
+using Slider = UnityEngine.UI.Slider;
 
-public abstract class LivingEntity : MonoBehaviour
+
+public interface IDamageable
 {
-    //스텟
+    public void OnDamage(float damage, bool isCritical,WeaponItem weaponItem = null);
+    public void ApplyDebuff(DebuffBase debuff);
+}
+
+
+
+public abstract class LivingEntity : MonoBehaviour, IDamageable
+{
+    [SerializeField] protected Slider healthSlider;
+    
+    [Header("성장스텟")]
     protected float hp;
     protected float toolWear;
     protected float defense;
-
-
-
+    
+    
     protected NavMeshAgent agent;
     
     public event Action<float> onDamage;
@@ -23,18 +35,32 @@ public abstract class LivingEntity : MonoBehaviour
 
     protected virtual EntityData EntityData => null;
     public bool IsDead { get; private set; }
+    
+    
+    private HashSet<string> activeDebuffIDs = new HashSet<string>();
 
 
     protected virtual void Awake()
     {
         hp = EntityData.Hp;
         toolWear = EntityData.ToolWear;
+        
+        healthSlider.maxValue = hp;
+        healthSlider.value = hp;
     }
-    
-    
+
+    protected void OnEnable()
+    {
+        //몬스터의 최대 체력이 늘어날 수 있음.
+        healthSlider.maxValue = hp;
+        healthSlider.value = hp;
+    }
+
+
     public virtual void StopMove()
     {
         agent.isStopped = true;
+        agent.speed = 0f;
     }
 
     
@@ -45,12 +71,50 @@ public abstract class LivingEntity : MonoBehaviour
     }
     
     
-    
-    
-    public virtual void OnDamage(float damage)
+    public virtual void OnDamage(float damage, bool isCritical, WeaponItem weaponItem = null)
     {
+        //데미지 스킨
+        DamageNumber damageNumber
+            = DamageManager.Instance.GetDamageSkin(isCritical ? DamageType.critical : DamageType.normal);
+
+        damageNumber.Spawn(transform.position, damage);
+        damageNumber.SetFollowedTarget(transform);
+        
+        //피해 애니메이션 및 Stop적용
         onDamage?.Invoke(damage);
+        
+        //체력바 적용
+        healthSlider.value -= damage;
+        
+        //무기 내구도 적용
+        if(weaponItem != null)
+            weaponItem.ReduceDurability(toolWear);
     }
+
+
+    public void ApplyDebuff(DebuffBase debuff)
+    {
+        if (activeDebuffIDs.Contains(debuff.debuffId))
+        {
+            return;
+        }
+        
+        activeDebuffIDs.Add(debuff.debuffId);
+        StartCoroutine(RunDebuff(debuff));
+    }
+
+    private IEnumerator RunDebuff(DebuffBase debuff)
+    {
+        yield return debuff.ApplyEffect(this);
+
+        RemoveDebuff(debuff.debuffId);
+    }
+
+    private void RemoveDebuff(string debuffID)
+    {
+        activeDebuffIDs.Remove(debuffID);
+    }
+
 
     protected void OnDead()
     {
@@ -101,5 +165,6 @@ public abstract class LivingEntity : MonoBehaviour
             }
         }
     }
+
     
 }

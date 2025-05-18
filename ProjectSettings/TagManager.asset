@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Land
   - A
+  - LivingEntity
   layers:
   - Default
   - TransparentFX
@@ -16,8 +17,8 @@ TagManager:
   - Interactable
   - Land
   - Farm
-  - 
-  - 
+  - LivingEntity
+  - Capture
   - 
   - 
   - 

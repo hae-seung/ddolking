@@ -28,4 +28,4 @@ MonoBehaviour:
   - _itemData: {fileID: 11400000, guid: 0d824450b7d4fc84692e0fc6748408d9, type: 2}
     minAmount: 1
     maxAmount: 2
-  ownObject: {fileID: 4155899601596985536, guid: e1de91a93b28f44429bc5f9fa5ef56e4, type: 3}
+  ownObject: {fileID: 4155899601596985536, guid: b5ef8c786ee945b47ab7b922b6e16d93, type: 3}

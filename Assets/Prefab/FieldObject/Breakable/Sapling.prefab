@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 797b71a1053332345af05d2ec0b69e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  growTime: 60
+  growTime: 1
   spawnFieldObject: {fileID: 11400000, guid: 08b8fd33348a70748a3c72c458b98f93, type: 2}
 --- !u!61 &2790944064689868016
 BoxCollider2D:

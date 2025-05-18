@@ -7,6 +7,7 @@ public enum Stat
     Energy,
     Str,
     Critical,
+    CriticalDamage,
     Speed,
     MineSpeed
 }

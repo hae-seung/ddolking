@@ -29,6 +29,11 @@ public class GrowObject : MonoBehaviour
     {
         if (!gameObject.activeSelf)
             return;
+        if (!ObjectPoolManager.Instance.IsPoolRegistered(spawnFieldObject.id))
+        {
+            ObjectPoolManager.Instance.RegisterPrefab(spawnFieldObject.id, spawnFieldObject.ownObject);
+        }
+        
         
         ObjectPoolManager.Instance.SpawnObject(
             spawnFieldObject.id,

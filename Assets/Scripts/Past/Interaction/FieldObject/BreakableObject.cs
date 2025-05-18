@@ -30,6 +30,8 @@ public class BreakableObject : Interactable
 
     protected virtual void Start() => SetData();
 
+    private bool isActuallyBreaking;
+
     private void OnEnable() => ResetState();
 
     private void ResetState()
@@ -37,6 +39,8 @@ public class BreakableObject : Interactable
         SetData();
         isCooldown = false;
         isHolding = false;
+        isActuallyBreaking = false;
+        
         
         drawOutline.onPointerExit += HandlePointerExit;
     }
@@ -54,6 +58,9 @@ public class BreakableObject : Interactable
 
     public override void Interact(Interactor interactor, InputAction.CallbackContext context, Item currentGripItem = null)
     {
+        if (context.control.name != "leftButton")
+            return;
+        
         if (!drawOutline.CanInteract) return;
 
         float holdTime = (float)(context.time - context.startTime);
@@ -89,6 +96,8 @@ public class BreakableObject : Interactable
             isHolding = false;
             StartBreakCoroutine(ref breakCoroutine, BreakOnce(gripItem));
         }
+
+        isActuallyBreaking = true;
     }
 
     private void StartBreakCoroutine(ref Coroutine coroutine, IEnumerator routine)
@@ -148,8 +157,12 @@ public class BreakableObject : Interactable
     private void EndBreakState()
     {
         GameEventsManager.Instance.playerEvents.PlayAnimation("isMine", false);
-        GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
+        
+        if(isActuallyBreaking)
+            GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
+        
         isCooldown = false;
+        isActuallyBreaking = false;
     }
 
     private void BreakObject(Item gripItem)
