@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c605ceab893c614d9ebb6e207d0c9bd, type: 3}
+  m_Name: 6017WheatSprout
+  m_EditorClassIdentifier: 
+  id: 6017
+  toolWear: 0
+  durability: 1
+  dropTable:
+  - _itemData: {fileID: 11400000, guid: cec0d4d149ae5ba42ba4797866c0a1fc, type: 2}
+    minAmount: 1
+    maxAmount: 1
+  ownObject: {fileID: 3264644597343606029, guid: 13af92f385b47a84d90e96f0f543c646, type: 3}

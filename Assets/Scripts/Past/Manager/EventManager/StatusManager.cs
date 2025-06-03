@@ -61,7 +61,7 @@ public class StatusManager : MonoBehaviour
         status[Stat.MaxEnergy] = 100f;
         status[Stat.Energy] = 10f;
         status[Stat.Str] = 5f;
-        status[Stat.Critical] = 5f;
+        status[Stat.Critical] = 50f;
         status[Stat.CriticalDamage] = 1.5f;
         status[Stat.Speed] = 2f;
         status[Stat.MineSpeed] = 5f;

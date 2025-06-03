@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InventoryQuickSlotUI
       objectReference: {fileID: 0}
+    - target: {fileID: 2670883404098182923, guid: 72e7548cf3c8b984f9c4e36d1f82ba53, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6671613790738203569, guid: 72e7548cf3c8b984f9c4e36d1f82ba53, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -95,6 +99,22 @@ PrefabInstance:
     - target: {fileID: 7147100377325018167, guid: 72e7548cf3c8b984f9c4e36d1f82ba53, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.000015258789
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482893916135130362, guid: 72e7548cf3c8b984f9c4e36d1f82ba53, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482893916135130362, guid: 72e7548cf3c8b984f9c4e36d1f82ba53, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482893916135130362, guid: 72e7548cf3c8b984f9c4e36d1f82ba53, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8482893916135130362, guid: 72e7548cf3c8b984f9c4e36d1f82ba53, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

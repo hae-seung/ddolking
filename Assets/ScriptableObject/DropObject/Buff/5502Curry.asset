@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc5c6089557038b4d9365cf7e7e19b87, type: 3}
+  m_Name: 5502Curry
+  m_EditorClassIdentifier: 
+  _id: 5502
+  _name: "[\uD2B9\uC0B0\uD488]\uCE74\uB808"
+  _description: "[\uD2B9\uC0B0\uD488]\uCE74\uB808"
+  _iconImage: {fileID: 21300000, guid: 1ccfc201f665f674eaf97eded9bc6c58, type: 3}
+  dropObjectPrefab: {fileID: 3692558984134776033, guid: f2ef529e7ffe9a547a77a1400b2d2ae3, type: 3}
+  maxAmount: 99
+  statModifier:
+  - stat: 1
+    increaseAmount: 10
+  buffDuration: 20

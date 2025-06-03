@@ -44,7 +44,7 @@ public class RangeWeaponData : WeaponItemData
                 if (criticalNum >= ran)
                     isCritical = true;
                 
-                dmg?.OnDamage(CalculateDamage(isCritical), isCritical, weapon);
+                dmg?.OnDamage(CalculateDamage(isCritical), isCritical, DebuffType.none, weapon);
             }
             
             if (debuff != null && debuff.CanApply())

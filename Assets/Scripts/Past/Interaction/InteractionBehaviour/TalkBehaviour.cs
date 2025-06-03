@@ -10,7 +10,7 @@ public class TalkBehaviour : InteractionBehaviour
     [SerializeField] private List<TalkSessionData> talkSessionDatas;
 
     private int currentIndex = 0;
-    protected override void Interact(Interactor interactor)
+    protected override void Interact(Interactor interactor, Item currentGripItem = null)
     {
         currentIndex %= talkSessionDatas.Count;
         

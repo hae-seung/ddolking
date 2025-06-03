@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 3Rock
   m_EditorClassIdentifier: 
   id: 6003
-  toolWear: 1
+  toolWear: 0.1
   durability: 60
   dropTable:
   - _itemData: {fileID: 11400000, guid: 154a33932e438d14ebe3929b2c9f0ad0, type: 2}

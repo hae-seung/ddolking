@@ -6,7 +6,7 @@ public class OpenShopBehaviour : InteractionBehaviour
 {
     [SerializeField] private string shopType;
     
-    protected override void Interact(Interactor interactor)
+    protected override void Interact(Interactor interactor, Item currentGripItem = null)
     {
         UIManager.Instance.OpenShop(shopType);
     }

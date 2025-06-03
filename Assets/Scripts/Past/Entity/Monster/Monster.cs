@@ -90,6 +90,7 @@ public class Monster : LivingEntity
     {
         if (other.gameObject.tag.Equals("Player"))
         {
+            Debug.Log("몸샷");
             target.OnDamage(bodyDamage);
         }
     }
@@ -101,20 +102,8 @@ public class Monster : LivingEntity
         if (monsterAttack.Attack())
         {
             //플레이어에게 공격로직
+            Debug.Log("기술공격");
             target.OnDamage(attackDamage);
-        }
-    }
-
-    public override void OnDamage(float damage, bool isCritical,WeaponItem weapon = null)
-    {
-        damage *= (1 - defense);
-        hp -= damage;
-        
-        base.OnDamage(damage, isCritical, weapon);
-        
-        if (hp <= 0)
-        {
-            OnDead();
         }
     }
     

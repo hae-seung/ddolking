@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513e80609651f7c4e921879f475c0c8d, type: 3}
+  m_Name: 41UpgradeTool
+  m_EditorClassIdentifier: 
+  _id: 41
+  _name: "\uAC15\uD654\uD0A4\uD2B8"
+  _description: "\uAC15\uD654\uD0A4\uD2B8"
+  _iconImage: {fileID: 21300000, guid: 5e69cc7f9690c0449bf692e83ef5e6e0, type: 3}
+  dropObjectPrefab: {fileID: 9106028211814909935, guid: cb14df74565653147b6b65afd9ef9831, type: 3}
+  maxAmount: 99

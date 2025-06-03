@@ -23,7 +23,7 @@ public class EnterMineBehaviour : InteractionBehaviour
         GameEventsManager.Instance.dayEvents.onChangeTime += ChangeTime;
     }
 
-    protected override void Interact(Interactor interactor)
+    protected override void Interact(Interactor interactor, Item currentGripItem = null)
     {
         player = interactor;
         UIManager.Instance.OpenMineUI(mineName, mainSpawnList, remainTime,EnterMine ,ExitMine);

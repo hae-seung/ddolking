@@ -11,7 +11,7 @@ using Slider = UnityEngine.UI.Slider;
 
 public interface IDamageable
 {
-    public void OnDamage(float damage, bool isCritical,WeaponItem weaponItem = null);
+    public void OnDamage(float damage, bool isCritical,DebuffType debuff ,WeaponItem weaponItem = null);
     public void ApplyDebuff(DebuffBase debuff);
 }
 
@@ -71,7 +71,40 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
     }
     
     
-    public virtual void OnDamage(float damage, bool isCritical, WeaponItem weaponItem = null)
+    public virtual void OnDamage(float damage, bool isCritical, DebuffType debuff, WeaponItem weaponItem = null)
+    {
+        if (debuff != DebuffType.none)
+        {
+            //todo : 디버프로 인한 피해 적용 로직 구상
+            return;
+        }
+        
+        
+        //데미지 효과 및 스킨
+        ApplyDamageEffect(damage, isCritical);
+            
+        
+        //피해 애니메이션 및 Stop적용
+        onDamage?.Invoke(damage);
+        
+        
+        damage *= (1 - defense);
+        hp -= damage;
+        
+        //체력바 적용
+        healthSlider.value -= damage;
+        
+        //무기 내구도 적용
+        if(weaponItem != null)
+            weaponItem.ReduceDurability(toolWear);
+        
+        if (hp <= 0)
+        {
+            OnDead();
+        }
+    }
+
+    private void ApplyDamageEffect(float damage, bool isCritical)
     {
         //데미지 스킨
         DamageNumber damageNumber
@@ -80,15 +113,22 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         damageNumber.Spawn(transform.position, damage);
         damageNumber.SetFollowedTarget(transform);
         
-        //피해 애니메이션 및 Stop적용
-        onDamage?.Invoke(damage);
         
-        //체력바 적용
-        healthSlider.value -= damage;
-        
-        //무기 내구도 적용
-        if(weaponItem != null)
-            weaponItem.ReduceDurability(toolWear);
+        //히트 이펙트
+        if (isCritical)
+        {
+            ObjectPoolManager.Instance.SpawnObject(
+                (int)DamageType.critical,
+                transform.position,
+                Quaternion.identity);
+        }
+        else
+        {
+            ObjectPoolManager.Instance.SpawnObject(
+                (int)DamageType.normal,
+                transform.position,
+                Quaternion.identity);
+        }
     }
 
 

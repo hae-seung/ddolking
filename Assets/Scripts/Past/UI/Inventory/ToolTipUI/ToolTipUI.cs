@@ -103,38 +103,43 @@ public class ToolTipUI : MonoBehaviour
             
             for (int i = 0; i < statModifiers.Count; i++)
             {
-                float increaseAmount = statModifiers[i].increaseAmount;
-                switch (statModifiers[i].stat)
+                float amount = statModifiers[i].increaseAmount;
+                if (amount == 0) continue;
+
+                string sign = amount > 0 ? "+" : "-";
+                float absAmount = Mathf.Abs(amount);
+                
+                string statName = statModifiers[i].stat switch
                 {
-                    case Stat.MaxHP:
-                        sb.AppendLine($"최대체력 : +{(int)increaseAmount}");
-                        break;
-                    case Stat.HP:
-                        sb.AppendLine($"체력 : +{(int)increaseAmount}");
-                        break;
-                    case Stat.MaxEnergy:
-                        sb.AppendLine($"최대기력 : +{(int)increaseAmount}");
-                        break;
-                    case Stat.Energy:
-                        sb.AppendLine($"기력 : +{(int)increaseAmount}");
-                        break;
-                    case Stat.Str:
-                        sb.AppendLine($"근력 : +{(int)increaseAmount}");
-                        break;
-                    case Stat.Critical:
-                        sb.AppendLine($"치명타 : +{(int)increaseAmount}");
-                        break;
-                    case Stat.Speed:
-                        sb.AppendLine($"이동속도 : +{increaseAmount:F1}");
-                        break;
-                    case Stat.MineSpeed:
-                        sb.AppendLine($"채굴력 : +{increaseAmount:F1}");
-                        break;
-                }
+                    Stat.MaxHP     => "최대체력",
+                    Stat.HP        => "체력",
+                    Stat.MaxEnergy => "최대기력",
+                    Stat.Energy    => "기력",
+                    Stat.Str       => "근력",
+                    Stat.Critical  => "치명타",
+                    Stat.Speed     => "이동속도",
+                    Stat.MineSpeed => "채굴력",
+                    _              => null
+                };
+
+                if (statName == null) continue;
+
+                string formattedAmount = (statModifiers[i].stat == Stat.Speed || 
+                                          statModifiers[i].stat == Stat.MineSpeed)
+                    ? $"{sign}{absAmount:F1}"
+                    : $"{sign}{(int)absAmount}";
+
+                sb.AppendLine($"{statName} : {formattedAmount}");
             }
+            
+            
             
             statTxt.text = sb.ToString();
             statTxt.gameObject.SetActive(true);
+        }
+        else
+        {
+            statTxt.gameObject.SetActive(false);
         }
     }
     

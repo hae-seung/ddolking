@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c605ceab893c614d9ebb6e207d0c9bd, type: 3}
+  m_Name: 13SoilField
+  m_EditorClassIdentifier: 
+  id: 6013
+  toolWear: 0
+  durability: 1
+  dropTable:
+  - _itemData: {fileID: 11400000, guid: bd0c8811a815cc94fb68fe0cc48ff16a, type: 2}
+    minAmount: 0
+    maxAmount: 1
+  ownObject: {fileID: 8280880052006586781, guid: 6ca51ead305f380428e56e7eda365b84, type: 3}

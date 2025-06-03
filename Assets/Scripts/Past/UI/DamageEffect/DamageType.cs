@@ -1,0 +1,8 @@
+public enum DamageType
+{
+    normal = 8000,
+    critical = 8001,
+    seed = 8002,
+    babyAnimal = 8003,
+    adultAniaml = 8004
+}

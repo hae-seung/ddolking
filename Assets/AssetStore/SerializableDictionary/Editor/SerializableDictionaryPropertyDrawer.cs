@@ -13,6 +13,7 @@ using System;
 [CustomPropertyDrawer(typeof(IdPortrait))]
 [CustomPropertyDrawer(typeof(ItemPrice))]
 [CustomPropertyDrawer(typeof(TypeDamage))]
+[CustomPropertyDrawer(typeof(TypeEffect))]
 
 
 

@@ -4,5 +4,9 @@ public enum CraftManualType
     MiniTable,
     NormalTable,
     Furnace,
-    Cooker
+    Cooker,
+    Filature,
+    Compressor,
+    Factory,
+    Brewer
 }

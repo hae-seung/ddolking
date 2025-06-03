@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c605ceab893c614d9ebb6e207d0c9bd, type: 3}
+  m_Name: 6023Factory(Field)
+  m_EditorClassIdentifier: 
+  id: 6023
+  toolWear: 1
+  durability: 50
+  dropTable:
+  - _itemData: {fileID: 11400000, guid: e64d5bf6ddb0ea34083e7ea9e3f8db2a, type: 2}
+    minAmount: 1
+    maxAmount: 1
+  ownObject: {fileID: 1618340282546587781, guid: bd311eb440700ae43b377a3af43a3a76, type: 3}

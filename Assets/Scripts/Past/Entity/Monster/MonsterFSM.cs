@@ -59,10 +59,6 @@ public class MonsterFSM : MonoBehaviour
         //1. 현재상태가 전이 가능한지 확인
         if (!state.CanTransition)
         {
-            if (state.RequestedState.HasValue)
-            {
-                ChangeState(state.RequestedState.Value);
-            }
             return;
         }
         
@@ -106,6 +102,12 @@ public class MonsterFSM : MonoBehaviour
     private void OnDead()
     {
         ChangeState(StateType.Dead);//무슨상황에서든 무조건 죽는 모션 실행
+    }
+    
+    public void OnAnimationEnd()
+    {
+        if (currentState == StateType.Attack || currentState == StateType.Injure)
+            ChangeState(StateType.Idle);
     }
     
 }

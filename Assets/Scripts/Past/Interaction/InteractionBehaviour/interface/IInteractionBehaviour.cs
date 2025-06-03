@@ -2,5 +2,5 @@
 
 public interface IInteractionBehavior
 {
-    public void Operate(Interactor interactor);
+    public void Operate(Interactor interactor, Item currentGripItem = null);
 }

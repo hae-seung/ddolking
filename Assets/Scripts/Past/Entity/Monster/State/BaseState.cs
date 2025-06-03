@@ -4,7 +4,6 @@ public abstract class BaseState
 {
     protected MonsterController controller;
     
-    public StateType? RequestedState { get; protected set; }
 
     public virtual bool CanTransition => true;
     

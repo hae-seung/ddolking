@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c605ceab893c614d9ebb6e207d0c9bd, type: 3}
+  m_Name: 6018Carrot(Field)
+  m_EditorClassIdentifier: 
+  id: 6018
+  toolWear: 0
+  durability: 1
+  dropTable:
+  - _itemData: {fileID: 11400000, guid: caee4ef82e100464e9d42f42b4972a8a, type: 2}
+    minAmount: 1
+    maxAmount: 2
+  - _itemData: {fileID: 11400000, guid: d47ab6e2d6efe2c469144421ebe0fa1b, type: 2}
+    minAmount: 2
+    maxAmount: 3
+  ownObject: {fileID: 2693545806275396327, guid: e0ca541996462a545aeb2455d99687bd, type: 3}

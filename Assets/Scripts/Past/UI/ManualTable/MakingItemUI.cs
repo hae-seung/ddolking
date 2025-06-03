@@ -16,6 +16,8 @@ public class MakingItemUI : MonoBehaviour
     private CraftItemSO _craftItemSo;
     private int totalAmount;
     private Action finishEvent;
+
+    private float makeTime;
     
     private void Awake()
     {
@@ -42,9 +44,11 @@ public class MakingItemUI : MonoBehaviour
 
     private IEnumerator MakeItemCoroutine()
     {
+        makeTime = _craftItemSo.MakingTime;
+        
         for (int i = 1; i <= totalAmount; i++)//만들 아이템 총 갯수 
         {
-            for (int time = 1; time <= _craftItemSo.MakingTime; time++)//아이템 1개 제작
+            for (int time = 1; time <= makeTime; time++)//아이템 1개 제작
             {
                 slider.value = time;
                 if (slider.value == slider.maxValue)

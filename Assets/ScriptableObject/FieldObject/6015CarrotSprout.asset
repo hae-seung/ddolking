@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c605ceab893c614d9ebb6e207d0c9bd, type: 3}
+  m_Name: 6015CarrotSprout
+  m_EditorClassIdentifier: 
+  id: 6015
+  toolWear: 0
+  durability: 1
+  dropTable:
+  - _itemData: {fileID: 11400000, guid: caee4ef82e100464e9d42f42b4972a8a, type: 2}
+    minAmount: 1
+    maxAmount: 1
+  ownObject: {fileID: 4747321697231073847, guid: 0db781684920e194e8aa7d1b1c5ca155, type: 3}

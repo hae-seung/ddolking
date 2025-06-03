@@ -15,7 +15,7 @@ public class SignBehaviour : InteractionBehaviour
         _particleSystem.Stop();
     }
 
-    protected override void Interact(Interactor interactor)
+    protected override void Interact(Interactor interactor, Item currentGripItem = null)
     {
         UIManager.Instance.OpenSignTab(needLevel, needMoney, UnlockSignQuest);
     }

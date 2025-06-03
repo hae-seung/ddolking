@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c605ceab893c614d9ebb6e207d0c9bd, type: 3}
+  m_Name: 6021Filature(Field)
+  m_EditorClassIdentifier: 
+  id: 6021
+  toolWear: 1
+  durability: 50
+  dropTable:
+  - _itemData: {fileID: 11400000, guid: 5fc1c54379aa8d94683492dbb39a9e27, type: 2}
+    minAmount: 1
+    maxAmount: 1
+  ownObject: {fileID: 5093340157044174341, guid: 5b72295de8a3f5145a8a15a3081f3ebe, type: 3}

@@ -6,7 +6,7 @@ public class PlacePlayerBehaviour : InteractionBehaviour
 {
     [SerializeField] private Transform goalTransform;
     
-    protected override void Interact(Interactor interactor)
+    protected override void Interact(Interactor interactor, Item currentGripItem = null)
     {
         UIManager.Instance.StartTransition();
         interactor.transform.position = goalTransform.position;

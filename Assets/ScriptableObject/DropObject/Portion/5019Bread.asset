@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd4caf4b23279b48b1e5fb4edd05eeb, type: 3}
+  m_Name: 5019Bread
+  m_EditorClassIdentifier: 
+  _id: 5019
+  _name: "\uBE75"
+  _description: "\uBE75"
+  _iconImage: {fileID: 21300000, guid: 73643e0f9b8bf3c44b8ceb982e1ff0d6, type: 3}
+  dropObjectPrefab: {fileID: 3579934518508936931, guid: 2f98cb5e861f29b4d8e918a970147002, type: 3}
+  maxAmount: 99
+  statModifier:
+  - stat: 2
+    increaseAmount: 10
+  ExperienceAmount: 0

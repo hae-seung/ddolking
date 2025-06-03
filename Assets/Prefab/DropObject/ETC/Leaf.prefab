@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1406433268974575446, guid: df89996f3ef080546bca7c324cba714c, type: 3}
+      propertyPath: itemData
+      value: 
+      objectReference: {fileID: 11400000, guid: 2d3e1eb0e1f59784c82d9d4fd39ed9fe, type: 2}
     - target: {fileID: 1077975803177326599, guid: df89996f3ef080546bca7c324cba714c, type: 3}
       propertyPath: m_Name
       value: Leaf
@@ -75,26 +79,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1077975803177326599, guid: df89996f3ef080546bca7c324cba714c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9186637115226374315}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df89996f3ef080546bca7c324cba714c, type: 3}
---- !u!1 &6039203949609953172 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1077975803177326599, guid: df89996f3ef080546bca7c324cba714c, type: 3}
-  m_PrefabInstance: {fileID: 6717737554235031443}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &9186637115226374315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6039203949609953172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dea20316b403df04487cb268ce197aa3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 2d3e1eb0e1f59784c82d9d4fd39ed9fe, type: 2}

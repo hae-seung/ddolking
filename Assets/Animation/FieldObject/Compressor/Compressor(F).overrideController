@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Compressor(F)
+  m_Controller: {fileID: 9100000, guid: 18502165585ab704e8e1f7d6085bbf9d, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: ed2f0d2084482ee49a14c820eeae8719, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3c33e7aaac1ad21409cda3c4af7f0b39, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 72961436705eb9f4babd559876350dfe, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a13ce47d7a8d05949890391f01ea4960, type: 2}

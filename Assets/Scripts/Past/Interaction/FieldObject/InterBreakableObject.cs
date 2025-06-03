@@ -18,10 +18,11 @@ public class InterBreakableObject : BreakableObject
         if (context.control.name.Equals("f"))
         {
             // F키 눌림 의미 todo: 상호작용 : NPC 대화, 장소이동, CraftTab 열기 등등
-            interactionBehaviour.Operate(interactor);
+            interactionBehaviour.Operate(interactor, currentGripItem);
         }
         else
         {
+            //부수기 동작
             base.Interact(interactor, context, currentGripItem);
         }
     }

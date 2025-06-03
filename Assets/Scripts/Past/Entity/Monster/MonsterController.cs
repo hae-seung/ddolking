@@ -8,23 +8,11 @@ public class MonsterController : MonoBehaviour
     private Monster monster;
     
     
-    public int AttackLayerIndex { get; private set; }
-    public int InjureLayerIndex { get; private set; }
-    public int DeadLayerIndex { get; private set; }
-    
-    
     [Header("캐싱")]
     private string movingBlend = "MovingBlend";
     private string attack = "Attack";
     private WaitForSeconds dieTime = new WaitForSeconds(1f);
     
-    
-    private void Awake()
-    {
-        AttackLayerIndex = animator.GetLayerIndex("Attack");
-        InjureLayerIndex = animator.GetLayerIndex("Injured");
-        DeadLayerIndex = animator.GetLayerIndex("Die");
-    }
 
     
     //moving animation blend
@@ -57,12 +45,7 @@ public class MonsterController : MonoBehaviour
     {
         animator.SetTrigger(attack);
     }
-
-    public void PerformAttack()
-    {
-        monster.PerformAttack();
-    }
-
+    
 
     public void PlayInjureAnim()
     {
