@@ -54,6 +54,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         //몬스터의 최대 체력이 늘어날 수 있음.
         healthSlider.maxValue = hp;
         healthSlider.value = hp;
+        healthSlider.gameObject.SetActive(true);
     }
 
 
@@ -158,6 +159,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
 
     protected void OnDead()
     {
+        healthSlider.gameObject.SetActive(false);
         onDead?.Invoke();
     }
 

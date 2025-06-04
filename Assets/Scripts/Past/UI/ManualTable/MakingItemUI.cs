@@ -25,30 +25,32 @@ public class MakingItemUI : MonoBehaviour
     }
     
 
-    public void MakeItem(CraftItemSO craftItem, int amount, Action onFinish)
+    public void MakeItem(CraftItemSO craftItem, int amount, int id, Action onFinish)
     {
         gameObject.SetActive(true);
-        
-        slider.maxValue = craftItem.MakingTime;
-        slider.value = 0f;
         
         reminAmountTxt.text = $"{amount}";
         itemImage.sprite = craftItem.CraftItemData.IconImage;
         
         _craftItemSo = craftItem;
+        
+        makeTime = craftItem.MakingTime;
+        makeTime *= (1 - ReinforceManager.Instance.GetEfficient(ReinforceManager.Instance.GetCraftLevel(id)));
+        
         totalAmount = amount;
         finishEvent = onFinish;
+        
+        slider.maxValue = makeTime;
+        slider.value = 0f;
         
         StartCoroutine(nameof(MakeItemCoroutine));
     }
 
     private IEnumerator MakeItemCoroutine()
     {
-        makeTime = _craftItemSo.MakingTime;
-        
         for (int i = 1; i <= totalAmount; i++)//만들 아이템 총 갯수 
         {
-            for (int time = 1; time <= makeTime; time++)//아이템 1개 제작
+            for (int time = 1; time <= Mathf.RoundToInt(makeTime); time++)//아이템 1개 제작
             {
                 slider.value = time;
                 if (slider.value == slider.maxValue)

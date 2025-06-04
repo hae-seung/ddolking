@@ -79,11 +79,11 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
 
     #region ToggleCraftTable
 
-    public void OpenCraftTab(CraftManualType type, Action<CraftItemSO , int> makeItem)
+    public void OpenCraftTab(CraftManualType type,int id, Action<CraftItemSO , int> makeItem)
     {
         if (craftCanvas.IsOpen)
             return;
-        craftCanvas.OpenTable(type, makeItem);
+        craftCanvas.OpenTable(type, id, makeItem);
     }
 
     public void CloseCraftTab()

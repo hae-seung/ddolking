@@ -59,6 +59,9 @@ public class GrowObject : InteractionBehaviour
 
     protected override void Interact(Interactor interactor, Item currentGripItem = null)
     {
+        if (currentGripItem == null)
+            return;
+        
         if (currentGripItem.itemData is IGrowable growableItem && 
             growableItem.GetTypeCorrect(growType))
         {

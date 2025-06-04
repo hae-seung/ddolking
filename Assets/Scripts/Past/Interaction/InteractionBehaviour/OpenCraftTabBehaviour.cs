@@ -14,11 +14,24 @@ public class CraftTabBehaviour : InteractionBehaviour
 
     private bool IsMaking = false;
     private readonly string operate = "make";
-
+    
+    private int id;
+    
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         idleSprite = sr.sprite;
+    }
+
+    private void OnEnable()
+    {
+        id = ReinforceManager.Instance.RegisterStructure(craftManualType);
+    }
+    
+    private void OnDisable()
+    {
+        if(ReinforceManager.Instance != null)
+            ReinforceManager.Instance.UnRegisterStructure(id);
     }
 
     private void Start()
@@ -33,9 +46,10 @@ public class CraftTabBehaviour : InteractionBehaviour
         if (IsMaking)
             return;
         
-        UIManager.Instance.OpenCraftTab(craftManualType, (CraftItemSO craftItem, int amount) =>
+        UIManager.Instance.OpenCraftTab(craftManualType, id,
+            (CraftItemSO craftItem, int amount) =>
         {
-            makingItemUI.MakeItem(craftItem, amount, onMakingFinished);
+            makingItemUI.MakeItem(craftItem, amount, id ,onMakingFinished);
             IsMaking = true;
             
             
@@ -71,5 +85,6 @@ public class CraftTabBehaviour : InteractionBehaviour
             animator.enabled = false;
         }
     }
+    
     
 }

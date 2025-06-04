@@ -39,10 +39,22 @@ public class CraftTable : MonoBehaviour
     [SerializeField] private GameObject contentParent;
     [SerializeField] private GameObject craftManualItemBtnPrefab;
 
+    [Header("강화")] 
+    [SerializeField] private List<GameObject> stars;
+    [SerializeField] private Button upgradeBtn;
+    [SerializeField] private CraftReinforce reinforce;
+    private int craftTableId;
+    private int craftTableLevel;
+    
+    
+    [Header("아이템 이름")]
+    [SerializeField] private TextMeshProUGUI nameText;
+    
+    
     private Image image;
     private CraftManualSO manual;
     private DOTweenAnimation _doTweenAnimation;
-    [SerializeField] private TextMeshProUGUI nameText;
+   
     
     private List<CraftManualItemBtn> _btns = new();
     
@@ -51,15 +63,29 @@ public class CraftTable : MonoBehaviour
     {
         image = GetComponent<Image>();
         _doTweenAnimation = GetComponent<DOTweenAnimation>();
+        
+        upgradeBtn.onClick.AddListener(() =>
+        {
+            //강화 설명창 열고 id 넘기기
+            reinforce.OpenUI(craftTableId, UpdateReinforceState);
+        });
     }
 
-    public void OpenTable(CraftManualType type)
+    public void OpenTable(CraftManualType type, int id)//처음 테이블 오픈
     {
+        //강화매니저로부터 id를 통해 레벨 가져오기
+        craftTableLevel = ReinforceManager.Instance.GetCraftLevel(id);
+        upgradeBtn.interactable = craftTableLevel < 3;
+        for (int i = 0; i < stars.Count; i++)
+            stars[i].SetActive(i < craftTableLevel);
+        craftTableId = id;
+        
+        //기본세팅
         image.sprite = craftLogBackgroundSprite[type];
         manual = craftManualSo[type];
         _craftTableLog.SetImage(craftLogBackgroundSprite[type]);
         nameText.text = tableName[type];
-
+        
         
         //버튼 갯수 부족하면 버튼 추가
         if (_btns.Count < manual.CraftItems.Count)
@@ -100,4 +126,15 @@ public class CraftTable : MonoBehaviour
     {
         UIManager.Instance.CloseCraftTab();
     }
+
+    private void UpdateReinforceState()
+    {
+        int level = ReinforceManager.Instance.GetCraftLevel(craftTableId);
+        for (int i = 0; i < stars.Count; i++)
+            stars[i].SetActive(i < level);
+
+        if(level >=3)
+            upgradeBtn.gameObject.SetActive(false);
+    }
+    
 }
