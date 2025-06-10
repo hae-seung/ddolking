@@ -81,6 +81,8 @@ public class MonsterController : MonoBehaviour
         monster.StopMove();
     }
 
+    
+    
 
     public void PlayDeadAnim()
     {
@@ -92,12 +94,6 @@ public class MonsterController : MonoBehaviour
     {
         yield return dieTime;
         monster.DisableObject();
-    }
-    
-    
-    public AnimatorStateInfo GetAnimatorState(int layerIndex)
-    {
-        return animator.GetCurrentAnimatorStateInfo(layerIndex);
     }
 
     

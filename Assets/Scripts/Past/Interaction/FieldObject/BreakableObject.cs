@@ -27,6 +27,10 @@ public class BreakableObject : Interactable
 
     [Header("닷트윈")]
     [SerializeField] private DOTweenAnimation _doTweenAnimation;
+    
+    protected ReinforceStructureItem structureItem;
+
+    public ReinforceStructureItem StructureItem => structureItem;
 
     protected virtual void Start() => SetData();
 
@@ -225,12 +229,26 @@ public class BreakableObject : Interactable
         {
             if (!ObjectPoolManager.Instance.IsPoolRegistered(drop.DropItemId))
                 ObjectPoolManager.Instance.RegisterPrefab(drop.DropItemId, drop.DropItemPrefab);
-
+            
+            
             for (int i = 0; i < Random.Range(drop.MinAmount, drop.MaxAmount + 1); i++)
             {
-                Vector3 dropPosition = transform.position + new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0);
-                GameObject dropObj = ObjectPoolManager.Instance.SpawnObject(drop.DropItemId, dropPosition, Quaternion.identity);
-
+                Vector3 dropPosition = transform.position + new Vector3(
+                    Random.Range(-0.5f, 0.5f),
+                    Random.Range(-0.5f, 0.5f),
+                    0);
+                
+                DropObject dropObj = ObjectPoolManager.Instance.SpawnObject(
+                    drop.DropItemId,
+                    dropPosition, 
+                    Quaternion.identity).GetComponent<DropObject>();
+                
+                if (dropObj != null && structureItem != null)
+                {
+                    dropObj.OverrideItem(structureItem);
+                    Debug.Log($"id {structureItem.StructureId} 드랍!");
+                }
+                
                 dropObj?.transform.DOJump(dropPosition, 1f, 1, 0.8f).SetEase(Ease.OutBounce);
             }
         }
@@ -242,6 +260,8 @@ public class BreakableObject : Interactable
         breakCoroutine = null;
         waitBreakCoroutine = null;
 
+        structureItem = null; //초기화
+        
         drawOutline.onPointerExit -= HandlePointerExit;
         
         ObjectPoolManager.Instance.ReleaseObject(fieldObjectData.id, gameObject);
@@ -258,4 +278,6 @@ public class BreakableObject : Interactable
 
         drawOutline.SetPlayerNear(state);
     }
+
+   
 }

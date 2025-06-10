@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   craftManualType: 3
-  interactableObject: {fileID: 4288214352124890127}
+  structureItemData: {fileID: 11400000, guid: 981823911ee6a314094fa48ce68c4ad9, type: 2}
   makingItemUI: {fileID: 3174017686418565976}
 --- !u!95 &2289340191054273780
 Animator:

@@ -37,5 +37,6 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 512
-  debuff: {fileID: 0}
+  debuff: {fileID: 11400000, guid: 973e32c6a6fe6f84c9f8ddd2454e6834, type: 2}
+  isHandWeapon: 0
   fanAngle: 90

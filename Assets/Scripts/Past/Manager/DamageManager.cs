@@ -9,13 +9,16 @@ public class TypeDamage : SerializableDictionary<DamageType, DamageNumber>{}
 [System.Serializable]
 public class TypeEffect : SerializableDictionary<DamageType, GameObject>{}
 
+[System.Serializable]
+public class DebuffSprite : SerializableDictionary<DebuffType, Sprite>{}
+
 public class DamageManager : MonoBehaviour
 {
     public static DamageManager Instance;
     
-
     [SerializeField] private TypeDamage typeDamage = new TypeDamage();
     [SerializeField] private TypeEffect typeEffect = new TypeEffect();
+    [SerializeField] private DebuffSprite debuffSprite = new DebuffSprite();
     
     private void Awake()
     {
@@ -29,24 +32,33 @@ public class DamageManager : MonoBehaviour
 
     private void Start()
     {
-        //데미지 스킨이 아닌 히트 이펙트 프리팹
-        //스킨은 자체 에셋에서 풀링이 됨.
-        foreach (DamageType type in Enum.GetValues(typeof(DamageType)))
+        foreach (var kvp in typeEffect)
         {
-            if (typeEffect.TryGetValue(type, out GameObject effect))
+            DamageType type = kvp.Key;
+            GameObject effect = kvp.Value;
+
+            if (effect != null)
             {
                 ObjectPoolManager.Instance.RegisterPrefab((int)type, effect);
+                Debug.Log($"[DamageManager] Registered Effect: {type}");
             }
             else
             {
-                Debug.LogWarning($"[DamageManager] typeEffect에 '{type}' 이(가) 없습니다.");
+                Debug.LogWarning($"[DamageManager] Effect for {type} is null. Skipped.");
             }
         }
     }
+
 
     public DamageNumber GetDamageSkin(DamageType type)
     {
         return typeDamage[type];
     }
 
+    public Sprite GetDebuffImage(DebuffType type)
+    {
+        return debuffSprite[type];
+    }
+    
+    
 }

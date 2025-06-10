@@ -66,7 +66,7 @@ MonoBehaviour:
   defaultFov: 60
   fovCamera: {fileID: 0}
   cameraOverride: {fileID: 0}
-  enableNumber: 1
+  enableNumber: 0
   number: 99
   numberSettings:
     bold: 1
@@ -96,8 +96,8 @@ MonoBehaviour:
     - B
     suffixDigits: 030000000300000003000000
     maxDigits: 4
-  enableLeftText: 0
-  leftText: 
+  enableLeftText: 1
+  leftText: grow
   leftTextSettings:
     bold: 0
     italic: 0
@@ -197,7 +197,7 @@ MonoBehaviour:
   durationFadeIn: 0.2
   enableOffsetFadeIn: 0
   offsetFadeIn: {x: 0.5, y: 0}
-  enableScaleFadeIn: 1
+  enableScaleFadeIn: 0
   scaleFadeIn: {x: -1.5, y: 2}
   enableCrossScaleFadeIn: 0
   crossScaleFadeIn: {x: 1, y: 1.5}
@@ -207,11 +207,11 @@ MonoBehaviour:
   durationFadeOut: 0.2
   enableOffsetFadeOut: 0
   offsetFadeOut: {x: 0.5, y: 0}
-  enableScaleFadeOut: 1
+  enableScaleFadeOut: 0
   scaleFadeOut: {x: 0.5, y: 2}
   enableCrossScaleFadeOut: 0
   crossScaleFadeOut: {x: 1, y: 1.5}
-  enableShakeFadeOut: 1
+  enableShakeFadeOut: 0
   shakeOffsetFadeOut: {x: 0, y: 1.5}
   shakeFrequencyFadeOut: 2
   enableLerp: 1
@@ -750,7 +750,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <b>99</b>
+  m_text: grow
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b7ed27dbbbb27854091191e07bf2ff75, type: 2}
   m_sharedMaterial: {fileID: -8715813908995864186, guid: b7ed27dbbbb27854091191e07bf2ff75, type: 2}
@@ -759,8 +759,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278222591
-  m_fontColor: {r: 1, g: 0.49540052, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

@@ -217,9 +217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   craftManualType: 1
-  interactableObject: {fileID: 2963306898831143856}
+  structureItemData: {fileID: 11400000, guid: d584f157907439e40b43217435e95ba5, type: 2}
   makingItemUI: {fileID: 337024703315750349}
-  operateUI: {fileID: 0}
 --- !u!212 &3779801710175990074
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -12,15 +12,15 @@ public class DropObject : MonoBehaviour
     private float disableCollisionTime = 0.5f;
     
 
-    private void Awake()//인스턴스 생성 후 base.Awake로 마지막에 실행됨.
+    private void Awake()
     {
         _collider = GetComponentInChildren<Collider2D>();
+        item = itemData.CreateItem();
         dropObjectPrefab = itemData.DropObjectPrefab;
     }
 
     private void OnEnable()
     {
-        item = itemData.CreateItem();
         StartCoroutine(DisableCollisionTemporarily());
     }
     
@@ -73,4 +73,14 @@ public class DropObject : MonoBehaviour
     {
         ObjectPoolManager.Instance.ReleaseObject(itemData.ID, gameObject);
     }
+
+
+    
+
+    public void OverrideItem(ReinforceStructureItem item)
+    {
+        this.item = item;
+        item.SetAmount(1);
+    }
+    
 }

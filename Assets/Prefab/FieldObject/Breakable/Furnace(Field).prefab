@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   craftManualType: 2
-  interactableObject: {fileID: 7350339679657382419}
+  structureItemData: {fileID: 11400000, guid: 38fbbedcfbedaee45a226072b0824802, type: 2}
   makingItemUI: {fileID: 2008311709029572558}
 --- !u!208 &1910083217270125900
 NavMeshObstacle:

@@ -10,6 +10,7 @@ public class PlayerBuild : MonoBehaviour
     private bool isBuilding = false;
     private PreviewObject previewObject;
     private EstablishItemData establishItemData;
+    private EstablishItem establishItem;
     private Coroutine buildCoroutine;
     private bool buildComplete = false;
 
@@ -78,6 +79,7 @@ public class PlayerBuild : MonoBehaviour
 
         previewObject = Instantiate(establishItem.EstablishData.PreviewObject).GetComponent<PreviewObject>();
         establishItemData = establishItem.EstablishData;
+        this.establishItem = establishItem;
         
         gameObject.SetActive(true);
 
@@ -110,10 +112,14 @@ public class PlayerBuild : MonoBehaviour
             ObjectPoolManager.Instance.RegisterPrefab(itemId, establishItemData.EstablishObjectData.ownObject);
         }
 
-        ObjectPoolManager.Instance.SpawnObject(
+        InterBreakableObject interBreakableObject = ObjectPoolManager.Instance.SpawnObject(
             itemId,
             new Vector3(mousePosition.x, mousePosition.y, 0),
-            Quaternion.identity);
+            Quaternion.identity).GetComponent<InterBreakableObject>();
+
+        if(interBreakableObject)
+            interBreakableObject.SetEstablishItem(establishItem);
+        
         
         //빌딩 시스템off
         callback(true);

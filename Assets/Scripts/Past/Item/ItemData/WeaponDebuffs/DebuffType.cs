@@ -2,6 +2,7 @@
 
 public enum DebuffType
 {
-    none,
-    
+    burn,
+    ice,
+    bomb
 }

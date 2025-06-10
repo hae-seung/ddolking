@@ -4,13 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class CraftTableLevel
-{
-    public CraftManualType type;
-    public int level;
-    public bool isActive = false;
-}
-
 
 public class ReinforceManager : MonoBehaviour
 {
@@ -18,7 +11,7 @@ public class ReinforceManager : MonoBehaviour
     
     //구조물 강화
     [SerializeField] private CraftReinforceSO craftReinforceSo;
-    private Dictionary<int, CraftTableLevel> craftTables = new(); //id, 구조물
+    private Dictionary<int, int> craftTables = new(); //id, 레벨
     private Dictionary<int, Sprite> toolImages = new();//level, sprite
     private Dictionary<int, float> efficient = new();//level, float
     private Dictionary<int, ItemData> reinforceData = new();//level itemData
@@ -46,38 +39,18 @@ public class ReinforceManager : MonoBehaviour
         }
     }
 
-    public int RegisterStructure(CraftManualType type) 
+    public int RegisterStructure(int id)
     {
-        //강화된 구조물이 파괴되고 다시 설치되면 데이터 이전 필요
-        for (int i = 0; i < craftTables.Count; i++)
-        {
-            if (!craftTables[i].isActive && craftTables[i].type == type)
-            {
-                craftTables[i].isActive = true;
-                return i;
-            }
-        }
+        Debug.Log($"{id}를 등록할려 합니다");
         
-        //완전히 새로운 구조물
+        if (craftTables.ContainsKey(id))
+            return id;
+        
+        
         int lastNum = craftTables.Count;
-        
-        CraftTableLevel craftTableLevel = new CraftTableLevel
-        {
-            //초기화
-            type = type,
-            level = 0,
-            isActive = true
-        };
-
-        //딕셔너리 등록
-        craftTables[lastNum] = craftTableLevel;
+        craftTables[lastNum] = 0; //레벨 0으로 초기화
         
         return lastNum;
-    }
-
-    public void UnRegisterStructure(int id)
-    {
-        craftTables[id].isActive = false;
     }
     
     public Sprite GetToolImage(int level)
@@ -92,7 +65,7 @@ public class ReinforceManager : MonoBehaviour
 
     public int GetCraftLevel(int id)
     {
-        return craftTables[id].level;
+        return craftTables[id];
     }
 
     public ItemData GetReinforceNeedItemData(int level)
@@ -102,6 +75,6 @@ public class ReinforceManager : MonoBehaviour
 
     public void LevelUp(int id)
     {
-        craftTables[id].level++;
+        craftTables[id]++;
     }
 }

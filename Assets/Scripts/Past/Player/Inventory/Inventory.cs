@@ -57,6 +57,7 @@ public class Inventory : MonoBehaviour
 
     public int Add(Item item, int amount = 1)
     {
+        Debug.Log($"{item.itemData.ID} 아이템 인벤토리에 추가, {amount}갯수");
         int index;
         int initAmount = amount;
         

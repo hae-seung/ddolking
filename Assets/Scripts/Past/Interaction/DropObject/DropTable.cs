@@ -8,6 +8,8 @@ public class DropTable
     [SerializeField] private int minAmount;
     [SerializeField] private int maxAmount;
 
+
+    public Item DropItem => _itemData.CreateItem();
     public int DropItemId => _itemData.ID;
     public int MinAmount => minAmount;
     public int MaxAmount => maxAmount;

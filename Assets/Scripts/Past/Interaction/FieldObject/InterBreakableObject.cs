@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,7 @@ public class InterBreakableObject : BreakableObject
     [SerializeField] private GameObject interactionUI;
     [SerializeField] private InteractionBehaviour interactionBehaviour;
 
+    
 
     protected override void Start()
     {
@@ -32,5 +34,15 @@ public class InterBreakableObject : BreakableObject
     {
         base.SetInteractState(state);
         interactionUI.SetActive(state);
+    }
+
+    public void SetEstablishItem(EstablishItem item)
+    {
+        if (item is ReinforceStructureItem reinforceStructureItem && 
+            interactionBehaviour is CraftTabBehaviour craftTabBehaviour)
+        {
+            structureItem = reinforceStructureItem;
+            craftTabBehaviour.SetStructureData(structureItem);
+        }
     }
 }

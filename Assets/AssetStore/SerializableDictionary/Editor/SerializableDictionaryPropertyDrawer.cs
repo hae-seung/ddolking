@@ -14,6 +14,7 @@ using System;
 [CustomPropertyDrawer(typeof(ItemPrice))]
 [CustomPropertyDrawer(typeof(TypeDamage))]
 [CustomPropertyDrawer(typeof(TypeEffect))]
+[CustomPropertyDrawer(typeof(DebuffSprite))]
 
 
 

@@ -32,3 +32,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   debuff: {fileID: 0}
+  isHandWeapon: 1

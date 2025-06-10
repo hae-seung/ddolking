@@ -4,5 +4,6 @@ public enum StateType
     Chase,
     Attack,
     Injure,
-    Dead
+    Dead,
+    Frozen
 }

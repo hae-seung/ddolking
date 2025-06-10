@@ -55,6 +55,11 @@ public class ToolTipUI : MonoBehaviour
         
         if (item is IStatModifier statItem)
             SetStatText(statItem);
+
+        if (item is WeaponItem weaponItem)
+        {
+            Debug.Log(weaponItem.GetDebuffDescription());
+        }
     }
 
     private void SetEquipItemText(EquipItem equipItem)
