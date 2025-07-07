@@ -68,4 +68,15 @@ public abstract class WeaponItem : EquipItem, IDurabilityReduceable
 
         return "";
     }
+
+    public string GetNextDebuffDescription()
+    {
+        if (weaponBuffer != null)
+        {
+            return weaponBuffer.GetNextDebuffDescription();
+        }
+
+        return "";
+    }
+    
 }

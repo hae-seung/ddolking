@@ -146,9 +146,14 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
 
     #region ToggleShop
 
-    public void OpenShop(string shopType)
+    public void OpenShop(ShopType shopType)
     {
         shopCanvas.OpenShop(shopType);
+    }
+
+    public void CloseShop()
+    {
+        shopCanvas.CloseShop();
     }
     
     public void ShopWarn(int amount)
@@ -165,5 +170,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     }
 
     #endregion
+
+
     
 }

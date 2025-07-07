@@ -35,6 +35,10 @@ public class PlayerLevelManager : MonoBehaviour
 
     private void GainExperience(int experience)
     {
+        int experienceGetter = (int)GameEventsManager.Instance.statusEvents.GetStatValue(Stat.ExperienceGetter);
+
+        experience *= experienceGetter;
+        
         curExperience += experience;
         // check if we're ready to level up
         while (curExperience >= needExperienceToNextLevel)

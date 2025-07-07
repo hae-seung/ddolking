@@ -152,7 +152,6 @@ public class InventoryUI : MonoBehaviour
 
     private T RaycastAndGetFirstComponent<T>() where T : Component
     {
-       
         _rrList.Clear();
         _gr.Raycast(_ped, _rrList);
 

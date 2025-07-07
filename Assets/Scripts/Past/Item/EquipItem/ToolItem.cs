@@ -15,6 +15,7 @@ public class ToolItem : EquipItem, IDurabilityReduceable
     {
         return new ToolItem(EquipData as ToolItemData);
     }
+    
 
 
     public void ReduceDurability(float amount)
@@ -25,4 +26,6 @@ public class ToolItem : EquipItem, IDurabilityReduceable
             Inventory.Instance.RemoveItem(this);
         }
     }
+    
+    
 }

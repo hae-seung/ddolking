@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c605ceab893c614d9ebb6e207d0c9bd, type: 3}
+  m_Name: 6027VillageGard(Field)
+  m_EditorClassIdentifier: 
+  id: 6027
+  toolWear: 1
+  durability: 50
+  dropTable:
+  - _itemData: {fileID: 11400000, guid: 21218f8ffe724914ab664591541a0605, type: 2}
+    minAmount: 1
+    maxAmount: 1
+  ownObject: {fileID: 3600967236813467656, guid: 359775a07a9cd8f448245c0f7f945757, type: 3}

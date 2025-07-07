@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class BuffItem : ConsumeItem
 {
-    private int duration;
-    
     public BuffItemData BuffData { get; private set; }
     
     public BuffItem(BuffItemData data, int amount = 1) : base(data, amount)
     {
         BuffData = data;
-        duration = data.BuffDuration;
     }
 
     protected override CountableItem CreateItem()
@@ -21,8 +18,13 @@ public class BuffItem : ConsumeItem
 
     protected override bool UseItem()
     {
-        GameEventsManager.Instance.playerEvents.ApplyPortionBuff(statModifiers, duration);
-        Amount--;
-        return true;
+        if (GameEventsManager.Instance.playerEvents.ApplyPortionBuff(this))
+        {
+            Amount--;
+            return true;
+        }
+        
+        
+        return false;
     }
 }

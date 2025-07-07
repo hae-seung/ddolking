@@ -18,14 +18,14 @@ MonoBehaviour:
     \uC54A\uC9C0\uB9CC \uC4F8\uB9CC\uD558\uB2E4"
   _iconImage: {fileID: 21300000, guid: f1ebed3273e51ec4da2945ed19925490, type: 3}
   dropObjectPrefab: {fileID: 5026200416116847091, guid: 53c9830581b4cf94f92ba5839b5bd6cb, type: 3}
-  isEnhanceable: 0
+  isEnhanceable: 1
   itemclass: 3
   maxDurability: 50
   itemLevel: 0
   statModifier:
   - stat: 5
     increaseAmount: 5
-  enhancementLogic: {fileID: 0}
+  enhancementLogic: {fileID: 11400000, guid: 04f713fe5ff7e3b48b9027e460bf8158, type: 2}
   hitCount: 1
   attackCount: 1
   weaponConst: 1
@@ -33,5 +33,6 @@ MonoBehaviour:
   attackDelay: 0.8
   targetLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2560
   debuff: {fileID: 0}
+  isHandWeapon: 0

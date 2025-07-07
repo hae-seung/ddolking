@@ -35,9 +35,14 @@ public class PlayerHand : MonoBehaviour
         GameEventsManager.Instance.inputEvents.onInteractPressed += InteractPressed;
         GameEventsManager.Instance.inputEvents.onEnableInput += EnableInput;
         GameEventsManager.Instance.inputEvents.onDisableInput += DisableInput;
+        GameEventsManager.Instance.playerEvents.onGetHandItem += GetHandItem;
     }
-    
-    
+
+    private Item GetHandItem()
+    {
+        return currentGripItem;
+    }
+
 
     private void InteractPressed(InputAction.CallbackContext context)
     {

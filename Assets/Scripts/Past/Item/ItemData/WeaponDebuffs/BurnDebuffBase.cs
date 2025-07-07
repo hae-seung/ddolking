@@ -16,9 +16,8 @@ public class BurnDebuffBase : DebuffBase
     }
 
     public List<BurnLevelAmount> BurnLevelAmounts => burnLevelAmounts;
-
-
 }
+
 
 [System.Serializable]
 public class BurnLevelAmount

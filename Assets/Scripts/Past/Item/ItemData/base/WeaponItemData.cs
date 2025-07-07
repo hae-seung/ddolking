@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.UIElements;
+
 using UnityEngine;
 
 public abstract class WeaponItemData : EquipItemData
@@ -28,7 +26,7 @@ public abstract class WeaponItemData : EquipItemData
     [SerializeField] protected DebuffBase debuff;
 
 
-    [Header("맨손인 무기 만들때체크")]
+    [Header("내구도가 닳지 않아야 하는 무기일 경우 체크")]
     [SerializeField] public bool isHandWeapon = false;
     
     
@@ -43,5 +41,5 @@ public abstract class WeaponItemData : EquipItemData
     
     
     private string targetTag = "LivingEntity";
-
+    
 }

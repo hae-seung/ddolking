@@ -36,4 +36,12 @@ public class BombBuffer : WeaponBuffer
 
         return description;
     }
+
+    public override string GetNextDebuffDescription()
+    {
+        string description = $"{bombLevelAmounts[debuffLevel].afterBombTime} 후에 " +
+                             $"{bombLevelAmounts[debuffLevel].damage} 만큼의 1회 폭발 데미지를 고정으로 입힙니다.";
+
+        return description;
+    }
 }

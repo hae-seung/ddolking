@@ -44,4 +44,10 @@ public class IceBuffer : WeaponBuffer
         string description = $"{iceLevelAmounts[debuffLevel - 1].duration}동안 적의 움직임을 제한합니다";
         return description;
     }
+
+    public override string GetNextDebuffDescription()
+    {
+        string description = $"{iceLevelAmounts[debuffLevel].duration}동안 적의 움직임을 제한합니다";
+        return description;
+    }
 }

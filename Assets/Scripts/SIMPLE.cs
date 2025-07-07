@@ -1,15 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SIMPLE : MonoBehaviour
+public class SIMPLE : MonoBehaviour, IPointerEnterHandler
 {
-    
-
-    public void Click()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        
-        SceneManager.LoadScene("Past_2");
+        Debug.Log(gameObject.name);
     }
 }

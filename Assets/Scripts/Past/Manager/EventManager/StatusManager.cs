@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ public class StatusManager : MonoBehaviour
         //레벨로 성장 가능한 옵션들
         //-1은 제한 맥스레벨 제한 없음
         { Stat.MaxHP, new StatData(0, 50f, -1) },
-        { Stat.MaxEnergy, new StatData(0, 20f, 50) },
+        { Stat.MaxEnergy, new StatData(0, 5f, 50) },
         { Stat.Str, new StatData(0, 5f, -1) },
         { Stat.Critical, new StatData(0, 1f, 50) },
         { Stat.Speed, new StatData(0, 0.5f, 10) },
@@ -55,16 +56,17 @@ public class StatusManager : MonoBehaviour
 
     private void InitStatus()
     {
-        status[Stat.Defense] = 0f;
-        status[Stat.MaxHP] = 100f;
-        status[Stat.HP] = 100f;
-        status[Stat.MaxEnergy] = 100f;
-        status[Stat.Energy] = 10f;
-        status[Stat.Str] = 5f;
-        status[Stat.Critical] = 50f;
-        status[Stat.CriticalDamage] = 1.5f;
-        status[Stat.Speed] = 2f;
-        status[Stat.MineSpeed] = 5f;
+        status[Stat.Defense] = 0f; //0~1 : 0.1단위
+        status[Stat.MaxHP] = 100f;//1단위
+        status[Stat.HP] = 100f;//1단위
+        status[Stat.MaxEnergy] = 50f;//1단위
+        status[Stat.Energy] = 10f;//1단위
+        status[Stat.Str] = 5f;//1단위
+        status[Stat.Critical] = 50f; //지금은 50퍼센트 0~100 : 1단위
+        status[Stat.CriticalDamage] = 1.5f;//기본 1.5배 1 ~ 무한 : 0.5단위
+        status[Stat.Speed] = 2f; //1~7 : 0.5단위
+        status[Stat.MineSpeed] = 5f; //0.5단위
+        status[Stat.ExperienceGetter] = 1f; //1 ~ 무한 : 1단위
     }
     
     private StatData GetStatData(Stat targetStat)
@@ -105,18 +107,35 @@ public class StatusManager : MonoBehaviour
                 // 플레이어 사망 처리 로직 추가
                 Dead();
             }
-
+            else if (goalStat == Stat.Energy && newVal <= 0)
+            {
+                //마나가 0이 되면 모든 능력치 감소
+            }
+            
+            
             status[goalStat] = Mathf.Min(newVal, maxVal);
         }
         else if (goalStat == Stat.MaxHP || goalStat == Stat.MaxEnergy)
         {
-            float newMax = currentStat + amount;
+            //최소 1f보다는 높게
+            float newMax = Mathf.Max(currentStat + amount, 1f);
             status[goalStat] = newMax;
             AdjustCurrentStatIfExceedsMax(goalStat, newMax);
         }
-        else // 그 외의 스탯 (근력, 행운, 속도 등)
+        else if(goalStat == Stat.Speed)
         {
-            status[goalStat] = currentStat + amount;
+            //이동속도는 1~7 사이로만 고정
+            status[goalStat] = Math.Clamp(currentStat + amount, 1f, 7f);
+        }
+        else if(goalStat == Stat.Defense)
+        {
+            //방어율은 0~1 사이
+            status[goalStat] = Mathf.Clamp(currentStat + amount, 0, 1f);
+        }
+        else
+        {
+            //나머지는 최소 1
+            status[goalStat] = Mathf.Max(currentStat + amount, 1f);
         }
 
         GameEventsManager.Instance.statusEvents.StatChanged(goalStat, status[goalStat]);

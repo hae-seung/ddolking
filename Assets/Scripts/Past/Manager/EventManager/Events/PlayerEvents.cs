@@ -102,10 +102,35 @@ public class PlayerEvents
     }
 
 
-    public event Action<List<StatModifier>, int> onApplyPortionBuff;
-    public void ApplyPortionBuff(List<StatModifier> buffStats, int duration)
+    /// <summary>
+    /// 버프
+    /// </summary>
+    public event Func<BuffItem, bool> onApplyPortionBuff;
+    public bool ApplyPortionBuff(BuffItem buffItem)
     {
-        onApplyPortionBuff?.Invoke(buffStats, duration);
+        if (onApplyPortionBuff != null)
+            return onApplyPortionBuff.Invoke(buffItem);
+
+        return false;
+    }
+
+
+    public event Func<List<StatModifier> ,bool> onApplySchoolBuff;
+    public bool ApplySchoolBuff(List<StatModifier> schoolBuffs)
+    {
+        if (onApplySchoolBuff != null)
+            return onApplySchoolBuff.Invoke(schoolBuffs);
+
+        return false;
+    }
+
+
+    public event Func<Item> onGetHandItem;
+    public Item GetHandItem()
+    {
+        if (onGetHandItem != null)
+            return onGetHandItem.Invoke();
+        return null;
     }
 
 }

@@ -113,6 +113,7 @@ public class PastShop : MonoBehaviour
         
         exitBtn.onClick.AddListener(() =>
         {
+            UIManager.Instance.CloseShop();
             gameObject.SetActive(false);
             _popup.gameObject.SetActive(false);
         });

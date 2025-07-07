@@ -17,9 +17,9 @@ TagManager:
   - Interactable
   - Land
   - Farm
-  - LivingEntity
+  - Monster
   - Fishing
-  - 
+  - Animal
   - 
   - 
   - 

@@ -7,7 +7,6 @@ public class LineWeaponItem : WeaponItem
     private LineWeaponData data;
     
     
-    
     private RaycastHit2D[] cachedHits = new RaycastHit2D[10]; // 초기 크기
     private HashSet<Transform> uniqueTargets = new();
     private List<Transform> validTargets = new List<Transform>();

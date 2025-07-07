@@ -7,11 +7,9 @@ public abstract class WeaponBuffer
 {
     public DebuffBase currentDebuff { get; private set; }
     
-    
     private LivingEntity entity;
-    public int debuffLevel { get; protected set; }
+    public int debuffLevel { get; protected set; } //1렙 시작 최대 3렙 : 무기 1 3 5렙때 각 활성화
     private Coroutine _coroutine;
-
     
     
     public WeaponBuffer(DebuffBase data, int level)
@@ -28,7 +26,6 @@ public abstract class WeaponBuffer
     }
     
     
-    
     public void RemoveDebuff()
     {
         if (_coroutine != null)
@@ -37,17 +34,23 @@ public abstract class WeaponBuffer
             entity.OnEndDebuff();
         }
     }
-
+    
+    
     public void ApplyEffect(LivingEntity target)
     {
         entity = target;
         _coroutine = entity.StartCoroutine(OnDebuffStart(entity, RemoveDebuff));
     }
-
+    
+    
     protected abstract IEnumerator OnDebuffStart(IDamageable entity, UnityAction onEnd);
-
+    
+    
     public abstract WeaponBuffer CreateBuffer(int level);
-
+    
+    
     public abstract string GetDebuffDescription();
+
+    public abstract string GetNextDebuffDescription();
 }
 

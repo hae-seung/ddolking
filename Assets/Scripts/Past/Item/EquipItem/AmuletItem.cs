@@ -40,4 +40,5 @@ public class AmuletItem : EquipItem
     {
         return new AmuletItem(EquipData as AmuletItemData);
     }
+    
 }

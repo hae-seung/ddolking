@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class EnterMineBehaviour : InteractionBehaviour
 {
+    [TextArea]
     [SerializeField] private string mineName;
     [TextArea]
     [SerializeField] private string mainSpawnList;
     [SerializeField] private int resetTime;
     [SerializeField] private Transform minePos;
     [SerializeField] private Transform exitPos;
+
+    [Header("광산스포너등록")] 
+    [SerializeField] private MineSpawner spawner;
 
 
     private int remainTime;
@@ -41,6 +45,7 @@ public class EnterMineBehaviour : InteractionBehaviour
     private void EnterMine()
     {
         player.transform.position = minePos.position;
+        spawner.Spawn();
     }
     
     private void ExitMine()

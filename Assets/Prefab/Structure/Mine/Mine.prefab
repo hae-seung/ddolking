@@ -300,6 +300,7 @@ MonoBehaviour:
   resetTime: 0
   minePos: {fileID: 0}
   exitPos: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!1001 &7856066006527956522
 PrefabInstance:
   m_ObjectHideFlags: 0

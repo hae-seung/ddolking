@@ -24,8 +24,9 @@ public class RangeWeaponItem : WeaponItem
     
     public override void ExecuteAttack(Vector2 dir, Vector2 origin)
     {
+        
         int hitCountActual = Physics2D.OverlapCircleNonAlloc(origin, range, hitBuffer, targetLayer);
-
+        
         int validCount = 0;
         
         int criticalNum = (int)GameEventsManager.Instance.statusEvents.GetStatValue(Stat.Critical);
