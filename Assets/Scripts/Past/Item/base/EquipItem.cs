@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class EquipItem : Item, IStatModifier
 {
@@ -9,8 +10,11 @@ public abstract class EquipItem : Item, IStatModifier
 
     public int curLevel { get; private set; }
     protected float curDurability;
+    protected float maxDurability;
 
     public float CurDurability => curDurability;
+    public float MaxDurability => maxDurability;
+    
     public ItemEnhancementLogic GetLogic => itemEnhancementLogic;
     
     
@@ -18,6 +22,7 @@ public abstract class EquipItem : Item, IStatModifier
     {
         EquipData = data;
         curLevel = data.itemLevel;
+        maxDurability = data.maxDurability;
         curDurability = data.maxDurability;
         
         if (data.GetStatModifier() != null)
@@ -46,6 +51,9 @@ public abstract class EquipItem : Item, IStatModifier
         if (curLevel >= 5)
             return;
 
+        //내구도 증가
+        UpgradeDurability();
+        
         curLevel++;
 
         if (itemEnhancementLogic == null)
@@ -78,5 +86,31 @@ public abstract class EquipItem : Item, IStatModifier
         }
     }
 
-    
+    private void UpgradeDurability()
+    {
+        switch (EquipData.itemclass)
+        {
+            case ItemClass.Normal:
+                maxDurability += 30;
+                curDurability = Mathf.Clamp(curDurability + 30, 0, maxDurability);
+                break;
+            case ItemClass.Epic:
+                maxDurability += 50;
+                curDurability = Mathf.Clamp(curDurability + 50, 0, maxDurability);
+                break;
+            case ItemClass.Unique:
+                maxDurability += 80;
+                curDurability = Mathf.Clamp(curDurability + 80, 0, maxDurability);
+                break;
+            case ItemClass.Legend:
+                maxDurability += 100;
+                curDurability = Mathf.Clamp(curDurability + 100, 0, maxDurability);
+                break;
+        }
+    }
+
+    public void RepairDurability()
+    {
+        curDurability = Mathf.Clamp(curDurability + 10, 0, maxDurability);
+    }
 }

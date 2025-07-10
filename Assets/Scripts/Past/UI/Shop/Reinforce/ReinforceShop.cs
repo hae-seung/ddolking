@@ -25,7 +25,7 @@ public class ReinforceShop : MonoBehaviour
         });
         
         upgradeBtn.onClick.AddListener(UpgradeStart);
-        upgradeBtn.enabled = false;
+        upgradeBtn.interactable = false;
     }
 
     private void UpgradeStart()
@@ -39,23 +39,14 @@ public class ReinforceShop : MonoBehaviour
         
         if (item.curLevel >= 5)
         {
-            upgradeBtn.enabled = false;
+            upgradeBtn.interactable = false;
         }
         
         upgradeItemSet.UpdateSet(item);
         upgradeGoods.UpdateSet(item);
         explain.UpdateSet(item);
-        
-        if (upgradeGoods.CanUpgrade)
-            upgradeBtn.enabled = true;
-        
-        
     }
-
-    public void OnEnable()
-    {
-        Init();
-    }
+    
 
     public void OpenShop()
     {
@@ -64,28 +55,30 @@ public class ReinforceShop : MonoBehaviour
 
     private void Init()
     {
-        itemList.UpdateSlot();
+        itemList.InitSlot();
         upgradeItemSet.Init();
         upgradeGoods.Init();
         explain.Init();
+
+        upgradeBtn.interactable = false;
+        
+        gameObject.SetActive(true);
     }
 
 
+    
+    //강화할 아이템을 골랐을 때
     public void UpdateAll(ReinforceSlot slot)
     {
         curSlot = slot;
         item = slot.GetItem() as EquipItem;
-        
-        if(item == null)
-            Debug.Log("아닌뎅"); 
         
         //모든 업데이트 시작
         upgradeItemSet.UpdateSet(item);
         upgradeGoods.UpdateSet(item);
         explain.UpdateSet(item);
 
-        if (upgradeGoods.CanUpgrade)
-            upgradeBtn.enabled = true;
+        upgradeBtn.interactable = upgradeGoods.CanUpgrade;
     }
     
 }

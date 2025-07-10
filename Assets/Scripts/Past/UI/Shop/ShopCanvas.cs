@@ -7,6 +7,7 @@ public class ShopCanvas : MonoBehaviour
 {
     [SerializeField] private PastShop pastShop;
     [SerializeField] private ReinforceShop reinforceShop;
+    [SerializeField] private DurabilityShop durabilityShop;
     [SerializeField] private ShopPopup _popup;
     [SerializeField] private WarnPopup warnPopup;
     
@@ -35,6 +36,9 @@ public class ShopCanvas : MonoBehaviour
                 break;
             case ShopType.reinforce:
                 reinforceShop.OpenShop();
+                break;
+            case ShopType.durability:
+                durabilityShop.OpenShop();
                 break;
         }
     }

@@ -15,6 +15,7 @@ public class UpgradeItemExplain : MonoBehaviour
     [SerializeField] private GameObject debuffObject;
     [SerializeField] private TextMeshProUGUI currentDebuffTxt;
     [SerializeField] private TextMeshProUGUI nextDebuffTxt;
+    [SerializeField] private TextMeshProUGUI durabilityAmountTxt;
 
 
     private EquipItem equipItem;
@@ -27,6 +28,7 @@ public class UpgradeItemExplain : MonoBehaviour
         debuffObject.SetActive(false);
         currentDebuffTxt.text = "";
         nextDebuffTxt.text = "";
+        durabilityAmountTxt.text = "";
     }
 
     
@@ -37,9 +39,29 @@ public class UpgradeItemExplain : MonoBehaviour
         UpdateClass();
         UpdateName();
         UpdateStat();
+        UpdateDurability();
         UpdateDebuff();
         
         scrollViewObject.SetActive(true);
+    }
+
+    private void UpdateDurability()
+    {
+        switch (equipItem.EquipData.itemclass)
+        {
+            case ItemClass.Normal:
+                durabilityAmountTxt.text = "내구도 30증가";
+                break;
+            case ItemClass.Epic:
+                durabilityAmountTxt.text = "내구도 50증가";
+                break;
+            case ItemClass.Unique:
+                durabilityAmountTxt.text = "내구도 80증가";
+                break;
+            case ItemClass.Legend:
+                durabilityAmountTxt.text = "내구도 100증가";
+                break;
+        }
     }
 
     private void UpdateDebuff()

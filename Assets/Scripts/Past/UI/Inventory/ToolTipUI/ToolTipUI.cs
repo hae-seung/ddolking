@@ -92,7 +92,7 @@ public class ToolTipUI : MonoBehaviour
 
     private void SetDurabilityText(EquipItem equipItem)
     {
-        durabilityTxt.text = $"{equipItem.CurDurability} / {equipItem.EquipData.maxDurability}";
+        durabilityTxt.text = $"{equipItem.CurDurability} / {equipItem.MaxDurability}";
         durabilityTxt.gameObject.SetActive(true);
     }
 

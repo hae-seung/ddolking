@@ -20,12 +20,6 @@ public class ItemList : MonoBehaviour
     private GraphicRaycaster gr;
     private PointerEventData ped;
     private List<RaycastResult> rrList = new List<RaycastResult>();
-        
-        
-    private void Update()
-    {
-        HandlePointerDown();
-    }
 
 
     private void Start()
@@ -33,19 +27,26 @@ public class ItemList : MonoBehaviour
         ped = new PointerEventData(EventSystem.current);
     }
 
+    private void Update()
+    {
+        HandlePointerDown();
+    }
+    
+
     private void Init()
     {
         //모든 슬롯 끄기
         for (int i = 0; i < slots.Count; i++)
             slots[i].gameObject.SetActive(false);
+        
+        currentSlot?.TurnOff();
+        currentSlot = null;
     }
     
     
-    public void UpdateSlot()
+    public void InitSlot()
     {
         Init();
-    
-        Debug.Log("켜져라");
         
         int inventorySlotCnt = Inventory.Instance.SlotCnt;
         int currentSlotIndex = 0;
