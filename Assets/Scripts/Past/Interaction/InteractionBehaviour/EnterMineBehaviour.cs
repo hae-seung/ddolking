@@ -12,6 +12,7 @@ public class EnterMineBehaviour : InteractionBehaviour
     [SerializeField] private int resetTime;
     [SerializeField] private Transform minePos;
     [SerializeField] private Transform exitPos;
+    [SerializeField] private Color mineColor;
 
     [Header("광산스포너등록")] 
     [SerializeField] private MineSpawner spawner;
@@ -30,7 +31,7 @@ public class EnterMineBehaviour : InteractionBehaviour
     protected override void Interact(Interactor interactor, Item currentGripItem = null)
     {
         player = interactor;
-        UIManager.Instance.OpenMineUI(mineName, mainSpawnList, remainTime,EnterMine ,ExitMine);
+        UIManager.Instance.OpenMineUI(mineName, mainSpawnList, remainTime, EnterMine ,ExitMine);
     }
 
 
@@ -44,12 +45,14 @@ public class EnterMineBehaviour : InteractionBehaviour
 
     private void EnterMine()
     {
+        GameEventsManager.Instance.playerEvents.MineEnter(mineColor);
         player.transform.position = minePos.position;
         spawner.Spawn();
     }
     
     private void ExitMine()
     {
+        GameEventsManager.Instance.playerEvents.ExitMine();
         remainTime = resetTime;
         player.transform.position = exitPos.position;
     }

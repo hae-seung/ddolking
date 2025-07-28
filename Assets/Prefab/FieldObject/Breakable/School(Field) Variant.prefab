@@ -170,6 +170,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: School(Field) Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3866539883220491495, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3901479124331710647, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.01

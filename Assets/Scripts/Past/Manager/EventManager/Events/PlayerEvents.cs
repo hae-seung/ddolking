@@ -87,11 +87,11 @@ public class PlayerEvents
     }
 
 
-    public event Action onMineEnter;
+    public event Action<Color> onMineEnter;
 
-    public void MineEnter()
+    public void MineEnter(Color color)
     {
-        onMineEnter?.Invoke();
+        onMineEnter?.Invoke(color);
     }
 
     public event Action onMineExit;

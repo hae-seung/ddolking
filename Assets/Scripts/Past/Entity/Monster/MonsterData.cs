@@ -20,6 +20,9 @@ public class MonsterData : EntityData
     [SerializeField] private float sightRange;
     [SerializeField] private float attackRange;
 
+    [Header("강화배율")] 
+    [SerializeField] private float levelRatio;
+
     
     public bool IsAdCarry => isAdCarry;
     public float RunSpeed => runSpeed;
@@ -29,4 +32,5 @@ public class MonsterData : EntityData
     public float BodyDamage => bodyDamage;
     public float SightRange => sightRange;
     public float AttackRange => attackRange;
+    public float LevelRatio => levelRatio;
 }

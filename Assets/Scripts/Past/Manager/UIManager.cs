@@ -15,6 +15,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     [SerializeField] private ShopCanvas shopCanvas;
     [SerializeField] private TransitionUI transitionUI;
     [SerializeField] private MineUI mineUI;
+    [SerializeField] private DungeonUI dungeonUI;
 
     private bool disableInput = false;
     
@@ -166,11 +167,30 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
 
     public void OpenMineUI(string name, string list,int remainTime ,Action EnterMine, Action ExitMine)
     {
-        mineUI.OpenMineUI(name, list, remainTime,EnterMine, ExitMine);
+        mineUI.OpenMineUI(name, list, remainTime, EnterMine, ExitMine);
     }
 
     #endregion
 
+
+    #region DungeonUI
+
+    public void OpenDungeonUI(string name, string explain, int remainTime, int sweepLimitTime,
+        bool isSweepable, bool hasFirstClear,
+        Action EnterDungeon, Action ExitDungeon)
+    {
+        dungeonUI.OpenDungeonUI(name, explain, remainTime, sweepLimitTime,
+            isSweepable, hasFirstClear,
+            EnterDungeon, ExitDungeon);
+        
+    }
+
+    public void OpenDungeonSweepList(bool isSweepable, List<SweepReward> rewards)
+    {
+        dungeonUI.OpenSweepRewards(isSweepable, rewards);
+    }
+
+    #endregion
 
     
 }

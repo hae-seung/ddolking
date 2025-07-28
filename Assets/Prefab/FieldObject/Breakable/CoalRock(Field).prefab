@@ -54,7 +54,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 0fa7babb9790fd84a909e725b6bfdcad, type: 3}
     - target: {fileID: 3047805321231605043, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_Name
-      value: CoalRock
+      value: CoalRock(Field)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866539883220491495, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6438894617053200630, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size

@@ -1,102 +1,284 @@
 fileFormatVersion: 2
 guid: 7d04e398276099d4cbb6f9aafdc4caeb
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Body
-    100002: //RootNode
-    100004: Rig
-    100006: Rig Arm L1
-    100008: Rig Arm L2
-    100010: Rig Arm R1
-    100012: Rig Arm R2
-    100014: Rig Body
-    100016: Rig Cloth B1
-    100018: Rig Cloth B1 2
-    100020: Rig Cloth B1 3
-    100022: Rig Cloth B2
-    100024: Rig Cloth B2 2
-    100026: Rig Cloth B2 3
-    100028: Rig Cloth B3
-    100030: Rig Cloth B3 2
-    100032: Rig Cloth B3 3
-    100034: Rig Cloth B4
-    100036: Rig Cloth B4 2
-    100038: Rig Cloth B4 3
-    100040: Rig Cloth F1
-    100042: Rig Cloth F1 2
-    100044: Rig Cloth F1 3
-    100046: Rig Cloth F2
-    100048: Rig Cloth F2 2
-    100050: Rig Cloth F2 3
-    100052: Rig Cloth F3
-    100054: Rig Cloth F3 2
-    100056: Rig Cloth F3 3
-    100058: Rig Cloth F4
-    100060: Rig Cloth F4 2
-    100062: Rig Cloth F4 3
-    100064: Rig Cloth F5
-    100066: Rig Cloth F5 2
-    100068: Rig Cloth F5 3
-    100070: Rig Expression
-    100072: Rig Expression Attack 1
-    100074: Rig Expression Attack 2
-    100076: Rig Expression Dead
-    100078: Rig Expression Injured
-    100080: Rig Expression Normal
-    100082: Rig Head
-    100084: Rig Root
-    400000: Body
-    400002: //RootNode
-    400004: Rig
-    400006: Rig Arm L1
-    400008: Rig Arm L2
-    400010: Rig Arm R1
-    400012: Rig Arm R2
-    400014: Rig Body
-    400016: Rig Cloth B1
-    400018: Rig Cloth B1 2
-    400020: Rig Cloth B1 3
-    400022: Rig Cloth B2
-    400024: Rig Cloth B2 2
-    400026: Rig Cloth B2 3
-    400028: Rig Cloth B3
-    400030: Rig Cloth B3 2
-    400032: Rig Cloth B3 3
-    400034: Rig Cloth B4
-    400036: Rig Cloth B4 2
-    400038: Rig Cloth B4 3
-    400040: Rig Cloth F1
-    400042: Rig Cloth F1 2
-    400044: Rig Cloth F1 3
-    400046: Rig Cloth F2
-    400048: Rig Cloth F2 2
-    400050: Rig Cloth F2 3
-    400052: Rig Cloth F3
-    400054: Rig Cloth F3 2
-    400056: Rig Cloth F3 3
-    400058: Rig Cloth F4
-    400060: Rig Cloth F4 2
-    400062: Rig Cloth F4 3
-    400064: Rig Cloth F5
-    400066: Rig Cloth F5 2
-    400068: Rig Cloth F5 3
-    400070: Rig Expression
-    400072: Rig Expression Attack 1
-    400074: Rig Expression Attack 2
-    400076: Rig Expression Dead
-    400078: Rig Expression Injured
-    400080: Rig Expression Normal
-    400082: Rig Head
-    400084: Rig Root
-    2100000: 'Material #20'
-    4300000: Body
-    7400000: Ghost - Injured Back
-    9500000: //RootNode
-    13700000: Body
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Body
+  - first:
+      1: 100002
+    second: //RootNode
+  - first:
+      1: 100004
+    second: Rig
+  - first:
+      1: 100006
+    second: Rig Arm L1
+  - first:
+      1: 100008
+    second: Rig Arm L2
+  - first:
+      1: 100010
+    second: Rig Arm R1
+  - first:
+      1: 100012
+    second: Rig Arm R2
+  - first:
+      1: 100014
+    second: Rig Body
+  - first:
+      1: 100016
+    second: Rig Cloth B1
+  - first:
+      1: 100018
+    second: Rig Cloth B1 2
+  - first:
+      1: 100020
+    second: Rig Cloth B1 3
+  - first:
+      1: 100022
+    second: Rig Cloth B2
+  - first:
+      1: 100024
+    second: Rig Cloth B2 2
+  - first:
+      1: 100026
+    second: Rig Cloth B2 3
+  - first:
+      1: 100028
+    second: Rig Cloth B3
+  - first:
+      1: 100030
+    second: Rig Cloth B3 2
+  - first:
+      1: 100032
+    second: Rig Cloth B3 3
+  - first:
+      1: 100034
+    second: Rig Cloth B4
+  - first:
+      1: 100036
+    second: Rig Cloth B4 2
+  - first:
+      1: 100038
+    second: Rig Cloth B4 3
+  - first:
+      1: 100040
+    second: Rig Cloth F1
+  - first:
+      1: 100042
+    second: Rig Cloth F1 2
+  - first:
+      1: 100044
+    second: Rig Cloth F1 3
+  - first:
+      1: 100046
+    second: Rig Cloth F2
+  - first:
+      1: 100048
+    second: Rig Cloth F2 2
+  - first:
+      1: 100050
+    second: Rig Cloth F2 3
+  - first:
+      1: 100052
+    second: Rig Cloth F3
+  - first:
+      1: 100054
+    second: Rig Cloth F3 2
+  - first:
+      1: 100056
+    second: Rig Cloth F3 3
+  - first:
+      1: 100058
+    second: Rig Cloth F4
+  - first:
+      1: 100060
+    second: Rig Cloth F4 2
+  - first:
+      1: 100062
+    second: Rig Cloth F4 3
+  - first:
+      1: 100064
+    second: Rig Cloth F5
+  - first:
+      1: 100066
+    second: Rig Cloth F5 2
+  - first:
+      1: 100068
+    second: Rig Cloth F5 3
+  - first:
+      1: 100070
+    second: Rig Expression
+  - first:
+      1: 100072
+    second: Rig Expression Attack 1
+  - first:
+      1: 100074
+    second: Rig Expression Attack 2
+  - first:
+      1: 100076
+    second: Rig Expression Dead
+  - first:
+      1: 100078
+    second: Rig Expression Injured
+  - first:
+      1: 100080
+    second: Rig Expression Normal
+  - first:
+      1: 100082
+    second: Rig Head
+  - first:
+      1: 100084
+    second: Rig Root
+  - first:
+      4: 400000
+    second: Body
+  - first:
+      4: 400002
+    second: //RootNode
+  - first:
+      4: 400004
+    second: Rig
+  - first:
+      4: 400006
+    second: Rig Arm L1
+  - first:
+      4: 400008
+    second: Rig Arm L2
+  - first:
+      4: 400010
+    second: Rig Arm R1
+  - first:
+      4: 400012
+    second: Rig Arm R2
+  - first:
+      4: 400014
+    second: Rig Body
+  - first:
+      4: 400016
+    second: Rig Cloth B1
+  - first:
+      4: 400018
+    second: Rig Cloth B1 2
+  - first:
+      4: 400020
+    second: Rig Cloth B1 3
+  - first:
+      4: 400022
+    second: Rig Cloth B2
+  - first:
+      4: 400024
+    second: Rig Cloth B2 2
+  - first:
+      4: 400026
+    second: Rig Cloth B2 3
+  - first:
+      4: 400028
+    second: Rig Cloth B3
+  - first:
+      4: 400030
+    second: Rig Cloth B3 2
+  - first:
+      4: 400032
+    second: Rig Cloth B3 3
+  - first:
+      4: 400034
+    second: Rig Cloth B4
+  - first:
+      4: 400036
+    second: Rig Cloth B4 2
+  - first:
+      4: 400038
+    second: Rig Cloth B4 3
+  - first:
+      4: 400040
+    second: Rig Cloth F1
+  - first:
+      4: 400042
+    second: Rig Cloth F1 2
+  - first:
+      4: 400044
+    second: Rig Cloth F1 3
+  - first:
+      4: 400046
+    second: Rig Cloth F2
+  - first:
+      4: 400048
+    second: Rig Cloth F2 2
+  - first:
+      4: 400050
+    second: Rig Cloth F2 3
+  - first:
+      4: 400052
+    second: Rig Cloth F3
+  - first:
+      4: 400054
+    second: Rig Cloth F3 2
+  - first:
+      4: 400056
+    second: Rig Cloth F3 3
+  - first:
+      4: 400058
+    second: Rig Cloth F4
+  - first:
+      4: 400060
+    second: Rig Cloth F4 2
+  - first:
+      4: 400062
+    second: Rig Cloth F4 3
+  - first:
+      4: 400064
+    second: Rig Cloth F5
+  - first:
+      4: 400066
+    second: Rig Cloth F5 2
+  - first:
+      4: 400068
+    second: Rig Cloth F5 3
+  - first:
+      4: 400070
+    second: Rig Expression
+  - first:
+      4: 400072
+    second: Rig Expression Attack 1
+  - first:
+      4: 400074
+    second: Rig Expression Attack 2
+  - first:
+      4: 400076
+    second: Rig Expression Dead
+  - first:
+      4: 400078
+    second: Rig Expression Injured
+  - first:
+      4: 400080
+    second: Rig Expression Normal
+  - first:
+      4: 400082
+    second: Rig Head
+  - first:
+      4: 400084
+    second: Rig Root
+  - first:
+      21: 2100000
+    second: Material #20
+  - first:
+      43: 4300000
+    second: Body
+  - first:
+      74: 7400000
+    second: Ghost - Injured Back
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Body
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -105,6 +287,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -125,6 +308,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Ghost - Injured Back
       takeName: Take 001
+      internalID: 0
       firstFrame: 0
       lastFrame: 35
       wrapMode: 0
@@ -145,7 +329,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.74647886
+        functionName: OnAnimationEnd
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -157,25 +348,36 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -184,10 +386,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -197,13 +399,19 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

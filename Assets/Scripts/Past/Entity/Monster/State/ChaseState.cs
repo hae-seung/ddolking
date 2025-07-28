@@ -65,6 +65,6 @@ public class ChaseState : BaseState
     {
         timer = 0f;
         isRunning = true;
-        walkTime = Random.Range(2f, 4f);
+        runTime = Random.Range(2f, 4f);
     }
 }

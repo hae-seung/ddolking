@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0998426caba6f8418dd340f4f83fa51, type: 3}
+  m_Name: 7004ArcherSkeleton
+  m_EditorClassIdentifier: 
+  entityId: 7004
+  hp: 100
+  toolWear: 0.1
+  moveSpeed: 1
+  defense: 0.1
+  entityPrefab: {fileID: 5578908736227098546, guid: 39849077497b2e140837313662135ba9, type: 3}
+  dropTable: {fileID: 11400000, guid: 27503a6807f37404da43acaca4421474, type: 2}
+  isAdCarry: 1
+  runSpeed: 1
+  acc: 0.25
+  attackDelay: 1
+  attackDamage: 1
+  bodyDamage: 1
+  sightRange: 10
+  attackRange: 5
+  levelRatio: 0.5

@@ -37,6 +37,7 @@ public class MonsterController : MonoBehaviour
 
     public void ChasePlayer(bool isRunning)
     {
+        Debug.Log("ChasePlayer 호출됨. isRunning: " + isRunning); // 이 줄 추가
         animator.SetFloat(movingBlend, isRunning ? 1.0f : 0.5f);
         monster.ChasePlayer(isRunning);
     }

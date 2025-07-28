@@ -88,6 +88,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cooker(Field) Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3866539883220491495, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4494496052428625566, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0.013

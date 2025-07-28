@@ -21,10 +21,9 @@ public class DayManager : MonoBehaviour
     private int hour;
 
     
-    [SerializeField] private Color mineColor;
+    private Color mineColor;
     private bool isMine = false;
     private Color tempColor;
-    
     
     private void Awake()
     {
@@ -33,6 +32,8 @@ public class DayManager : MonoBehaviour
         currentHour = GetCurrentTime();
         
         GameEventsManager.Instance.dayEvents.onGetCurrentTime += GetCurrentTime;
+        
+        
         GameEventsManager.Instance.playerEvents.onMineEnter += EnterMine;
         GameEventsManager.Instance.playerEvents.onMineExit += ExitMine;
     }
@@ -40,6 +41,7 @@ public class DayManager : MonoBehaviour
     private void Start()
     {
         //todo : 저장된 timeOfDay 불러오기
+        
         GameEventsManager.Instance.dayEvents.ChangeDay(currentDay);
         GameEventsManager.Instance.dayEvents.ChangeTime(currentHour);
     }
@@ -51,7 +53,7 @@ public class DayManager : MonoBehaviour
 
         if (timeOfDay >= 24f)
         {
-            timeOfDay = 0f; // 하루가 끝나면 다시 0시로 돌아갑니다.
+            timeOfDay = 0f; // 하루가 끝나면 다시 0시로
             currentDay++;
             GameEventsManager.Instance.dayEvents.ChangeDay(currentDay);
         }
@@ -61,6 +63,7 @@ public class DayManager : MonoBehaviour
         if (hour != currentHour)
         {
             currentHour = hour;
+            //한시간 단위로 업데이트
             GameEventsManager.Instance.dayEvents.ChangeTime(currentHour);
         }
         
@@ -108,11 +111,11 @@ public class DayManager : MonoBehaviour
     }
 
 
-    private void EnterMine()
+    private void EnterMine(Color color)
     {
         isMine = true;
         tempColor = globalLight.color;
-        globalLight.color = mineColor;
+        globalLight.color = color;
     }
 
     private void ExitMine()

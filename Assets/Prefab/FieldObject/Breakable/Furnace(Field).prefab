@@ -306,11 +306,11 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.1}
+  m_Extents: {x: 0.5, y: 0.9, z: 0.00001}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: -0.2, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
 --- !u!95 &7708691668692826132
 Animator:
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 2995761163435612237}
   - component: {fileID: 3020447706648671512}
   - component: {fileID: 1795521171774747742}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: MouseSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

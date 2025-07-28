@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SmallBush(F)
       objectReference: {fileID: 0}
+    - target: {fileID: 3866539883220491495, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 6438894617053200630, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -226,6 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 797b71a1053332345af05d2ec0b69e7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  growType: 0
   growTime: 1
   spawnFieldObject: {fileID: 11400000, guid: 868cbd73918a5524c91fa17992e895e9, type: 2}
 --- !u!114 &8549810797574222975 stripped

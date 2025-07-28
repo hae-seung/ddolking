@@ -40,7 +40,6 @@ public class ObjectPoolManager : MonoBehaviour
             OnDestroyPoolObject,
             false, defaultCapacity, maxPoolSize
         );
-        
     }
 
     // 아이템 생성 (Instantiate)

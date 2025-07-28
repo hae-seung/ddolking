@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MineUI : MonoBehaviour
 {
-    [Header("구성요소")]
+    [Header("구성요소")] 
     [SerializeField] private TextMeshProUGUI mineName;
     [SerializeField] private TextMeshProUGUI spawnList;
     [SerializeField] private TextMeshProUGUI remainTime;
@@ -38,7 +38,6 @@ public class MineUI : MonoBehaviour
             EnterMine?.Invoke();
             UseTicket();
             exitBtn.gameObject.SetActive(true);
-            GameEventsManager.Instance.playerEvents.MineEnter();
             UIManager.Instance.StartTransition();
         });
 
@@ -46,7 +45,6 @@ public class MineUI : MonoBehaviour
 
         exitBtn.onClick.AddListener(() =>
         {
-            GameEventsManager.Instance.playerEvents.ExitMine();
             UIManager.Instance.StartTransition();
             ExitMine?.Invoke();
             exitBtn.gameObject.SetActive(false);
@@ -96,6 +94,7 @@ public class MineUI : MonoBehaviour
 
         
         exitBtn.gameObject.SetActive(false);//나가기 버튼은 광산 입장했을때 활성화
+        
         
         _doTweenAnimation.DORestartById("show");
     }

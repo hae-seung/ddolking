@@ -39,28 +39,28 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
 
     protected virtual void Awake()
     {
-        hp = EntityData.Hp;
-        toolWear = EntityData.ToolWear;
-
         healthSlider.maxValue = hp;
         healthSlider.value = hp;
     }
 
     protected virtual void OnEnable()
     {
-        healthSlider.maxValue = hp;
-        healthSlider.value = hp;
-        healthSlider.gameObject.SetActive(true);
-
         hasDebuff = false;
         overrideSpeed = false;
         debuffIcon.gameObject.SetActive(false);
+        
+        healthSlider.maxValue = hp;
+        healthSlider.value = hp;
+        healthSlider.gameObject.SetActive(true);
     }
 
     public virtual void StopMove()
     {
-        agent.isStopped = true;
-        agent.speed = 0f;
+        if (agent != null)
+        {
+            agent.enabled = false;  // 비활성화하여 이동을 멈추게 함
+            agent.speed = 0f;       // 속도 0으로 설정
+        }
     }
 
     public virtual void MoveRandom() { }
@@ -73,7 +73,8 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         damage *= (1 - defense);
         hp -= damage;
         healthSlider.value -= damage;
-
+        
+        
         if (hp <= 0)
         {
             OnDead();
@@ -124,7 +125,6 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
 
     public void OnEndDebuff()
     {
-        Debug.Log("버프가 끝나서 아이콘을 끕니다");
         debuffIcon.gameObject.SetActive(false);
         hasDebuff = false;
         overrideSpeed = false;
@@ -133,6 +133,11 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
 
     private void OnDead()
     {
+        if (agent != null)
+        {
+            agent.enabled = false; // 몬스터가 죽었을 때 비활성화
+        }
+
         healthSlider.gameObject.SetActive(false);
         buffer?.RemoveDebuff();
         onDead?.Invoke();
@@ -179,4 +184,8 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         overrideSpeed = false;
         agent.speed = EntityData.MoveSpeed;
     }
+    
+    public virtual void SetTarget(Player player, Transform pos) {}
+    
+    public virtual void SetLevel(int level) {}
 }
