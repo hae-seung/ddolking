@@ -212,7 +212,7 @@
                     "name": "",
                     "id": "4cf6912d-e1a5-4262-ac86-6d4ce20f373a",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "Hold(duration=0.15,pressPoint=0.1),Press(pressPoint=0.1,behavior=2)",
+                    "interactions": "Hold(duration=0.2,pressPoint=0.1),Press(pressPoint=0.1,behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "Interact",

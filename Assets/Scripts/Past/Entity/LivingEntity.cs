@@ -35,7 +35,9 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
     private bool hasDebuff;
     protected bool overrideSpeed = false;
 
-    protected virtual EntityData EntityData => null;
+
+    protected EntityData data;
+    protected virtual EntityData EntityData => data;
 
     protected virtual void Awake()
     {
@@ -149,7 +151,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         DropItem(EntityData);
 
         if (!ObjectPoolManager.Instance.IsPoolRegistered(entityId))
-            ObjectPoolManager.Instance.RegisterPrefab(entityId, gameObject);
+            ObjectPoolManager.Instance.RegisterPrefab(entityId, data.EntityPrefab);
 
         ObjectPoolManager.Instance.ReleaseObject(entityId, gameObject);
     }
@@ -183,6 +185,16 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
     {
         overrideSpeed = false;
         agent.speed = EntityData.MoveSpeed;
+    }
+
+    public void ReleasePool()
+    {
+        if (!ObjectPoolManager.Instance.IsPoolRegistered(data.EntityId))
+        {
+            ObjectPoolManager.Instance.RegisterPrefab(data.EntityId, data.EntityPrefab);
+        }
+        
+        ObjectPoolManager.Instance.ReleaseObject(data.EntityId, gameObject);
     }
     
     public virtual void SetTarget(Player player, Transform pos) {}

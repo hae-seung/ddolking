@@ -16,6 +16,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     [SerializeField] private TransitionUI transitionUI;
     [SerializeField] private MineUI mineUI;
     [SerializeField] private DungeonUI dungeonUI;
+    [SerializeField] private DungeonAlarm alarm;
 
     private bool disableInput = false;
     
@@ -188,6 +189,26 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     public void OpenDungeonSweepList(bool isSweepable, List<SweepReward> rewards)
     {
         dungeonUI.OpenSweepRewards(isSweepable, rewards);
+    }
+
+    public void BossAlarm(string message)
+    {
+        alarm.AlarmBoss(message);
+    }
+
+    public void WaveAlarm(Action Finish)
+    {
+        alarm.WaveAlarm(Finish);
+    }
+
+    public void FinishWaveAlarm()
+    {
+        alarm.FinishWave();
+    }
+    
+    public void OffAlarms()
+    {
+        alarm.Off();
     }
 
     #endregion

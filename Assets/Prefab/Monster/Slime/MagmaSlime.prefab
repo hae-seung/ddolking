@@ -651,9 +651,10 @@ GameObject:
   - component: {fileID: 2875726313434148085}
   - component: {fileID: 5562545386356352388}
   - component: {fileID: 8921288175849436061}
-  m_Layer: 0
+  - component: {fileID: 2814868689434379689}
+  m_Layer: 9
   m_Name: MagmaSlime
-  m_TagString: Untagged
+  m_TagString: LivingEntity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -754,7 +755,7 @@ MonoBehaviour:
   healthSlider: {fileID: 3983489755017924564}
   debuffIcon: {fileID: 6036704211169858997}
   target: {fileID: 0}
-  monsterData: {fileID: 0}
+  monsterData: {fileID: 11400000, guid: 4290d8cf26e089f41a3597a1ae94ae35, type: 2}
   monsterAttack: {fileID: 8924790092093000010}
   dieFxId: 0
   dieFxPrefab: {fileID: 0}
@@ -781,6 +782,51 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
+--- !u!61 &2814868689434379689
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5368433534417597175}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 0.8472662}
+  m_EdgeRadius: 0
 --- !u!1 &5506889219964988476
 GameObject:
   m_ObjectHideFlags: 0

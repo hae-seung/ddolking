@@ -27,9 +27,7 @@ public class CraftTabBehaviour : InteractionBehaviour
         interBreakableObject = GetComponent<InterBreakableObject>();
         idleSprite = sr.sprite;
         
-        //데이터 저장후 불러오고 데이터 인계되면 isInit = true로 설정하기
-        //만약 게임 저장후 불러올땐 인스터스의  GUID를 통해서 실제 설치된 오브젝트와
-        //해당 스크립트와 저장된 key를 비교하여 일치하면 데이터를 로드하면됨(구조물 id)
+        //데이터 저장 불러오기 고민해보기
     }
 
     private void Start()
@@ -38,7 +36,7 @@ public class CraftTabBehaviour : InteractionBehaviour
         if(animator)
             animator.enabled = false;
         
-        //저장 된 데이터가 없이 필드에 설치되어있는 경우 == 새롭게 객체 생성 필요  
+        //저장 된 데이터가 없이 필드에 설치되는 경우 == 새롭게 객체 생성 필요  
         if (!isInit)
         {
             if (interBreakableObject)

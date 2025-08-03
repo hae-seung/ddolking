@@ -72,7 +72,8 @@ public class Monster : LivingEntity
     protected override void Awake()
     {
         base.Awake();
-        
+
+        data = monsterData;
         _collider2D = GetComponent<BoxCollider2D>();
         
         if (dieFxId != 0 && !ObjectPoolManager.Instance.IsPoolRegistered(dieFxId))

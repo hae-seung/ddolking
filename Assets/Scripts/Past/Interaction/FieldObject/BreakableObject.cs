@@ -263,7 +263,14 @@ public class BreakableObject : Interactable
         structureItem = null; //초기화
         
         drawOutline.onPointerExit -= HandlePointerExit;
+
+        if (!ObjectPoolManager.Instance.IsPoolRegistered(fieldObjectData.id))
+        {
+            ObjectPoolManager.Instance.RegisterPrefab(fieldObjectData.id, fieldObjectData.ownObject);
+        }
         
+        
+        EndBreakState();
         ObjectPoolManager.Instance.ReleaseObject(fieldObjectData.id, gameObject);
     }
 

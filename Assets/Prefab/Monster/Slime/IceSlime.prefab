@@ -419,9 +419,9 @@ GameObject:
   - component: {fileID: 3412859487296430291}
   - component: {fileID: 4241042286816434584}
   - component: {fileID: 7345789705022458465}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: IceSlime
-  m_TagString: Untagged
+  m_TagString: LivingEntity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -515,7 +515,7 @@ MonoBehaviour:
   healthSlider: {fileID: 5569049287811856021}
   debuffIcon: {fileID: 3010551341463956724}
   target: {fileID: 0}
-  monsterData: {fileID: 0}
+  monsterData: {fileID: 11400000, guid: 101141799e923b4488f2f3d6eacb986b, type: 2}
   monsterAttack: {fileID: 462085498245053694}
   dieFxId: 0
   dieFxPrefab: {fileID: 0}

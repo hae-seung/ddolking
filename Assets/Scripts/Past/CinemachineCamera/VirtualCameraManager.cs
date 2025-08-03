@@ -7,7 +7,8 @@ public enum CameraType
     main,
     house,
     talk,
-    highlight
+    highlight,
+    dungeon
 }
 
 public class VirtualCameraManager : MonoBehaviour
@@ -46,6 +47,7 @@ public class VirtualCameraManager : MonoBehaviour
     [SerializeField] private GameObject houseCamera;
     [SerializeField] private GameObject highlightCamera;
     [SerializeField] private GameObject talkCamera;
+    [SerializeField] private GameObject dungeonCamera;
 
 
     public GameObject GetCamera(CameraType type)
@@ -60,6 +62,8 @@ public class VirtualCameraManager : MonoBehaviour
                 return highlightCamera;
             case CameraType.talk:
                 return talkCamera;
+            case CameraType.dungeon:
+                return dungeonCamera;
         }
 
         return null;

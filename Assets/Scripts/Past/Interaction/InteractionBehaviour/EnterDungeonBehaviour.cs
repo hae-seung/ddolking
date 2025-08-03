@@ -83,6 +83,13 @@ public class EnterDungeonBehaviour : InteractionBehaviour
         UIManager.Instance.StartTransition();
         player.transform.position = dungeonPos.position;
         GameEventsManager.Instance.playerEvents.MineEnter(dungeonLight);
+        DungeonManager.Instance.EnterDungeon(_dungeonType, hasFirstClear);
+
+        VirtualCameraManager.Instance.GetCamera(CameraType.dungeon).SetActive(true);
+        if (hasFirstClear && !isSweepable)
+        {
+            //DungeonManger에게 타이머도 띄워달라고 부탁하기
+        }
     }
 
     private void ExitDungeon()
@@ -90,5 +97,7 @@ public class EnterDungeonBehaviour : InteractionBehaviour
         GameEventsManager.Instance.playerEvents.ExitMine();
         player.transform.position = exitPos.position;
         remainTime = resetTime;
+        DungeonManager.Instance.ExitDungeon(_dungeonType);
+        VirtualCameraManager.Instance.GetCamera(CameraType.dungeon).SetActive(false);
     }
 }

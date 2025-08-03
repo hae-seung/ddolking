@@ -17,7 +17,7 @@ MonoBehaviour:
   toolWear: 0.1
   moveSpeed: 1
   defense: 0.1
-  entityPrefab: {fileID: 6511847422743412285, guid: a38746ab6b650664db29c49a28612516, type: 3}
+  entityPrefab: {fileID: 5368433534417597175, guid: 7643e76b0a6aaa949a8a69c2fd2000da, type: 3}
   dropTable: {fileID: 11400000, guid: d0893af6bfb55f146b76dd3df4e1d677, type: 2}
   isAdCarry: 0
   runSpeed: 1

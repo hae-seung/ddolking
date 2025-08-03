@@ -34,8 +34,6 @@ public class DungeonUI : MonoBehaviour
     [SerializeField] private GameObject slotPrefab;
     
     
-    
-    
     //소탕보상
     private List<SweepSlot> slots;//슬롯저장용
     private List<SweepReward> rewards; //소탕 보상목록
@@ -43,6 +41,7 @@ public class DungeonUI : MonoBehaviour
     //소탕결과 창
     private List<SweepSlot> resultSlots = new List<SweepSlot>();
     
+    [Header("UI애니메이션")]
     [SerializeField]
     private DOTweenAnimation _doTweenAnimation;
     
@@ -192,15 +191,19 @@ public class DungeonUI : MonoBehaviour
     
     private void CloseDungeonUI()
     {
-        GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
-        GameEventsManager.Instance.inputEvents.EnableInput();
-        
+        StartCoroutine(StartClose());
         _doTweenAnimation.DORestartById("hide");
-        
-        sweepItems.SetActive(false);
         exitBtn.gameObject.SetActive(false);
     }
 
+    private IEnumerator StartClose()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
+        GameEventsManager.Instance.inputEvents.EnableInput();
+        
+        sweepItems.SetActive(false);
+    }
 
     private void UseTicket()
     {
@@ -248,5 +251,4 @@ public class DungeonUI : MonoBehaviour
             currentSlotIndex++;
         }
     }
-    
 }

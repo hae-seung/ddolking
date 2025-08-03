@@ -53,7 +53,13 @@ public class MineSpawner : MonoBehaviour
     {
         currentObjects = new List<SpawnObject>();
         for(int i = 0; i < spawnItems.Count; i++)
+        {
             totalPb += spawnItems[i].Probability;
+            ObjectPoolManager.Instance.RegisterPrefab(spawnItems[i].FieldObject.id, 
+                spawnItems[i].FieldObject.ownObject);
+        }
+        
+        
     }
 
     public void Spawn()
@@ -69,11 +75,6 @@ public class MineSpawner : MonoBehaviour
             FieldObjectData item = GetRandomItem();
             
             if (item == null) continue;
-            
-            if(!ObjectPoolManager.Instance.IsPoolRegistered(item.id))
-                ObjectPoolManager.Instance.RegisterPrefab(item.id, item.ownObject);
-
-            
             
             GameObject obj = ObjectPoolManager.Instance.SpawnObject(
                 item.id,
