@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EntityData : ScriptableObject
+
+[CreateAssetMenu(fileName = "EntityData", menuName = "SO/Entity/Entity")]
+public class EntityData : ScriptableObject
 {
     [SerializeField] protected int entityId;
     [SerializeField] protected float hp;

@@ -18,12 +18,12 @@ public class MakingItemUI : MonoBehaviour
     private Action finishEvent;
 
     private float makeTime;
-    
+    private Coroutine makeRoutine;
+
     private void Awake()
     {
         gameObject.SetActive(false);
     }
-    
 
     public void MakeItem(CraftItemSO craftItem, int amount, int id, Action onFinish)
     {
@@ -43,7 +43,7 @@ public class MakingItemUI : MonoBehaviour
         slider.maxValue = makeTime;
         slider.value = 0f;
         
-        StartCoroutine(nameof(MakeItemCoroutine));
+        makeRoutine = StartCoroutine(MakeItemCoroutine());
     }
 
     private IEnumerator MakeItemCoroutine()
@@ -70,6 +70,7 @@ public class MakingItemUI : MonoBehaviour
         gameObject.SetActive(false);
         finishEvent?.Invoke();
         finishEvent = null;
+        makeRoutine = null;
     }
 
     private void InstanceObject()
@@ -91,5 +92,12 @@ public class MakingItemUI : MonoBehaviour
         {
             dropObj.transform.DOJump(dropPosition, 1f, 1, 0.8f).SetEase(Ease.OutBounce);
         }
+    }
+
+    public void StopMaking()
+    {
+        if(makeRoutine != null)
+            StopCoroutine(makeRoutine);
+        gameObject.SetActive(false);
     }
 }

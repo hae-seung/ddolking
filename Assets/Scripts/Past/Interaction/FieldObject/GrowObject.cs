@@ -42,6 +42,7 @@ public class GrowObject : InteractionBehaviour
     {
         if (!gameObject.activeSelf)
             return;
+        
         if (!ObjectPoolManager.Instance.IsPoolRegistered(spawnFieldObject.id))
         {
             ObjectPoolManager.Instance.RegisterPrefab(spawnFieldObject.id, spawnFieldObject.ownObject);

@@ -17,6 +17,8 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     [SerializeField] private MineUI mineUI;
     [SerializeField] private DungeonUI dungeonUI;
     [SerializeField] private DungeonAlarm alarm;
+    [SerializeField] private MineMachineUI mineMachineUI;
+    [SerializeField] private ChestUI chestUI;
 
     private bool disableInput = false;
     
@@ -213,5 +215,28 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
 
     #endregion
 
+
+    #region MineMachineUI
+
+    public void OpenMineMachineUI(MineMachine machine, Action OperateMachine, Action Retrieve)
+    {
+        mineMachineUI.Open(machine, OperateMachine, Retrieve);
+    }
+
+    public void UpdateUI(MineMachine machine)
+    {
+        mineMachineUI.UpdateRetrieveUI(machine);
+    }
+
+    #endregion
+
+    #region ChestUI
+
+    public void OpenChest(Chest chest)
+    {
+        chestUI.Open(chest);
+    }
     
+
+    #endregion
 }

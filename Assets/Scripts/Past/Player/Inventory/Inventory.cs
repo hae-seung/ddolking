@@ -37,7 +37,7 @@ public class Inventory : MonoBehaviour
         else
             Destroy(gameObject);
         
-        SlotCnt = 30; // 초기 슬롯 개수 설정
+        SlotCnt = 30; // 초기 슬롯 개수 설정 <최소 5개>
         inventoryUI.Init(SlotCnt, this);
         UpdateInventory(SlotCnt); // List는 0, 슬롯은 열려있어서 각각 맞춰줘야함
     }
@@ -375,6 +375,19 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        return sum;
+    }
+
+    public int GetEmptySlotAmount()
+    {
+        int sum = 0;
+
+        for (int i = 0; i < slotCnt; i++)
+        {
+            if (_items[i] == null)
+                sum++;
+        }
+        
         return sum;
     }
 

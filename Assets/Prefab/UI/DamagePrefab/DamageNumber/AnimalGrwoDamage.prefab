@@ -97,7 +97,7 @@ MonoBehaviour:
     suffixDigits: 030000000300000003000000
     maxDigits: 4
   enableLeftText: 1
-  leftText: grow
+  leftText: feed
   leftTextSettings:
     bold: 0
     italic: 0
@@ -750,7 +750,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: grow
+  m_text: feed
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b7ed27dbbbb27854091191e07bf2ff75, type: 2}
   m_sharedMaterial: {fileID: -8715813908995864186, guid: b7ed27dbbbb27854091191e07bf2ff75, type: 2}
@@ -759,8 +759,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4287233373
+  m_fontColor: {r: 0.3656104, g: 0.99371064, b: 0.53876287, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

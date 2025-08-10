@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa0f2e16d78f5bd408d6aae0a01d4776, type: 3}
+  m_Name: 7028Calf
+  m_EditorClassIdentifier: 
+  entityId: 7028
+  hp: 100
+  toolWear: 0.1
+  moveSpeed: 1
+  defense: 0
+  entityPrefab: {fileID: 5658094789726947389, guid: c2a0c3252376e834bbc0f09be202bf96, type: 3}
+  dropTable: {fileID: 11400000, guid: 681ffabf02e42c04780e5a52e57c41c2, type: 2}

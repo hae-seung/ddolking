@@ -50,7 +50,18 @@ public class CraftTabBehaviour : InteractionBehaviour
         }
     }
 
-    
+    private void OnEnable()
+    {
+        idleSprite = sr.sprite;
+    }
+
+    private void OnDisable()
+    {
+        IsMaking = false;
+        makingItemUI.StopMaking();
+    }
+
+
     //구조물이 설치될때마다 호출될거임.
     public void SetStructureData(ReinforceStructureItem reinforceStructureItem)
     {

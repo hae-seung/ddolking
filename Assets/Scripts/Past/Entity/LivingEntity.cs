@@ -33,20 +33,22 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
 
     private WeaponBuffer buffer;
     private bool hasDebuff;
-    protected bool overrideSpeed = false;
+    protected bool overrideSpeed = false; //빙결 디버프용
 
 
     protected EntityData data;
     protected virtual EntityData EntityData => data;
+    public float GetToolWear() => toolWear;
 
     protected virtual void Awake()
     {
-        healthSlider.maxValue = hp;
-        healthSlider.value = hp;
+        if (!ObjectPoolManager.Instance.IsPoolRegistered(data.EntityId))
+            ObjectPoolManager.Instance.RegisterPrefab(data.EntityId, data.EntityPrefab);
     }
 
     protected virtual void OnEnable()
     {
+        IsDead = false;
         hasDebuff = false;
         overrideSpeed = false;
         debuffIcon.gameObject.SetActive(false);
@@ -66,9 +68,18 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
     }
 
     public virtual void MoveRandom() { }
+    public bool IsStopped()
+    {
+        // agent.enabled가 false이면 에이전트는 멈춘 상태로 처리
+        return !agent.enabled || !agent.hasPath;
+    }
+    
 
     public virtual void OnDamage(float damage, bool isCritical)
     {
+        if (IsDead)
+            return;
+        
         ApplyDamageEffect(damage, isCritical);
         onDamage?.Invoke(damage);
 
@@ -83,8 +94,11 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         }
     }
 
-    public void OnDebuffDamage(DamageType damageType, DebuffType debuffType, float damage)
+    public virtual void OnDebuffDamage(DamageType damageType, DebuffType debuffType, float damage)
     {
+        if (IsDead)
+            return;
+        
         DamageNumber damageNumber = DamageManager.Instance.GetDamageSkin(damageType);
         damageNumber.Spawn(transform.position, damage);
         damageNumber.SetFollowedTarget(transform);
@@ -101,8 +115,6 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         }
     }
 
-    public float GetToolWear() => toolWear;
-
     private void ApplyDamageEffect(float damage, bool isCritical)
     {
         DamageType type = isCritical ? DamageType.critical : DamageType.normal;
@@ -116,6 +128,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
 
     public void ApplyDebuff(WeaponBuffer buffer)
     {
+        if (IsDead) return;
         if (hasDebuff) return;
 
         this.buffer = buffer.CreateBuffer(buffer.debuffLevel);
@@ -142,6 +155,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
 
         healthSlider.gameObject.SetActive(false);
         buffer?.RemoveDebuff();
+        IsDead = true;
         onDead?.Invoke();
     }
 
@@ -149,9 +163,6 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
     {
         int entityId = EntityData.EntityId;
         DropItem(EntityData);
-
-        if (!ObjectPoolManager.Instance.IsPoolRegistered(entityId))
-            ObjectPoolManager.Instance.RegisterPrefab(entityId, data.EntityPrefab);
 
         ObjectPoolManager.Instance.ReleaseObject(entityId, gameObject);
     }
@@ -189,11 +200,6 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
 
     public void ReleasePool()
     {
-        if (!ObjectPoolManager.Instance.IsPoolRegistered(data.EntityId))
-        {
-            ObjectPoolManager.Instance.RegisterPrefab(data.EntityId, data.EntityPrefab);
-        }
-        
         ObjectPoolManager.Instance.ReleaseObject(data.EntityId, gameObject);
     }
     

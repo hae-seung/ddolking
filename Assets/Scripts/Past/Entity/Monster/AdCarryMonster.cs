@@ -17,12 +17,7 @@ public class AdCarryMonster : Monster
     protected override void Awake()
     {
         base.Awake();
-
-        if (!ObjectPoolManager.Instance.IsPoolRegistered(projectileData.Id))
-        {
-            ObjectPoolManager.Instance.RegisterPrefab(projectileData.Id, projectileData.Prefab);
-        }
-
+        
         if (hasLaunch && !ObjectPoolManager.Instance.IsPoolRegistered(launchId))
         {
             ObjectPoolManager.Instance.RegisterPrefab(launchId, launchPrefab);

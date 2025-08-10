@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa0f2e16d78f5bd408d6aae0a01d4776, type: 3}
+  m_Name: 7027Cow
+  m_EditorClassIdentifier: 
+  entityId: 7027
+  hp: 100
+  toolWear: 0.1
+  moveSpeed: 1
+  defense: 0
+  entityPrefab: {fileID: 3112685383148299255, guid: 960845bedd9591f489984299e6d45eca, type: 3}
+  dropTable: {fileID: 11400000, guid: 19383f4b3d3545540b40f0b6af9c24ef, type: 2}

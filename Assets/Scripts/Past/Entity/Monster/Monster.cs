@@ -71,8 +71,6 @@ public class Monster : LivingEntity
     
     protected override void Awake()
     {
-        base.Awake();
-
         data = monsterData;
         _collider2D = GetComponent<BoxCollider2D>();
         
@@ -84,7 +82,11 @@ public class Monster : LivingEntity
         // 몬스터가 활성화될 때 NavMeshAgent 활성화
         agent.enabled = true;
     
+        ObjectPoolManager.Instance.RegisterPrefab(data.EntityId, data.EntityPrefab);
+        
         SetUp();
+        
+        base.Awake();
     }
 
     protected override void OnEnable()
@@ -165,12 +167,7 @@ public class Monster : LivingEntity
             controller.StopMove();
         }
     }
-
-    public bool IsStopped()
-    {
-        // agent.enabled가 false이면 에이전트는 멈춘 상태로 처리
-        return !agent.enabled || !agent.hasPath;
-    }
+    
 
     public bool CanAttack()
     {
@@ -222,9 +219,11 @@ public class Monster : LivingEntity
     {
         if (level == 1)
         {
-            SetUp();
+            SetUp();//기본베이스로 셋업
             return;
         }
+        
+        //레벨 2 이상이면 비율따라 증가하도록 셋업
         
         attackDamage = monsterData.AttackDamage * level * levelRatio;
         bodyDamage = monsterData.BodyDamage * level * levelRatio;

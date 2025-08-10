@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c605ceab893c614d9ebb6e207d0c9bd, type: 3}
+  m_Name: 6029MineMachine(Field)
+  m_EditorClassIdentifier: 
+  id: 6029
+  toolWear: 1
+  durability: 50
+  dropTable:
+  - _itemData: {fileID: 11400000, guid: 4104d8230897cfb42ab9ef3f60d30b0b, type: 2}
+    minAmount: 1
+    maxAmount: 1
+  ownObject: {fileID: 1902093921186812709, guid: 3af7b431162953c4caf198129cb3005d, type: 3}
