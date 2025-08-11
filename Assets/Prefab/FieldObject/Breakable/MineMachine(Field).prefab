@@ -58,11 +58,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982919740601397112, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -29.14
+      value: -47.43
       objectReference: {fileID: 0}
     - target: {fileID: 982919740601397112, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.97
+      value: 7.52
       objectReference: {fileID: 0}
     - target: {fileID: 982919740601397112, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1732,6 +1732,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3047805321231605043, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8899815103542556441}
+    - targetCorrespondingSourceObject: {fileID: 3047805321231605043, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2421585730386662534}
   m_SourcePrefab: {fileID: 100100000, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
 --- !u!1 &1902093921186812709 stripped
 GameObject:
@@ -1846,6 +1849,22 @@ MonoBehaviour:
   - oreData: {fileID: 11400000, guid: d9a5dd6cab042dc46b2ce22d3fb212c6, type: 2}
     oilPrice: 9
   animator: {fileID: 686727985395416688}
+--- !u!208 &2421585730386662534
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902093921186812709}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.6, y: 0.5, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.5, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!114 &3256372174338133203 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2098281190031033029, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}

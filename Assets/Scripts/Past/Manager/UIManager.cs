@@ -234,9 +234,18 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
 
     public void OpenChest(Chest chest)
     {
+        if (!chestUI)
+        {
+            Debug.Log("초기화 안됨");
+            return;
+        }
         chestUI.Open(chest);
     }
-    
+
+    public void UpdateChestSlot(int idx)
+    {
+        chestUI.UpdateChestSlot(idx);
+    }
 
     #endregion
 }

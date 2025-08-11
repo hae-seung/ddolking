@@ -201,6 +201,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3047805321231605043, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1830967276756725593}
+    - targetCorrespondingSourceObject: {fileID: 3047805321231605043, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 388357231244184694}
   m_SourcePrefab: {fileID: 100100000, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
 --- !u!114 &480858169564147710 stripped
 MonoBehaviour:
@@ -268,6 +271,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!208 &388357231244184694
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3600967236813467656}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.005, y: 0.5, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!114 &5514378327189843193 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6284157048554471874, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}

@@ -116,11 +116,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 982919740601397112, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33.46
+      value: -53.58
       objectReference: {fileID: 0}
     - target: {fileID: 982919740601397112, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.22
+      value: 5.01
       objectReference: {fileID: 0}
     - target: {fileID: 982919740601397112, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_LocalPosition.z
@@ -402,6 +402,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3047805321231605043, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4467508935814757587}
+    - targetCorrespondingSourceObject: {fileID: 3047805321231605043, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6469826212667669691}
   m_SourcePrefab: {fileID: 100100000, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
 --- !u!114 &5976496411327741 stripped
 MonoBehaviour:
@@ -498,3 +501,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!208 &6469826212667669691
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9037333394950479884}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.5, z: 0}
+  m_TimeToStationary: 0.5

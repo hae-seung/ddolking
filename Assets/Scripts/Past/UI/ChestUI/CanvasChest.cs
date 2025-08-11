@@ -6,11 +6,22 @@ using UnityEngine;
 public class CanvasChest : MonoBehaviour
 {
     [Header("게임 시작하고 tab 끄는 용도")]
-    [SerializeField] private GameObject chestTab;
+    [SerializeField] private ChestUI chestTab;
+
+    private void Awake()
+    {
+        GameEventsManager.Instance.playerEvents.onAcquireItem += AcquireItem;
+        chestTab.isOpen = false;
+    }
+
+    private void AcquireItem(int index)
+    {
+        chestTab.UpdateInvenSlot(index);
+    }
 
 
     private void Start()
     {
-        chestTab.SetActive(false);
+        chestTab.gameObject.SetActive(false);
     }
 }

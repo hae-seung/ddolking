@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class ChestUI : MonoBehaviour
 {
-    [Header("창고슬롯리스트")] 
+    [Header("창고슬롯리스트")] //지금은 12개로 고정을 박았지만 아니라면 Instanciate
     [SerializeField] private List<ChestSlot> chestSlots;
 
     [Header("인벤토리슬롯")] 
@@ -16,6 +16,9 @@ public class ChestUI : MonoBehaviour
 
     [Header("툴팁")] 
     [SerializeField] private ToolTipUI _itemTooltip;
+
+    [Header("버튼")] 
+    [SerializeField] private Button closeBtn;
 
     private List<ChestSlot> inventorySlots;
     
@@ -28,6 +31,8 @@ public class ChestUI : MonoBehaviour
     private ChestSlot _pointerOverSlot = null;
 
     private Chest chest;
+    public bool isOpen;
+    
 
     private void Awake()
     {
@@ -36,6 +41,15 @@ public class ChestUI : MonoBehaviour
         _gr = GetComponent<GraphicRaycaster>();
         _ped = new PointerEventData(EventSystem.current);
         _rrList = new List<RaycastResult>();
+
+        
+        closeBtn.onClick.AddListener(() =>
+        {
+            isOpen = false;
+            gameObject.SetActive(false);
+            GameEventsManager.Instance.inputEvents.EnableInput();
+            GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
+        });
     }
 
     private void Update()
@@ -222,43 +236,99 @@ public class ChestUI : MonoBehaviour
     
     private void InvenToChest(ChestSlot slot, int amount)
     {
+        //인벤토리 "1칸"으로부터 아이템이 빠져나가는 거임
         Item item = slot.GetItem();
-        //상자에 넣었으나 못넣고 남은 양
+        
+        //상자에 넣었으나 못넣고 남은 양 && 알아서 상자 저장고 부분 UI 업데이트 처리됨
         int remain = chest.Add(item, amount);
 
         int moveAmount = amount - remain;
         
+        //클릭된 인벤토리 슬롯의 인덱스 == 인벤토리 실제 슬롯인덱스
+        Inventory.Instance.RemoveItem(slot.Index, moveAmount);
+        
+        //현재 인벤토리 슬롯에서 나갔음 -> 현재 클릭된 슬롯을 업데이트
+        slot.UpdateInvenSlot();
     }
 
     private void ChestToInven(ChestSlot slot, int amount)
     {
+        Item item = slot.GetItem();
+
+        int remain = Inventory.Instance.Add(item, amount);
+
+        int moveAmount = amount - remain;
+
+        chest.RemoveItem(slot.Index, moveAmount);
         
+        //현재 상자 슬롯에서 나갔음 -> 현재 클릭된 슬롯을 업데이트
+        slot.UpdateChestSlot(chest);
     }
 
     
     
-    
-    
     public void Open(Chest chest)
     {
-        this.chest = chest;
+        if (isOpen)
+            return;
 
-        UpdateInvenList();
-        UpdateChestList();
+        isOpen = true;
+        
+        this.chest = chest;
+        
+        OpenInvenList();
+        OpenChestList();
         
         
         //미리 슬롯 초기화 해놓아야 Update로 돌아가는 슬롯에 접근할때 사고 방지가능
         gameObject.SetActive(true);
     }
     
-    private void UpdateInvenList()
+    
+    private void OpenInvenList()
     {
+        //실제 인벤토리랑 상자에서 보이는 인벤토리랑 맞춤.
+        //하나 넣고 업데이트 했는데 상자 내에서 UI 보이는 순서가 갑자기 달라지는거 방지.
+        //그냥 아예 동기화 시켜버림.
         
+        while (inventorySlots.Count < Inventory.Instance.SlotCnt)
+        {
+            ChestSlot slot = Instantiate(invenSlotPrefab, contentParent).GetComponent<ChestSlot>();
+            inventorySlots.Add(slot);
+        }
+
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            inventorySlots[i].InitInvenSlot(i);
+        }
     }
     
-    private void UpdateChestList()
+    
+    private void OpenChestList()
     {
+        for (int i = 0; i < chestSlots.Count; i++)
+        {
+            chestSlots[i].InitChestSlot(i, chest);
+        }
+    }
+
+
+
+    public void UpdateInvenSlot(int idx)
+    {
+        if (!isOpen)
+            return;
         
+        //상자에서 인벤으로 아이템이 들어왔을 때 호출(없다가 생겼을 수도 있어서 Init)
+        inventorySlots[idx].InitInvenSlot(idx);
+    }
+    
+    public void UpdateChestSlot(int idx)
+    {
+        if (!isOpen)
+            return;
+        
+        chestSlots[idx].InitChestSlot(idx, chest);
     }
 
     
