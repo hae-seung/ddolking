@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "CraftReinforceSO", menuName = "SO/Craft")]
-public class CraftReinforceSO : ScriptableObject
+[CreateAssetMenu(fileName = "ReinforceStructure", menuName = "SO/CountableItemData/ReinforceStructure")]
+public class ReinforceStructureData : ScriptableObject
 {
     [SerializeField] private int maxLevel;
     [SerializeField] private Sprite[] toolImages;
@@ -15,4 +15,5 @@ public class CraftReinforceSO : ScriptableObject
     public Sprite[] ToolImages => toolImages;
     public float[] Efficient => efficients;
     public ItemData[] ReinforceDatas => reinforceNeedItem;
+    
 }

@@ -369,7 +369,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   craftManualType: 6
-  structureItemData: {fileID: 11400000, guid: e64d5bf6ddb0ea34083e7ea9e3f8db2a, type: 2}
+  establishData: {fileID: 11400000, guid: e64d5bf6ddb0ea34083e7ea9e3f8db2a, type: 2}
+  reinforceData: {fileID: 11400000, guid: 0c2c62893dc2507438baad714947b9ab, type: 2}
   makingItemUI: {fileID: 5511647882431540370}
 --- !u!95 &5160869420955978904
 Animator:

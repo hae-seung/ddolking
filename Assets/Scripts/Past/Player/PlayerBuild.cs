@@ -111,14 +111,18 @@ public class PlayerBuild : MonoBehaviour
         {
             ObjectPoolManager.Instance.RegisterPrefab(itemId, establishItemData.EstablishObjectData.ownObject);
         }
-
-        InterBreakableObject interBreakableObject = ObjectPoolManager.Instance.SpawnObject(
+        
+        IReBuild rebuildItem = ObjectPoolManager.Instance.SpawnObject(
             itemId,
             new Vector3(mousePosition.x, mousePosition.y, 0),
-            Quaternion.identity).GetComponent<InterBreakableObject>();
+            Quaternion.identity).GetComponent<IReBuild>();
 
-        if(interBreakableObject)
-            interBreakableObject.SetEstablishItem(establishItem);
+        if (rebuildItem != null)
+        {
+            rebuildItem.SetRebuildItem(establishItem);
+        }
+            
+            
         
         
         //빌딩 시스템off

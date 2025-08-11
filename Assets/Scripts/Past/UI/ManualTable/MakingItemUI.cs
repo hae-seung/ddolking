@@ -25,7 +25,7 @@ public class MakingItemUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void MakeItem(CraftItemSO craftItem, int amount, int id, Action onFinish)
+    public void MakeItem(CraftItemSO craftItem, int amount, ReinforceStructureItem ritem, Action onFinish)
     {
         gameObject.SetActive(true);
         
@@ -35,7 +35,9 @@ public class MakingItemUI : MonoBehaviour
         _craftItemSo = craftItem;
         
         makeTime = craftItem.MakingTime;
-        makeTime *= (1 - ReinforceManager.Instance.GetEfficient(ReinforceManager.Instance.GetCraftLevel(id)));
+
+        int curLevel = ritem.GetLevel();
+        makeTime *= (1 - ritem.GetEfficient(curLevel));
         
         totalAmount = amount;
         finishEvent = onFinish;

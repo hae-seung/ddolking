@@ -15,9 +15,7 @@ public class EstablishItemData : CountableItemData
 
     [Header("설치할 레이어")] 
     [SerializeField] private LayerMask targetLayer;
-
-    [Header("강화되는 구조물인지")] 
-    [SerializeField] private bool isStructure = false;
+    
     
     public FieldObjectData EstablishObjectData => establishObjectData;
     public GameObject PreviewObject => establishObjectPreview;
@@ -26,9 +24,6 @@ public class EstablishItemData : CountableItemData
     
     public override Item CreateItem()
     {
-        if (isStructure)
-            return new ReinforceStructureItem(this);
-        
         return new EstablishItem(this);
     }
 }

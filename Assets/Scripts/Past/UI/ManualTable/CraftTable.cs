@@ -43,7 +43,7 @@ public class CraftTable : MonoBehaviour
     [SerializeField] private List<GameObject> stars;
     [SerializeField] private Button upgradeBtn;
     [SerializeField] private CraftReinforce reinforce;
-    private int craftTableId;
+    private ReinforceStructureItem ritem;
     private int craftTableLevel;
     
     
@@ -66,19 +66,28 @@ public class CraftTable : MonoBehaviour
         
         upgradeBtn.onClick.AddListener(() =>
         {
-            //강화 설명창 열고 id 넘기기
-            reinforce.OpenUI(craftTableId, UpdateReinforceState);
+            reinforce.OpenUI(ritem, UpdateReinforceState);
         });
     }
 
-    public void OpenTable(CraftManualType type, int id)//처음 테이블 오픈
+    public void OpenTable(CraftManualType type, ReinforceStructureItem ritem)//처음 테이블 오픈
     {
-        //강화매니저로부터 id를 통해 레벨 가져오기
-        craftTableLevel = ReinforceManager.Instance.GetCraftLevel(id);
-        upgradeBtn.interactable = craftTableLevel < 3;
-        for (int i = 0; i < stars.Count; i++)
-            stars[i].SetActive(i < craftTableLevel);
-        craftTableId = id;
+        this.ritem = ritem;
+
+        if (ritem != null)
+        {
+            craftTableLevel = ritem.GetLevel();
+            upgradeBtn.interactable = craftTableLevel < 3;
+            for (int i = 0; i < stars.Count; i++)
+                stars[i].SetActive(i < craftTableLevel);
+        }
+        else
+        {
+            // ritem이 없으면 업그레이드 버튼 비활성화
+            upgradeBtn.interactable = false;
+            for (int i = 0; i < stars.Count; i++)
+                stars[i].SetActive(false);
+        }
         
         //기본세팅
         image.sprite = craftLogBackgroundSprite[type];
@@ -129,7 +138,7 @@ public class CraftTable : MonoBehaviour
 
     private void UpdateReinforceState()
     {
-        int level = ReinforceManager.Instance.GetCraftLevel(craftTableId);
+        int level = ritem.GetLevel();
         for (int i = 0; i < stars.Count; i++)
             stars[i].SetActive(i < level);
 

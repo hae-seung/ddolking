@@ -1,33 +1,49 @@
 
+using System;
 using UnityEngine;
 
-public class ReinforceStructureItem : EstablishItem
+public abstract class RebuildItem
 {
-    //etcItem과 etcItemData는 공유하되 객체만 다름.
+    
+}
 
-    private int structureId;
-    
-    public int StructureId => structureId;
-    
-    
-    protected override CountableItem CreateItem()
+
+public class ReinforceStructureItem : RebuildItem
+{
+    private ReinforceStructureData data;
+
+    private int level;
+
+
+    public ReinforceStructureItem(ReinforceStructureData data)
     {
-        //굳이 클론으로 복제할 필요 없음. 오버헤드만 발생함.
-        //어차피 갯수는 1개만 가지고 있을거고, Amount만 1씩 다시 복구 시키면 무한 사용 가능.
-        //structureId만 달라지면서
-        //실제로 한개의 실제 설치 구조물에 일대일 대응으로 한개의 객체만 담는셈임.
-        //new로 객체 생성은 OpenCraftTabBehaviour에서 진행
-        return this;
+        this.data = data;
+        level = 0;
     }
 
-    public void SetStructureId(int newId)
+    public void LevelUp()
     {
-        structureId = newId;
+        level = Math.Min(level + 1, 3);
     }
 
-    public ReinforceStructureItem(EstablishItemData data, int amount = 1) : base(data, amount)
+    public int GetLevel()
     {
-        structureId = -1;
+        return level;
+    }
+    
+    public float GetEfficient(int level)
+    {
+        return data.Efficient[level];
+    }
+
+    public Sprite GetSprite(int level)
+    {
+        return data.ToolImages[level];
+    }
+
+    public ItemData GetNextLevelNeedItem(int level)
+    {
+        return data.ReinforceDatas[level];
     }
     
 }

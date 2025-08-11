@@ -217,7 +217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   craftManualType: 1
-  structureItemData: {fileID: 11400000, guid: d584f157907439e40b43217435e95ba5, type: 2}
+  establishData: {fileID: 11400000, guid: d584f157907439e40b43217435e95ba5, type: 2}
+  reinforceData: {fileID: 11400000, guid: 0c2c62893dc2507438baad714947b9ab, type: 2}
   makingItemUI: {fileID: 337024703315750349}
 --- !u!212 &3779801710175990074
 SpriteRenderer:

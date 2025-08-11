@@ -96,9 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   craftManualType: 0
-  interactableObject: {fileID: 5919136275248398315}
+  establishData: {fileID: 0}
+  reinforceData: {fileID: 0}
   makingItemUI: {fileID: 337024703315750349}
-  operateUI: {fileID: 0}
 --- !u!212 &3779801710175990074
 SpriteRenderer:
   m_ObjectHideFlags: 0

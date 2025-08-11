@@ -16,13 +16,14 @@ public class CraftReinforce : MonoBehaviour
 
     private UnityAction updateAction;
     private ItemData itemData;
-    private int structureId;
+    private ReinforceStructureItem ritem;
+    
     
     private void Awake()
     {
         confirmBtn.onClick.AddListener(() =>
         {
-            ReinforceManager.Instance.LevelUp(structureId);
+            ritem.LevelUp();
             updateAction?.Invoke();
             Inventory.Instance.RemoveItem(itemData);
             Close();
@@ -36,26 +37,28 @@ public class CraftReinforce : MonoBehaviour
     }
 
 
-    public void OpenUI(int id, UnityAction UpdateState)
+    public void OpenUI(ReinforceStructureItem ritem, UnityAction UpdateState)
     {
+        this.ritem = ritem;
+        
         rayBlocker.SetActive(true);
         gameObject.SetActive(true);
 
-        int nextLevel = ReinforceManager.Instance.GetCraftLevel(id) + 1;
+        int nextLevel = ritem.GetLevel() + 1;
         
         //강화매니저로부터 id를 통해 현재 레벨과 관련된 정보들을 가져와서 할당
         for (int i = 0; i < stars.Count; i++)
             stars[i].SetActive(i < nextLevel);
 
-        float effi = ReinforceManager.Instance.GetEfficient(nextLevel) * 100;
+        float effi = ritem.GetEfficient(nextLevel) * 100;
         description.text = $"생산속도 {(int)effi}% 감소";
-        toolImage.sprite = ReinforceManager.Instance.GetToolImage(nextLevel);
-
-        structureId = id;
+        toolImage.sprite = ritem.GetSprite(nextLevel);
+        
+        
         updateAction = UpdateState;
         
         //강화에 필요한 재료 있는지 확인
-        itemData = ReinforceManager.Instance.GetReinforceNeedItemData(nextLevel);
+        itemData = ritem.GetNextLevelNeedItem(nextLevel);
         int amount = 
             Inventory.Instance.GetItemTotalAmount(itemData);
         

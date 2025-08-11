@@ -25,7 +25,8 @@ public class CraftManualTables : MonoBehaviour
         craftReinforce.gameObject.SetActive(false);
     }
 
-    public void OpenTable(CraftManualType type, int id, Action<CraftItemSO , int> makeItem)
+    public void OpenTable(CraftManualType type, ReinforceStructureItem ritem,
+        Action<CraftItemSO , int> makeItem)
     {
         if (IsOpen)
         {
@@ -34,7 +35,7 @@ public class CraftManualTables : MonoBehaviour
         
         tableLog.SetConfirmEvent(makeItem);
 
-        craftTable.OpenTable(type,id);
+        craftTable.OpenTable(type, ritem);
         
 
         GameEventsManager.Instance.playerEvents.DisablePlayerMovement();

@@ -1,12 +1,16 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class InterBreakableObject : BreakableObject
 {
     [SerializeField] private GameObject interactionUI;
     [SerializeField] private InteractionBehaviour interactionBehaviour;
 
+
+    private EstablishItem item;
     
 
     protected override void Start()
@@ -30,19 +34,47 @@ public class InterBreakableObject : BreakableObject
     }
     
     
+    protected override void DropItems()
+    {
+        if (item == null || item.GetRebuildItem() == null)
+        {
+            base.DropItems();
+        }
+        else
+        {
+            if (!ObjectPoolManager.Instance.IsPoolRegistered(item.itemData.ID))
+                ObjectPoolManager.Instance.RegisterPrefab(item.itemData.ID, item.itemData.DropObjectPrefab);
+            
+            
+            Vector3 dropPosition = transform.position + new Vector3(
+                Random.Range(-0.5f, 0.5f),
+                Random.Range(-0.5f, 0.5f),
+                0);
+            
+            DropObject dropObj = ObjectPoolManager.Instance.SpawnObject(
+                item.itemData.ID,
+                dropPosition, 
+                Quaternion.identity).GetComponent<DropObject>();
+            
+            dropObj.OverrideItem(item);
+                
+            dropObj?.transform.DOJump(dropPosition, 1f, 1, 0.8f).SetEase(Ease.OutBounce);
+        }
+        
+        item = null;
+    }
+    
+    
     public override void SetInteractState(bool state)
     {
         base.SetInteractState(state);
         interactionUI.SetActive(state);
     }
+    
+    
 
     public void SetEstablishItem(EstablishItem item)
     {
-        if (item is ReinforceStructureItem reinforceStructureItem && 
-            interactionBehaviour is CraftTabBehaviour craftTabBehaviour)
-        {
-            structureItem = reinforceStructureItem;
-            craftTabBehaviour.SetStructureData(structureItem);
-        }
+        this.item = item;
     }
 }

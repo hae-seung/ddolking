@@ -74,10 +74,13 @@ public class DropObject : MonoBehaviour
         ObjectPoolManager.Instance.ReleaseObject(itemData.ID, gameObject);
     }
 
-
     
-
-    public void OverrideItem(ReinforceStructureItem item)
+    
+    /// <summary>
+    /// 기존에 존재하던(정보를 유지해야하는) 아이템인경우
+    /// </summary>
+    /// <param name="item"></param>
+    public void OverrideItem(EstablishItem item)
     {
         this.item = item;
         item.SetAmount(1);

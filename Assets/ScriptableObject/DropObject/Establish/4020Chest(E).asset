@@ -17,7 +17,7 @@ MonoBehaviour:
   _description: "\uCC3D\uACE0"
   _iconImage: {fileID: 21300000, guid: 897e3a7c654188a40b89f6c2dbaf96cb, type: 3}
   dropObjectPrefab: {fileID: 8316119076970073957, guid: 8f5db5b814de14346bb775c7a89d81b6, type: 3}
-  maxAmount: 50
+  maxAmount: 1
   establishObjectData: {fileID: 0}
   establishObjectPreview: {fileID: 3805441725298577387, guid: ee030522c870bab43bf1d0d36ff7d02c, type: 3}
   targetLayer:

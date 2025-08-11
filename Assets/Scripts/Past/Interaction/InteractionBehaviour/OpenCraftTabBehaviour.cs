@@ -1,10 +1,20 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class CraftTabBehaviour : InteractionBehaviour
+
+public interface IReBuild
+{
+    public abstract void SetRebuildItem(EstablishItem item);
+}
+
+
+
+public class OpenCraftTabBehaviour : InteractionBehaviour, IReBuild
 {
     [SerializeField] private CraftManualType craftManualType;
-    [SerializeField] private EstablishItemData structureItemData;
+    [SerializeField] private EstablishItemData establishData;
+    [SerializeField] private ReinforceStructureData reinforceData;
     [SerializeField] private MakingItemUI makingItemUI;
     
     private Animator animator;
@@ -16,18 +26,21 @@ public class CraftTabBehaviour : InteractionBehaviour
     private bool IsMaking = false;
     private readonly string operate = "make";
 
-
-    private ReinforceStructureItem structureItem;
-    private bool isInit = false;
-    private int id;
+    private EstablishItem eitem;
     
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         interBreakableObject = GetComponent<InterBreakableObject>();
         idleSprite = sr.sprite;
-        
-        //데이터 저장 불러오기 고민해보기
+
+
+        if (!interBreakableObject)
+            return;
+        eitem = new EstablishItem(establishData);
+        ReinforceStructureItem ritem = new ReinforceStructureItem(reinforceData);
+        eitem.SetRebuildItem(ritem);
+        interBreakableObject.SetEstablishItem(eitem);
     }
 
     private void Start()
@@ -35,19 +48,6 @@ public class CraftTabBehaviour : InteractionBehaviour
         animator = GetComponent<Animator>();
         if(animator)
             animator.enabled = false;
-        
-        //저장 된 데이터가 없이 필드에 설치되는 경우 == 새롭게 객체 생성 필요  
-        if (!isInit)
-        {
-            if (interBreakableObject)
-            {
-                //게임 시작되고 처음부터 씬에 배치된 구조물인 경우
-                structureItem = new ReinforceStructureItem(structureItemData);
-                
-                //breakableObject에도 저장
-                interBreakableObject.SetEstablishItem(structureItem);
-            }
-        }
     }
 
     private void OnEnable()
@@ -60,44 +60,32 @@ public class CraftTabBehaviour : InteractionBehaviour
         IsMaking = false;
         makingItemUI.StopMaking();
     }
-
-
-    //구조물이 설치될때마다 호출될거임.
-    public void SetStructureData(ReinforceStructureItem reinforceStructureItem)
-    {
-        structureItem = reinforceStructureItem;
-
-        RegisterStructure();
-
-        Debug.Log($"{gameObject.name}의 id : {id}");
-        isInit = true;
-    }
-
-    private void RegisterStructure()
-    {
-        id = ReinforceManager.Instance.RegisterStructure(structureItem.StructureId);
-        structureItem.SetStructureId(id);
-        Debug.Log($"id {id} 설치완료");
-    }
-
+    
 
     protected override void Interact(Interactor interactor, Item currentGripItem = null)
     {
         if (IsMaking)
             return;
+
+
+        ReinforceStructureItem ritem = null;
         
-        UIManager.Instance.OpenCraftTab(craftManualType, id,
+        if(interBreakableObject)
+            ritem = eitem.GetRebuildItem() as ReinforceStructureItem; 
+        
+        UIManager.Instance.OpenCraftTab(craftManualType, ritem,
             (CraftItemSO craftItem, int amount) =>
-        {
-            makingItemUI.MakeItem(craftItem, amount, id ,onMakingFinished);
-            IsMaking = true;
-            
-            
-            if(animator)
             {
-                SetAnimator(IsMaking);
-            }
-        });
+                makingItemUI.MakeItem(craftItem, amount, ritem ,onMakingFinished);
+                IsMaking = true;
+            
+            
+                if(animator)
+                {
+                    SetAnimator(IsMaking);
+                }
+            });
+        
     }
 
     private void onMakingFinished()
@@ -125,6 +113,16 @@ public class CraftTabBehaviour : InteractionBehaviour
             animator.enabled = false;
         }
     }
-    
-    
+
+
+    public void SetRebuildItem(EstablishItem item)
+    {
+        if (item.GetRebuildItem() == null)
+        {
+            ReinforceStructureItem ritem = new ReinforceStructureItem(reinforceData);
+            item.SetRebuildItem(ritem);
+        }
+        eitem = item;
+        interBreakableObject.SetEstablishItem(eitem);
+    }
 }
