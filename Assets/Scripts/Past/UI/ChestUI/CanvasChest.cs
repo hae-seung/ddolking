@@ -11,7 +11,7 @@ public class CanvasChest : MonoBehaviour
     private void Awake()
     {
         GameEventsManager.Instance.playerEvents.onAcquireItem += AcquireItem;
-        chestTab.isOpen = false;
+        chestTab.Init();
     }
 
     private void AcquireItem(int index)

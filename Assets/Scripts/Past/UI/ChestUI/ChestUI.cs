@@ -31,10 +31,10 @@ public class ChestUI : MonoBehaviour
     private ChestSlot _pointerOverSlot = null;
 
     private Chest chest;
-    public bool isOpen;
+    private bool isOpen;
     
 
-    private void Awake()
+    public void Init()
     {
         inventorySlots = new List<ChestSlot>();
         
@@ -50,6 +50,8 @@ public class ChestUI : MonoBehaviour
             GameEventsManager.Instance.inputEvents.EnableInput();
             GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
         });
+
+        isOpen = false;
     }
 
     private void Update()
