@@ -42,11 +42,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 982919740601397112, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -48.39
+      value: -0.26000977
       objectReference: {fileID: 0}
     - target: {fileID: 982919740601397112, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.9
+      value: -50.22
       objectReference: {fileID: 0}
     - target: {fileID: 982919740601397112, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_LocalPosition.z
@@ -269,6 +269,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3bf7a77dbd873f41aead34ded86310e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rewardList: []
+  establishData: {fileID: 11400000, guid: 23e958044325c8049878591d334dd037, type: 2}
 --- !u!208 &7885473505001884236
 NavMeshObstacle:
   m_ObjectHideFlags: 0

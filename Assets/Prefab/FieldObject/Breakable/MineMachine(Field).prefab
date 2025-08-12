@@ -1849,6 +1849,7 @@ MonoBehaviour:
   - oreData: {fileID: 11400000, guid: d9a5dd6cab042dc46b2ce22d3fb212c6, type: 2}
     oilPrice: 9
   animator: {fileID: 686727985395416688}
+  establishData: {fileID: 11400000, guid: 4104d8230897cfb42ab9ef3f60d30b0b, type: 2}
 --- !u!208 &2421585730386662534
 NavMeshObstacle:
   m_ObjectHideFlags: 0

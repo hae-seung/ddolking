@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class Chest
+public class Chest : RebuildItem
 {
     private int maxSlotCnt = 12;
     
@@ -13,8 +13,13 @@ public class Chest
     private List<Item> items;
 
     public int MaxSlotCnt => maxSlotCnt;
-    
-    
+
+
+    public void Log()
+    {
+        for(int i = 0; i<12; i++)
+            Debug.Log(items[i].itemData.Name);
+    }
     
     private bool IsValidIndex(int index)
     {
@@ -168,32 +173,59 @@ public class Chest
 
 
 
-public class ChestBehaviour : InteractionBehaviour
+public class ChestBehaviour : InteractionBehaviour, IReBuild
 {
     [SerializeField] private List<ItemData> rewardList;
+    [SerializeField] private EstablishItemData establishData;
     private List<Item> items = new List<Item>();
-
-    private Chest chest;
     
-    
+    private EstablishItem eitem;
+    private InterBreakableObject interbreakable;
     
     private void Awake()
     {
+        interbreakable = GetComponent<InterBreakableObject>();
+        
         for (int i = 0; i < rewardList.Count; i++)
         {
             Item item = rewardList[i].CreateItem();
             items.Add(item);
         }
 
-        chest = new Chest(items);
+        Chest chest = new Chest(items);
+        
+        if (!interbreakable)
+            return;
+
+        eitem = new EstablishItem(establishData);
+        eitem.SetRebuildItem(chest);
+        interbreakable.SetEstablishItem(eitem);
     }
 
     
-
     protected override void Interact(Interactor interactor, Item currentGripItem = null)
     {
         GameEventsManager.Instance.inputEvents.DisableInput();
         GameEventsManager.Instance.playerEvents.DisablePlayerMovement();
-        UIManager.Instance.OpenChest(chest);
+        UIManager.Instance.OpenChest(eitem.GetRebuildItem() as Chest);
+    }
+
+    public void SetRebuildItem(EstablishItem item)
+    {
+        if (item.GetRebuildItem() == null)
+        {
+            items.Clear();
+            for (int i = 0; i < rewardList.Count; i++)
+            {
+                Item newItem = rewardList[i].CreateItem();
+                items.Add(newItem);
+            }
+
+            Chest newChest = new Chest(items);
+            item.SetRebuildItem(newChest);
+        }
+        
+        eitem = item;
+        interbreakable.SetEstablishItem(eitem);
     }
 }

@@ -15,12 +15,13 @@ public class DropObject : MonoBehaviour
     private void Awake()
     {
         _collider = GetComponentInChildren<Collider2D>();
-        item = itemData.CreateItem();
         dropObjectPrefab = itemData.DropObjectPrefab;
     }
 
     private void OnEnable()
     {
+        if(item == null)
+            item = itemData.CreateItem();
         StartCoroutine(DisableCollisionTemporarily());
     }
     
@@ -57,10 +58,11 @@ public class DropObject : MonoBehaviour
             }
             else
             {
+                item = null;
                 DestroyDropObject();
             }
         }
-        else
+        else//장비 아이템은 추가되면 바로 추가
         {
             int amount = Inventory.Instance.Add(item);
             if (amount <= 0)

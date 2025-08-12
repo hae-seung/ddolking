@@ -13,7 +13,7 @@ public class MineMachinePbData
 }
 
 
-public class MineMachine
+public class MineMachine : RebuildItem
 {
     //여기서는 수정가능한 데이터 자료
     private List<MineMachinePbData> oreList;
@@ -109,18 +109,22 @@ public class MineMachine
 
 
 
-public class MineMachineBehaviour : InteractionBehaviour
+public class MineMachineBehaviour : InteractionBehaviour, IReBuild
 {
     //여기서는 절대 수정 불가능한 자료
     [SerializeField] private List<MineMachinePbData> mineMachinePbDatas;
     [SerializeField] private Animator animator;
-
+    [SerializeField] private EstablishItemData establishData;
+    
     private bool isOperate;
     private int mineAmount = 400;
     private int storeAmount = 2000;
     
     //객체로 만들어서 이 안에서 작업
+    private EstablishItem eitem;
     private MineMachine mineMachine;
+    private InterBreakableObject interBreakable;
+    
 
     private float nextMineTime = 10f;
     private float timer;
@@ -131,10 +135,20 @@ public class MineMachineBehaviour : InteractionBehaviour
     
     private void Awake()
     {
+        interBreakable = GetComponent<InterBreakableObject>();
+        
         mineMachine = new MineMachine(mineMachinePbDatas);
         basicPb = Mathf.RoundToInt(50 / (mineMachinePbDatas.Count - 1));
         totalPb = 50 + basicPb * (mineMachinePbDatas.Count - 1);
         isOperate = false;
+
+        if (!interBreakable)
+            return;
+
+        EstablishItem item = new EstablishItem(establishData);
+        item.SetRebuildItem(mineMachine);
+        eitem = item;
+        interBreakable.SetEstablishItem(eitem);
     }
 
     private void OnDisable()
@@ -270,5 +284,16 @@ public class MineMachineBehaviour : InteractionBehaviour
     {
         animator.SetBool("make", false);
     }
-    
+
+    public void SetRebuildItem(EstablishItem item)
+    {
+        if (item.GetRebuildItem() == null)
+        {
+            MineMachine newMachine = new MineMachine(mineMachinePbDatas);
+            item.SetRebuildItem(newMachine);
+        }
+
+        eitem = item;
+        interBreakable.SetEstablishItem(eitem);
+    }
 }

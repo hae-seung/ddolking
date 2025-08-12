@@ -121,8 +121,6 @@ public class PlayerBuild : MonoBehaviour
         {
             rebuildItem.SetRebuildItem(establishItem);
         }
-            
-            
         
         
         //빌딩 시스템off
