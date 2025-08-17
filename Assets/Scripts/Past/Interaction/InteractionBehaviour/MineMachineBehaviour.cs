@@ -294,6 +294,7 @@ public class MineMachineBehaviour : InteractionBehaviour, IReBuild
         }
 
         eitem = item;
+        mineMachine = eitem.GetRebuildItem() as MineMachine;
         interBreakable.SetEstablishItem(eitem);
     }
 }

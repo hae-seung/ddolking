@@ -173,6 +173,14 @@ public class Chest : RebuildItem
 
 
 
+
+
+
+
+
+
+
+
 public class ChestBehaviour : InteractionBehaviour, IReBuild
 {
     [SerializeField] private List<ItemData> rewardList;

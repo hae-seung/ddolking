@@ -32,7 +32,6 @@ namespace Cainos.PixelArtMonster_Dungeon
         
         public void OnAnimationEnd()
         {
-            Debug.Log("공격이 끝나고 Idle로 진입");
             fsm.OnAnimationEnd();
         }
     }

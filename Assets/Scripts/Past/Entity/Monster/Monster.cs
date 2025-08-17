@@ -19,7 +19,7 @@ public class Monster : LivingEntity
 
     [Header("성장스텟")]
     protected float attackDamage;
-    private float bodyDamage;
+    //private float bodyDamage;
     private int level;
 
     [Header("고정스텟")]
@@ -101,6 +101,8 @@ public class Monster : LivingEntity
         controller.SetFacing(rightFace);
     }
     
+    
+    //애니메이션 event등록 호출
     public virtual void PerformAttack()
     {
         lastAttackTime = Time.time;
@@ -226,7 +228,6 @@ public class Monster : LivingEntity
         //레벨 2 이상이면 비율따라 증가하도록 셋업
         
         attackDamage = monsterData.AttackDamage * level * levelRatio;
-        bodyDamage = monsterData.BodyDamage * level * levelRatio;
 
         defense = monsterData.Defense * level * levelRatio;
         toolWear = monsterData.ToolWear * level * levelRatio;
@@ -251,7 +252,6 @@ public class Monster : LivingEntity
         attackRangeY = monsterData.AttackRange * 0.5f;
         sightRange = monsterData.SightRange;
         attackDamage = monsterData.AttackDamage;
-        bodyDamage = monsterData.BodyDamage;
         
 
         lastAttackTime = 0f;

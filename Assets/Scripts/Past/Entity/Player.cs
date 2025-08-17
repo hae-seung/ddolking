@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
 
     private bool isDead;
+    public bool IsDead => isDead;
     
     private void Awake()
     {

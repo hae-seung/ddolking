@@ -5,7 +5,7 @@ using UnityEngine;
 public class MonsterController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    private Monster monster;
+    protected Monster monster;
     
     
     [Header("캐싱")]
