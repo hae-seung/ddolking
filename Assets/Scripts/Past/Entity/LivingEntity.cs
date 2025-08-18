@@ -90,7 +90,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         
         if (hp <= 0)
         {
-            OnDead();
+            Dead();
         }
     }
 
@@ -111,7 +111,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
 
         if (hp <= 0)
         {
-            OnDead();
+            Dead();
         }
     }
 
@@ -146,7 +146,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         buffer = null;
     }
 
-    private void OnDead()
+    private void Dead()
     {
         if (agent != null)
         {

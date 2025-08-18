@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class BossAI : LivingEntity
 {
-    //private로 바꿔야함
     public Player target;
     
     
     [SerializeField] private MonsterData bossData;
     [SerializeField] private MonsterAttack monsterAttack;
+    [SerializeField] private Renderer renderer;
     
     [Header("DieFx 존재시에만, Id '0'은 존재x 의미")]
     [SerializeField] private int dieFxId;
@@ -22,7 +22,7 @@ public class BossAI : LivingEntity
     private float attackRange;
     
     [Header("평타 딜레이")]
-    protected float lastAttackTime;
+    private float lastAttackTime;
 
     [Header("보스패턴")] 
     [SerializeField] private List<BossPattern> patterns;
@@ -36,7 +36,7 @@ public class BossAI : LivingEntity
     [Header("캐싱")]
     private string movingBlend = "MovingBlend";
     private string attack = "Attack";
-    private WaitForSeconds dieTime = new WaitForSeconds(1f);
+    private WaitForSeconds dieTime = new WaitForSeconds(3.5f);
     
     private bool facingRight;
 
@@ -51,6 +51,7 @@ public class BossAI : LivingEntity
     private int currentAttackCnt;
     private bool isAttack;
     
+    
     private void Init()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -59,13 +60,17 @@ public class BossAI : LivingEntity
 
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        
+        renderer.sortingLayerName = "Front";
+        renderer.sortingOrder = 2;
     }
     
     
     protected override void Awake()
     {
         Init();
-        
+
+        onDead += StartDead;
         data = bossData;
         
         if (dieFxId != 0 && !ObjectPoolManager.Instance.IsPoolRegistered(dieFxId))
@@ -83,11 +88,13 @@ public class BossAI : LivingEntity
         base.Awake();
     }
     
+
     protected override void OnEnable()
     {
         base.OnEnable();
 
         agent.enabled = true;
+        agent.speed = bossData.MoveSpeed;
         
         lastAttackTime = 0f;        
         
@@ -101,8 +108,10 @@ public class BossAI : LivingEntity
             return;
         
         if(!isAttack)
+        {
             ChasePlayer();
-
+        }
+        
         CheckAndAttackPlayer();
         
         //보스는 플레이어를 쉬지 않고 추격함.
@@ -120,6 +129,7 @@ public class BossAI : LivingEntity
                 isAttack = true;
                 animator.SetBool(attack, true);
                 availablePattern.UseSkill(this, EndSkill);
+                agent.speed = 0f;
                 return;
             }
         }
@@ -132,17 +142,13 @@ public class BossAI : LivingEntity
         Vector2 diff = transform.position - target.transform.position;
         float distance = diff.sqrMagnitude;
 
-        if (distance <= AttackRange && lastAttackTime - Time.time >= bossData.AttackDelay)
+        if (distance <= AttackRange && Time.time - lastAttackTime >= bossData.AttackDelay)
         {
             isAttack = true;
             currentAttackCnt++;
             animator.SetBool(attack, true);
-            
-            if (monsterAttack.Attack())
-            {
-                target.OnDamage(attackDamage);
-            }
-
+            agent.speed = 0f;
+            //애니메이션 없이 나타남
             if (currentAttackCnt >= 3)
             {
                 thirdAttackPattern.Execute(this);
@@ -153,6 +159,16 @@ public class BossAI : LivingEntity
         }
     }
 
+    public void PerformAttack()
+    {
+        if (monsterAttack.Attack())
+        {
+            target.OnDamage(attackDamage);
+        }
+    }
+    
+    
+    
     private void EndSkill()
     {
         isAttack = false;
@@ -164,6 +180,7 @@ public class BossAI : LivingEntity
     {
         animator.SetBool(attack,false);
         animator.SetFloat(movingBlend,0.5f);
+        agent.speed = bossData.MoveSpeed;
         isAttack = false;
     }
     
@@ -199,8 +216,6 @@ public class BossAI : LivingEntity
 
         // 플레이어 위치 업데이트
         agent.SetDestination(target.transform.position);
-
-        agent.speed = bossData.MoveSpeed;
 
         // 몬스터가 플레이어의 위치를 쫓도록 계속 설정
         CheckTargetPos(target.transform.position);
@@ -248,5 +263,17 @@ public class BossAI : LivingEntity
     private void SetFacing(Vector3 facingDir)
     {
         animator.transform.localScale = facingDir;
+    }
+    
+    private void StartDead()
+    {
+        animator.SetBool("IsDead", true);
+        StartCoroutine(DeadAnim());
+    }
+    
+    private IEnumerator DeadAnim()
+    {
+        yield return dieTime;
+        DisableObject();
     }
 }

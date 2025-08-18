@@ -22,9 +22,9 @@ MonoBehaviour:
   isAdCarry: 0
   runSpeed: 1
   acc: 0.25
-  attackDelay: 1
-  attackDamage: 1
+  attackDelay: 2
+  attackDamage: 0
   bodyDamage: 1
   sightRange: 10
-  attackRange: 1
+  attackRange: 5
   levelRatio: 0.5

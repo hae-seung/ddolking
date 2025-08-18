@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "ThirdAttack", menuName = "Entity/Boss/ThirdAttack")]
-public class ThirdAttack : ScriptableObject
+public abstract class ThirdAttack : ScriptableObject
 {
+    [SerializeField] protected int id;
+    [SerializeField] protected GameObject thirdAttackPb;
+    [SerializeField] protected float attackDamage;
 
-
-
+    protected Transform spawnPos;
+    
     public void Execute(BossAI boss)
     {
         Debug.Log("3타 추가타 발생");
+        UseSkill(boss);
     }
+
+    protected abstract void UseSkill(BossAI boss);
 }
