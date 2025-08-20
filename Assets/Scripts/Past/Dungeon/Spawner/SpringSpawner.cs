@@ -4,13 +4,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SpringSpawner : MonoBehaviour
+[System.Serializable]
+public class SwordPos
 {
+    public GameObject sword;
+    public Transform spawnMinPos;
+    public Transform spawnMaxPos;
+}
+
+
+public interface ISpanwBoss
+{
+    public void SpawnBoss(GameObject boss, Transform pos, Action action);
+}
+
+public class SpringSpawner : MonoBehaviour, ISpanwBoss
+{
+    public static SpringSpawner Instance;
+    
     private Action clearAction;
 
+    //패턴
+    [SerializeField] public List<SwordPos> swordPosPatterns;
+    [SerializeField] public List<SwordPos> swordPosPatterns1;
     
     //웨이브별 몬스터(3Wave) 
-    //준보스 몬스터 2마리
 
     [SerializeField] private List<EntityData> monsterPrefabs;
     [SerializeField] private List<Transform> spawnPoints;
@@ -18,12 +36,11 @@ public class SpringSpawner : MonoBehaviour
     //보스 각 방에 한마리씩 소환하고 죽으면 각 방 나갈 수 있도록. onDead설정
     //2마리 다 죽으면 던전 나가라는 알림
     
-    
     [SerializeField] private int wave1Cnt;
     [SerializeField] private int wave2Cnt;
     [SerializeField] private int wave3Cnt;
 
-    [SerializeField] private Player player;
+    private Player player;
     
     [Header("던전의 몬스터는 레벨 고정")]
     [SerializeField] private int monsterFixLevel;
@@ -33,19 +50,38 @@ public class SpringSpawner : MonoBehaviour
 
     private List<(LivingEntity, Action)> monsters = new();
 
+    //보스
+    private LivingEntity boss;
+    
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
+        
         for (int i = 0; i < monsterPrefabs.Count; i++)
         {
             ObjectPoolManager.Instance.RegisterPrefab(monsterPrefabs[i].EntityId, monsterPrefabs[i].EntityPrefab);
         }
     }
 
+
+    private void Start()
+    {
+        player = FindObjectOfType<Player>();
+    }
+    
     public void StartWave(int curWave, Action ClearWave)
     {
         clearAction = ClearWave;
         currentWave = curWave;
-
+        
         Shuffle(); //스폰 포인트 한번 섞기
         monsters.Clear();
         
@@ -128,5 +164,27 @@ public class SpringSpawner : MonoBehaviour
         }
         
         monsters.Clear();
+        
+        if(boss != null)
+            Destroy(boss);
     }
+    
+
+    public void SpawnBoss(GameObject boss, Transform pos, Action Clear)
+    {
+        //봄던전은 보스 스폰하고 Clear구독시키기.
+        this.boss = Instantiate(boss, pos).GetComponent<LivingEntity>();
+        this.boss.SetTarget(player, pos);
+        this.boss.onDead += KillBoss;
+        
+        UIManager.Instance.OpenBossHealth(this.boss);
+
+        void KillBoss()
+        {
+            Clear.Invoke();
+            this.boss.onDead -= KillBoss;
+            boss = null;
+        }
+    }
+    
 }

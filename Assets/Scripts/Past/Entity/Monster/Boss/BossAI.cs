@@ -1,14 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 
 public class BossAI : LivingEntity
 {
     public Player target;
     
-    
+    [Header("보스 정보")]
+    [TextArea] public string level;
+    [TextArea] public string name;
+     
     [SerializeField] private MonsterData bossData;
     [SerializeField] private MonsterAttack monsterAttack;
     [SerializeField] private Renderer renderer;
@@ -28,6 +34,7 @@ public class BossAI : LivingEntity
     [SerializeField] private List<BossPattern> patterns;
     [SerializeField] private ThirdAttack thirdAttackPattern;
     [SerializeField] private float globalPatternDelay;
+    private List<BossPatternState> patternStates;
     private float lastPatternEndTime;
     
     
@@ -50,7 +57,6 @@ public class BossAI : LivingEntity
 
     private int currentAttackCnt;
     private bool isAttack;
-    
     
     private void Init()
     {
@@ -85,9 +91,11 @@ public class BossAI : LivingEntity
         
         SetUp();
         
+        
         base.Awake();
     }
-    
+
+ 
 
     protected override void OnEnable()
     {
@@ -100,6 +108,14 @@ public class BossAI : LivingEntity
         
         facingRight = true;
         SetFacing(rightFace);
+        
+        patternStates = new List<BossPatternState>();
+        foreach (var p in patterns)
+        {
+            patternStates.Add(new BossPatternState(p));
+        }
+
+        lastPatternEndTime = Time.time;
     }
 
     private void Update()
@@ -119,23 +135,36 @@ public class BossAI : LivingEntity
         //보스는 3번 평타시 강화 패턴이 존재.
     }
 
-    private void CheckAndAttackPlayer()
+    private BossPatternState GetAvailablePattern() 
     {
-        if (Time.time - lastPatternEndTime >= globalPatternDelay)
+        var ready = patternStates.FindAll(p => p.IsReady());
+        if (ready.Count > 0) 
         {
-            BossPattern availablePattern = GetAvailablePattern();
-            if (availablePattern != null)
+            return ready[Random.Range(0, ready.Count)];
+        }
+        return null;
+    }
+
+    private void CheckAndAttackPlayer() 
+    {
+        if (Time.time - lastPatternEndTime >= globalPatternDelay) 
+        {
+            BossPatternState available = GetAvailablePattern();
+            if (available != null) 
             {
                 isAttack = true;
                 animator.SetBool(attack, true);
-                availablePattern.UseSkill(this, EndSkill);
+                available.Use(); // 쿨타임 시작
+                available.Pattern.UseSkill(this);
+                StartCoroutine(EndSkill());
                 agent.speed = 0f;
                 return;
             }
         }
-
+        
         CheckAndPerformBasicAttack();
     }
+
 
     private void CheckAndPerformBasicAttack()
     {
@@ -168,9 +197,9 @@ public class BossAI : LivingEntity
     }
     
     
-    
-    private void EndSkill()
+    private IEnumerator EndSkill()
     {
+        yield return new WaitForSeconds(1f);
         isAttack = false;
         lastPatternEndTime = Time.time;
         animator.SetBool(attack, false);
@@ -184,18 +213,6 @@ public class BossAI : LivingEntity
         isAttack = false;
     }
     
-
-    private BossPattern GetAvailablePattern()
-    {
-        List<BossPattern> readyPatterns = patterns.FindAll(p => p.IsReady());
-        if (readyPatterns.Count > 0)
-        {
-            int idx = Random.Range(0, readyPatterns.Count);
-            return readyPatterns[idx];
-        }
-
-        return null;
-    }
 
 
     public override void SetTarget(Player player, Transform pos)
@@ -276,4 +293,17 @@ public class BossAI : LivingEntity
         yield return dieTime;
         DisableObject();
     }
+
+
+    public void SetUI(Slider slider, Image debuffIcon)
+    {
+        healthSlider = slider;
+        slider.maxValue = data.Hp;
+        slider.value = Hp;
+        slider.gameObject.SetActive(true);
+        
+        this.debuffIcon = debuffIcon;
+        this.debuffIcon.gameObject.SetActive(false);
+    }
+    
 }

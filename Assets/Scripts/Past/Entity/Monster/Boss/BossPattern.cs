@@ -7,21 +7,18 @@ using UnityEngine;
 public abstract class BossPattern : ScriptableObject
 {
     [SerializeField] protected float cooldown;
-    private float lastUsedTime;
+    [SerializeField] protected float damage;
+    
+    public float Cooldown => cooldown;
+    
+    
 
-    protected Action EndSkill;
-
-    public bool IsReady()
+    public void UseSkill(BossAI boss)
     {
-        return Time.time - lastUsedTime >= cooldown;
-    }
-
-    public void UseSkill(BossAI boss, Action onEndSkill)
-    {
-        lastUsedTime = Time.time;
-        EndSkill = onEndSkill;
         ExecutePattern(boss);
     }
+
+    
     
     protected abstract void ExecutePattern(BossAI boss);
 }

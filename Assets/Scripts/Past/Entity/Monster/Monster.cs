@@ -11,6 +11,7 @@ public class Monster : LivingEntity
     
     [SerializeField] private MonsterData monsterData;
     [SerializeField] private MonsterAttack monsterAttack;
+    
     private MonsterController controller;
     
     [Header("DieFx 존재시에만, Id '0'은 존재x 의미")]

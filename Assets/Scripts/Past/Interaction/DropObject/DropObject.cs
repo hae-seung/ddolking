@@ -45,6 +45,9 @@ public class DropObject : MonoBehaviour
 
     private void CollectItem()
     {
+        if (item == null)
+            return;
+        
         if(!ObjectPoolManager.Instance.IsPoolRegistered(itemData.ID))
             ObjectPoolManager.Instance.RegisterPrefab(itemData.ID, dropObjectPrefab);
         

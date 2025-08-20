@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpringDungeon : MonoBehaviour
+
+public class SpringDungeon : Dungeon
 {
     //1번방 : 3개의 웨이브
     //2번방 : 2개의 준보스 방
@@ -16,20 +18,29 @@ public class SpringDungeon : MonoBehaviour
 
     [SerializeField] private StageDoorBehaviour stageDoor;
     
+    
     private int currentWave;
     private bool isAlarmFinish;
+
+
+    private int bossCnt;
+    private Action ClearBossStage;
+
+    private Action AllClear;
     
-    
-    public void Enter(bool hasFirstClear)
+    public void Enter(bool hasFirstClear, Action AllClearDungeon)
     {
         //웨이브랑 방 관리
+        bossCnt = 2;
         currentWave = 1;
         isAlarmFinish = false;
+
+        AllClear = AllClearDungeon;
         
         if(!hasFirstClear)
         {
             UIManager.Instance.BossAlarm(enterDungeon);
-            StartCoroutine(WaitBossAlarm());
+            StartCoroutine(WaitEnterDungeonAlarm());
             return;
         }
         
@@ -37,7 +48,7 @@ public class SpringDungeon : MonoBehaviour
         StartCoroutine(SpawnWave());
     }
 
-    private IEnumerator WaitBossAlarm()
+    private IEnumerator WaitEnterDungeonAlarm()
     {
         yield return new WaitForSeconds(4f);
         WaveAlarm();
@@ -83,5 +94,25 @@ public class SpringDungeon : MonoBehaviour
         //다음 웨이브 시작
         WaveAlarm();
         StartCoroutine(SpawnWave());
+    }
+
+    public override void SpawnBoss(GameObject boss, Transform spawnPoint, Action ClearBoss)
+    {
+        ClearBossStage = ClearBoss;
+        spawner.SpawnBoss(boss, spawnPoint, KillBoss);
+    }
+
+    private void KillBoss()
+    {
+        bossCnt--;
+        
+        //나가는 문이 열림.
+        ClearBossStage?.Invoke(); 
+        
+        //만약 보스 2마리를 다 잡았으면 던전 종료
+        if (bossCnt <= 0)
+        {
+            AllClear?.Invoke();
+        }
     }
 }

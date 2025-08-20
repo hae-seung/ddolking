@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0998426caba6f8418dd340f4f83fa51, type: 3}
+  m_Name: 7029MossKnightBoss
+  m_EditorClassIdentifier: 
+  entityId: 7029
+  hp: 1111
+  toolWear: 0.1
+  moveSpeed: 1
+  defense: 0.1
+  entityPrefab: {fileID: 7038916177618310106, guid: ec97e30ddca044b47b03069378902fd7, type: 3}
+  dropTable: {fileID: 11400000, guid: 5fdf54c15c4fa724bb061b2e2a1d82c2, type: 2}
+  isAdCarry: 0
+  runSpeed: 1
+  acc: 0.25
+  attackDelay: 2
+  attackDamage: 1
+  bodyDamage: 1
+  sightRange: 10
+  attackRange: 5
+  levelRatio: 0.5

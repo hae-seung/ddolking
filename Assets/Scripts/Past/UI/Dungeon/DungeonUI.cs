@@ -32,6 +32,8 @@ public class DungeonUI : MonoBehaviour
     [SerializeField] private GameObject rewardResultUI;
     [SerializeField] private Transform content;
     [SerializeField] private GameObject slotPrefab;
+
+    [SerializeField] private BossHealth bossHealth;
     
     
     //소탕보상
@@ -251,4 +253,14 @@ public class DungeonUI : MonoBehaviour
             currentSlotIndex++;
         }
     }
+
+
+
+    public void OpenBossSlider(LivingEntity boss)
+    {
+        bossHealth.OpenSlider(boss);
+    }
+    
+    
+    
 }

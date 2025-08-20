@@ -16,6 +16,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     [SerializeField] private TransitionUI transitionUI;
     [SerializeField] private MineUI mineUI;
     [SerializeField] private DungeonUI dungeonUI;
+    [SerializeField] private DungeonTimer dungeonTimer;
     [SerializeField] private DungeonAlarm alarm;
     [SerializeField] private MineMachineUI mineMachineUI;
     [SerializeField] private ChestUI chestUI;
@@ -214,6 +215,31 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
         alarm.Off();
     }
 
+    public void OpenBossHealth(LivingEntity boss)
+    {
+        dungeonUI.OpenBossSlider(boss);
+    }
+
+    public void StartDungeonTimer(float needSweepLimitTime)
+    {
+        dungeonTimer.StartTimer(needSweepLimitTime);
+    }
+
+    public void StopTimer()
+    {
+        dungeonTimer.StopTimer();
+    }
+
+    public float GetRemainTime()
+    {
+        return dungeonTimer.GetRemainTime();
+    }
+
+    public void HideTimer()
+    {
+        dungeonTimer.HideTimer();
+    }
+    
     #endregion
 
 

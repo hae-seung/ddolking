@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,12 +25,12 @@ public class DungeonManager : MonoBehaviour
         }
     }
 
-    public void EnterDungeon(DungeonType type, bool hasClear)
+    public void EnterDungeon(DungeonType type, bool hasClear, Action ClearDungeon)
     {
         switch (type)
         {
             case DungeonType.Spring:
-                _springDungeon.Enter(hasClear);
+                _springDungeon.Enter(hasClear, ClearDungeon);
                 break;
         }
     }
@@ -42,6 +43,8 @@ public class DungeonManager : MonoBehaviour
                 _springDungeon.Exit();
                 break;
         }
+        
+        UIManager.Instance.HideTimer();
     }
     
 }

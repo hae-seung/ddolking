@@ -28,7 +28,7 @@ public class MossKnightThirdAttacker : BossThirdAttacker
     
     protected override void SetDes(Vector3 des)
     {
-        Vector3 newDes = des + Vector3.down * 10f;
+        Vector3 newDes = des + Vector3.down * 25f;
         this.des = newDes;
     }
 

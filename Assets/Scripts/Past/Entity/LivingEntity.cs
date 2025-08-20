@@ -18,7 +18,7 @@ public interface IDamageable
 public abstract class LivingEntity : MonoBehaviour, IDamageable
 {
     [SerializeField] protected Slider healthSlider;
-    [SerializeField] private Image debuffIcon;
+    [SerializeField] protected Image debuffIcon;
 
     [Header("성장스텟")]
     protected float hp;
@@ -39,6 +39,8 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
     protected EntityData data;
     protected virtual EntityData EntityData => data;
     public float GetToolWear() => toolWear;
+    
+    public float Hp => hp;
 
     protected virtual void Awake()
     {
@@ -51,11 +53,16 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         IsDead = false;
         hasDebuff = false;
         overrideSpeed = false;
-        debuffIcon.gameObject.SetActive(false);
         
-        healthSlider.maxValue = hp;
-        healthSlider.value = hp;
-        healthSlider.gameObject.SetActive(true);
+        if(debuffIcon)
+            debuffIcon.gameObject.SetActive(false);
+        
+        if(healthSlider)
+        {
+            healthSlider.maxValue = hp;
+            healthSlider.value = hp;
+            healthSlider.gameObject.SetActive(true);
+        }
     }
 
     public virtual void StopMove()

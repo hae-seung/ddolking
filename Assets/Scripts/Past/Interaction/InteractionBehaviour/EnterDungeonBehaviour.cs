@@ -50,8 +50,6 @@ public class EnterDungeonBehaviour : InteractionBehaviour
     private void Awake()
     {
         GameEventsManager.Instance.dayEvents.onChangeTime += ChangeTime;
-        isSweepable = false;
-        hasFirstClear = false;
     }
     
     protected override void Interact(Interactor interactor, Item currentGripItem = null)
@@ -83,12 +81,13 @@ public class EnterDungeonBehaviour : InteractionBehaviour
         UIManager.Instance.StartTransition();
         player.transform.position = dungeonPos.position;
         GameEventsManager.Instance.playerEvents.MineEnter(dungeonLight);
-        DungeonManager.Instance.EnterDungeon(_dungeonType, hasFirstClear);
+        DungeonManager.Instance.EnterDungeon(_dungeonType, hasFirstClear, ClearDungeon);
 
         VirtualCameraManager.Instance.GetCamera(CameraType.dungeon).SetActive(true);
         if (hasFirstClear && !isSweepable)
         {
             //DungeonManger에게 타이머도 띄워달라고 부탁하기
+            UIManager.Instance.StartDungeonTimer(sweepLimitTime);
         }
     }
 
@@ -99,5 +98,25 @@ public class EnterDungeonBehaviour : InteractionBehaviour
         remainTime = resetTime;
         DungeonManager.Instance.ExitDungeon(_dungeonType);
         VirtualCameraManager.Instance.GetCamera(CameraType.dungeon).SetActive(false);
+    }
+
+    private void ClearDungeon()
+    {
+        UIManager.Instance.StopTimer();
+        
+        if(UIManager.Instance.GetRemainTime() > 0)
+        {
+            if (!hasFirstClear)
+            {
+                hasFirstClear = true;
+                return;
+            }
+
+            if (!isSweepable)
+            {
+                isSweepable = true;
+                return;
+            }
+        }
     }
 }

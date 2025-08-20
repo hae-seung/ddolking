@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 7011MossKnight
   m_EditorClassIdentifier: 
   entityId: 7011
-  hp: 100
+  hp: 1111
   toolWear: 0.1
   moveSpeed: 1
   defense: 0.1
@@ -23,7 +23,7 @@ MonoBehaviour:
   runSpeed: 1
   acc: 0.25
   attackDelay: 2
-  attackDamage: 0
+  attackDamage: 1
   bodyDamage: 1
   sightRange: 10
   attackRange: 5

@@ -6,12 +6,12 @@ using UnityEngine;
 public class StageDoorBehaviour : InteractionBehaviour
 {
     [SerializeField]
-    private bool canEnter;
+    protected bool canEnter;
+    
 
     [TextArea] [Header("없다면 공백으로")]
     [SerializeField] private string enterMessage;
     [SerializeField] private Transform nextStagePos;
-    
     
 
     protected override void Interact(Interactor interactor, Item currentGripItem = null)
@@ -30,4 +30,10 @@ public class StageDoorBehaviour : InteractionBehaviour
     {
         canEnter = true;
     }
+
+    public void BlockDoor()
+    {
+        canEnter = false;
+    }
+    
 }
