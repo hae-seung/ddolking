@@ -15,7 +15,13 @@ public interface IDamageable
     void ApplyDebuff(WeaponBuffer buffer);
 }
 
-public abstract class LivingEntity : MonoBehaviour, IDamageable
+
+public interface IDebuffable
+{
+    public void OnEndDebuff();
+}
+
+public abstract class LivingEntity : MonoBehaviour, IDamageable, IDebuffable
 {
     [SerializeField] protected Slider healthSlider;
     [SerializeField] protected Image debuffIcon;
@@ -41,6 +47,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
     public float GetToolWear() => toolWear;
     
     public float Hp => hp;
+    public float Defense => defense;
 
     protected virtual void Awake()
     {
@@ -87,10 +94,11 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         if (IsDead)
             return;
         
+        damage *= (1 - defense);
+        
         ApplyDamageEffect(damage, isCritical);
         onDamage?.Invoke(damage);
-
-        damage *= (1 - defense);
+        
         hp -= damage;
         healthSlider.value -= damage;
         
@@ -142,7 +150,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable
         debuffIcon.sprite = DamageManager.Instance.GetDebuffImage(buffer.currentDebuff.debuffType);
         debuffIcon.gameObject.SetActive(true);
         hasDebuff = true;
-        this.buffer.ApplyEffect(this);
+        this.buffer.ApplyEffect(this, this, this);
     }
 
     public void OnEndDebuff()

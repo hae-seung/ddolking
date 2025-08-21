@@ -37,10 +37,10 @@ public class Player : MonoBehaviour
 
     }
 
-    public void OnDamage(float damage)
+    public bool OnDamage(float damage)
     {
-        if (isDead)
-            return;
+        if (isDead || isHurt)
+            return false;
         
         float applyDamage = GameEventsManager.Instance.calculatorEvents.CalculateDamage(damage);
         Debug.Log(applyDamage);
@@ -51,6 +51,7 @@ public class Player : MonoBehaviour
         
         StartCoroutine(HurtRoutine());
         StartCoroutine(AlphaBlink());
+        return true;
     }
 
     private IEnumerator AlphaBlink()

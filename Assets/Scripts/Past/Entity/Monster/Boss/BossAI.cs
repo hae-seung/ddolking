@@ -177,13 +177,6 @@ public class BossAI : LivingEntity
             currentAttackCnt++;
             animator.SetBool(attack, true);
             agent.speed = 0f;
-            //애니메이션 없이 나타남
-            if (currentAttackCnt >= 3)
-            {
-                thirdAttackPattern.Execute(this);
-                currentAttackCnt = 0;
-            }
-
             lastAttackTime = Time.time;
         }
     }
@@ -193,6 +186,12 @@ public class BossAI : LivingEntity
         if (monsterAttack.Attack())
         {
             target.OnDamage(attackDamage);
+        }
+        
+        if (currentAttackCnt >= 3)
+        {
+            thirdAttackPattern.Execute(this);
+            currentAttackCnt = 0;
         }
     }
     
@@ -304,6 +303,11 @@ public class BossAI : LivingEntity
         
         this.debuffIcon = debuffIcon;
         this.debuffIcon.gameObject.SetActive(false);
+    }
+
+    public void SetDefense(float def)
+    {
+        defense = def;
     }
     
 }

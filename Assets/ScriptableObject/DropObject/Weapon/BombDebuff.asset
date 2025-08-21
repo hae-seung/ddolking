@@ -17,9 +17,9 @@ MonoBehaviour:
   damageType: 8007
   debuffProbability: 100
   bombLevelAmounts:
-  - afterBombTime: 10
+  - afterBombTime: 5
     damage: 5
   - afterBombTime: 7
     damage: 8
   - afterBombTime: 5
-    damage: 10
+    damage: 40

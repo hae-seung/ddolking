@@ -27,7 +27,7 @@ MonoBehaviour:
   itemLevel: 0
   statModifier:
   - stat: 5
-    increaseAmount: 605
+    increaseAmount: 10
   enhancementLogic: {fileID: 11400000, guid: 04f713fe5ff7e3b48b9027e460bf8158, type: 2}
   hitCount: 5
   attackCount: 3
@@ -37,6 +37,6 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 2560
-  debuff: {fileID: 11400000, guid: 973e32c6a6fe6f84c9f8ddd2454e6834, type: 2}
+  debuff: {fileID: 11400000, guid: 7c214a6425734374daf4aae5a30ee72a, type: 2}
   isHandWeapon: 0
   fanAngle: 90

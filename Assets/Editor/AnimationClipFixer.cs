@@ -15,9 +15,9 @@ public class AnimationClipFixer : MonoBehaviour
         }
 
         // 원하는 값 입력
-        float targetX = 1.7f;
+        float targetX = 1.3f;
         float targetY = 1f;
-        float targetZ = 2.5f;
+        float targetZ = 1.3f;
 
         var bindings = AnimationUtility.GetCurveBindings(clip);
         foreach (var binding in bindings)
