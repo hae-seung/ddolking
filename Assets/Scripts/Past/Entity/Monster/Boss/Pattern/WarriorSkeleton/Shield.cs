@@ -106,7 +106,6 @@ public class Shield : MonoBehaviour ,IDamageable, IDebuffable
             {
                 //방패 떠짐 => 보스 단단해짐
                 convert = false;
-                bossOrigin = boss.Defense;
                 boss.SetDefense(0.99f);
                 defense = 0.1f;
                 animator.SetBool(param, convert);
@@ -130,6 +129,8 @@ public class Shield : MonoBehaviour ,IDamageable, IDebuffable
         buffer?.RemoveDebuff(); 
         
         boss.SetDefense(bossOrigin);
+        Debug.Log("방패 부서짐" + bossOrigin);
+        
         ObjectPoolManager.Instance.ReleaseObject(id, gameObject);
     }
     

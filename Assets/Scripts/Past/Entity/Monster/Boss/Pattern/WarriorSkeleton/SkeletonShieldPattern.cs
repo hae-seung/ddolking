@@ -23,12 +23,12 @@ public class SkeletonShieldPattern : BossPattern
         Shield shield = ObjectPoolManager.Instance.SpawnObject(
             shieldId,
             boss.transform.position,
-            Quaternion.identity).GetComponent<Shield>();
-
-        shield.transform.SetParent(boss.transform, false);
-
-        shield.transform.position = boss.transform.position;
+            Quaternion.identity,
+            boss.transform).GetComponent<Shield>();
         
+        shield.transform.position = boss.transform.position;
+        Vector3 scale = new Vector3(1.5f, 1.5f, 1f);
+        shield.transform.localScale = scale;
         
         shield.Init(shieldId, shieldHp, boss, defense, toolWear);
     }

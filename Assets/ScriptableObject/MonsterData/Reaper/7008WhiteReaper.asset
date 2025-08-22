@@ -18,7 +18,7 @@ MonoBehaviour:
   moveSpeed: 1
   defense: 0.1
   entityPrefab: {fileID: 3885904539395595751, guid: e8512b18f1a39e54394359ce85e7f243, type: 3}
-  dropTable: {fileID: 11400000, guid: 9e8d166babec3094eb4a0ad92e19ae3b, type: 2}
+  dropTable: {fileID: 11400000, guid: 068b350bfd2fbfa4e91c2682ca5232e2, type: 2}
   isAdCarry: 0
   runSpeed: 1
   acc: 0.25

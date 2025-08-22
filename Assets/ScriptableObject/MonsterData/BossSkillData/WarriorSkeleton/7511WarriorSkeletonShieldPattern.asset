@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82d499928e876d40b10fed98edee2c7, type: 3}
   m_Name: 7511WarriorSkeletonShieldPattern
   m_EditorClassIdentifier: 
-  cooldown: 120
+  cooldown: 10
   damage: 0
   shieldId: 7511
   shieldPrefab: {fileID: 8565961847611199083, guid: c8e94953e31872348ae1d6296a3b95f5, type: 3}
