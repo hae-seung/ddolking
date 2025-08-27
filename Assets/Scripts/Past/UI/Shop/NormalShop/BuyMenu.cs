@@ -30,7 +30,7 @@ public class ShopBuyItem //BuyItem을 실체화 시키는 실제 객체
     public ShopBuyItem(BuyItem buyItem)
     {
         itemData = buyItem.buyItem;
-        this.price = buyItem.price;
+        price = buyItem.price;
         remainAmount = buyItem.maxAmount;
     }
 }

@@ -20,6 +20,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     [SerializeField] private DungeonAlarm alarm;
     [SerializeField] private MineMachineUI mineMachineUI;
     [SerializeField] private ChestUI chestUI;
+    [SerializeField] private Canvas_Statue statueUI;
 
     private bool disableInput = false;
     
@@ -272,6 +273,15 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     public void UpdateChestSlot(int idx)
     {
         chestUI.UpdateChestSlot(idx);
+    }
+
+    #endregion
+
+    #region Statue
+
+    public void OpenStatueExplain(StatueData data, Action BuyAction = null)
+    {
+        statueUI.OpenStatue(data, BuyAction);
     }
 
     #endregion
