@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c80e4695741fc1447afb9d3b9d2c5cb4, type: 3}
+  m_Name: BuyMenu
+  m_EditorClassIdentifier: 
+  buyItems:
+  - buyItem: {fileID: 11400000, guid: 98b66a1f4dab70f44a4f160f1f552650, type: 2}
+    price: 1
+    maxAmount: 5
+  - buyItem: {fileID: 11400000, guid: 2d3e1eb0e1f59784c82d9d4fd39ed9fe, type: 2}
+    price: 50
+    maxAmount: -1
+  - buyItem: {fileID: 11400000, guid: 648fa5df0cf029549b8c9b08f63b07b9, type: 2}
+    price: 20
+    maxAmount: -1

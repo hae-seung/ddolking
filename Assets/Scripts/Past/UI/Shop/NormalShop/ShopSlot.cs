@@ -148,6 +148,8 @@ public class ShopSlot : MonoBehaviour
             currentHasAmount = 1;
             amountTxt.text = "x1";
         }
+
+        button.interactable = true;
     }
 
 

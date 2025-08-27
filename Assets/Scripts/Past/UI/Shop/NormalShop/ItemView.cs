@@ -13,7 +13,7 @@ public class ItemView : MonoBehaviour
     [SerializeField] private GameObject contentParent;
 
     [Header("슬롯 프리팹")]
-    [SerializeField] private ShopSlot slotPrefab;
+    [SerializeField] private GameObject slotPrefab;
     
     
     
@@ -190,6 +190,9 @@ public class ItemView : MonoBehaviour
         PlayerWallet.Instance.SpendMoney(MoneyType.past, totalPrice);
         Item newItem = item.itemData.CreateItem();
         Inventory.Instance.Add(newItem, amount);
+        
+        item.BuyItem(amount);
+        OpenBuyTab();
     }
 
     private void SellItem(ItemData data, int amount)
