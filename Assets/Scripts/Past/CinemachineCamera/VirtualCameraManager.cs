@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 
@@ -43,6 +45,8 @@ public class VirtualCameraManager : MonoBehaviour
         talkCamera.SetActive(false);
     }
 
+    [SerializeField] private List<GameObject> cameras;
+    
     [SerializeField] private GameObject mainCamera;
     [SerializeField] private GameObject houseCamera;
     [SerializeField] private GameObject highlightCamera;
@@ -68,7 +72,16 @@ public class VirtualCameraManager : MonoBehaviour
 
         return null;
     }
-    
 
+    public CinemachineVirtualCamera GetCamera()
+    {
+        for (int i = 0; i < cameras.Count; i++)
+        {
+            if (cameras[i].activeSelf)
+                return cameras[i].GetComponent<CinemachineVirtualCamera>();
+        }
+
+        return null;
+    }
 
 }

@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         GameEventsManager.Instance.playerEvents.onDead += Dead;
+        GameEventsManager.Instance.playerEvents.onPlayerYesHurt += YesHurt;
+        GameEventsManager.Instance.playerEvents.onPlayerNoHurt += NoHurt;
     }
 
     private void OnEnable()
@@ -70,5 +72,17 @@ public class Player : MonoBehaviour
         isHurt = true;
         yield return hurtTime;
         isHurt = false;
+    }
+
+    private void YesHurt()
+    {
+        isHurt = false;
+    }
+
+    
+    
+    private void NoHurt()
+    {
+        isHurt = true;
     }
 }

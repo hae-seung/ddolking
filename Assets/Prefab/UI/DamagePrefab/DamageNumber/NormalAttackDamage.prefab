@@ -218,9 +218,9 @@ MonoBehaviour:
   lerpSettings:
     speed: 5
     minX: -0.4
-    maxX: 0.4
-    minY: 0.5
-    maxY: 1
+    maxX: 0.6
+    minY: -0.2
+    maxY: 1.2
     randomFlip: 0
   enableVelocity: 0
   velocitySettings:
@@ -458,18 +458,18 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  enableCollision: 1
+  enableCollision: 0
   collisionSettings:
-    radius: 0.5
-    pushFactor: 1.5
+    radius: 0.1
+    pushFactor: 0.5
     desiredDirection: {x: 0, y: 1, z: 0}
   enablePush: 1
   pushSettings:
-    radius: 1.2
-    pushOffset: 0.6
+    radius: 0.21
+    pushOffset: 1.2
   updateDelay: 0.0125
   enablePooling: 1
-  poolSize: 60
+  poolSize: 100
   disableOnSceneLoad: 0
   editorLastFont: Pixel-Outline
   position: {x: 0, y: 0, z: 0}

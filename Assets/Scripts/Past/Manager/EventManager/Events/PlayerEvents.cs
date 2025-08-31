@@ -18,6 +18,28 @@ public class PlayerEvents
         onEnablePlayerMovement?.Invoke();
     }
 
+    
+    public event Action onPlayerNoHurt;
+    /// <summary>
+    /// 플레이어 무적 활성화
+    /// </summary>
+    public void PlayerNoHurt()
+    {
+        onPlayerNoHurt?.Invoke();
+    }
+    
+    public event Action onPlayerYesHurt;
+    /// <summary>
+    /// 플레이어 무적 종료
+    /// </summary>
+    public void PlayerYesHurt()
+    {
+        onPlayerYesHurt?.Invoke();
+    }
+    
+    
+    
+    
     public event Action<string, bool> onPlayAnimation;
 
     public void PlayAnimation(string animationName, bool state)

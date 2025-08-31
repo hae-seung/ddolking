@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8853959579819266484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2607818949231446904}
+  - component: {fileID: -4424034043907903252}
+  m_Layer: 0
+  m_Name: ChunMaGumGong
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2607818949231446904
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8853959579819266484}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-4424034043907903252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8853959579819266484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef4455909abb614eb55be5d2be3ae8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 5123200203066673826, guid: 0a6996d462bdf4043bf00109f41a0122, type: 3}
+  moveParent: {fileID: 4343638891876230793, guid: d0924ee6cdc71d7449ef5a5ddd5286e2, type: 3}
+  words:
+  - {fileID: 21300000, guid: 9b0a6c64b3e155d4e8b3f8a488b1f590, type: 3}
+  - {fileID: 21300000, guid: 9e2cc6b44c632cc408f15cfa2cf3090b, type: 3}
+  - {fileID: 21300000, guid: 72f0658378fce544c95ab31bf16c4bf9, type: 3}
+  - {fileID: 21300000, guid: bcb8b33004de9d84486221a7ffafbf58, type: 3}
+  WordImage: {fileID: 6913784528794505256, guid: 51199e26800cc35429a557daaf82fa50, type: 3}
+  wordDelay: 0.5
+  slashEffect: {fileID: 1165056604914447981, guid: 39afb25fa5d2de0488221947c384de10, type: 3}
+  slashDelay: 2
+  cutEffect: {fileID: 5629605053040284996, guid: 49c13366546d6d94a841875dd55003c1, type: 3}
+  cutDelay: 1.2
+  slashTerm: 0.5
+  cuttingDelay: 0.75

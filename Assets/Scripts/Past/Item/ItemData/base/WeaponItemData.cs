@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public abstract class WeaponItemData : EquipItemData
@@ -24,10 +23,12 @@ public abstract class WeaponItemData : EquipItemData
 
     [Header("상태이상")] 
     [SerializeField] protected DebuffBase debuff;
-
-
+    
     [Header("내구도가 닳지 않아야 하는 무기일 경우 체크")]
     [SerializeField] public bool isHandWeapon = false;
+
+    [Header("스킬")] 
+    [SerializeField] private SkillData skillData;
     
     
     
@@ -38,6 +39,7 @@ public abstract class WeaponItemData : EquipItemData
     public float AttackDelay => attackDelay;
     public LayerMask TargetLayer => targetLayer;
     public DebuffBase Debuff => debuff;
+    public SkillData Skill => skillData;
     
     
     private string targetTag = "LivingEntity";

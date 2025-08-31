@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 7010NormalKnight
   m_EditorClassIdentifier: 
   entityId: 7010
-  hp: 100
+  hp: 50000
   toolWear: 0.1
   moveSpeed: 1
   defense: 0.1

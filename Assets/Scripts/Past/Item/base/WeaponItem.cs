@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class WeaponItem : EquipItem, IDurabilityReduceable
 {
-    private WeaponItemData data;
+    public WeaponItemData data;
     
     protected int hitCount;
     protected int attackCount;
@@ -15,7 +15,7 @@ public abstract class WeaponItem : EquipItem, IDurabilityReduceable
     protected string targetTag = "LivingEntity";
     protected DebuffBase debuff;
     protected WeaponBuffer weaponBuffer;
-
+    
     
     
     public float AttackDelay => attackDelay;
