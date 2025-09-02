@@ -27,7 +27,7 @@ MonoBehaviour:
   itemLevel: 0
   statModifier:
   - stat: 5
-    increaseAmount: 10
+    increaseAmount: 500
   enhancementLogic: {fileID: 11400000, guid: 04f713fe5ff7e3b48b9027e460bf8158, type: 2}
   hitCount: 5
   attackCount: 3

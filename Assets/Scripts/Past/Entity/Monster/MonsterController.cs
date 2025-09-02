@@ -88,13 +88,14 @@ public class MonsterController : MonoBehaviour
     public void PlayDeadAnim()
     {
         animator.SetBool("IsDead", true);
-        StartCoroutine(DisableMonster());
+        if(gameObject.activeSelf)
+            StartCoroutine(DisableMonster());
     }
 
     private IEnumerator DisableMonster()
     {
         yield return dieTime;
-        monster.DisableObject();
+        monster.DisableObject();    
     }
 
     

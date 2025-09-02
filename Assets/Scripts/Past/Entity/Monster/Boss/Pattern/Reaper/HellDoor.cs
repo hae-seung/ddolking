@@ -41,7 +41,7 @@ public class HellDoor : MonoBehaviour
         yield return new WaitForSeconds(fadeOutTime);
 
         int spawnCnt = Random.Range(1, maxSpawnCnt + 1); // 총 스폰될 수
-
+        
         while (spawnCnt > 0)
         {
             int curSpawn = Random.Range(1, 4); // 한 번에 소환될 수
@@ -49,15 +49,7 @@ public class HellDoor : MonoBehaviour
 
             for (int j = 0; j < curSpawn; j++)
             {
-                int monsterNum = Random.Range(0, monsters.Count);
-                Monster monster = ObjectPoolManager.Instance.SpawnObject(
-                    monsters[monsterNum].EntityId,
-                    transform.position,
-                    Quaternion.identity).GetComponent<Monster>();
-
-                monster.SetLevel(monsterLevel);
-                monster.SetTarget(target, transform);
-
+                SpawnOneMonster();
                 yield return new WaitForSeconds(interval);
             }
 
@@ -72,9 +64,33 @@ public class HellDoor : MonoBehaviour
         _doTweenAnimation.DORestartById("break");
     }
 
-    public void DestroyGameObject()
+    private void SpawnOneMonster()
     {
-        Destroy(gameObject);
+        int monsterNum = Random.Range(0, monsters.Count);
+        Monster monster = ObjectPoolManager.Instance.SpawnObject(
+            monsters[monsterNum].EntityId,
+            transform.position,
+            Quaternion.identity).GetComponent<Monster>();
+
+        monster.SetLevel(monsterLevel);
+        monster.SetTarget(target, transform);
+        AutumnSpawner.Instance.DeleteAllMonsters += ReleaseMonster;
+        AutumnSpawner.Instance.DeleteAllMonsters += DestroyGameObject;
+
+        void ReleaseMonster()
+        {
+            AutumnSpawner.Instance.DeleteAllMonsters -= ReleaseMonster;
+            monster.ReleasePool();
+        }
     }
 
+    public void DestroyGameObject()
+    {
+        AutumnSpawner.Instance.DeleteAllMonsters -= DestroyGameObject;
+        if(gameObject.activeSelf)
+            Destroy(gameObject);
+    }
+
+   
+    
 }

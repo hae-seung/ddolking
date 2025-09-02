@@ -47,4 +47,11 @@ public class StatusEvents
         return (float)onGetStatValue?.Invoke(targetStat);
     }
 
+
+    public Action<SkillData> onUseSkill;
+    public void UseSkill(SkillData data)
+    {
+        onUseSkill?.Invoke(data);
+    }
+
 }

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f667789dd407f394aa2429daaf9e9a7b, type: 3}
   m_Name: DragonSKill
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 0480805b25ad5a248bf889369582fab5, type: 3}
   skillConst: 2
   attackCount: 18
   hitCount: 60
   skillPrefab: {fileID: 2588571336265713076, guid: 80df5be6d48cc924d81cbb1fd64f0ca2, type: 3}
   coolDown: 60
+  mana: 0

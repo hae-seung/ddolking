@@ -69,12 +69,15 @@ public class AttackPoint : MonoBehaviour
         if (item is WeaponItem weaponItem)
         {
             SkillData skillData = weaponItem.data.Skill;
-            if (skillData != null)
+            if (skillData != null && 
+                GameEventsManager.Instance.statusEvents.GetStatValue(Stat.Energy) >= skillData.Mana)
             {
                 if (Time.time - lastSkillUsedTime >= skillData.CoolDown)
                 {
                     ActivateSkill(weaponItem);
                     lastSkillUsedTime = Time.time;
+                    GameEventsManager.Instance.statusEvents.UseSkill(skillData);
+                    GameEventsManager.Instance.statusEvents.AddStat(Stat.Energy, -skillData.Mana);
                 }
             }
         }
@@ -82,7 +85,6 @@ public class AttackPoint : MonoBehaviour
 
     private void ActivateSkill(WeaponItem weaponItem)
     {
-        Debug.Log("액티베이트스킬");
         SkillData skillData = weaponItem.data.Skill;
         
         PlayerSkill playerSkill = Instantiate(
@@ -92,6 +94,8 @@ public class AttackPoint : MonoBehaviour
         
         playerSkill.Init(skillData);
         playerSkill.ActiveSkill();
+        
+        
     }
 
     private IEnumerator AnimationDelayWeapon(WeaponItem weaponItem)

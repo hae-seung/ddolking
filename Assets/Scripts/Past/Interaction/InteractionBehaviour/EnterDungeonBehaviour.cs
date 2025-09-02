@@ -25,7 +25,9 @@ public class EnterDungeonBehaviour : InteractionBehaviour
     [SerializeField] private string dungeonName;
     [TextArea]
     [SerializeField] private string dungeonExplain;
+    [Header("시간 단위")]
     [SerializeField] private int resetTime;
+    [Header("분단위")]
     [SerializeField] private int sweepLimitTime;
     [SerializeField] private Transform dungeonPos;
     [SerializeField] private Transform exitPos;
@@ -82,8 +84,7 @@ public class EnterDungeonBehaviour : InteractionBehaviour
         player.transform.position = dungeonPos.position;
         GameEventsManager.Instance.playerEvents.MineEnter(dungeonLight);
         DungeonManager.Instance.EnterDungeon(_dungeonType, hasFirstClear, ClearDungeon);
-
-        VirtualCameraManager.Instance.GetCamera(CameraType.dungeon).SetActive(true);
+        
         if (hasFirstClear && !isSweepable)
         {
             //DungeonManger에게 타이머도 띄워달라고 부탁하기
@@ -97,26 +98,25 @@ public class EnterDungeonBehaviour : InteractionBehaviour
         player.transform.position = exitPos.position;
         remainTime = resetTime;
         DungeonManager.Instance.ExitDungeon(_dungeonType);
-        VirtualCameraManager.Instance.GetCamera(CameraType.dungeon).SetActive(false);
     }
 
     private void ClearDungeon()
     {
         UIManager.Instance.StopTimer();
-        
-        if(UIManager.Instance.GetRemainTime() > 0)
-        {
-            if (!hasFirstClear)
-            {
-                hasFirstClear = true;
-                return;
-            }
 
-            if (!isSweepable)
-            {
-                isSweepable = true;
-                return;
-            }
+
+        //인생 첫 클리어시
+        if (!hasFirstClear)
+        {
+            hasFirstClear = true;
+            return;
+        }
+        
+        //소탕 가능 도전 완료시 
+        if(hasFirstClear && UIManager.Instance.GetRemainTime() > 0)
+        {
+            isSweepable = true;
+            return;
         }
     }
 }

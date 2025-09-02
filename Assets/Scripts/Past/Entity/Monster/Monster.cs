@@ -27,7 +27,6 @@ public class Monster : LivingEntity
     private float attackRange;
     private float attackRangeY;
     private float sightRange;
-    private float levelRatio;
 
     [Header("공격딜레이")]
     protected float lastAttackTime;
@@ -61,8 +60,6 @@ public class Monster : LivingEntity
 
         agent.updateRotation = false;
         agent.updateUpAxis = false;
-
-        levelRatio = monsterData.LevelRatio;
 
         objectLayer = LayerMask.GetMask("Obstacle");
         renderer.sortingLayerName = "Front";
@@ -227,13 +224,14 @@ public class Monster : LivingEntity
         }
         
         //레벨 2 이상이면 비율따라 증가하도록 셋업
-        
-        attackDamage = monsterData.AttackDamage * level * levelRatio;
 
-        defense = monsterData.Defense * level * levelRatio;
-        toolWear = monsterData.ToolWear * level * levelRatio;
+        int ratioLevel = level -1;
         
-        hp = monsterData.Hp * level * levelRatio;
+        attackDamage = monsterData.AttackDamage + (ratioLevel * monsterData.DamageRatio);
+        hp = monsterData.Hp + (ratioLevel * monsterData.HpRatio);
+        defense = monsterData.Defense + (ratioLevel * monsterData.DefenseRatio);
+        toolWear = monsterData.ToolWear + (ratioLevel * monsterData.ToolWearRatio);
+        
         healthSlider.maxValue = hp;
         healthSlider.value = hp;
         

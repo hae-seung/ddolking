@@ -44,7 +44,8 @@ public class BossAI : LivingEntity
     private string movingBlend = "MovingBlend";
     private string attack = "Attack";
     private WaitForSeconds dieTime = new WaitForSeconds(3.5f);
-    
+
+    private bool isFirstPattern;
     private bool facingRight;
 
     private Vector3 rightFace = new Vector3(1, 1, 1);
@@ -66,6 +67,7 @@ public class BossAI : LivingEntity
 
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        isFirstPattern = true;
         
         renderer.sortingLayerName = "Front";
         renderer.sortingOrder = 2;
@@ -115,6 +117,7 @@ public class BossAI : LivingEntity
             patternStates.Add(new BossPatternState(p));
         }
 
+        isFirstPattern = true;
         lastPatternEndTime = Time.time;
     }
 
@@ -137,12 +140,25 @@ public class BossAI : LivingEntity
 
     private BossPatternState GetAvailablePattern() 
     {
+        //나타나자마자 패턴쓰는거 방지
+        if (isFirstPattern)
+        {
+            StartCoroutine(WaitFirstPatternDelay());
+            return null;
+        }
+        
         var ready = patternStates.FindAll(p => p.IsReady());
         if (ready.Count > 0) 
         {
             return ready[Random.Range(0, ready.Count)];
         }
         return null;
+    }
+
+    public IEnumerator WaitFirstPatternDelay()
+    {
+        yield return new WaitForSeconds(Random.Range(10f, 15f));
+        isFirstPattern = false;
     }
 
     private void CheckAndAttackPlayer() 

@@ -8,6 +8,7 @@ public class StageBossDoorBehaviour : StageDoorBehaviour
     [SerializeField] private Transform bossSpawnPoint;
     [SerializeField] protected Dungeon dungeon;
     
+    
     [Header("보스 클리어 후 나가는 문")]
     [SerializeField] private StageDoorBehaviour exitDoor;
     
@@ -21,7 +22,8 @@ public class StageBossDoorBehaviour : StageDoorBehaviour
     private void ClearBossStage()
     {
         canEnter = false;
-        exitDoor.ClearCurrentStage();
+        if(exitDoor != null)
+            exitDoor.ClearCurrentStage();
     }
     
 }

@@ -177,8 +177,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     }
 
     #endregion
-
-
+    
     #region DungeonUI
 
     public void OpenDungeonUI(string name, string explain, int remainTime, int sweepLimitTime,
@@ -242,8 +241,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     }
     
     #endregion
-
-
+    
     #region MineMachineUI
 
     public void OpenMineMachineUI(MineMachine machine, Action OperateMachine, Action Retrieve)

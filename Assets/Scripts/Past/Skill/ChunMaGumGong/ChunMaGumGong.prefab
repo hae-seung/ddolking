@@ -58,4 +58,4 @@ MonoBehaviour:
   cutEffect: {fileID: 5629605053040284996, guid: 49c13366546d6d94a841875dd55003c1, type: 3}
   cutDelay: 1.2
   slashTerm: 0.5
-  cuttingDelay: 0.75
+  cuttingDelay: 1

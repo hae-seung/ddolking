@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f667789dd407f394aa2429daaf9e9a7b, type: 3}
   m_Name: ChunMaGumGong
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 28f085616f9dfcf4981df0a030cb8ac8, type: 3}
   skillConst: 2
   attackCount: 18
   hitCount: 60
   skillPrefab: {fileID: 8853959579819266484, guid: fdcfa346529a0a443badea6b5c1b0be7, type: 3}
   coolDown: 60
+  mana: 10

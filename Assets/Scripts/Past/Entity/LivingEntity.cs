@@ -213,9 +213,14 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable, IDebuffable
         agent.speed = EntityData.MoveSpeed;
     }
 
+    
+    /// <summary>
+    /// 몬스터를 죽이는게 아닌 그냥 사라지게 만들기
+    /// </summary>
     public void ReleasePool()
     {
         ObjectPoolManager.Instance.ReleaseObject(data.EntityId, gameObject);
+        StopAllCoroutines();
     }
     
     public virtual void SetTarget(Player player, Transform pos) {}

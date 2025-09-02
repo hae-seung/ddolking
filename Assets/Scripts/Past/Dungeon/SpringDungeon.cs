@@ -13,7 +13,7 @@ public class SpringDungeon : Dungeon
     [SerializeField] private SpringSpawner spawner;
 
     [TextArea] 
-    [SerializeField] private string enterDungeon;
+    [SerializeField] private string enterDungeonText;
 
 
     [SerializeField] private StageDoorBehaviour stageDoor;
@@ -39,7 +39,7 @@ public class SpringDungeon : Dungeon
         
         if(!hasFirstClear)
         {
-            UIManager.Instance.BossAlarm(enterDungeon);
+            UIManager.Instance.BossAlarm(enterDungeonText);
             StartCoroutine(WaitEnterDungeonAlarm());
             return;
         }
@@ -50,7 +50,7 @@ public class SpringDungeon : Dungeon
 
     private IEnumerator WaitEnterDungeonAlarm()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3.5f);
         WaveAlarm();
         StartCoroutine(SpawnWave());
     }

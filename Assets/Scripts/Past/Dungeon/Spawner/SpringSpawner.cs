@@ -79,6 +79,9 @@ public class SpringSpawner : MonoBehaviour, ISpanwBoss
     
     public void StartWave(int curWave, Action ClearWave)
     {
+        if(player == null)
+            player = FindObjectOfType<Player>();
+        
         clearAction = ClearWave;
         currentWave = curWave;
         

@@ -11,13 +11,19 @@ public class StageDoorBehaviour : InteractionBehaviour
 
     [TextArea] [Header("없다면 공백으로")]
     [SerializeField] private string enterMessage;
+    [TextArea] [Header("없다면 공백으로")] 
+    [SerializeField] private string cantEnterMessage;
     [SerializeField] private Transform nextStagePos;
+    
     
 
     protected override void Interact(Interactor interactor, Item currentGripItem = null)
     {
         if (!canEnter)
+        {
+            UIManager.Instance.BossAlarm(cantEnterMessage);
             return;
+        }
 
         UIManager.Instance.OffAlarms();
         
