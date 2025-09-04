@@ -114,7 +114,7 @@ public class StatusUI : MonoBehaviour
         }
     }
 
-    private void ChangedLevel(int curLevel, int needExperienceToNextLevel)
+    private void ChangedLevel(int curLevel, float needExperienceToNextLevel)
     {
         if (curLevel <= 1)//게임 시작 초기화를 위해서 호출햇던거임
         {

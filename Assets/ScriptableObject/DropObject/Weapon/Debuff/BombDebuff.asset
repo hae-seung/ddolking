@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c482b93431317645b94a25a7967e9c2, type: 3}
   m_Name: BombDebuff
   m_EditorClassIdentifier: 
-  debuffLevel: 3
+  debuffLevel: 1
   debuffType: 2
   damageType: 8007
   debuffProbability: 100

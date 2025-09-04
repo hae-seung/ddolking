@@ -21,6 +21,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     [SerializeField] private MineMachineUI mineMachineUI;
     [SerializeField] private ChestUI chestUI;
     [SerializeField] private Canvas_Statue statueUI;
+    [SerializeField] private Canvas_Teleport teleportUI;
 
     private bool disableInput = false;
     
@@ -280,6 +281,20 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     public void OpenStatueExplain(StatueData data, Action BuyAction = null)
     {
         statueUI.OpenStatue(data, BuyAction);
+    }
+
+    #endregion
+
+    #region ShortCut
+
+    public void OpenFieldShortCut(Interactor player)
+    {
+        teleportUI.OpenFieldShortCut(player);
+    }
+
+    public void RegisterFieldShortCut(VillageType type)
+    {
+        teleportUI.RegisterFieldShortCut(type);
     }
 
     #endregion

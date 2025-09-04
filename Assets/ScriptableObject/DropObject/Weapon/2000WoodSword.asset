@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca896ee6d9234fc429ee868adfccd3ad, type: 3}
-  m_Name: 0WoodSword
+  m_Name: 2000WoodSword
   m_EditorClassIdentifier: 
   _id: 2000
   _name: "\uB098\uBB34 \uAC80"
@@ -25,7 +25,7 @@ MonoBehaviour:
   statModifier:
   - stat: 5
     increaseAmount: 5
-  enhancementLogic: {fileID: 11400000, guid: 04f713fe5ff7e3b48b9027e460bf8158, type: 2}
+  enhancementLogic: {fileID: 11400000, guid: 06659bbe08508194b84b414958aceeb1, type: 2}
   hitCount: 1
   attackCount: 1
   weaponConst: 1
@@ -36,3 +36,4 @@ MonoBehaviour:
     m_Bits: 2560
   debuff: {fileID: 0}
   isHandWeapon: 0
+  skillData: {fileID: 0}

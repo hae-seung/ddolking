@@ -13,9 +13,8 @@ public abstract class WeaponItem : EquipItem, IDurabilityReduceable
     private float attackDelay;
     protected LayerMask targetLayer;
     protected string targetTag = "LivingEntity";
-    protected DebuffBase debuff;
+    private DebuffBase debuff;
     protected WeaponBuffer weaponBuffer;
-    
     
     
     public float AttackDelay => attackDelay;
@@ -38,14 +37,24 @@ public abstract class WeaponItem : EquipItem, IDurabilityReduceable
             weaponBuffer = debuff.CreateDebuff();
         }
     }
+
+    public override void LevelUp()
+    {
+        base.LevelUp();
+        if (weaponBuffer != null)
+        {
+            if (curLevel == 3 || curLevel == 5)
+            {
+                weaponBuffer.LevelUp();
+            }
+        }
+    }
     
     public void ReduceDurability(float amount)
     {
         //내구력% 계산하여 내구력 감소 시키기
         if (data.isHandWeapon)
             return;
-        
-        
     }
 
     public virtual void ExecuteAttack(Vector2 dir, Vector2 origin)
@@ -78,5 +87,7 @@ public abstract class WeaponItem : EquipItem, IDurabilityReduceable
 
         return "";
     }
+    
+    
     
 }

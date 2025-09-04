@@ -47,7 +47,7 @@ public class EnterMineBehaviour : InteractionBehaviour
     {
         GameEventsManager.Instance.playerEvents.MineEnter(mineColor);
         player.transform.position = minePos.position;
-        spawner.Spawn();
+        spawner.Spawn(player);
     }
     
     private void ExitMine()
@@ -55,5 +55,6 @@ public class EnterMineBehaviour : InteractionBehaviour
         GameEventsManager.Instance.playerEvents.ExitMine();
         remainTime = resetTime;
         player.transform.position = exitPos.position;
+        spawner.Exit();
     }
 }

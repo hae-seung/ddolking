@@ -61,13 +61,13 @@ public class PlayerStatUI : MonoBehaviour
     }
 
 
-    private void ChangedLevel(int curLevel, int nextExperienceToNextLevel)
+    private void ChangedLevel(int curLevel, float nextExperienceToNextLevel)
     {
         levelTxt.text = $"레벨 : {curLevel}";
         experienceSlider.maxValue = nextExperienceToNextLevel;
     }
 
-    private void ChangedExperience(int value)
+    private void ChangedExperience(float value)
     {
         experienceSlider.value = value;
     }

@@ -56,9 +56,9 @@ public class PlayerEvents
     /// <summary>
     /// 외부에서 경험치 획득 -> 레벨 매니저에서 계산
     /// </summary>
-    public event Action<int> onGainExperience;
+    public event Action<float> onGainExperience;
 
-    public void GainExperience(int amount)
+    public void GainExperience(float amount)
     {
         onGainExperience?.Invoke(amount);
     }
@@ -66,9 +66,9 @@ public class PlayerEvents
     /// <summary>
     /// 레벨 매니저에서 경험치 변화 -> UI 및 레벨업 포인트 지급
     /// </summary>
-    public event Action<int> onChangedExperience;
+    public event Action<float> onChangedExperience;
 
-    public void ChangedExperience(int value)
+    public void ChangedExperience(float value)
     {
         onChangedExperience?.Invoke(value);
     }
@@ -76,9 +76,9 @@ public class PlayerEvents
     /// <summary>
     /// 레벨매니저에서 레벨 변화 -> UI에서 업데이트
     /// </summary>
-    public event Action<int, int> onChangedLevel;
+    public event Action<int, float> onChangedLevel;
 
-    public void ChangedLevel(int curLevel, int needExperienceToNextLevel)
+    public void ChangedLevel(int curLevel, float needExperienceToNextLevel)
     {
         onChangedLevel?.Invoke(curLevel, needExperienceToNextLevel);
     }

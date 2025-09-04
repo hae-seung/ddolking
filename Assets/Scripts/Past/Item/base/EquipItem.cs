@@ -46,7 +46,7 @@ public abstract class EquipItem : Item, IStatModifier
 
     
     //어차피 아뮬렛은 강화시스템에 못들어가게 막아두었음.
-    public void LevelUp()
+    public virtual void LevelUp()
     {
         if (curLevel >= 5)
             return;
@@ -55,7 +55,7 @@ public abstract class EquipItem : Item, IStatModifier
         UpgradeDurability();
         
         curLevel++;
-
+        
         if (itemEnhancementLogic == null)
             return;
 
@@ -113,4 +113,5 @@ public abstract class EquipItem : Item, IStatModifier
     {
         curDurability = Mathf.Clamp(curDurability + 10, 0, maxDurability);
     }
+    
 }

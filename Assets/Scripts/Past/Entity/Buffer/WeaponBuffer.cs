@@ -18,6 +18,11 @@ public abstract class WeaponBuffer
         debuffLevel = level;
     }
 
+    public void LevelUp()
+    {
+        debuffLevel++;
+    }
+    
     public bool CanApply()
     {
         int ran = Random.Range(1, 101);
@@ -43,7 +48,6 @@ public abstract class WeaponBuffer
     }
 
     protected abstract IEnumerator OnDebuffStart(IDamageable entity, UnityAction onEnd);
-
     public abstract WeaponBuffer CreateBuffer(int level);
     public abstract string GetDebuffDescription();
     public abstract string GetNextDebuffDescription();

@@ -22,6 +22,7 @@ public class LineWeaponItem : WeaponItem
         return new LineWeaponItem(EquipData as LineWeaponData);
     }
     
+
     public override void ExecuteAttack(Vector2 dir, Vector2 origin)
     {
         // hitCount에 따라 배열 크기 조절

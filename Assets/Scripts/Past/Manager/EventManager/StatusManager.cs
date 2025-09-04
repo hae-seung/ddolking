@@ -66,7 +66,7 @@ public class StatusManager : MonoBehaviour
         status[Stat.CriticalDamage] = 1.5f;//기본 1.5배 1 ~ 무한 : 0.5단위
         status[Stat.Speed] = 2f; //1~7 : 0.5단위
         status[Stat.MineSpeed] = 5f; //0.5단위
-        status[Stat.ExperienceGetter] = 1f; //1 ~ 무한 : 1단위
+        status[Stat.ExperienceGetter] = 1f; //1배 ~ 무한 : 1단위 : 획득경험치 증가 버프 
     }
     
     private StatData GetStatData(Stat targetStat)

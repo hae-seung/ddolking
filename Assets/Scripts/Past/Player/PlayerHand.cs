@@ -93,8 +93,10 @@ public class PlayerHand : MonoBehaviour
         };
 
         targetImage.gameObject.SetActive(newItem != null);
-        if (newItem != null) 
+        if (newItem != null)
+        {
             targetImage.sprite = newItem.itemData.IconImage;
+        }
 
         // 아이템 변경 반영
         ChangeStat(newItem);

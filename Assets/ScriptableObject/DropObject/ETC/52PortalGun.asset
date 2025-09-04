@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513e80609651f7c4e921879f475c0c8d, type: 3}
+  m_Name: 52PortalGun
+  m_EditorClassIdentifier: 
+  _id: 52
+  _name: "\uD3EC\uD0C8\uAC74"
+  _description: "\uD3EC\uD0C8\uAC74"
+  _iconImage: {fileID: 21300000, guid: 3ef3733e11990f64da99bbb71a56a573, type: 3}
+  dropObjectPrefab: {fileID: 4909439658362368442, guid: 3b05d964b806186429642fc1dba40f96, type: 3}
+  maxAmount: 99

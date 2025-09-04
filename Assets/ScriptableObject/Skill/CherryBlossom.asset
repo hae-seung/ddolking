@@ -17,5 +17,5 @@ MonoBehaviour:
   attackCount: 20
   hitCount: 50
   skillPrefab: {fileID: 2165465479534315655, guid: 99b8dd7cc331b9f4b88511276c671c2b, type: 3}
-  coolDown: 1
+  coolDown: 60
   mana: 0

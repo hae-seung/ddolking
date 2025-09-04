@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class DebuffBase : ScriptableObject
 {
     [Header("디버프 레벨")] 
-    [SerializeField] public int debuffLevel = 1;
+    [SerializeField, Min(1)] public int debuffLevel = 1;
     
     [Header("데미지 이펙트")]
     [SerializeField] public DebuffType debuffType;
