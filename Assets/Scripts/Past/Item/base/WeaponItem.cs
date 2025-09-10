@@ -15,7 +15,10 @@ public abstract class WeaponItem : EquipItem, IDurabilityReduceable
     protected string targetTag = "LivingEntity";
     private DebuffBase debuff;
     protected WeaponBuffer weaponBuffer;
-    
+
+
+    private int tempHitCount;
+    private float tempRange;
     
     public float AttackDelay => attackDelay;
     
@@ -32,6 +35,9 @@ public abstract class WeaponItem : EquipItem, IDurabilityReduceable
         targetLayer = data.TargetLayer;
         debuff = data.Debuff;
 
+        tempRange = range;
+        tempHitCount = hitCount;
+        
         if (debuff != null)
         {
             weaponBuffer = debuff.CreateDebuff();
@@ -59,8 +65,8 @@ public abstract class WeaponItem : EquipItem, IDurabilityReduceable
 
     public virtual void ExecuteAttack(Vector2 dir, Vector2 origin)
     {
-        //비어있음.
-        //Line, RangeWeapon에서 각각 오버라이드 사용
+        range = tempRange + GameEventsManager.Instance.statusEvents.GetStatValue(Stat.AttackRange);
+        hitCount = tempHitCount + (int)GameEventsManager.Instance.statusEvents.GetStatValue(Stat.AdditionalAttackCount);
     }
     
     protected float CalculateDamage(bool isCritical)

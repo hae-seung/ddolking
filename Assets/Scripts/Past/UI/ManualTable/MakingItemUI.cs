@@ -36,8 +36,11 @@ public class MakingItemUI : MonoBehaviour
         
         makeTime = craftItem.MakingTime;
 
-        int curLevel = ritem.GetLevel();
-        makeTime *= (1 - ritem.GetEfficient(curLevel));
+        if(ritem != null)
+        {
+            int curLevel = ritem.GetLevel();
+            makeTime *= (1 - ritem.GetEfficient(curLevel));
+        }
         
         totalAmount = amount;
         finishEvent = onFinish;

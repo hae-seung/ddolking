@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: c0d36b91dbce1e6418f7f6b5c42c124e, type: 3}
+    - target: {fileID: 2894622350300423171, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3047805321231605043, guid: 5f660ea8d12185746a6719c5114a7222, type: 3}
       propertyPath: m_Name
       value: WheatSprout(F) Variant

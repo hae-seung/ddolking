@@ -221,6 +221,11 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
         dungeonUI.OpenBossSlider(boss);
     }
 
+    public void HideBossHealth()
+    {
+        dungeonUI.HideBossSlider();
+    }
+
     public void StartDungeonTimer(float needSweepLimitTime)
     {
         dungeonTimer.StartTimer(needSweepLimitTime);
@@ -240,6 +245,7 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     {
         dungeonTimer.HideTimer();
     }
+    
     
     #endregion
     

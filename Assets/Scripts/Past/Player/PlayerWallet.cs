@@ -43,10 +43,12 @@ public class PlayerWallet : MonoBehaviour
         if (type == MoneyType.past)
         {
             pastMoney -= amount;
+            pastMoney = Math.Max(pastMoney, 0);
         }
         else
         {
             modernMoney -= amount;
+            modernMoney = Math.Max(modernMoney, 0);
         }
         
         playerStatUI.ChangeMoney(modernMoney, pastMoney);

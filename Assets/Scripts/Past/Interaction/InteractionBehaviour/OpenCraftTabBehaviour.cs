@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -66,8 +65,7 @@ public class OpenCraftTabBehaviour : InteractionBehaviour, IReBuild
     {
         if (IsMaking)
             return;
-
-
+        
         ReinforceStructureItem ritem = null;
         
         if(interBreakableObject)

@@ -13,4 +13,11 @@ MonoBehaviour:
   m_Name: FurnaceManual
   m_EditorClassIdentifier: 
   craftItemSo:
-  - {fileID: 11400000, guid: a4ba4fddd695bcb4ca671bed3a28fd28, type: 2}
+  - {fileID: 11400000, guid: 6f2c239046b46de439fd65ca72c4a7d3, type: 2}
+  - {fileID: 11400000, guid: 7a1113df4ab990a41bf3d5a243b159a8, type: 2}
+  - {fileID: 11400000, guid: 8344932b8d9c5854ca0b40860e1dccfe, type: 2}
+  - {fileID: 11400000, guid: 4c8cedb32946dd2438f3bf01a02c3d92, type: 2}
+  - {fileID: 11400000, guid: c0973557d3712bf4baa89fdd726ed398, type: 2}
+  - {fileID: 11400000, guid: 4f08c9d52a8395044a291ff178be4d0b, type: 2}
+  - {fileID: 11400000, guid: bfc0c916cd5c7a54abd4b813d1bb2c93, type: 2}
+  - {fileID: 11400000, guid: 14194625b687e58478e90d29dd12fb7b, type: 2}

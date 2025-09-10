@@ -64,8 +64,11 @@ public class DungeonManager : MonoBehaviour
 
     public void ExitDungeon(DungeonType type)
     {
-        cam.gameObject.SetActive(true);
-        VirtualCameraManager.Instance.GetCamera(CameraType.dungeon).SetActive(false);
+        if(cam != null)
+        {
+            cam.gameObject.SetActive(true);
+            VirtualCameraManager.Instance.GetCamera(CameraType.dungeon).SetActive(false);
+        }
         
         switch (type)
         {
@@ -80,6 +83,7 @@ public class DungeonManager : MonoBehaviour
                 break;
         }
         
+        UIManager.Instance.HideBossHealth();
         UIManager.Instance.HideTimer();
     }
     

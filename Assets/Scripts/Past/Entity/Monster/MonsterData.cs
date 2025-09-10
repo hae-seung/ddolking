@@ -20,7 +20,7 @@ public class MonsterData : EntityData
     [SerializeField] private float sightRange;
     [SerializeField] private float attackRange;
 
-    [Header("레벨별 증가량")] 
+    [Header("레벨별 증가량/ 보스는 0")] 
     [SerializeField] private float hpRatio;
     [SerializeField] private float damageRatio;
     [SerializeField] private float defenseRatio;

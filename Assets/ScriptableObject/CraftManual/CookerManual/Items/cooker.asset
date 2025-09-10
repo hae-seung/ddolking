@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ae77d3b2164203418d3fc57bf50ec18, type: 3}
-  m_Name: C_WoodSword
+  m_Name: cooker
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 72df2c19157627042b5cab1d76a1025b, type: 2}
+  itemData: {fileID: 11400000, guid: 1c732bb2c60013448b14027ca8c05869, type: 2}
   craftNeedItems:
-  - itemData: {fileID: 11400000, guid: 93a8549cdd8a7bd4da34718a3984b7fe, type: 2}
+  - itemData: {fileID: 11400000, guid: f3cbe51f8e8647b46b4edb5d7492ffc8, type: 2}
+    amount: 4
+  - itemData: {fileID: 11400000, guid: 16910f697da37734b9d073c53ca6d8bc, type: 2}
     amount: 1
-  - itemData: {fileID: 11400000, guid: 8ed1d117413647f4383bf293aac5d76b, type: 2}
-    amount: 2
   makingTime: 5

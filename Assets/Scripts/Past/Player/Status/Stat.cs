@@ -10,5 +10,7 @@ public enum Stat
     CriticalDamage,
     Speed,
     MineSpeed,
-    ExperienceGetter
+    ExperienceGetter,
+    AttackRange,
+    AdditionalAttackCount
 }

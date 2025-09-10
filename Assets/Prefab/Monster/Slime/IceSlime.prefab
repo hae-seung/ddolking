@@ -123,7 +123,8 @@ Transform:
   m_LocalPosition: {x: -0.27114, y: 0.187628, z: 0.00000006139278}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1250283624981877109}
   m_Father: {fileID: 3034534559323329794}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3495754788168183150
@@ -340,13 +341,12 @@ Transform:
   m_GameObject: {fileID: 6029224526425804942}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.5, z: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5534868247557974267}
   - {fileID: 8013721776052039046}
-  - {fileID: 3936030897917354236}
   m_Father: {fileID: 4403325234026774085}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!95 &7684770067480923859
@@ -516,7 +516,7 @@ MonoBehaviour:
   debuffIcon: {fileID: 3010551341463956724}
   target: {fileID: 0}
   monsterData: {fileID: 11400000, guid: 101141799e923b4488f2f3d6eacb986b, type: 2}
-  monsterAttack: {fileID: 462085498245053694}
+  monsterAttack: {fileID: 2891373206881883924}
   dieFxId: 0
   dieFxPrefab: {fileID: 0}
   renderer: {fileID: 7715334361883037337}
@@ -766,7 +766,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1780791916631180378}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8287966178765222496
+--- !u!1 &8512155466638299622
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -774,9 +774,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3936030897917354236}
-  - component: {fileID: 3650201687198918815}
-  - component: {fileID: 462085498245053694}
+  - component: {fileID: 1250283624981877109}
+  - component: {fileID: 6617853733866115925}
+  - component: {fileID: 2891373206881883924}
   m_Layer: 0
   m_Name: MonsterAttack
   m_TagString: Untagged
@@ -784,29 +784,29 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3936030897917354236
+--- !u!4 &1250283624981877109
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8287966178765222496}
+  m_GameObject: {fileID: 8512155466638299622}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.75, y: 0.531, z: 1.055}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4729007907077923653}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!61 &3650201687198918815
+  m_Father: {fileID: 1429981354635203763}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &6617853733866115925
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8287966178765222496}
-  m_Enabled: 1
+  m_GameObject: {fileID: 8512155466638299622}
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -831,7 +831,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.3, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -842,20 +842,26 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3, y: 1.8}
+  m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
---- !u!114 &462085498245053694
+--- !u!114 &2891373206881883924
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8287966178765222496}
+  m_GameObject: {fileID: 8512155466638299622}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f384d2f7d682e2f4494c5ac9cd75bcdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackBone: {fileID: 1250283624981877109}
+  boxCollider: {fileID: 6617853733866115925}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  animatorObject: {fileID: 6029224526425804942}
 --- !u!1 &8594232258995594335
 GameObject:
   m_ObjectHideFlags: 0

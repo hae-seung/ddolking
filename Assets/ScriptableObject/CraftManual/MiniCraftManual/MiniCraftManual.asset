@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MiniCraftManual
   m_EditorClassIdentifier: 
   craftItemSo:
-  - {fileID: 11400000, guid: a4ba4fddd695bcb4ca671bed3a28fd28, type: 2}
   - {fileID: 11400000, guid: 349c63a2732ce1e40a53f4b8b37b712e, type: 2}
-  - {fileID: 11400000, guid: b80ace60610eb3547a15c44428d9deb5, type: 2}
-  - {fileID: 11400000, guid: b7aa176892550db4ca2207294bcab93a, type: 2}
+  - {fileID: 11400000, guid: d5d39a0df35a8794b8f137252e8ce014, type: 2}
+  - {fileID: 11400000, guid: ec6eb7bdda7c414459f674f2942e3dc2, type: 2}
+  - {fileID: 11400000, guid: c71dd8026a0a9a04eb78f4e286959b07, type: 2}
   - {fileID: 11400000, guid: 42cc98f473c897c439fed0d33b7d0191, type: 2}

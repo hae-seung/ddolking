@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: CookerManual
   m_EditorClassIdentifier: 
   craftItemSo:
-  - {fileID: 11400000, guid: 349c63a2732ce1e40a53f4b8b37b712e, type: 2}
+  - {fileID: 11400000, guid: 1d91eed3a57c8b04e8b1ff88926e8cb2, type: 2}
+  - {fileID: 11400000, guid: 1d88765b9c8642c42a27265602e06bb2, type: 2}
+  - {fileID: 11400000, guid: cdf721794918a9d4ebdaba6469a564dd, type: 2}
+  - {fileID: 11400000, guid: eb0024116ce7c144ca5077131b9819a5, type: 2}

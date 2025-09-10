@@ -99,6 +99,7 @@ public class Shield : MonoBehaviour ,IDamageable, IDebuffable
                 //방패 눈이 감김 => 보스 물렁해짐
                 convert = true;
                 boss.SetDefense(bossOrigin);
+                Debug.Log($"보스방어력 ; {boss.Defense}");
                 defense = 0.99f;
                 animator.SetBool(param, convert);
             }
@@ -107,6 +108,7 @@ public class Shield : MonoBehaviour ,IDamageable, IDebuffable
                 //방패 떠짐 => 보스 단단해짐
                 convert = false;
                 boss.SetDefense(0.99f);
+                Debug.Log($"보스방어력 ; {boss.Defense}");
                 defense = 0.1f;
                 animator.SetBool(param, convert);
             }
@@ -129,7 +131,6 @@ public class Shield : MonoBehaviour ,IDamageable, IDebuffable
         buffer?.RemoveDebuff(); 
         
         boss.SetDefense(bossOrigin);
-        Debug.Log("방패 부서짐" + bossOrigin);
         
         ObjectPoolManager.Instance.ReleaseObject(id, gameObject);
     }

@@ -18,7 +18,7 @@ public class StatData
 
 public class StatusManager : MonoBehaviour
 {
-    private Dictionary<Stat, float> status = new Dictionary<Stat, float>(); // object → float
+    private Dictionary<Stat, float> status = new Dictionary<Stat, float>(); 
     private Dictionary<Stat, StatData> statLevelData = new Dictionary<Stat, StatData>()
     {
         //레벨로 성장 가능한 옵션들
@@ -43,6 +43,8 @@ public class StatusManager : MonoBehaviour
     private void Start()
     {
         InitStatus();
+        
+        //awake에서 전부 이벤트를 구독했기 때문에 start에서 실행
         InvokeEvent();
     }
 
@@ -66,7 +68,9 @@ public class StatusManager : MonoBehaviour
         status[Stat.CriticalDamage] = 1.5f;//기본 1.5배 1 ~ 무한 : 0.5단위
         status[Stat.Speed] = 2f; //1~7 : 0.5단위
         status[Stat.MineSpeed] = 5f; //0.5단위
-        status[Stat.ExperienceGetter] = 1f; //1배 ~ 무한 : 1단위 : 획득경험치 증가 버프 
+        status[Stat.ExperienceGetter] = 1f; //1배 ~ 무한 : 획득경험치 증가 버프 
+        status[Stat.AttackRange] = 0f; //증가시킬 사거리
+        status[Stat.AdditionalAttackCount] = 0f; //증가시킬 타격횟수
     }
     
     private StatData GetStatData(Stat targetStat)

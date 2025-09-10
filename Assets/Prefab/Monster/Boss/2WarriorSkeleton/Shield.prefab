@@ -132,9 +132,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb93f877eefdae40a72f7345c81f043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shieldDuration: 5
-  minConvertTime: 10
-  maxConvertTime: 16
+  shieldDuration: 30
+  minConvertTime: 5
+  maxConvertTime: 10
   animator: {fileID: 4780679191989849936}
   param: isConvert
   healthSlider: {fileID: 6006349576869739248}

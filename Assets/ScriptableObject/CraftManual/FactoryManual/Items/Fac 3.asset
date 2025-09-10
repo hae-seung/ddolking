@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae77d3b2164203418d3fc57bf50ec18, type: 3}
+  m_Name: Fac 3
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 8b03181a00dabe2489d32c31c1e179ff, type: 2}
+  craftNeedItems:
+  - itemData: {fileID: 11400000, guid: 98177ea231c812c40b0b7ba42e0010be, type: 2}
+    amount: 4
+  - itemData: {fileID: 11400000, guid: 07311dc53bf9ce64d8bf6b5eb15f7214, type: 2}
+    amount: 2
+  makingTime: 10

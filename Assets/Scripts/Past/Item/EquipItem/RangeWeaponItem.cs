@@ -6,8 +6,8 @@ public class RangeWeaponItem : WeaponItem
 {
     private RangeWeaponData data;
     private float fanAngle;
-    
-    private Collider2D[] hitBuffer = new Collider2D[20];
+
+    private Collider2D[] hitBuffer;
     
     
     
@@ -15,6 +15,7 @@ public class RangeWeaponItem : WeaponItem
     {
         this.data = data;
         fanAngle = data.FanAngle;
+        hitBuffer = new Collider2D[data.HitCount];
     }
 
     protected override EquipItem CreateItem()
@@ -24,6 +25,7 @@ public class RangeWeaponItem : WeaponItem
     
     public override void ExecuteAttack(Vector2 dir, Vector2 origin)
     {
+        base.ExecuteAttack(dir, origin);
         
         int hitCountActual = Physics2D.OverlapCircleNonAlloc(origin, range, hitBuffer, targetLayer);
         

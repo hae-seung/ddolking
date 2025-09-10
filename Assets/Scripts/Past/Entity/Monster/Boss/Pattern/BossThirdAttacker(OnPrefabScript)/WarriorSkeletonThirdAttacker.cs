@@ -48,7 +48,7 @@ public class WarriorSkeletonThirdAttacker : MonoBehaviour
                 swordId,
                 transform.position,
                 Quaternion.identity).GetComponent<SkeletonSwordBullet>();
-
+            
             bullet.transform.parent = transform;
             Vector3 rot = Vector3.forward * 360 * i / spawnCnt;
             bullet.transform.Rotate(rot);
@@ -71,9 +71,11 @@ public class WarriorSkeletonThirdAttacker : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-
+        
+        
         for (int i = 0; i < swordList.Count; i++)
         {
+            swordList[i].CanAttack();
             swordList[i].transform.SetParent(null, true);
             swordList[i].Launch();
         }

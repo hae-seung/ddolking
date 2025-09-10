@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 7031WarriorSkeletonBoss
   m_EditorClassIdentifier: 
   entityId: 7031
-  hp: 2222
+  hp: 50000
   toolWear: 0.1
   moveSpeed: 0.45
   defense: 0.2
@@ -27,4 +27,7 @@ MonoBehaviour:
   bodyDamage: 1
   sightRange: 10
   attackRange: 5
-  levelRatio: 0.5
+  hpRatio: 0
+  damageRatio: 0
+  defenseRatio: 0
+  toolWearRatio: 0

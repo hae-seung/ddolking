@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ae77d3b2164203418d3fc57bf50ec18, type: 3}
-  m_Name: C_TutorialAmulet
+  m_Name: 5.C_CraftTable
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 71034c0a7cc2fe14eada1da9d119b290, type: 2}
+  itemData: {fileID: 11400000, guid: d584f157907439e40b43217435e95ba5, type: 2}
   craftNeedItems:
-  - itemData: {fileID: 11400000, guid: 2d3e1eb0e1f59784c82d9d4fd39ed9fe, type: 2}
-    amount: 8
-  - itemData: {fileID: 11400000, guid: 0d824450b7d4fc84692e0fc6748408d9, type: 2}
-    amount: 2
+  - itemData: {fileID: 11400000, guid: 8ed1d117413647f4383bf293aac5d76b, type: 2}
+    amount: 6
   makingTime: 10

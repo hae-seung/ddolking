@@ -35,10 +35,19 @@ public class BossHealth : MonoBehaviour
         gameObject.SetActive(true);
     }
 
+    public void HideSlider()
+    {
+        Dead();
+    }
+    
     private void Dead()
     {
-        boss.onDamage -= UpdateHealthText;
-        boss.onDead -= Dead;
+        if(boss != null)
+        {
+            boss.onDamage -= UpdateHealthText;
+            boss.onDead -= Dead;
+            boss = null;
+        }
         gameObject.SetActive(false);
     }
 

@@ -1,5 +1,8 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
+
+[RequireComponent(typeof(BoxCollider2D))]
 public class MonsterAttack : MonoBehaviour
 {
     [Header("공격 판정 설정")]
@@ -19,7 +22,7 @@ public class MonsterAttack : MonoBehaviour
         Vector2 size   = Vector2.Scale(boxCollider.size, attackBone.lossyScale);
         float angle    = attackBone.eulerAngles.z;
 
-        // 👉 애니메이터 오브젝트의 flip 상태에 따라 angle 보정
+        //애니메이터 오브젝트의 flip 상태에 따라 angle 보정
         if (animatorObject != null && animatorObject.transform.localScale.z < 0f)
         {
             angle = -angle;
@@ -30,7 +33,7 @@ public class MonsterAttack : MonoBehaviour
         return hit != null;
     }
 
-    // 🔎 Scene 뷰에서 공격 범위를 시각화
+    // Scene 뷰에서 공격 범위를 시각화
     private void OnDrawGizmos()
     {
         if (attackBone == null || boxCollider == null) return;

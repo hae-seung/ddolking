@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ae77d3b2164203418d3fc57bf50ec18, type: 3}
-  m_Name: C_CraftTable
+  m_Name: cooker 2
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: d584f157907439e40b43217435e95ba5, type: 2}
+  itemData: {fileID: 11400000, guid: 71958d7488dd5974b87bcda09dcfee85, type: 2}
   craftNeedItems:
-  - itemData: {fileID: 11400000, guid: 8ed1d117413647f4383bf293aac5d76b, type: 2}
-    amount: 4
+  - itemData: {fileID: 11400000, guid: 7a3ddbac62c41d3419a7cf9a29491d8f, type: 2}
+    amount: 1
+  - itemData: {fileID: 11400000, guid: 16910f697da37734b9d073c53ca6d8bc, type: 2}
+    amount: 1
   makingTime: 5

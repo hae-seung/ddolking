@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: FilatureManual
   m_EditorClassIdentifier: 
   craftItemSo:
-  - {fileID: 11400000, guid: 349c63a2732ce1e40a53f4b8b37b712e, type: 2}
+  - {fileID: 11400000, guid: 098070b00ea440646a8b4e1be41b23eb, type: 2}
+  - {fileID: 11400000, guid: cd1fe3f92c121f54ab03e208340ff827, type: 2}
+  - {fileID: 11400000, guid: 9671d744b9aff2944ad56b65138da138, type: 2}

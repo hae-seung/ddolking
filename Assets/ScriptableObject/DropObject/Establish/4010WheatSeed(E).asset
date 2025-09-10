@@ -23,3 +23,6 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 256
+  blockedLayer:
+    serializedVersion: 2
+    m_Bits: 64

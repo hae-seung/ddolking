@@ -25,6 +25,8 @@ public class LineWeaponItem : WeaponItem
 
     public override void ExecuteAttack(Vector2 dir, Vector2 origin)
     {
+        base.ExecuteAttack(dir, origin);
+        
         // hitCount에 따라 배열 크기 조절
         if (cachedHits.Length < hitCount)
             cachedHits = new RaycastHit2D[hitCount];
@@ -69,7 +71,8 @@ public class LineWeaponItem : WeaponItem
                     
                 dmg?.OnDamage(CalculateDamage(isCritical), isCritical);
             }
-
+            
+            //내구도는 타격횟수 상관없이 한마리당 한 번씩 감소
             if(dmg != null)
                 ReduceDurability(dmg.GetToolWear());
             

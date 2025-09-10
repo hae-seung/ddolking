@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ae77d3b2164203418d3fc57bf50ec18, type: 3}
-  m_Name: C_WoodPickAxe
+  m_Name: 6.C_Brick
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 1d13c3116f40b5d4a8a087d1d20a12d1, type: 2}
-  resultAmount: 1
+  itemData: {fileID: 11400000, guid: 3fa1c9efd681083469daebe43d91f982, type: 2}
   craftNeedItems:
-  - itemData: {fileID: 11400000, guid: 93a8549cdd8a7bd4da34718a3984b7fe, type: 2}
+  - itemData: {fileID: 11400000, guid: 08e6d38c10211714f8935695cbf608a9, type: 2}
     amount: 2
-  - itemData: {fileID: 11400000, guid: 8ed1d117413647f4383bf293aac5d76b, type: 2}
-    amount: 3
+  - itemData: {fileID: 11400000, guid: 65d93b557685037479e9764c182e24b0, type: 2}
+    amount: 1
   makingTime: 5

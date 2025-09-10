@@ -39,6 +39,6 @@ public class ShopBuyItem //BuyItem을 실체화 시키는 실제 객체
         if (remainAmount == -1)
             return;
         
-        remainAmount = Mathf.Min(0, remainAmount - amount);
+        remainAmount = Mathf.Max(0, remainAmount - amount);
     }
 }

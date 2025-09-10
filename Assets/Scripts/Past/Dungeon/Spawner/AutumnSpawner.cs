@@ -69,7 +69,6 @@ public class AutumnSpawner : MonoBehaviour, ISpanwBoss
         livingEntity.SetTarget(player, pos);
         livingEntity.SetLevel(monsterFixLevel);
 
-
         Action handler = null;
         handler = () =>
         {

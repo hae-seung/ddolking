@@ -98,8 +98,7 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable, IDebuffable
         
         ApplyDamageEffect(damage, isCritical);
         onDamage?.Invoke(damage);
-
-        Debug.Log("체력 줄일게");
+        
         hp -= damage;
         healthSlider.value -= damage;
         
@@ -120,7 +119,6 @@ public abstract class LivingEntity : MonoBehaviour, IDamageable, IDebuffable
         damageNumber.SetFollowedTarget(transform);
 
         ObjectPoolManager.Instance.SpawnObject((int)damageType, transform.position, Quaternion.identity);
-        Debug.Log("디버프 체력 줄일게");
         hp -= damage;
         healthSlider.value -= damage;
         onDamage?.Invoke(damage);

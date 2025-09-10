@@ -210,6 +210,7 @@ public class ToolTipUI : MonoBehaviour
         float height = _rt.rect.height;
 
         // 기본 위치 (pivot은 0,1 → 좌상단 기준)
+        // 스크린 좌표 -> 부모 로컬 좌표 변환
         Vector2 anchoredPos;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             parentRect,
@@ -241,10 +242,10 @@ public class ToolTipUI : MonoBehaviour
         anchoredPos.y = Mathf.Clamp(anchoredPos.y, minY, maxY);
 
         _rt.anchoredPosition = anchoredPos;
+        Debug.Log(_rt.anchoredPosition);
     }
 
-
-
+    
 
 
 

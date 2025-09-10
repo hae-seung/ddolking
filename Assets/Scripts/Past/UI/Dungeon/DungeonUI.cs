@@ -126,6 +126,8 @@ public class DungeonUI : MonoBehaviour
         _doTweenAnimation.DORestartById("show");
     }
 
+  
+
     public void OpenSweepRewards(bool CanSweep, List<SweepReward> rewards)
     {
         if(!CanSweep)
@@ -260,7 +262,10 @@ public class DungeonUI : MonoBehaviour
     {
         bossHealth.OpenSlider(boss);
     }
-    
-    
+
+    public void HideBossSlider()
+    {
+        bossHealth.HideSlider();
+    }
     
 }

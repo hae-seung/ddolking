@@ -8,9 +8,16 @@ public class SkeletonSwordBullet : MonoBehaviour
     private int id;
     private float speed;
     private float damage;
+    private float rotationTime;
 
+    private bool canAttack;
     private Coroutine launchRoutine;
-    
+
+    private void OnEnable()
+    {
+        canAttack = false;
+    }
+
     public void Init(int id, float speed, float damage)
     {
         this.id = id;
@@ -40,8 +47,16 @@ public class SkeletonSwordBullet : MonoBehaviour
         ObjectPoolManager.Instance.ReleaseObject(id, gameObject);
     }
 
+    public void CanAttack()
+    {
+        canAttack = true;
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (!canAttack)
+            return;
+        
         if (other.CompareTag("Player"))
         {
             Player target = other.GetComponent<Player>();

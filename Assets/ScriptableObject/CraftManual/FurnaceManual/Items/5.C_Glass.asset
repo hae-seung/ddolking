@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ae77d3b2164203418d3fc57bf50ec18, type: 3}
-  m_Name: C_Furnace
+  m_Name: 5.C_Glass
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 38fbbedcfbedaee45a226072b0824802, type: 2}
+  itemData: {fileID: 11400000, guid: 210fcb128bd770b41bec428173191563, type: 2}
   craftNeedItems:
-  - itemData: {fileID: 11400000, guid: 154a33932e438d14ebe3929b2c9f0ad0, type: 2}
-    amount: 8
-  makingTime: 15
+  - itemData: {fileID: 11400000, guid: a2614e895873755498d5eb0de9a944c9, type: 2}
+    amount: 2
+  - itemData: {fileID: 11400000, guid: 65d93b557685037479e9764c182e24b0, type: 2}
+    amount: 1
+  makingTime: 5

@@ -804,9 +804,9 @@ MonoBehaviour:
   renderer: {fileID: 8903314436629913606}
   projectileData: {fileID: 11400000, guid: e02f007a007545544aa06991d347bc28, type: 2}
   launchPos: {fileID: 1808064730483994218}
-  hasLaunch: 0
-  launchId: 0
-  launchPrefab: {fileID: 0}
+  hasLaunch: 1
+  launchId: 7500
+  launchPrefab: {fileID: 7713808481027264603, guid: c6c5aae66841ee348a25a064d58056f1, type: 3}
 --- !u!1 &6256157127005439586
 GameObject:
   m_ObjectHideFlags: 0

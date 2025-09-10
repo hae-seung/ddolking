@@ -145,6 +145,7 @@ public class FutureItemView : MonoBehaviour
         //돈 딸리면 최대 몇개 구매 가능한지 경고문 띄우기
         //인벤토리에 아이템 추가해주기
 
+        
         int totalPrice = item.price * amount;
         if (PlayerWallet.Instance.ModernMoney < totalPrice)//돈부족
         {

@@ -52,7 +52,8 @@ public class Projectile : MonoBehaviour
 
         yield return new WaitForSeconds(lifeTime);
 
-        ObjectPoolManager.Instance.ReleaseObject(id, gameObject);
+        if(hasExplode)
+            ObjectPoolManager.Instance.ReleaseObject(id, gameObject);
     }
     
     
@@ -88,6 +89,9 @@ public class Projectile : MonoBehaviour
 
     private void SpawnExplosionEffect(Transform pos)
     {
+        if(!hasExplode)
+            return;
+        
         ObjectPoolManager.Instance.SpawnObject(
             explosionId,
             pos.position,

@@ -25,6 +25,3 @@ MonoBehaviour:
   - buyItem: {fileID: 11400000, guid: 71034c0a7cc2fe14eada1da9d119b290, type: 2}
     price: 1
     maxAmount: -1
-  - buyItem: {fileID: 11400000, guid: 873ae3bd41b37f346ab2e75b2bbc0de8, type: 2}
-    price: 1
-    maxAmount: 55
