@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f348ead59a1c04a4a8df28da986b354d, type: 3}
+  m_Name: IceSlime Table
+  m_EditorClassIdentifier: 
+  experience: 1
+  items:
+  - probability: 100
+    dropItem: {fileID: 11400000, guid: 0d824450b7d4fc84692e0fc6748408d9, type: 2}
+    dropItemAmount_Min: 1
+    dropItemAmount_Max: 1

@@ -16,35 +16,46 @@ public class MakingItemUI : MonoBehaviour
     private CraftItemSO _craftItemSo;
     private int totalAmount;
     private Action finishEvent;
-    
+
+    private float makeTime;
+    private Coroutine makeRoutine;
+
     private void Awake()
     {
         gameObject.SetActive(false);
     }
-    
 
-    public void MakeItem(CraftItemSO craftItem, int amount, Action onFinish)
+    public void MakeItem(CraftItemSO craftItem, int amount, ReinforceStructureItem ritem, Action onFinish)
     {
         gameObject.SetActive(true);
-        
-        slider.maxValue = craftItem.MakingTime;
-        slider.value = 0f;
         
         reminAmountTxt.text = $"{amount}";
         itemImage.sprite = craftItem.CraftItemData.IconImage;
         
         _craftItemSo = craftItem;
+        
+        makeTime = craftItem.MakingTime;
+
+        if(ritem != null)
+        {
+            int curLevel = ritem.GetLevel();
+            makeTime *= (1 - ritem.GetEfficient(curLevel));
+        }
+        
         totalAmount = amount;
         finishEvent = onFinish;
         
-        StartCoroutine(nameof(MakeItemCoroutine));
+        slider.maxValue = makeTime;
+        slider.value = 0f;
+        
+        makeRoutine = StartCoroutine(MakeItemCoroutine());
     }
 
     private IEnumerator MakeItemCoroutine()
     {
         for (int i = 1; i <= totalAmount; i++)//만들 아이템 총 갯수 
         {
-            for (int time = 1; time <= _craftItemSo.MakingTime; time++)//아이템 1개 제작
+            for (int time = 1; time <= Mathf.RoundToInt(makeTime); time++)//아이템 1개 제작
             {
                 slider.value = time;
                 if (slider.value == slider.maxValue)
@@ -64,6 +75,7 @@ public class MakingItemUI : MonoBehaviour
         gameObject.SetActive(false);
         finishEvent?.Invoke();
         finishEvent = null;
+        makeRoutine = null;
     }
 
     private void InstanceObject()
@@ -85,5 +97,12 @@ public class MakingItemUI : MonoBehaviour
         {
             dropObj.transform.DOJump(dropPosition, 1f, 1, 0.8f).SetEase(Ease.OutBounce);
         }
+    }
+
+    public void StopMaking()
+    {
+        if(makeRoutine != null)
+            StopCoroutine(makeRoutine);
+        gameObject.SetActive(false);
     }
 }

@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EntityData : ScriptableObject
+
+[CreateAssetMenu(fileName = "EntityData", menuName = "SO/Entity/Entity")]
+public class EntityData : ScriptableObject
 {
     [SerializeField] protected int entityId;
     [SerializeField] protected float hp;
     [SerializeField] protected float toolWear;
     [SerializeField] protected float moveSpeed;
-    [Range(0f,1f)]
+    [Range(0f,0.99f)]
     [SerializeField] protected float defense;
+    [SerializeField] private GameObject entityPrefab;
+    
 
     //사망시 드랍
     [SerializeField] protected EntityDropTable dropTable;
@@ -21,5 +25,7 @@ public abstract class EntityData : ScriptableObject
     public float Defense => defense;
 
     public EntityDropTable DropTable => dropTable;
+
+    public GameObject EntityPrefab => entityPrefab;
 
 }

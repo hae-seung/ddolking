@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f221a4ba5bf3159488a146f53fcfcc6f, type: 3}
+  m_Name: 32VitalityPieceData
+  m_EditorClassIdentifier: 
+  _id: 32
+  _name: "\uD65C\uB825\uC870\uAC01"
+  _description: "\uD65C\uB825\uC870\uAC01"
+  _iconImage: {fileID: 21300000, guid: a925486266fbfe14993c934c161aadf9, type: 3}
+  dropObjectPrefab: {fileID: 6182415438641699452, guid: 549c77d6751916648850734e5156e56b, type: 3}
+  maxAmount: 99
+  reduceTime: 3
+  growType: 8002

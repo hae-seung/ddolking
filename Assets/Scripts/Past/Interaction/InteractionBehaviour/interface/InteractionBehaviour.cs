@@ -4,10 +4,10 @@ using UnityEngine;
 
 public abstract class InteractionBehaviour : MonoBehaviour, IInteractionBehavior
 {
-    public void Operate(Interactor interactor)
+    public void Operate(Interactor interactor, Item currentGripItem = null)
     {
-        Interact(interactor);
+        Interact(interactor, currentGripItem);
     }
 
-    protected abstract void Interact(Interactor interactor);
+    protected abstract void Interact(Interactor interactor, Item currentGripItem = null);
 }

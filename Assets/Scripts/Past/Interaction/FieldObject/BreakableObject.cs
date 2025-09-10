@@ -13,7 +13,7 @@ public class BreakableObject : Interactable
     [SerializeField] private FieldObjectData fieldObjectData;
     private float durability;
     private float toolWear;
-    private List<DropTable> dropTable = new();
+    protected List<DropTable> dropTable = new();
 
     [Header("오브젝트 체력")]
     [SerializeField] private Slider durabilityBar;
@@ -26,7 +26,9 @@ public class BreakableObject : Interactable
     private bool  isCooldown, isHolding;
 
     [Header("닷트윈")]
-    [SerializeField] private DOTweenAnimation _doTweenAnimation;
+    [SerializeField] protected DOTweenAnimation _doTweenAnimation;
+    
+    
 
     protected virtual void Start() => SetData();
 
@@ -102,6 +104,8 @@ public class BreakableObject : Interactable
 
     private void StartBreakCoroutine(ref Coroutine coroutine, IEnumerator routine)
     {
+        if (!isActiveAndEnabled) return;
+        
         if (coroutine == null)
         {
             coroutine = StartCoroutine(routine);
@@ -184,11 +188,14 @@ public class BreakableObject : Interactable
         if (durability <= 0)
         {
             durabilityBar.gameObject.SetActive(false);
+
+            // 코루틴 먼저 멈춤
             StopBreakObject();
-            
+
             GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
             DropItems();
             DestroyFieldObject();
+            return; // 여기서 바로 종료
         }
 
         if (gripItem is ToolItem toolItem)
@@ -218,32 +225,49 @@ public class BreakableObject : Interactable
     }
     
     
-
-    private void DropItems()
+    //interbreak에서 오버라이드
+    protected virtual void DropItems()
     {
         foreach (var drop in dropTable)
         {
             if (!ObjectPoolManager.Instance.IsPoolRegistered(drop.DropItemId))
                 ObjectPoolManager.Instance.RegisterPrefab(drop.DropItemId, drop.DropItemPrefab);
-
+            
+            
             for (int i = 0; i < Random.Range(drop.MinAmount, drop.MaxAmount + 1); i++)
             {
-                Vector3 dropPosition = transform.position + new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), 0);
-                GameObject dropObj = ObjectPoolManager.Instance.SpawnObject(drop.DropItemId, dropPosition, Quaternion.identity);
+                Vector3 dropPosition = transform.position + new Vector3(
+                    Random.Range(-0.5f, 0.5f),
+                    Random.Range(-0.5f, 0.5f),
+                    0);
 
+                GameObject dropObj = ObjectPoolManager.Instance.SpawnObject(
+                    drop.DropItemId,
+                    dropPosition,
+                    Quaternion.identity);
+                
                 dropObj?.transform.DOJump(dropPosition, 1f, 1, 0.8f).SetEase(Ease.OutBounce);
             }
         }
     }
-
-    public void DestroyFieldObject()
+    
+    
+    //interbreak에서 override
+    public virtual void DestroyFieldObject()
     {
         StopAllCoroutines();
         breakCoroutine = null;
         waitBreakCoroutine = null;
-
-        drawOutline.onPointerExit -= HandlePointerExit;
         
+        drawOutline.onPointerExit -= HandlePointerExit;
+
+        if (!ObjectPoolManager.Instance.IsPoolRegistered(fieldObjectData.id))
+        {
+            ObjectPoolManager.Instance.RegisterPrefab(fieldObjectData.id, fieldObjectData.ownObject);
+        }
+        
+        
+        EndBreakState();
         ObjectPoolManager.Instance.ReleaseObject(fieldObjectData.id, gameObject);
     }
 
@@ -258,4 +282,6 @@ public class BreakableObject : Interactable
 
         drawOutline.SetPlayerNear(state);
     }
+
+   
 }

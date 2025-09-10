@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca896ee6d9234fc429ee868adfccd3ad, type: 3}
+  m_Name: 2004RoninSword
+  m_EditorClassIdentifier: 
+  _id: 2004
+  _name: "\uB0AD\uC778 \uAC80"
+  _description: "\uB0AD\uC778 \uAC80"
+  _iconImage: {fileID: 21300000, guid: 3145f61cd4430a04bb7f279047fae989, type: 3}
+  dropObjectPrefab: {fileID: 5026200416116847091, guid: ae02333c466d53d40b42c9b963d8b5f6, type: 3}
+  isEnhanceable: 1
+  itemclass: 7
+  maxDurability: 100
+  itemLevel: 0
+  statModifier: []
+  enhancementLogic: {fileID: 11400000, guid: c1bc60917939e494f9a77f058d3ac166, type: 2}
+  hitCount: 1
+  attackCount: 1
+  weaponConst: 0.5
+  range: 1.5
+  attackDelay: 0.25
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 2560
+  debuff: {fileID: 11400000, guid: 656f4a9e8de03014c81929c4a56da756, type: 2}
+  isHandWeapon: 0
+  skillData: {fileID: 11400000, guid: 85687860187deda4080cce97fd5f1fd6, type: 2}

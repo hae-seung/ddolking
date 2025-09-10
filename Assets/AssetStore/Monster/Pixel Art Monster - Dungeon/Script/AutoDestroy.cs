@@ -8,7 +8,7 @@ namespace Cainos.PixelArtMonster_Dungeon
     {
         public float lifeTime = 2.0f;
 
-        private void Start()
+        private void OnEnable()
         {
             Destroy(gameObject, lifeTime);
         }

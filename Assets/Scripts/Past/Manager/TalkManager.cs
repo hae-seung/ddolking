@@ -9,7 +9,9 @@ public class TalkManager : Singleton<TalkManager>
     private Dictionary<int, NPCData> npcInfo;
     [SerializeField] private TalkUI talkUI;
     private DOTweenAnimation talkPanel;
-    
+
+    [SerializeField] private List<CinemachineVirtualCamera> cameras;
+    private CinemachineVirtualCamera currentCamera;
     
     public bool isTalk { get; private set; } 
     
@@ -76,6 +78,8 @@ public class TalkManager : Singleton<TalkManager>
         isTalk = false;
         talkPanel.DORestartById("hide");
         VirtualCameraManager.Instance.GetCamera(CameraType.talk).SetActive(false);
+        currentCamera.gameObject.SetActive(true);
+        currentCamera = null;
         
         GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
     }
@@ -84,6 +88,15 @@ public class TalkManager : Singleton<TalkManager>
     {
         if (isTalk)
             return;
+
+        for (int i = 0; i < cameras.Count; i++)
+        {
+            if (cameras[i].gameObject.activeSelf)
+            {
+                currentCamera = cameras[i];
+                break;
+            }
+        }
         
         if(!talkPanel.gameObject.activeSelf)
             talkPanel.gameObject.SetActive(true);

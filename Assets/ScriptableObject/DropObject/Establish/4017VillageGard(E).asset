@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae7a91ca788315498e43e2db6af0122, type: 3}
+  m_Name: 4017VillageGard(E)
+  m_EditorClassIdentifier: 
+  _id: 4017
+  _name: "\uC7A5\uC2B9"
+  _description: "\uC7A5\uC2B9"
+  _iconImage: {fileID: 21300000, guid: 994c7905e69da784a9ca053d441e2716, type: 3}
+  dropObjectPrefab: {fileID: 8399067976999917615, guid: b316c057e03b0b84f8194634e295e5c7, type: 3}
+  maxAmount: 1
+  establishObjectData: {fileID: 11400000, guid: 78b325a685f439f4cbc15f6ebb1fbe68, type: 2}
+  establishObjectPreview: {fileID: 3805441725298577387, guid: dbc6638d5c2c01f43be4b785f25bd567, type: 3}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  isStructure: 0

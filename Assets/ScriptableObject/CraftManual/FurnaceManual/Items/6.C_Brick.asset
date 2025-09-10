@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae77d3b2164203418d3fc57bf50ec18, type: 3}
+  m_Name: 6.C_Brick
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 3fa1c9efd681083469daebe43d91f982, type: 2}
+  craftNeedItems:
+  - itemData: {fileID: 11400000, guid: 08e6d38c10211714f8935695cbf608a9, type: 2}
+    amount: 2
+  - itemData: {fileID: 11400000, guid: 65d93b557685037479e9764c182e24b0, type: 2}
+    amount: 1
+  makingTime: 5

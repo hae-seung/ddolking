@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae7a91ca788315498e43e2db6af0122, type: 3}
+  m_Name: 4019MineMachine(E)
+  m_EditorClassIdentifier: 
+  _id: 4019
+  _name: "\uCC44\uAD74\uAE30"
+  _description: "\uCC44\uAD74\uAE30"
+  _iconImage: {fileID: 21300000, guid: 304cf3fa1b845db429475ddeb559a2d7, type: 3}
+  dropObjectPrefab: {fileID: 8316119076970073957, guid: 06d5e15124e28d340b8a57e546333635, type: 3}
+  maxAmount: 1
+  establishObjectData: {fileID: 11400000, guid: 36a6cdc9671bd64418918ec2c82d005b, type: 2}
+  establishObjectPreview: {fileID: 3805441725298577387, guid: 89aba53ed406870408c3ed41d73c87bc, type: 3}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  isStructure: 0

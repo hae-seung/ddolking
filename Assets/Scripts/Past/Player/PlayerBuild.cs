@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.Pipes;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class PlayerBuild : MonoBehaviour
     private bool isBuilding = false;
     private PreviewObject previewObject;
     private EstablishItemData establishItemData;
+    private EstablishItem establishItem;
     private Coroutine buildCoroutine;
     private bool buildComplete = false;
 
@@ -38,22 +40,34 @@ public class PlayerBuild : MonoBehaviour
         }
 
         UpdatePreviewPosition();
-        
+
         Collider2D[] hits = Physics2D.OverlapPointAll(mousePosition);
         bool isOnValidTarget = false;
+        bool hasBlocked = false;
 
-        foreach (var c in hits)
+        for (int i = 0; i < hits.Length; i++)
         {
-            if (((1 << c.gameObject.layer) & establishItemData.TargetLayer) != 0)
+            int layer = hits[i].gameObject.layer;
+
+            // 차단 레이어에 걸리면 무조건 불가
+            if (((1 << layer) & establishItemData.BlockedLayer) != 0)
+            {
+                hasBlocked = true;
+                break;
+            }
+
+            // 설치 가능한 레이어 체크
+            if (((1 << layer) & establishItemData.TargetLayer) != 0)
             {
                 isOnValidTarget = true;
-                break;
             }
         }
 
+        if (hasBlocked)
+            isOnValidTarget = false;
+
         // 설치 가능 여부 계산
         bool isValidPlacement = isOnValidTarget && previewObject.CanEstablish;
-        
         previewObject.SetPlacementValidity(isValidPlacement);
 
         if (isValidPlacement && Input.GetMouseButtonDown(0))
@@ -61,6 +75,8 @@ public class PlayerBuild : MonoBehaviour
             buildComplete = true;
         }
     }
+
+
     
 
     public IEnumerator BuildItem(EstablishItem establishItem, Action<bool> callback)
@@ -78,6 +94,7 @@ public class PlayerBuild : MonoBehaviour
 
         previewObject = Instantiate(establishItem.EstablishData.PreviewObject).GetComponent<PreviewObject>();
         establishItemData = establishItem.EstablishData;
+        this.establishItem = establishItem;
         
         gameObject.SetActive(true);
 
@@ -109,11 +126,17 @@ public class PlayerBuild : MonoBehaviour
         {
             ObjectPoolManager.Instance.RegisterPrefab(itemId, establishItemData.EstablishObjectData.ownObject);
         }
-
-        ObjectPoolManager.Instance.SpawnObject(
+        
+        IReBuild rebuildItem = ObjectPoolManager.Instance.SpawnObject(
             itemId,
             new Vector3(mousePosition.x, mousePosition.y, 0),
-            Quaternion.identity);
+            Quaternion.identity).GetComponent<IReBuild>();
+
+        if (rebuildItem != null)
+        {
+            rebuildItem.SetRebuildItem(establishItem);
+        }
+        
         
         //빌딩 시스템off
         callback(true);

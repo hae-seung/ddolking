@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae7a91ca788315498e43e2db6af0122, type: 3}
+  m_Name: 4010WheatSeed(E)
+  m_EditorClassIdentifier: 
+  _id: 4010
+  _name: "\uBC00\uC528\uC557"
+  _description: "\uBC00\uC528\uC557"
+  _iconImage: {fileID: 21300000, guid: 1ffe80ce12309324d8e452d99216f71c, type: 3}
+  dropObjectPrefab: {fileID: 956573388279783908, guid: a86d86a2211c6be4899ade63bf9cb34e, type: 3}
+  maxAmount: 50
+  establishObjectData: {fileID: 11400000, guid: 0d45c191c3dea8742a2c29d9ba3f9029, type: 2}
+  establishObjectPreview: {fileID: 3805441725298577387, guid: ce078fa173389c44697e4d027f94d481, type: 3}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  blockedLayer:
+    serializedVersion: 2
+    m_Bits: 64

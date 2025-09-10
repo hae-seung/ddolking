@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -8,10 +6,12 @@ using UnityEngine.UI;
 
 public class MineUI : MonoBehaviour
 {
-    [Header("구성요소")]
+    [Header("구성요소")] 
     [SerializeField] private TextMeshProUGUI mineName;
     [SerializeField] private TextMeshProUGUI spawnList;
     [SerializeField] private TextMeshProUGUI remainTime;
+    [SerializeField] private GameObject ticketSet;
+    [SerializeField] private ItemData ticketItem;
     [SerializeField] private Button enterBtn;
     [SerializeField] private Button closeBtn;
     [SerializeField] private Button exitBtn;
@@ -25,6 +25,8 @@ public class MineUI : MonoBehaviour
     private Action ExitMine;
     private Action EnterMine;
 
+    private bool CanUseTicket;
+
 
     private void Awake()
     {
@@ -34,8 +36,8 @@ public class MineUI : MonoBehaviour
         {
             CloseMineUI();
             EnterMine?.Invoke();
+            UseTicket();
             exitBtn.gameObject.SetActive(true);
-            GameEventsManager.Instance.playerEvents.MineEnter();
             UIManager.Instance.StartTransition();
         });
 
@@ -43,7 +45,6 @@ public class MineUI : MonoBehaviour
 
         exitBtn.onClick.AddListener(() =>
         {
-            GameEventsManager.Instance.playerEvents.ExitMine();
             UIManager.Instance.StartTransition();
             ExitMine?.Invoke();
             exitBtn.gameObject.SetActive(false);
@@ -53,31 +54,47 @@ public class MineUI : MonoBehaviour
     }
 
 
-    public void OpenMineUI(string name, string list,int remainTime ,Action EnterMine, Action ExitMine)
+    public void OpenMineUI(string name, string list, int remainTime, Action EnterMine, Action ExitMine)
     {
         GameEventsManager.Instance.playerEvents.DisablePlayerMovement();
         GameEventsManager.Instance.inputEvents.DisableInput();
-
-
+        
         this.EnterMine = EnterMine;
         this.ExitMine = ExitMine;
 
         mineName.text = name;
         spawnList.text = list;
 
+        CanUseTicket = false;
+        
+        //입장시간까지 남음
         if (remainTime > 0)
         {
-            this.remainTime.text = $"남은시간 : {remainTime}시간";
-            enterBtn.gameObject.SetActive(false);
+            //티켓이 있다면 입장가능
+            if (Inventory.Instance.GetItemTotalAmount(ticketItem) > 0)
+            {
+                CanUseTicket = true;
+                ticketSet.SetActive(true);
+                this.remainTime.text = "입장가능";
+                enterBtn.gameObject.SetActive(true);
+            }
+            else
+            {
+                ticketSet.SetActive(true);
+                this.remainTime.text = $"남은시간 : {remainTime}시간";
+                enterBtn.gameObject.SetActive(false);
+            }
         }
         else
         {
             this.remainTime.text = "입장가능";
+            ticketSet.SetActive(false);
             enterBtn.gameObject.SetActive(true);
         }
 
         
         exitBtn.gameObject.SetActive(false);//나가기 버튼은 광산 입장했을때 활성화
+        
         
         _doTweenAnimation.DORestartById("show");
     }
@@ -90,5 +107,13 @@ public class MineUI : MonoBehaviour
         _doTweenAnimation.DORestartById("hide");
         
         exitBtn.gameObject.SetActive(false);
+    }
+
+    private void UseTicket()
+    {
+        if (CanUseTicket)
+        {
+            Inventory.Instance.RemoveItem(ticketItem, 1);
+        }
     }
 }

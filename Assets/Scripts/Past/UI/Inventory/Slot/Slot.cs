@@ -2,8 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using DG.Tweening;
-using Unity.VisualScripting;
 
 public class Slot : MonoBehaviour
 {

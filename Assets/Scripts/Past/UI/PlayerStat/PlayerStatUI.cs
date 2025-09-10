@@ -22,19 +22,25 @@ public class PlayerStatUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timeText;
 
     [Header("Money")]
-    [SerializeField]private TextMeshProUGUI modernMoneyText;
-    [SerializeField]private TextMeshProUGUI pastMoneyText;
-
-
+    [SerializeField] private TextMeshProUGUI modernMoneyText;
+    [SerializeField] private TextMeshProUGUI pastMoneyText;
+    
+    [Header("SkillCool")]
+    [SerializeField] private SkillCoolUI skillUI;
+    
     private void Awake()
     {
         GameEventsManager.Instance.playerEvents.onChangedExperience += ChangedExperience;
         GameEventsManager.Instance.playerEvents.onChangedLevel += ChangedLevel;
         
         GameEventsManager.Instance.statusEvents.onStatChanged += StatChanged;
+        GameEventsManager.Instance.statusEvents.onUseSkill += UseSkill;
         
         GameEventsManager.Instance.dayEvents.onChangeDay += ChangeDay;
         GameEventsManager.Instance.dayEvents.onChangeTime += ChangeTime;
+
+        
+        skillUI.gameObject.SetActive(false);
     }
 
     private void ChangeTime(int currentTime)
@@ -55,13 +61,13 @@ public class PlayerStatUI : MonoBehaviour
     }
 
 
-    private void ChangedLevel(int curLevel, int nextExperienceToNextLevel)
+    private void ChangedLevel(int curLevel, float nextExperienceToNextLevel)
     {
         levelTxt.text = $"레벨 : {curLevel}";
         experienceSlider.maxValue = nextExperienceToNextLevel;
     }
 
-    private void ChangedExperience(int value)
+    private void ChangedExperience(float value)
     {
         experienceSlider.value = value;
     }
@@ -95,5 +101,10 @@ public class PlayerStatUI : MonoBehaviour
     {
         modernMoneyText.text = $"x{modernAmount}";
         pastMoneyText.text = $"x{pastAmount}";
+    }
+
+    public void UseSkill(SkillData data)
+    {
+        skillUI.UseSkill(data);
     }
 }

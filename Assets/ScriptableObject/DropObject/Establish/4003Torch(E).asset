@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae7a91ca788315498e43e2db6af0122, type: 3}
+  m_Name: 4003Torch(E)
+  m_EditorClassIdentifier: 
+  _id: 4003
+  _name: "\uD683\uBD88"
+  _description: "\uC5B4\uB460\uC744 \uBC1D\uD600\uC900\uB2E4."
+  _iconImage: {fileID: 21300000, guid: 3c0dbbb31ab60a84dadd00d7640e8e8a, type: 3}
+  dropObjectPrefab: {fileID: 3096665513260859450, guid: 0a907e75695b1c54c9156c246f3df634, type: 3}
+  maxAmount: 50
+  establishObjectData: {fileID: 11400000, guid: 46cae4e367debdc4ebd1b087fdf5b8c1, type: 2}
+  establishObjectPreview: {fileID: 3805441725298577387, guid: e80e72ca13bed8f4e8c5159c44f00bbb, type: 3}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 384

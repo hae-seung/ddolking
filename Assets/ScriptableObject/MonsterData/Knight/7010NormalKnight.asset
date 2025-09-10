@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0998426caba6f8418dd340f4f83fa51, type: 3}
+  m_Name: 7010NormalKnight
+  m_EditorClassIdentifier: 
+  entityId: 7010
+  hp: 50000
+  toolWear: 0.1
+  moveSpeed: 1
+  defense: 0.1
+  entityPrefab: {fileID: 3273370572504723094, guid: 9c1d176fa8720cd41b7785c0b4be401b, type: 3}
+  dropTable: {fileID: 11400000, guid: fb662d07a9bdec74e84f9b4991d1a46f, type: 2}
+  isAdCarry: 0
+  runSpeed: 1
+  acc: 0.25
+  attackDelay: 1
+  attackDamage: 1
+  bodyDamage: 1
+  sightRange: 10
+  attackRange: 1
+  levelRatio: 0.5

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513e80609651f7c4e921879f475c0c8d, type: 3}
+  m_Name: 46Paper
+  m_EditorClassIdentifier: 
+  _id: 46
+  _name: "\uC885\uC774"
+  _description: "\uC885"
+  _iconImage: {fileID: 21300000, guid: cfdadefd31b6e9d4aa64f6d5f0a1c867, type: 3}
+  dropObjectPrefab: {fileID: 8014045826366315498, guid: 880eb492836fca84d907ae6a9ee3be8d, type: 3}
+  maxAmount: 99

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0375000df742c09478d2dcdde7affc46, type: 3}
+  m_Name: ddolking
+  m_EditorClassIdentifier: 
+  statueImage: {fileID: 21300000, guid: cda492d5f05732e4fb02c2c11769bc85, type: 3}
+  name: "<color=#00CDFF>\uC601\uC6C5</color>"
+  explain: "<color=red>\uC783\uC5B4\uBC84\uB9B0 \uC2DC\uAC04\uB300</color>  \uC720\uBB3C\uB85C
+    \uCD94\uC815\uC911. \n\uB3D9\uC0C1\uC758 \uC8FC\uC778\uC740 \uB204\uAD6C\uC778\uC9C0,
+    \uB204\uAC00 \uB9CC\uB4E4\uC5C8\uB294\uC9C0 \uC65C \uB9CC\uB4E4\uC5C8\uB294\uC9C0
+    \uBAA8\uB450 \uC54C\uB824\uC9C0\uC9C0 \uC54A\uC558\uB2E4.\n\uD558\uC9C0\uB9CC
+    <color=red>\uC655\uAD00\uACFC \uB9DD\uD1A0</color>\uB97C \uC4F4 \uADF8\uC758
+    \uBAA8\uC2B5\uC740 \uB9C8\uCE58 <color=#00CDFF>\uC601\uC6C5</color>\uC758 \uBAA8\uC2B5\uC744
+    \n\uD615\uC0C1\uCF00 \uD588\uB2E4."
+  day: ???

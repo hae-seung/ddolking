@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae7a91ca788315498e43e2db6af0122, type: 3}
+  m_Name: 4011Filature(E)
+  m_EditorClassIdentifier: 
+  _id: 4011
+  _name: "\uBC29\uC801\uAE30"
+  _description: "\uBC29\uC801\uAE30"
+  _iconImage: {fileID: 21300000, guid: cbb79e92c87ca6d49b68692375998a40, type: 3}
+  dropObjectPrefab: {fileID: 3333078294068328923, guid: 1d115100c129e1047a12fb648af09f61, type: 3}
+  maxAmount: 1
+  establishObjectData: {fileID: 11400000, guid: e696b07fbba277248a297a9b32e85a8a, type: 2}
+  establishObjectPreview: {fileID: 3805441725298577387, guid: 567cc63c96ff61e4cacce0d40a9e2479, type: 3}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  isStructure: 1

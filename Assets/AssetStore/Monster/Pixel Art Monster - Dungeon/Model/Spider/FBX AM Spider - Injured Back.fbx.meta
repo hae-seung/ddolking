@@ -1,98 +1,272 @@
 fileFormatVersion: 2
 guid: 33fb8387f815465458aeb229898598db
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: Body
-    100002: //RootNode
-    100004: Rig
-    100006: Rig Eye
-    100008: Rig Eye Dead
-    100010: Rig Eye Injured
-    100012: Rig Eye Normal
-    100014: Rig Head
-    100016: Rig LArm1 1
-    100018: Rig LArm1 2
-    100020: Rig LArm1 3
-    100022: Rig LArm1 Target
-    100024: Rig LArm2 1
-    100026: Rig LArm2 2
-    100028: Rig LArm2 3
-    100030: Rig LArm2 Target
-    100032: Rig LArm3 1
-    100034: Rig LArm3 2
-    100036: Rig LArm3 3
-    100038: Rig LArm3 Target
-    100040: Rig LArm4 1
-    100042: Rig LArm4 2
-    100044: Rig LArm4 3
-    100046: Rig LArm4 Target
-    100048: Rig RArm1 1
-    100050: Rig RArm1 2
-    100052: Rig RArm1 3
-    100054: Rig RArm1 Target
-    100056: Rig RArm2 1
-    100058: Rig RArm2 2
-    100060: Rig RArm2 3
-    100062: Rig RArm2 Target
-    100064: Rig RArm3 1
-    100066: Rig RArm3 2
-    100068: Rig RArm3 3
-    100070: Rig RArm3 Target
-    100072: Rig RArm4 1
-    100074: Rig RArm4 2
-    100076: Rig RArm4 3
-    100078: Rig RArm4 Target
-    100080: Rig Root
-    400000: Body
-    400002: //RootNode
-    400004: Rig
-    400006: Rig Eye
-    400008: Rig Eye Dead
-    400010: Rig Eye Injured
-    400012: Rig Eye Normal
-    400014: Rig Head
-    400016: Rig LArm1 1
-    400018: Rig LArm1 2
-    400020: Rig LArm1 3
-    400022: Rig LArm1 Target
-    400024: Rig LArm2 1
-    400026: Rig LArm2 2
-    400028: Rig LArm2 3
-    400030: Rig LArm2 Target
-    400032: Rig LArm3 1
-    400034: Rig LArm3 2
-    400036: Rig LArm3 3
-    400038: Rig LArm3 Target
-    400040: Rig LArm4 1
-    400042: Rig LArm4 2
-    400044: Rig LArm4 3
-    400046: Rig LArm4 Target
-    400048: Rig RArm1 1
-    400050: Rig RArm1 2
-    400052: Rig RArm1 3
-    400054: Rig RArm1 Target
-    400056: Rig RArm2 1
-    400058: Rig RArm2 2
-    400060: Rig RArm2 3
-    400062: Rig RArm2 Target
-    400064: Rig RArm3 1
-    400066: Rig RArm3 2
-    400068: Rig RArm3 3
-    400070: Rig RArm3 Target
-    400072: Rig RArm4 1
-    400074: Rig RArm4 2
-    400076: Rig RArm4 3
-    400078: Rig RArm4 Target
-    400080: Rig Root
-    2100000: 'Material #20'
-    4300000: Body
-    7400000: Spider - Injured Back
-    9500000: //RootNode
-    13700000: Body
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Body
+  - first:
+      1: 100002
+    second: //RootNode
+  - first:
+      1: 100004
+    second: Rig
+  - first:
+      1: 100006
+    second: Rig Eye
+  - first:
+      1: 100008
+    second: Rig Eye Dead
+  - first:
+      1: 100010
+    second: Rig Eye Injured
+  - first:
+      1: 100012
+    second: Rig Eye Normal
+  - first:
+      1: 100014
+    second: Rig Head
+  - first:
+      1: 100016
+    second: Rig LArm1 1
+  - first:
+      1: 100018
+    second: Rig LArm1 2
+  - first:
+      1: 100020
+    second: Rig LArm1 3
+  - first:
+      1: 100022
+    second: Rig LArm1 Target
+  - first:
+      1: 100024
+    second: Rig LArm2 1
+  - first:
+      1: 100026
+    second: Rig LArm2 2
+  - first:
+      1: 100028
+    second: Rig LArm2 3
+  - first:
+      1: 100030
+    second: Rig LArm2 Target
+  - first:
+      1: 100032
+    second: Rig LArm3 1
+  - first:
+      1: 100034
+    second: Rig LArm3 2
+  - first:
+      1: 100036
+    second: Rig LArm3 3
+  - first:
+      1: 100038
+    second: Rig LArm3 Target
+  - first:
+      1: 100040
+    second: Rig LArm4 1
+  - first:
+      1: 100042
+    second: Rig LArm4 2
+  - first:
+      1: 100044
+    second: Rig LArm4 3
+  - first:
+      1: 100046
+    second: Rig LArm4 Target
+  - first:
+      1: 100048
+    second: Rig RArm1 1
+  - first:
+      1: 100050
+    second: Rig RArm1 2
+  - first:
+      1: 100052
+    second: Rig RArm1 3
+  - first:
+      1: 100054
+    second: Rig RArm1 Target
+  - first:
+      1: 100056
+    second: Rig RArm2 1
+  - first:
+      1: 100058
+    second: Rig RArm2 2
+  - first:
+      1: 100060
+    second: Rig RArm2 3
+  - first:
+      1: 100062
+    second: Rig RArm2 Target
+  - first:
+      1: 100064
+    second: Rig RArm3 1
+  - first:
+      1: 100066
+    second: Rig RArm3 2
+  - first:
+      1: 100068
+    second: Rig RArm3 3
+  - first:
+      1: 100070
+    second: Rig RArm3 Target
+  - first:
+      1: 100072
+    second: Rig RArm4 1
+  - first:
+      1: 100074
+    second: Rig RArm4 2
+  - first:
+      1: 100076
+    second: Rig RArm4 3
+  - first:
+      1: 100078
+    second: Rig RArm4 Target
+  - first:
+      1: 100080
+    second: Rig Root
+  - first:
+      4: 400000
+    second: Body
+  - first:
+      4: 400002
+    second: //RootNode
+  - first:
+      4: 400004
+    second: Rig
+  - first:
+      4: 400006
+    second: Rig Eye
+  - first:
+      4: 400008
+    second: Rig Eye Dead
+  - first:
+      4: 400010
+    second: Rig Eye Injured
+  - first:
+      4: 400012
+    second: Rig Eye Normal
+  - first:
+      4: 400014
+    second: Rig Head
+  - first:
+      4: 400016
+    second: Rig LArm1 1
+  - first:
+      4: 400018
+    second: Rig LArm1 2
+  - first:
+      4: 400020
+    second: Rig LArm1 3
+  - first:
+      4: 400022
+    second: Rig LArm1 Target
+  - first:
+      4: 400024
+    second: Rig LArm2 1
+  - first:
+      4: 400026
+    second: Rig LArm2 2
+  - first:
+      4: 400028
+    second: Rig LArm2 3
+  - first:
+      4: 400030
+    second: Rig LArm2 Target
+  - first:
+      4: 400032
+    second: Rig LArm3 1
+  - first:
+      4: 400034
+    second: Rig LArm3 2
+  - first:
+      4: 400036
+    second: Rig LArm3 3
+  - first:
+      4: 400038
+    second: Rig LArm3 Target
+  - first:
+      4: 400040
+    second: Rig LArm4 1
+  - first:
+      4: 400042
+    second: Rig LArm4 2
+  - first:
+      4: 400044
+    second: Rig LArm4 3
+  - first:
+      4: 400046
+    second: Rig LArm4 Target
+  - first:
+      4: 400048
+    second: Rig RArm1 1
+  - first:
+      4: 400050
+    second: Rig RArm1 2
+  - first:
+      4: 400052
+    second: Rig RArm1 3
+  - first:
+      4: 400054
+    second: Rig RArm1 Target
+  - first:
+      4: 400056
+    second: Rig RArm2 1
+  - first:
+      4: 400058
+    second: Rig RArm2 2
+  - first:
+      4: 400060
+    second: Rig RArm2 3
+  - first:
+      4: 400062
+    second: Rig RArm2 Target
+  - first:
+      4: 400064
+    second: Rig RArm3 1
+  - first:
+      4: 400066
+    second: Rig RArm3 2
+  - first:
+      4: 400068
+    second: Rig RArm3 3
+  - first:
+      4: 400070
+    second: Rig RArm3 Target
+  - first:
+      4: 400072
+    second: Rig RArm4 1
+  - first:
+      4: 400074
+    second: Rig RArm4 2
+  - first:
+      4: 400076
+    second: Rig RArm4 3
+  - first:
+      4: 400078
+    second: Rig RArm4 Target
+  - first:
+      4: 400080
+    second: Rig Root
+  - first:
+      21: 2100000
+    second: Material #20
+  - first:
+      43: 4300000
+    second: Body
+  - first:
+      74: 7400000
+    second: Spider - Injured Back
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Body
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -101,6 +275,7 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -121,6 +296,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Spider - Injured Back
       takeName: Take 001
+      internalID: 0
       firstFrame: 0
       lastFrame: 25
       wrapMode: 0
@@ -141,7 +317,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.5931198
+        functionName: OnAnimationEnd
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -153,25 +336,36 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -180,10 +374,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -193,13 +387,19 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

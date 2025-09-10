@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd4caf4b23279b48b1e5fb4edd05eeb, type: 3}
+  m_Name: 5012CookedChicken
+  m_EditorClassIdentifier: 
+  _id: 5012
+  _name: "\uCE58\uD0A8"
+  _description: "\uCE58\uD0A8"
+  _iconImage: {fileID: 21300000, guid: 78e2c06a60c818b4facb6800a1f660cf, type: 3}
+  dropObjectPrefab: {fileID: 8381180079880822412, guid: cc160c221b60b91418d4c96c32c5e576, type: 3}
+  maxAmount: 99
+  statModifier:
+  - stat: 2
+    increaseAmount: 10
+  ExperienceAmount: 0

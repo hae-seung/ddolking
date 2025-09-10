@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ec9bfe56e5802439e1feb741e8eedf, type: 3}
+  m_Name: 9SpringGirl
+  m_EditorClassIdentifier: 
+  npcId: 9
+  npcName: "\uAE40\uC601\uD76C"
+  npcJob: "\uB538"
+  npcPortrait:
+    m_keys: 0100000004000000
+    m_values:
+    - {fileID: 21300000, guid: 987a901c1cacea94db34827307416b93, type: 3}
+    - {fileID: 21300000, guid: c034d76bbe0787f42819975d88c11095, type: 3}

@@ -5,12 +5,7 @@ using UnityEngine;
 public class MonsterController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
-    private Monster monster;
-    
-    
-    public int AttackLayerIndex { get; private set; }
-    public int InjureLayerIndex { get; private set; }
-    public int DeadLayerIndex { get; private set; }
+    protected Monster monster;
     
     
     [Header("캐싱")]
@@ -18,13 +13,6 @@ public class MonsterController : MonoBehaviour
     private string attack = "Attack";
     private WaitForSeconds dieTime = new WaitForSeconds(1f);
     
-    
-    private void Awake()
-    {
-        AttackLayerIndex = animator.GetLayerIndex("Attack");
-        InjureLayerIndex = animator.GetLayerIndex("Injured");
-        DeadLayerIndex = animator.GetLayerIndex("Die");
-    }
 
     
     //moving animation blend
@@ -57,12 +45,7 @@ public class MonsterController : MonoBehaviour
     {
         animator.SetTrigger(attack);
     }
-
-    public void PerformAttack()
-    {
-        monster.PerformAttack();
-    }
-
+    
 
     public void PlayInjureAnim()
     {
@@ -98,23 +81,20 @@ public class MonsterController : MonoBehaviour
         monster.StopMove();
     }
 
+    
+    
 
     public void PlayDeadAnim()
     {
         animator.SetBool("IsDead", true);
-        StartCoroutine(DisableMonster());
+        if(gameObject.activeSelf)
+            StartCoroutine(DisableMonster());
     }
 
     private IEnumerator DisableMonster()
     {
         yield return dieTime;
-        monster.DisableObject();
-    }
-    
-    
-    public AnimatorStateInfo GetAnimatorState(int layerIndex)
-    {
-        return animator.GetCurrentAnimatorStateInfo(layerIndex);
+        monster.DisableObject();    
     }
 
     

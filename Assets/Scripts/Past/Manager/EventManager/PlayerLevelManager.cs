@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerLevelManager : MonoBehaviour
 {
-    private int needExperienceToNextLevel = 5;
-    private int curExperience = 0;
+    private float needExperienceToNextLevel = 5;
+    private float curExperience = 0;
     private int level = 1;
 
 
@@ -33,16 +33,20 @@ public class PlayerLevelManager : MonoBehaviour
         return level;
     }
 
-    private void GainExperience(int experience)
+    private void GainExperience(float experience)
     {
+        float experienceGetter = GameEventsManager.Instance.statusEvents.GetStatValue(Stat.ExperienceGetter);
+        //경험치 증가 버프 생각
+
+        experience *= experienceGetter;
+        
         curExperience += experience;
         // check if we're ready to level up
         while (curExperience >= needExperienceToNextLevel)
         {
             curExperience -= needExperienceToNextLevel;
             level++;
-            needExperienceToNextLevel *= 2; //다음 목표치 경험치는 2배로 임시 설정 todo: 구글시트로 레벨 매니저 시트 만들기
-            Debug.Log("이벤트호출");
+            needExperienceToNextLevel *= 1.25f; //다음 목표치 경험치는 1.25배
             GameEventsManager.Instance.playerEvents.ChangedLevel(level, needExperienceToNextLevel);
         }
         GameEventsManager.Instance.playerEvents.ChangedExperience(curExperience);

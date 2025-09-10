@@ -39,10 +39,22 @@ public class CraftTable : MonoBehaviour
     [SerializeField] private GameObject contentParent;
     [SerializeField] private GameObject craftManualItemBtnPrefab;
 
+    [Header("강화")] 
+    [SerializeField] private List<GameObject> stars;
+    [SerializeField] private Button upgradeBtn;
+    [SerializeField] private CraftReinforce reinforce;
+    private ReinforceStructureItem ritem;
+    private int craftTableLevel;
+    
+    
+    [Header("아이템 이름")]
+    [SerializeField] private TextMeshProUGUI nameText;
+    
+    
     private Image image;
     private CraftManualSO manual;
     private DOTweenAnimation _doTweenAnimation;
-    [SerializeField] private TextMeshProUGUI nameText;
+   
     
     private List<CraftManualItemBtn> _btns = new();
     
@@ -51,15 +63,38 @@ public class CraftTable : MonoBehaviour
     {
         image = GetComponent<Image>();
         _doTweenAnimation = GetComponent<DOTweenAnimation>();
+        
+        upgradeBtn.onClick.AddListener(() =>
+        {
+            reinforce.OpenUI(ritem, UpdateReinforceState);
+        });
     }
 
-    public void OpenTable(CraftManualType type)
+    public void OpenTable(CraftManualType type, ReinforceStructureItem ritem)//처음 테이블 오픈
     {
+        this.ritem = ritem;
+
+        if (ritem != null)
+        {
+            craftTableLevel = ritem.GetLevel();
+            upgradeBtn.interactable = craftTableLevel < 3;
+            for (int i = 0; i < stars.Count; i++)
+                stars[i].SetActive(i < craftTableLevel);
+        }
+        else
+        {
+            // ritem이 없으면 업그레이드 버튼 비활성화
+            upgradeBtn.interactable = false;
+            for (int i = 0; i < stars.Count; i++)
+                stars[i].SetActive(false);
+        }
+        
+        //기본세팅
         image.sprite = craftLogBackgroundSprite[type];
         manual = craftManualSo[type];
         _craftTableLog.SetImage(craftLogBackgroundSprite[type]);
         nameText.text = tableName[type];
-
+        
         
         //버튼 갯수 부족하면 버튼 추가
         if (_btns.Count < manual.CraftItems.Count)
@@ -100,4 +135,15 @@ public class CraftTable : MonoBehaviour
     {
         UIManager.Instance.CloseCraftTab();
     }
+
+    private void UpdateReinforceState()
+    {
+        int level = ritem.GetLevel();
+        for (int i = 0; i < stars.Count; i++)
+            stars[i].SetActive(i < level);
+
+        if(level >=3)
+            upgradeBtn.gameObject.SetActive(false);
+    }
+    
 }

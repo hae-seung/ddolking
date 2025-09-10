@@ -1,4 +1,6 @@
 
+using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 
@@ -7,7 +9,8 @@ public enum CameraType
     main,
     house,
     talk,
-    highlight
+    highlight,
+    dungeon
 }
 
 public class VirtualCameraManager : MonoBehaviour
@@ -42,10 +45,13 @@ public class VirtualCameraManager : MonoBehaviour
         talkCamera.SetActive(false);
     }
 
+    [SerializeField] private List<GameObject> cameras;
+    
     [SerializeField] private GameObject mainCamera;
     [SerializeField] private GameObject houseCamera;
     [SerializeField] private GameObject highlightCamera;
     [SerializeField] private GameObject talkCamera;
+    [SerializeField] private GameObject dungeonCamera;
 
 
     public GameObject GetCamera(CameraType type)
@@ -60,11 +66,22 @@ public class VirtualCameraManager : MonoBehaviour
                 return highlightCamera;
             case CameraType.talk:
                 return talkCamera;
+            case CameraType.dungeon:
+                return dungeonCamera;
         }
 
         return null;
     }
-    
 
+    public CinemachineVirtualCamera GetCamera()
+    {
+        for (int i = 0; i < cameras.Count; i++)
+        {
+            if (cameras[i].activeSelf)
+                return cameras[i].GetComponent<CinemachineVirtualCamera>();
+        }
+
+        return null;
+    }
 
 }

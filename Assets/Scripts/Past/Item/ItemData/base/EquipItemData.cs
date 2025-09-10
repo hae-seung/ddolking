@@ -30,10 +30,6 @@ public abstract class EquipItemData : ItemData
     {
         return enhancementLogic;
     }
-    
-    
-    
-    //만약 강화로 StatModifier에 없는 능력이 새로 생긴다면 객체에서 Add해줘야함.
 }
 
 

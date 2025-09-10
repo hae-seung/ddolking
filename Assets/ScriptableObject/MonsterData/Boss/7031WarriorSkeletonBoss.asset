@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0998426caba6f8418dd340f4f83fa51, type: 3}
+  m_Name: 7031WarriorSkeletonBoss
+  m_EditorClassIdentifier: 
+  entityId: 7031
+  hp: 50000
+  toolWear: 0.1
+  moveSpeed: 0.45
+  defense: 0.2
+  entityPrefab: {fileID: 6894930315354645215, guid: 369414f70030e844d9ad1698ad66648f, type: 3}
+  dropTable: {fileID: 11400000, guid: de85288b1aa554c419fc43e80995ca3d, type: 2}
+  isAdCarry: 0
+  runSpeed: 1
+  acc: 0.25
+  attackDelay: 2
+  attackDamage: 5
+  bodyDamage: 1
+  sightRange: 10
+  attackRange: 5
+  hpRatio: 0
+  damageRatio: 0
+  defenseRatio: 0
+  toolWearRatio: 0

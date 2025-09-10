@@ -5,10 +5,13 @@ using UnityEngine;
 public class PortionItem : ConsumeItem
 {
     public PortionItemData PortionData { get; private set; }
+    private int experienceAmount;
+    
 
     public PortionItem(PortionItemData data, int amount = 1) : base(data, amount)
     {
         PortionData = data;
+        experienceAmount = data.ExperienceAmount;
     }
     
 
@@ -20,17 +23,20 @@ public class PortionItem : ConsumeItem
 
     protected override bool UseItem()
     {
-        if (statModifiers != null)
+        if (statModifiers != null)//버프물약
         {
             for (int i = 0; i < statModifiers.Count; i++)
             {
                 GameEventsManager.Instance.statusEvents.
                     AddStat(statModifiers[i].stat, statModifiers[i].increaseAmount);
             }
-
-            Amount--;
-            return true;
         }
+        else//경험치 물약
+        {
+            GameEventsManager.Instance.playerEvents.GainExperience(experienceAmount);
+        }
+        
+        Amount--;
         return true;
     }
 }

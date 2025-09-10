@@ -15,6 +15,13 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
     [SerializeField] private ShopCanvas shopCanvas;
     [SerializeField] private TransitionUI transitionUI;
     [SerializeField] private MineUI mineUI;
+    [SerializeField] private DungeonUI dungeonUI;
+    [SerializeField] private DungeonTimer dungeonTimer;
+    [SerializeField] private DungeonAlarm alarm;
+    [SerializeField] private MineMachineUI mineMachineUI;
+    [SerializeField] private ChestUI chestUI;
+    [SerializeField] private Canvas_Statue statueUI;
+    [SerializeField] private Canvas_Teleport teleportUI;
 
     private bool disableInput = false;
     
@@ -79,11 +86,12 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
 
     #region ToggleCraftTable
 
-    public void OpenCraftTab(CraftManualType type, Action<CraftItemSO , int> makeItem)
+    public void OpenCraftTab(CraftManualType type, ReinforceStructureItem ritem, 
+        Action<CraftItemSO , int> makeItem)
     {
         if (craftCanvas.IsOpen)
             return;
-        craftCanvas.OpenTable(type, makeItem);
+        craftCanvas.OpenTable(type, ritem, makeItem);
     }
 
     public void CloseCraftTab()
@@ -146,9 +154,14 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
 
     #region ToggleShop
 
-    public void OpenShop(string shopType)
+    public void OpenShop(ShopType shopType)
     {
         shopCanvas.OpenShop(shopType);
+    }
+
+    public void CloseShop()
+    {
+        shopCanvas.CloseShop();
     }
     
     public void ShopWarn(int amount)
@@ -161,9 +174,134 @@ public class UIManager : Singleton<UIManager> //모든 캔버스를 관통하는
 
     public void OpenMineUI(string name, string list,int remainTime ,Action EnterMine, Action ExitMine)
     {
-        mineUI.OpenMineUI(name, list, remainTime,EnterMine, ExitMine);
+        mineUI.OpenMineUI(name, list, remainTime, EnterMine, ExitMine);
     }
 
     #endregion
     
+    #region DungeonUI
+
+    public void OpenDungeonUI(string name, string explain, int remainTime, int sweepLimitTime,
+        bool isSweepable, bool hasFirstClear,
+        Action EnterDungeon, Action ExitDungeon)
+    {
+        dungeonUI.OpenDungeonUI(name, explain, remainTime, sweepLimitTime,
+            isSweepable, hasFirstClear,
+            EnterDungeon, ExitDungeon);
+        
+    }
+
+    public void OpenDungeonSweepList(bool isSweepable, List<SweepReward> rewards)
+    {
+        dungeonUI.OpenSweepRewards(isSweepable, rewards);
+    }
+
+    public void BossAlarm(string message)
+    {
+        alarm.AlarmBoss(message);
+    }
+
+    public void WaveAlarm(Action Finish)
+    {
+        alarm.WaveAlarm(Finish);
+    }
+
+    public void FinishWaveAlarm()
+    {
+        alarm.FinishWave();
+    }
+    
+    public void OffAlarms()
+    {
+        alarm.Off();
+    }
+
+    public void OpenBossHealth(LivingEntity boss)
+    {
+        dungeonUI.OpenBossSlider(boss);
+    }
+
+    public void HideBossHealth()
+    {
+        dungeonUI.HideBossSlider();
+    }
+
+    public void StartDungeonTimer(float needSweepLimitTime)
+    {
+        dungeonTimer.StartTimer(needSweepLimitTime);
+    }
+
+    public void StopTimer()
+    {
+        dungeonTimer.StopTimer();
+    }
+
+    public float GetRemainTime()
+    {
+        return dungeonTimer.GetRemainTime();
+    }
+
+    public void HideTimer()
+    {
+        dungeonTimer.HideTimer();
+    }
+    
+    
+    #endregion
+    
+    #region MineMachineUI
+
+    public void OpenMineMachineUI(MineMachine machine, Action OperateMachine, Action Retrieve)
+    {
+        mineMachineUI.Open(machine, OperateMachine, Retrieve);
+    }
+
+    public void UpdateUI(MineMachine machine)
+    {
+        mineMachineUI.UpdateRetrieveUI(machine);
+    }
+
+    #endregion
+
+    #region ChestUI
+
+    public void OpenChest(Chest chest)
+    {
+        if (!chestUI)
+        {
+            Debug.Log("초기화 안됨");
+            return;
+        }
+        chestUI.Open(chest);
+    }
+
+    public void UpdateChestSlot(int idx)
+    {
+        chestUI.UpdateChestSlot(idx);
+    }
+
+    #endregion
+
+    #region Statue
+
+    public void OpenStatueExplain(StatueData data, Action BuyAction = null)
+    {
+        statueUI.OpenStatue(data, BuyAction);
+    }
+
+    #endregion
+
+    #region ShortCut
+
+    public void OpenFieldShortCut(Interactor player)
+    {
+        teleportUI.OpenFieldShortCut(player);
+    }
+
+    public void RegisterFieldShortCut(VillageType type)
+    {
+        teleportUI.RegisterFieldShortCut(type);
+    }
+
+    #endregion
 }

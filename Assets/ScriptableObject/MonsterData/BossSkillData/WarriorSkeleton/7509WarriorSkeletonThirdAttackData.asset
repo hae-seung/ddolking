@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a711236793aa102469821bb18facd3e2, type: 3}
+  m_Name: 7509WarriorSkeletonThirdAttackData
+  m_EditorClassIdentifier: 
+  id: 7509
+  thirdAttackPb: {fileID: 4552410594156331423, guid: 4fbaf80ed08def54c811ad4d07f05be4, type: 3}
+  attackDamage: 5
+  waitTime: 2
+  flySpeed: 10
+  spawnSwordId: 7510
+  swordBullet: {fileID: 5178397649583606116, guid: 4c2e650391592ab48b441ecb9b5b7f86, type: 3}

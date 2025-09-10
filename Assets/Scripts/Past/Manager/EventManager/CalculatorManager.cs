@@ -24,7 +24,7 @@ public class CalculatorManager : MonoBehaviour
         damage *= variance;
 
         if (isCritical)
-            damage *= 2f;
+            damage *= GameEventsManager.Instance.statusEvents.GetStatValue(Stat.CriticalDamage);
 
         return damage;
     }
@@ -34,7 +34,8 @@ public class CalculatorManager : MonoBehaviour
     private float CalculateDamage(float damage)
     {
         float defense = GameEventsManager.Instance.statusEvents.GetStatValue(Stat.Defense);
-        float realDamage = damage * (1 - defense);
+        
+        float realDamage = damage * (1.0f - defense);
         return realDamage;
     }
 

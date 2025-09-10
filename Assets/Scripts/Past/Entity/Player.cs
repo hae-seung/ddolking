@@ -15,10 +15,13 @@ public class Player : MonoBehaviour
 
 
     private bool isDead;
+    public bool IsDead => isDead;
     
     private void Awake()
     {
         GameEventsManager.Instance.playerEvents.onDead += Dead;
+        GameEventsManager.Instance.playerEvents.onPlayerYesHurt += YesHurt;
+        GameEventsManager.Instance.playerEvents.onPlayerNoHurt += NoHurt;
     }
 
     private void OnEnable()
@@ -36,10 +39,10 @@ public class Player : MonoBehaviour
 
     }
 
-    public void OnDamage(float damage)
+    public bool OnDamage(float damage)
     {
-        if (isDead)
-            return;
+        if (isDead || isHurt)
+            return false;
         
         float applyDamage = GameEventsManager.Instance.calculatorEvents.CalculateDamage(damage);
         Debug.Log(applyDamage);
@@ -50,6 +53,7 @@ public class Player : MonoBehaviour
         
         StartCoroutine(HurtRoutine());
         StartCoroutine(AlphaBlink());
+        return true;
     }
 
     private IEnumerator AlphaBlink()
@@ -68,5 +72,17 @@ public class Player : MonoBehaviour
         isHurt = true;
         yield return hurtTime;
         isHurt = false;
+    }
+
+    private void YesHurt()
+    {
+        isHurt = false;
+    }
+
+    
+    
+    private void NoHurt()
+    {
+        isHurt = true;
     }
 }

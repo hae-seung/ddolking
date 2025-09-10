@@ -17,11 +17,11 @@ TagManager:
   - Interactable
   - Land
   - Farm
-  - LivingEntity
-  - Capture
-  - 
-  - 
-  - 
+  - Monster
+  - Fishing
+  - Animal
+  - Obstacle
+  - PlayerParticle
   - 
   - 
   - 

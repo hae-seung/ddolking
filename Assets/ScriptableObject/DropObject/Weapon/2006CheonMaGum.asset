@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca896ee6d9234fc429ee868adfccd3ad, type: 3}
+  m_Name: 2006CheonMaGum
+  m_EditorClassIdentifier: 
+  _id: 2006
+  _name: "\uCC9C\uB9C8\uAC80"
+  _description: "\uCC9C\uB9C8\uAC80"
+  _iconImage: {fileID: 21300000, guid: 8bd8d2538e3f34246ab7f8599d2dfd25, type: 3}
+  dropObjectPrefab: {fileID: 5026200416116847091, guid: c95ad163bea25584791e20ab5a512598, type: 3}
+  isEnhanceable: 1
+  itemclass: 10
+  maxDurability: 100
+  itemLevel: 0
+  statModifier: []
+  enhancementLogic: {fileID: 11400000, guid: db4a5528e3c06c747ac8274de477b2f4, type: 2}
+  hitCount: 1
+  attackCount: 1
+  weaponConst: 0.5
+  range: 1.5
+  attackDelay: 0.3
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 2560
+  debuff: {fileID: 0}
+  isHandWeapon: 0
+  skillData: {fileID: 11400000, guid: 70678ea86d769d34190fc9604499b450, type: 2}

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24adf761b15333f4292983c2ea33c759, type: 3}
+  m_Name: 7506MossKnightThirdAttack
+  m_EditorClassIdentifier: 
+  id: 7506
+  thirdAttackPb: {fileID: 5420801328976643127, guid: 574304773cb943c41836d62a69c3a659, type: 3}
+  attackDamage: 5
+  waitTime: 0.55
+  fallSpeed: 20
+  destroyDelay: 1

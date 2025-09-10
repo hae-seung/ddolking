@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4165762347809900303}
   - component: {fileID: 3208223450394409482}
   - component: {fileID: 4859434713896699732}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: MouseSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10659c535ffdc084d83736be90ce7e4c, type: 3}
+  m_Name: CookerManual
+  m_EditorClassIdentifier: 
+  craftItemSo:
+  - {fileID: 11400000, guid: 1d91eed3a57c8b04e8b1ff88926e8cb2, type: 2}
+  - {fileID: 11400000, guid: 1d88765b9c8642c42a27265602e06bb2, type: 2}
+  - {fileID: 11400000, guid: cdf721794918a9d4ebdaba6469a564dd, type: 2}
+  - {fileID: 11400000, guid: eb0024116ce7c144ca5077131b9819a5, type: 2}

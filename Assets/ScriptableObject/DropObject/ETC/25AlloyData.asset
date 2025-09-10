@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513e80609651f7c4e921879f475c0c8d, type: 3}
+  m_Name: 25AlloyData
+  m_EditorClassIdentifier: 
+  _id: 25
+  _name: "\uD569\uAE08"
+  _description: "\uD569\uAE08"
+  _iconImage: {fileID: 21300000, guid: 044c3e6c5f56cec408c1d9e82c09eed7, type: 3}
+  dropObjectPrefab: {fileID: 1712497815507904315, guid: 174fe489be08e5a4090652ca3d97a838, type: 3}
+  maxAmount: 99

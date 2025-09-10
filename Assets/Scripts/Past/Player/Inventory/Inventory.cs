@@ -12,6 +12,8 @@ public class Inventory : MonoBehaviour
     [SerializeField] private InventoryUI inventoryUI;
     [SerializeField] private StatusUI statusUI;
     [SerializeField] private PlayerBuild playerBuild;
+
+    [SerializeField]
     private int slotCnt;
 
 
@@ -37,7 +39,8 @@ public class Inventory : MonoBehaviour
         else
             Destroy(gameObject);
         
-        SlotCnt = 30; // 초기 슬롯 개수 설정
+        
+        SlotCnt = slotCnt; // 초기 슬롯 개수 설정 <최소 5개>
         inventoryUI.Init(SlotCnt, this);
         UpdateInventory(SlotCnt); // List는 0, 슬롯은 열려있어서 각각 맞춰줘야함
     }
@@ -57,8 +60,8 @@ public class Inventory : MonoBehaviour
 
     public int Add(Item item, int amount = 1)
     {
+        Debug.Log($"{item.itemData.ID} 아이템 인벤토리에 추가 시도중, {amount}갯수");
         int index;
-        int initAmount = amount;
         
         // 수량이 있는 아이템일 경우
         if (item is CountableItem countableItem)
@@ -85,6 +88,7 @@ public class Inventory : MonoBehaviour
                         
                         amount = existingItem.AddAmountAndGetExcess(amount); // 수량 추가 후 남은 수량 계산
                         UpdateSlot(index);
+                        GameEventsManager.Instance.playerEvents.AcquireItem(index);
                     }
                 }
                 // 1-2. 빈 슬롯 탐색
@@ -107,6 +111,7 @@ public class Inventory : MonoBehaviour
                         amount = (amount > citem.MaxAmount) ? (amount - citem.MaxAmount) : 0;
                         
                         UpdateSlot(index);
+                        GameEventsManager.Instance.playerEvents.AcquireItem(index);
                     }
                 }
             }
@@ -122,10 +127,10 @@ public class Inventory : MonoBehaviour
                 _items[index] = eitem.Clone();
                 amount = 0;
                 UpdateSlot(index);
+                GameEventsManager.Instance.playerEvents.AcquireItem(index);
             }
         }
         
-        GameEventsManager.Instance.playerEvents.AcquireItem(initAmount - amount, item.itemData.ID);
         return amount; // 남은 아이템 수량 반환
     }
 
@@ -374,6 +379,19 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        return sum;
+    }
+
+    public int GetEmptySlotAmount()
+    {
+        int sum = 0;
+
+        for (int i = 0; i < slotCnt; i++)
+        {
+            if (_items[i] == null)
+                sum++;
+        }
+        
         return sum;
     }
 

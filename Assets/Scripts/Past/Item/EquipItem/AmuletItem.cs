@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AmuletItem : EquipItem
@@ -36,8 +35,17 @@ public class AmuletItem : EquipItem
         }
     }
 
+
+    public void OverrideStatModifier(List<StatModifier> statModifier)
+    {
+        statModifiers = new List<StatModifier>(statModifier);
+    }
+    
     protected override EquipItem CreateItem()
     {
         return new AmuletItem(EquipData as AmuletItemData);
     }
+    
+    
+    
 }

@@ -1,0 +1,465 @@
+fileFormatVersion: 2
+guid: 47cd07fbe07b494458beaa126bbd7b69
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 28
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Compressor(Field)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16.830727, y: -0.09124756}
+        - {x: -17.060547, y: -19.015606}
+        - {x: 21.792667, y: -19.122452}
+        - {x: 21.830727, y: 0.07803345}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74229e34a6e802d4786cdcbf5721b1d8
+      internalID: -617435897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Compressor(Field)_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16.830727, y: -0.09124756}
+        - {x: -17.060547, y: -19.015606}
+        - {x: 21.792667, y: -19.122452}
+        - {x: 21.830727, y: 0.07803345}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1afabdcb2a217e7429dc86164d38e7f0
+      internalID: -81885239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Compressor(Field)_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16.830727, y: -0.09124756}
+        - {x: -17.060547, y: -19.015606}
+        - {x: 21.792667, y: -19.122452}
+        - {x: 21.830727, y: 0.07803345}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 977b204307191a149859e83f832aa4cd
+      internalID: 1537838272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Compressor(Field)_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16.830727, y: -0.09124756}
+        - {x: -17.060547, y: -19.015606}
+        - {x: 21.792667, y: -19.122452}
+        - {x: 21.830727, y: 0.07803345}
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd37f082dc66433489524af3774027d6
+      internalID: 1541865085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Compressor(Field)_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16.830727, y: -0.09124756}
+        - {x: -17.060547, y: -19.015606}
+        - {x: 21.792667, y: -19.122452}
+        - {x: 21.830727, y: 0.07803345}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bf775a624c856d4ead9a9d3a1804eaf
+      internalID: -658335660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Compressor(Field)_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16.830727, y: -0.09124756}
+        - {x: -17.060547, y: -19.015606}
+        - {x: 21.792667, y: -19.122452}
+        - {x: 21.830727, y: 0.07803345}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c913fb200baa1e45a72e9f12b170506
+      internalID: 1360447726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Compressor(Field)_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16.830727, y: -0.09124756}
+        - {x: -17.060547, y: -19.015606}
+        - {x: 21.792667, y: -19.122452}
+        - {x: 21.830727, y: 0.07803345}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28efbe643ba7a6d4caaab316812cb049
+      internalID: -2088269699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Compressor(Field)_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16.830727, y: -0.09124756}
+        - {x: -17.060547, y: -19.015606}
+        - {x: 21.792667, y: -19.122452}
+        - {x: 21.830727, y: 0.07803345}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 001594c8fd4b09b4c8b9201d32577ff7
+      internalID: 129593712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Compressor(Field)_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16.830727, y: -0.09124756}
+        - {x: -17.060547, y: -19.015606}
+        - {x: 21.792667, y: -19.122452}
+        - {x: 21.830727, y: 0.07803345}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88e98c86df1dd0449b0f27e6c7ebc689
+      internalID: -1452023436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Compressor(Field)_9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16.830727, y: -0.09124756}
+        - {x: -17.060547, y: -19.015606}
+        - {x: 21.792667, y: -19.122452}
+        - {x: 21.830727, y: 0.07803345}
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdbafcd97c7ccdd4ba2119d165a362c5
+      internalID: -1500472223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Compressor(Field)_10
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16.830727, y: -0.09124756}
+        - {x: -17.060547, y: -19.015606}
+        - {x: 21.792667, y: -19.122452}
+        - {x: 21.830727, y: 0.07803345}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12113a197e49d6e4fa44cacbd5ffbc5d
+      internalID: -472908844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Compressor(Field)_11
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16.830727, y: -0.09124756}
+        - {x: -17.060547, y: -19.015606}
+        - {x: 21.792667, y: -19.122452}
+        - {x: 21.830727, y: 0.07803345}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 255bca73617f2fc479753b2d1c43b25d
+      internalID: -1336449122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Compressor(Field)_0: -617435897
+      Compressor(Field)_1: -81885239
+      Compressor(Field)_10: -472908844
+      Compressor(Field)_11: -1336449122
+      Compressor(Field)_2: 1537838272
+      Compressor(Field)_3: 1541865085
+      Compressor(Field)_4: -658335660
+      Compressor(Field)_5: 1360447726
+      Compressor(Field)_6: -2088269699
+      Compressor(Field)_7: 129593712
+      Compressor(Field)_8: -1452023436
+      Compressor(Field)_9: -1500472223
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class EquipItem : Item, IStatModifier
 {
@@ -7,17 +8,21 @@ public abstract class EquipItem : Item, IStatModifier
     protected List<StatModifier> statModifiers = null;
     private ItemEnhancementLogic itemEnhancementLogic = null;
 
-    protected int curLevel;
+    public int curLevel { get; private set; }
     protected float curDurability;
-    private int curDurabilityPower = 0;
-    //내구력 노말 : 3%, 에픽 : 5%, 유니크 : 7%, 레전더리 : 10% 고정값, 3렙강화 부터 무조건 활성화
+    protected float maxDurability;
 
     public float CurDurability => curDurability;
+    public float MaxDurability => maxDurability;
+    
+    public ItemEnhancementLogic GetLogic => itemEnhancementLogic;
+    
     
     protected EquipItem(EquipItemData data) : base(data)
     {
         EquipData = data;
         curLevel = data.itemLevel;
+        maxDurability = data.maxDurability;
         curDurability = data.maxDurability;
         
         if (data.GetStatModifier() != null)
@@ -25,18 +30,6 @@ public abstract class EquipItem : Item, IStatModifier
         
         if (data.isEnhanceable)
             itemEnhancementLogic = data.GetLogic();
-        
-        SetDurabilityPower(curLevel);
-    }
-
-    private void SetDurabilityPower(int curLevel)//강화할때 사용
-    {
-        if (curLevel < 3)
-            return;
-
-        int durabilityValue = (int)EquipData.itemclass;
-        int amount = curLevel - EquipData.itemLevel;
-        curDurability = durabilityValue + (amount * durabilityValue);
     }
 
     public List<StatModifier> GetStatModifier()
@@ -50,4 +43,75 @@ public abstract class EquipItem : Item, IStatModifier
     }
     
     protected abstract EquipItem CreateItem();
+
+    
+    //어차피 아뮬렛은 강화시스템에 못들어가게 막아두었음.
+    public virtual void LevelUp()
+    {
+        if (curLevel >= 5)
+            return;
+
+        //내구도 증가
+        UpgradeDurability();
+        
+        curLevel++;
+        
+        if (itemEnhancementLogic == null)
+            return;
+
+        var enhanceLogics = itemEnhancementLogic.GetItemEnhanceLogic();
+        var nextLogic = enhanceLogics.Find(logic => logic.nextLevel == curLevel);
+
+        if (nextLogic == null)
+            return;
+
+        foreach (var enhancement in nextLogic.statEnhancements)
+        {
+            // 기존 스탯이 있는지 확인
+            var existing = statModifiers.Find(mod => mod.stat == enhancement.stat);
+
+            if (existing != null)
+            {
+                existing.increaseAmount += enhancement.enhanceValue;
+            }
+            else
+            {
+                statModifiers.Add(new StatModifier (enhancement.stat, enhancement.enhanceValue));
+            }
+
+            if (GameEventsManager.Instance.playerEvents.GetHandItem() == this)
+            {
+                GameEventsManager.Instance.statusEvents.AddStat(enhancement.stat, enhancement.enhanceValue);
+            }
+        }
+    }
+
+    private void UpgradeDurability()
+    {
+        switch (EquipData.itemclass)
+        {
+            case ItemClass.Normal:
+                maxDurability += 30;
+                curDurability = Mathf.Clamp(curDurability + 30, 0, maxDurability);
+                break;
+            case ItemClass.Epic:
+                maxDurability += 50;
+                curDurability = Mathf.Clamp(curDurability + 50, 0, maxDurability);
+                break;
+            case ItemClass.Unique:
+                maxDurability += 80;
+                curDurability = Mathf.Clamp(curDurability + 80, 0, maxDurability);
+                break;
+            case ItemClass.Legend:
+                maxDurability += 100;
+                curDurability = Mathf.Clamp(curDurability + 100, 0, maxDurability);
+                break;
+        }
+    }
+
+    public void RepairDurability()
+    {
+        curDurability = Mathf.Clamp(curDurability + 10, 0, maxDurability);
+    }
+    
 }

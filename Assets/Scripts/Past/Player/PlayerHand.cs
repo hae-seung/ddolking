@@ -35,9 +35,14 @@ public class PlayerHand : MonoBehaviour
         GameEventsManager.Instance.inputEvents.onInteractPressed += InteractPressed;
         GameEventsManager.Instance.inputEvents.onEnableInput += EnableInput;
         GameEventsManager.Instance.inputEvents.onDisableInput += DisableInput;
+        GameEventsManager.Instance.playerEvents.onGetHandItem += GetHandItem;
     }
-    
-    
+
+    private Item GetHandItem()
+    {
+        return currentGripItem;
+    }
+
 
     private void InteractPressed(InputAction.CallbackContext context)
     {
@@ -88,8 +93,10 @@ public class PlayerHand : MonoBehaviour
         };
 
         targetImage.gameObject.SetActive(newItem != null);
-        if (newItem != null) 
+        if (newItem != null)
+        {
             targetImage.sprite = newItem.itemData.IconImage;
+        }
 
         // 아이템 변경 반영
         ChangeStat(newItem);

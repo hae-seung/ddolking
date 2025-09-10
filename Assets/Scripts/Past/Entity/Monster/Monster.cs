@@ -1,223 +1,206 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Cainos.Common;
+
 
 public class Monster : LivingEntity
 {
+    //private로 바꿔야함
     public Player target;
     
     [SerializeField] private MonsterData monsterData;
     [SerializeField] private MonsterAttack monsterAttack;
+    
     private MonsterController controller;
+    
+    [Header("DieFx 존재시에만, Id '0'은 존재x 의미")]
+    [SerializeField] private int dieFxId;
+    [SerializeField] private GameObject dieFxPrefab;
 
-    
-    [Header("성장스텟")] //Awake에서 초기화, Enable에서 강화
-    //부모의 hp
-    //보모의 toolWear
-    //부모의 defense
-    private float attackDamage;
-    private float bodyDamage;
+    [Header("성장스텟")]
+    protected float attackDamage;
+    //private float bodyDamage;
     private int level;
-    
-    [Header("고정스텟")]//Awake에서 초기화
+
+    [Header("고정스텟")]
     private float attackRange;
     private float attackRangeY;
     private float sightRange;
-    
-    
-    [Header("공격딜레이")]
-    private float lastAttackTime;
 
+    [Header("공격딜레이")]
+    protected float lastAttackTime;
 
     private bool facingRight;
 
     private Vector3 rightFace = new Vector3(1, 1, 1);
     private Vector3 leftFace = new Vector3(1, 1, -1);
 
+
+    [SerializeField] private Renderer renderer;    
+    private BoxCollider2D _collider2D;
+    private LayerMask objectLayer;
+    private readonly Collider2D[] _cachedResults = new Collider2D[5];
+    private int resultCount;
+    
+    
     protected override EntityData EntityData => monsterData;
     public float AttackRange => attackRange * attackRange;
     public float SightRange => sightRange * sightRange;
     public bool FacingRight => facingRight;
-    
 
-    protected override void Awake()
-    {
-        base.Awake();
-        
-        //몬스터 데이터
-        attackRange = monsterData.AttackRange;
-        attackRangeY = monsterData.AttackRange / 2;
-        sightRange = monsterData.SightRange;
-        attackDamage = monsterData.AttackDamage;
-        bodyDamage = monsterData.BodyDamage;
-        
-        //부모
-        defense = monsterData.Defense;
-        toolWear = monsterData.ToolWear;
-        
-        lastAttackTime = 0f;
-    }
+    
     
     public void Init(NavMeshAgent agent, MonsterController controller)
     {
-        //agent랑 controller할당
         this.agent = agent;
         this.controller = controller;
-        
-        this.controller.SetFacing(rightFace);
-        
+
+        controller.SetFacing(rightFace);
+
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+
+        objectLayer = LayerMask.GetMask("Obstacle");
+        renderer.sortingLayerName = "Front";
     }
     
-    private void OnEnable()
+    
+    
+    protected override void Awake()
     {
+        data = monsterData;
+        _collider2D = GetComponent<BoxCollider2D>();
+        
+        if (dieFxId != 0 && !ObjectPoolManager.Instance.IsPoolRegistered(dieFxId))
+        {
+            ObjectPoolManager.Instance.RegisterPrefab(dieFxId, dieFxPrefab);
+        }
+    
+        // 몬스터가 활성화될 때 NavMeshAgent 활성화
+        agent.enabled = true;
+    
+        ObjectPoolManager.Instance.RegisterPrefab(data.EntityId, data.EntityPrefab);
+        
+        SetUp();
+        
+        base.Awake();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        agent.enabled = true;
+        
+        lastAttackTime = 0f;        
+        
         facingRight = true;
         controller.SetFacing(rightFace);
-        
-        hp = monsterData.Hp;//날짜에 따른 성장 체력
-        
-        
-        
-        //마지막 실행
-        base.OnEnable();
     }
-
-
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag.Equals("Player"))
-        {
-            target.OnDamage(bodyDamage);
-        }
-    }
-
-
-    public void PerformAttack()
+    
+    
+    //애니메이션 event등록 호출
+    public virtual void PerformAttack()
     {
         lastAttackTime = Time.time;
         if (monsterAttack.Attack())
         {
-            //플레이어에게 공격로직
+            //근거리 : 일단 공격을 행했고, 해당 범위내에 플레이어 있으면 데미지 주기
+            //원거리 : 그냥 플레이어 방향으로 화살쏘기만 하면 됨.
+            Debug.Log("기술공격");
             target.OnDamage(attackDamage);
         }
     }
 
-    public override void OnDamage(float damage, bool isCritical,WeaponItem weapon = null)
-    {
-        damage *= (1 - defense);
-        hp -= damage;
-        
-        base.OnDamage(damage, isCritical, weapon);
-        
-        if (hp <= 0)
-        {
-            OnDead();
-        }
-    }
-    
+    // private void OnCollisionEnter2D(Collision2D other)
+    // {
+    //     if (other.gameObject.CompareTag("Player"))
+    //     {
+    //         Debug.Log("몸샷");
+    //     }
+    // }
 
 
-    #region 몬스터 움직임
+    #region 움직임 관련
 
     public float GetDistanceToPlayer()
     {
-        //제곱된 거리 반환
         Vector2 diff = transform.position - target.transform.position;
-        float sqrDistance = diff.sqrMagnitude;
-        
-        return sqrDistance;
+        return diff.sqrMagnitude;
     }
-    
+
     private bool CheckDistancePlayerY()
     {
-        if (monsterData.IsAdCarry)//원거리는 플레이어와의 Y축 신경X
-            return true;
-        
-        //근거리는 Y축 범위가 X축보다 절반
         float diff = transform.position.y - target.transform.position.y;
-        if (Math.Abs(diff) <= attackRangeY)
-            return true;
-
-        return false;
+        return Math.Abs(diff) <= attackRangeY;
     }
 
-    
-    //스포너가 설정
-    public void SetTarget(Player player)
+    public override void SetTarget(Player player, Transform pos)
     {
         target = player;
+        
+        agent.Warp(pos.position); // 내비메시 상의 유효한 위치로 강제로 이동
     }
-    
+
     public override void MoveRandom()
     {
-        agent.isStopped = false;
+        if (overrideSpeed) return;
 
+        // 비활성화 상태에서 경로 설정하려면, 먼저 활성화해야 함
+        agent.enabled = true; // 비활성화 상태에서 이동이 불가능하므로 비활성화
+
+        // 랜덤 방향으로 이동
         Vector2 randomDirection = UnityEngine.Random.insideUnitCircle.normalized;
         float moveDistance = 10f;
         Vector2 randomDestination = (Vector2)transform.position + randomDirection * moveDistance;
 
         NavMeshHit hit;
-        float sampleRadius = 10f;
-        if (NavMesh.SamplePosition(randomDestination, out hit, sampleRadius, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(randomDestination, out hit, 10f, NavMesh.AllAreas))
         {
             CheckTargetPos(hit.position);
-            
             agent.speed = monsterData.MoveSpeed;
             agent.SetDestination(hit.position);
         }
-        else//랜점 목적지를 잡지 못한 경우
+        else
         {
             controller.StopMove();
         }
     }
-
-    public bool IsStopped()
-    {
-        //움직이는 지속시간이 끝나기도 전에 목적지에 도착하거나 랜덤목적지를 잡지 못한경우
-        if (agent.isStopped || !agent.hasPath)
-            return true;
-        
-        return false;
-    }
     
+
     public bool CanAttack()
     {
-        if (Time.time >= lastAttackTime + monsterData.AttackDelay
-            && CheckDistancePlayerY())
-        {
-            return true;
-        }
-
-        return false;
+        return Time.time >= lastAttackTime + monsterData.AttackDelay && CheckDistancePlayerY();
     }
-
 
     public void ChasePlayer(bool isRun)
     {
-        agent.isStopped = false;
+        if (overrideSpeed) return;
 
+        // NavMeshAgent 활성화
+        agent.enabled = true;
+
+        // 플레이어 위치 업데이트
+        agent.SetDestination(target.transform.position);
+
+        // 속도 설정
         if (isRun)
         {
             agent.speed = monsterData.RunSpeed;
-            agent.acceleration = monsterData.Acc;
         }
         else
         {
             agent.speed = monsterData.MoveSpeed;
-            agent.acceleration = 9999f;
         }
-        
+
+        // 몬스터가 플레이어의 위치를 쫓도록 계속 설정
         CheckTargetPos(target.transform.position);
-        agent.SetDestination(target.transform.position);
     }
-    
 
     private void CheckTargetPos(Vector3 targetTransform)
     {
-        if (targetTransform.x - transform.position.x >= 0)//right facing
+        if (targetTransform.x - transform.position.x >= 0)
         {
             facingRight = true;
             controller.SetFacing(rightFace);
@@ -230,13 +213,101 @@ public class Monster : LivingEntity
     }
 
     #endregion
+
+
+    public override void SetLevel(int level)
+    {
+        if (level == 1)
+        {
+            SetUp();//기본베이스로 셋업
+            return;
+        }
+        
+        //레벨 2 이상이면 비율따라 증가하도록 셋업
+
+        int ratioLevel = level -1;
+        
+        attackDamage = monsterData.AttackDamage + (ratioLevel * monsterData.DamageRatio);
+        hp = monsterData.Hp + (ratioLevel * monsterData.HpRatio);
+        defense = monsterData.Defense + (ratioLevel * monsterData.DefenseRatio);
+        toolWear = monsterData.ToolWear + (ratioLevel * monsterData.ToolWearRatio);
+        
+        healthSlider.maxValue = hp;
+        healthSlider.value = hp;
+        
+        lastAttackTime = 0f;
+        
+        //onEnable에서 잔잔바리 작업 알아서 해줌. 여기서는 설정만 건드리면 됨.
+    }
+
+    private void SetUp()
+    {
+        hp = monsterData.Hp;
+        defense = monsterData.Defense;
+        toolWear = monsterData.ToolWear;
+        
+        
+        attackRange = monsterData.AttackRange;
+        attackRangeY = monsterData.AttackRange * 0.5f;
+        sightRange = monsterData.SightRange;
+        attackDamage = monsterData.AttackDamage;
+        
+
+        lastAttackTime = 0f;
+        
+        //onEnable에서 잔잔바리 작업 알아서 해줌. 여기서는 설정만 건드리면 됨.
+    }
     
     private void OnDrawGizmosSelected()
     {
-        if (monsterData == null)
-            return;
-        
-        Gizmos.color = Color.red; // 기즈모 색상 설정
-        Gizmos.DrawWireSphere(transform.position, monsterData.AttackRange); // 원 그리기
+        if (monsterData == null) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, monsterData.AttackRange);
     }
+
+
+    public void PlayDieFx()
+    {
+        ObjectPoolManager.Instance.SpawnObject(
+            dieFxId,
+            transform.position,
+            Quaternion.identity);
+    }
+
+    
+
+    public void UpdateSortingOrder()
+    {
+        resultCount = Physics2D.OverlapBoxNonAlloc(
+            _collider2D.bounds.center,
+            _collider2D.bounds.size,
+            0f,
+            _cachedResults,
+            objectLayer
+        );
+
+        float selfY = transform.position.y;
+
+        for (int i = 0; i < resultCount; i++)
+        {
+            if (_cachedResults[i] == null) continue;
+
+            float otherY = _cachedResults[i].transform.position.y;
+
+            if (otherY < selfY)
+            {
+                SetSortingOrder(-2); // 뒤로
+                return;
+            }
+        }
+
+        SetSortingOrder(1); // 앞으로
+    }
+
+    private void SetSortingOrder(int order)
+    {
+        renderer.sortingOrder = order;
+    }
+
+
 }

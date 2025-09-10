@@ -7,10 +7,12 @@ namespace Cainos.PixelArtMonster_Dungeon
 {
     public class AnimationEventReceiver : MonoBehaviour
     {
+        [SerializeField] private MonsterFSM fsm;
+        
         public UnityEvent onFootstep;
         public UnityEvent onAttack;
         public UnityEvent onDieFx;
-
+        
         public void OnFootstep()
         {
             onFootstep?.Invoke();
@@ -19,11 +21,18 @@ namespace Cainos.PixelArtMonster_Dungeon
         public void OnAttack()
         {
             onAttack?.Invoke();
+            Debug.Log("고옹격");
         }
 
         public void OnDieFx()
         {
             onDieFx?.Invoke();
+        }
+        
+        
+        public void OnAnimationEnd()
+        {
+            fsm.OnAnimationEnd();
         }
     }
 }

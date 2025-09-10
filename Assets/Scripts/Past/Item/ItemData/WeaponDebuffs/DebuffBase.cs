@@ -4,15 +4,20 @@ using UnityEngine;
 
 public abstract class DebuffBase : ScriptableObject
 {
-    public string debuffId;
-    public int debuffProbability;
+    [Header("디버프 레벨")] 
+    [SerializeField, Min(1)] public int debuffLevel = 1;
+    
+    [Header("데미지 이펙트")]
+    [SerializeField] public DebuffType debuffType;
+    
+    [Header("데미지스킨")]
+    [SerializeField] public DamageType damageType;
+    
+    [Header("디버프 적용 확률")]
+    [SerializeField] public int debuffProbability;
+    
+    
 
-    public abstract IEnumerator ApplyEffect(IDamageable damageable);
-
-    public bool CanApply()
-    {
-        int ran = Random.Range(1, 101); // 1 이상 100 이하
-        return debuffProbability >= ran;
-    }
+    public abstract WeaponBuffer CreateDebuff();
 
 }

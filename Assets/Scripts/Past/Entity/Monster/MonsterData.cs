@@ -20,6 +20,12 @@ public class MonsterData : EntityData
     [SerializeField] private float sightRange;
     [SerializeField] private float attackRange;
 
+    [Header("레벨별 증가량/ 보스는 0")] 
+    [SerializeField] private float hpRatio;
+    [SerializeField] private float damageRatio;
+    [SerializeField] private float defenseRatio;
+    [SerializeField] private float toolWearRatio;
+
     
     public bool IsAdCarry => isAdCarry;
     public float RunSpeed => runSpeed;
@@ -29,4 +35,9 @@ public class MonsterData : EntityData
     public float BodyDamage => bodyDamage;
     public float SightRange => sightRange;
     public float AttackRange => attackRange;
+
+    public float HpRatio => hpRatio;
+    public float DamageRatio => damageRatio;
+    public float DefenseRatio => defenseRatio;
+    public float ToolWearRatio => toolWearRatio;
 }

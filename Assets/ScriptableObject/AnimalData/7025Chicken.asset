@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa0f2e16d78f5bd408d6aae0a01d4776, type: 3}
+  m_Name: 7025Chicken
+  m_EditorClassIdentifier: 
+  entityId: 7025
+  hp: 100
+  toolWear: 0.1
+  moveSpeed: 1
+  defense: 0
+  entityPrefab: {fileID: 6387861864484665113, guid: 45f6030a5f00a3b468e631243edd4e1e, type: 3}
+  dropTable: {fileID: 11400000, guid: 7791759bd6358964aaa5757b49e675d9, type: 2}

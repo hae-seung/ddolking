@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd4caf4b23279b48b1e5fb4edd05eeb, type: 3}
+  m_Name: 5015Beef
+  m_EditorClassIdentifier: 
+  _id: 5015
+  _name: "\uC18C\uACE0\uAE30"
+  _description: "\uC18C\uACE0\uAE30"
+  _iconImage: {fileID: 21300000, guid: 6b998c1bba519f949b16baf8c5ef288a, type: 3}
+  dropObjectPrefab: {fileID: 6209899244200098554, guid: 3ff58cfa72b6cb64dbaa8a9ac895df57, type: 3}
+  maxAmount: 99
+  statModifier:
+  - stat: 2
+    increaseAmount: 10
+  ExperienceAmount: 0

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: NormalTableManual
   m_EditorClassIdentifier: 
   craftItemSo:
-  - {fileID: 11400000, guid: 349c63a2732ce1e40a53f4b8b37b712e, type: 2}
-  - {fileID: 11400000, guid: 0e65dda06fa36c94eaa655028f310814, type: 2}
-  - {fileID: 11400000, guid: 75324b4d20cee0a47bce9aeb6ac778ec, type: 2}
+  - {fileID: 11400000, guid: 97c5276946c876246a902cb42a527d50, type: 2}
+  - {fileID: 11400000, guid: 0754ec4816d14544fb06ec9bedf630f3, type: 2}
+  - {fileID: 11400000, guid: 0754ec4816d14544fb06ec9bedf630f3, type: 2}

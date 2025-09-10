@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae7a91ca788315498e43e2db6af0122, type: 3}
+  m_Name: 4018StoneGrandFather(E)
+  m_EditorClassIdentifier: 
+  _id: 4018
+  _name: "\uB3CC\uD558\uB974\uBC29"
+  _description: "\uB3CC\uD558\uB974\uBC29"
+  _iconImage: {fileID: 21300000, guid: 06ab7dd439b180b45b71dfa07127bc01, type: 3}
+  dropObjectPrefab: {fileID: 1765909303156989627, guid: 8a89613cfc56ca34cb434b15b03a6379, type: 3}
+  maxAmount: 1
+  establishObjectData: {fileID: 11400000, guid: 28fc4c4c07636b945819f6bcdc4f33b2, type: 2}
+  establishObjectPreview: {fileID: 3805441725298577387, guid: dbc6638d5c2c01f43be4b785f25bd567, type: 3}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  isStructure: 0

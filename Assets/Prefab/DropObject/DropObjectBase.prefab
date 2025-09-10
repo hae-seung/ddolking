@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3014260318908142027}
   - component: {fileID: 5790865575449280099}
-  m_Layer: 2
+  - component: {fileID: -1406433268974575446}
+  m_Layer: 0
   m_Name: DropObjectBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,6 +69,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &-1406433268974575446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077975803177326599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ebb062fac88cb641a7d9e7b9c13414f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: f431b3fdc5a36b44fbcfc391fa32e3a9, type: 2}
 --- !u!1 &3119382176343223909
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,7 +93,7 @@ GameObject:
   - component: {fileID: 1030841082487336263}
   - component: {fileID: 3225919621569570533}
   - component: {fileID: 7610310580316646530}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,14 +177,14 @@ SpriteRenderer:
   m_SortingLayerID: -365929287
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 957192e1645915c45a44c0381969138f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.24, y: 0.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0

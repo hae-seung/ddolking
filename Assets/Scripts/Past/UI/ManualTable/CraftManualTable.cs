@@ -1,12 +1,14 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CraftManualTables : MonoBehaviour
 {
     [Header("테이블")]
     [SerializeField] private CraftTable craftTable;
     [SerializeField] private CraftTableLog tableLog;
+    [SerializeField] private CraftReinforce craftReinforce;
     
     public bool IsOpen { get; private set; }
     
@@ -20,9 +22,11 @@ public class CraftManualTables : MonoBehaviour
     {
         craftTable.gameObject.SetActive(false);
         tableLog.gameObject.SetActive(false);
+        craftReinforce.gameObject.SetActive(false);
     }
 
-    public void OpenTable(CraftManualType type, Action<CraftItemSO , int> makeItem)
+    public void OpenTable(CraftManualType type, ReinforceStructureItem ritem,
+        Action<CraftItemSO , int> makeItem)
     {
         if (IsOpen)
         {
@@ -31,9 +35,9 @@ public class CraftManualTables : MonoBehaviour
         
         tableLog.SetConfirmEvent(makeItem);
 
-        craftTable.OpenTable(type);
+        craftTable.OpenTable(type, ritem);
         
-        Debug.Log("멈춰!");
+
         GameEventsManager.Instance.playerEvents.DisablePlayerMovement();
         GameEventsManager.Instance.inputEvents.DisableInput();
         
@@ -44,7 +48,6 @@ public class CraftManualTables : MonoBehaviour
     {
         Hide();
         
-        Debug.Log("움직여");
         GameEventsManager.Instance.playerEvents.EnablePlayerMovement();
         GameEventsManager.Instance.inputEvents.EnableInput();
         

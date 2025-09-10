@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f221a4ba5bf3159488a146f53fcfcc6f, type: 3}
+  m_Name: 31VitalityStoneData
+  m_EditorClassIdentifier: 
+  _id: 31
+  _name: "\uD65C\uB825\uC11D"
+  _description: "\uD65C\uB825\uC11D"
+  _iconImage: {fileID: 21300000, guid: 1b8312fb1d384ea48a93e924679a92bc, type: 3}
+  dropObjectPrefab: {fileID: 4307163909494912164, guid: 9e774d873d7eb5f4e96954b86afd0179, type: 3}
+  maxAmount: 99
+  reduceTime: 10
+  growType: 8002

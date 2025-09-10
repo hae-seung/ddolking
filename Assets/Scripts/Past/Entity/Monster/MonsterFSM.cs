@@ -11,11 +11,16 @@ public class MonsterFSM : MonoBehaviour
 
     private Dictionary<StateType, BaseState> monsterState = new ();
     private StateType currentState;
-    
-    
+
+    private bool isActive = false;
+
+    private float timer = 0f;
+    private float detectTime = 0.05f;
     
     public void Init(Monster monster, MonsterController controller)//Awake실행
     {
+        isActive = false;
+        
         this.monster = monster;
         this.controller = controller;
 
@@ -29,12 +34,16 @@ public class MonsterFSM : MonoBehaviour
         monsterState.Add(StateType.Injure, new InjureState(controller));
         monsterState.Add(StateType.Dead, new DeadState(controller));
     }
+
     
     
+
     private void OnEnable()
     {
         currentState = StateType.Idle;
         monsterState[currentState].EnterState();
+
+        timer = 0f;
     }
     
 
@@ -44,13 +53,16 @@ public class MonsterFSM : MonoBehaviour
     {
         if (currentState == StateType.Dead)
             return;
+
+        DetectObstacleAndUpdateZ();
         
         monsterState[currentState].UpdateState();
         
         TryTransition();
     }
-
     
+
+
     private void TryTransition()
     {
         var state = monsterState[currentState];
@@ -59,10 +71,6 @@ public class MonsterFSM : MonoBehaviour
         //1. 현재상태가 전이 가능한지 확인
         if (!state.CanTransition)
         {
-            if (state.RequestedState.HasValue)
-            {
-                ChangeState(state.RequestedState.Value);
-            }
             return;
         }
         
@@ -75,6 +83,7 @@ public class MonsterFSM : MonoBehaviour
         }
         else if (distance <= monster.SightRange)
         {
+            Debug.Log("쫓을 수 있어!");
             ChangeState(StateType.Chase);
         }
         else
@@ -106,6 +115,27 @@ public class MonsterFSM : MonoBehaviour
     private void OnDead()
     {
         ChangeState(StateType.Dead);//무슨상황에서든 무조건 죽는 모션 실행
+        isActive = false;
+    }
+    
+    public void OnAnimationEnd()
+    {
+        if (currentState == StateType.Attack || currentState == StateType.Injure)
+        {
+            ChangeState(StateType.Idle);
+        }
+    }
+    
+    
+    private void DetectObstacleAndUpdateZ()
+    {
+        timer += Time.deltaTime;
+
+        if (timer >= detectTime)
+        {
+            timer = 0f;
+            monster.UpdateSortingOrder();
+        }
     }
     
 }
