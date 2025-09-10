@@ -8,6 +8,6 @@ public class SIMPLE : MonoBehaviour, IPointerEnterHandler
 {
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log(gameObject.name);
+        return;
     }
 }
